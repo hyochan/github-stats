@@ -29,10 +29,3 @@ jobs:
           touch out/.nojekyll
         env:
           DATABASE_URL: file:./dev.db
-
-      - name: Deploy
-        # https://github.com/JamesIves/github-pages-deploy-action
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: out
