@@ -2,7 +2,7 @@ import type {NextApiHandler, NextApiRequest, NextApiResponse} from 'next';
 
 import {HeaderMap} from '@apollo/server';
 import {apolloServer} from '../../../server';
-import {createContext} from '../../../server/context';
+import {createSupabaseClient} from '../../../server/utils';
 import {parse} from 'url';
 
 const handler: NextApiHandler = async (
@@ -17,8 +17,17 @@ const handler: NextApiHandler = async (
     }
   }
 
+  const supabase = createSupabaseClient();
+
   const httpGraphQLResponse = await apolloServer.executeHTTPGraphQLRequest({
-    context: async () => createContext({req, res}),
+    // context: async () => createContext({req, res}),
+    context: async () => {
+      return {
+        supabase,
+        request: {req, res},
+        appSecret: process.env.JWT_SECRET,
+      };
+    },
     httpGraphQLRequest: {
       body: req.body,
       headers,

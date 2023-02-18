@@ -1,39 +1,137 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
-
-model User {
-  id       String  @id @default(cuid())
-  email    String? @unique
-  name     String?
-  imageUrl String?
-
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  deletedAt DateTime?
-
-  posts Post[]
+enum Gender {
+  male
+  female
 }
 
-model Post {
-  id      String @id @default(cuid())
-  title   String
-  content String
+enum AuthType {
+  email
+  github
+  apple
+}
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
+model NewsLetter {
+  email String @id @db.VarChar(255)
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+}
+
+model User {
+  id          String    @id @db.VarChar(50)
+  email       String?   @db.VarChar(255)
+  name        String?   @db.VarChar(255)
+  description String?
+  birthday    DateTime?
+  gender      Gender?
+  phone       String?   @db.VarChar(255)
+  locale      String?   @db.VarChar(8)
+  certified   Boolean?  @default(false)
+  githubLogin String?   @unique @db.VarChar(255)
+  location    String?   @db.VarChar(255)
+  company     String?   @db.VarChar(255)
+  blog        String?   @db.VarChar(255)
+  twitter     String?   @db.VarChar(255)
+  githubURL   String?   @db.VarChar(255)
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
   deletedAt DateTime?
 
-  authorId String
-  author   User   @relation(fields: [authorId], references: [id])
+  image       Image?
+  userPlugins UserPlugin[]
+}
+
+model Image {
+  id           String    @id @default(cuid()) @db.VarChar(50)
+  thumbUrl     String?   @db.VarChar(1000)
+  thumbUrlHigh String?   @db.VarChar(1000)
+  imageUrl     String?   @db.VarChar(1000)
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @updatedAt
+  deletedAt    DateTime?
+
+  userId String? @unique @db.VarChar(50)
+  user   User?   @relation(fields: [userId], references: [id])
+}
+
+model UserPlugin {
+  id              String    @id @default(cuid()) @db.VarChar(50)
+  login           String    @db.VarChar(255)
+  githubId        String    @db.VarChar(255)
+  score           Int       @default(0) @db.SmallInt
+  userName        String?   @db.VarChar(255)
+  avatarUrl       String?   @db.VarChar(1000)
+  description     String?
+  json            Json?     @db.Json
+  certifiedAt     DateTime?
+  certificationNo Int?
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.VarChar(50)
+
+  plugin   Plugin? @relation(fields: [pluginId], references: [id])
+  pluginId String? @db.VarChar(50)
+
+  viewCount Int? @default(0)
+
+  stats    Stats[]
+  trophies Trophy[]
+
+  @@unique([login, pluginId])
+}
+
+model Plugin {
+  id          String  @id @default(cuid()) @db.VarChar(50)
+  name        String  @unique @db.VarChar(255)
+  apiURL      String  @db.VarChar(255)
+  description String?
+  json        Json?   @db.Json
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  userPlugins UserPlugin[]
+}
+
+model Trophy {
+  id     String  @id @default(cuid()) @db.VarChar(50)
+  type   String  @db.VarChar(255)
+  score  Decimal @db.Decimal(7, 2)
+  points Int     @default(0)
+
+  userPlugin   UserPlugin? @relation(fields: [userPluginId], references: [id])
+  userPluginId String?     @db.VarChar(50)
+
+  @@unique([type, userPluginId])
+}
+
+model Stats {
+  id              String  @id @default(cuid()) @db.VarChar(50)
+  name            String  @db.VarChar(255)
+  iconURL         String? @db.VarChar(255)
+  iconURLSelected String? @db.VarChar(255)
+  score           Decimal @db.Decimal(7, 2)
+  description     String?
+  statsElements   Json?   @db.Json
+
+  userPlugin   UserPlugin? @relation(fields: [userPluginId], references: [id])
+  userPluginId String?     @db.VarChar(50)
+
+  @@index([userPluginId])
 }

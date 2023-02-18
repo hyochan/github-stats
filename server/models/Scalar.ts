@@ -1,17 +1,24 @@
-import {GraphQLDate, GraphQLDateTime} from 'graphql-iso-date';
 import {asNexusMethod, scalarType} from 'nexus';
 
-export enum Gender {
-  male = 'male',
-  female = 'female',
+import {GraphQLDateTime} from 'graphql-iso-date';
+// @ts-ignore
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
+import {JSONResolver} from 'graphql-scalars';
+import type {Prisma} from '@prisma/client';
+
+export enum AuthType {
+  email = 'email',
+  github = 'github',
+  apple = 'apple',
 }
 
-export const gender = scalarType({
-  name: 'Gender',
-  asNexusMethod: 'gender',
-  parseValue: (value): Gender | undefined => {
-    if (Gender[value as Gender]) {
-      return value as Gender;
+export const authType = scalarType({
+  name: 'AuthType',
+  asNexusMethod: 'auth',
+  // @ts-ignore
+  parseValue(value: AuthType): AuthType | undefined {
+    if (AuthType[value]) {
+      return value;
     }
   },
   serialize(value) {
@@ -19,6 +26,41 @@ export const gender = scalarType({
   },
 });
 
-export const GQLDate = GraphQLDate;
-//@ts-ignore
-export const GQLDateTime = asNexusMethod(GraphQLDateTime, 'date');
+enum GenderType {
+  male = 'male',
+  female = 'female',
+}
+
+export const Gender = scalarType({
+  name: 'GenderType',
+  asNexusMethod: 'gender',
+  // @ts-ignore
+  parseValue(value: GenderType): GenderType | undefined {
+    if (GenderType[value]) {
+      return value;
+    }
+  },
+  serialize(value) {
+    return value;
+  },
+});
+
+export const Upload = GraphQLUpload;
+// @ts-ignore
+export const DateTime = asNexusMethod(GraphQLDateTime, 'date');
+
+export const Decimal = scalarType({
+  name: 'Decimal',
+  asNexusMethod: 'decimal',
+  // @ts-ignore
+  parseValue(value: Prisma.Decimal): Prisma.Decimal | undefined {
+    if (value) {
+      return value;
+    }
+  },
+  serialize(value) {
+    return value;
+  },
+});
+
+export const JSON = asNexusMethod(JSONResolver, 'json');

@@ -8,20 +8,32 @@ import type { Context } from "./../context"
 import type { core, connectionPluginCore } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
-    gender<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Gender";
+    auth<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "AuthType";
+    gender<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "GenderType";
     /**
      * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
      */
     date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+    decimal<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Decimal";
+    /**
+     * The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "JSON";
   }
 }
 declare global {
   interface NexusGenCustomOutputMethods<TypeName extends string> {
-    gender<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Gender";
+    auth<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "AuthType";
+    gender<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "GenderType";
     /**
      * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
      */
     date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+    decimal<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Decimal";
+    /**
+     * The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "JSON";
     /**
      * Adds a Relay-style connection to the type, with numerous options for configuration
      *
@@ -40,13 +52,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  PostUpdateInput: { // input type
-    content: string; // String!
-    title: string; // String!
-  }
   UserUpdateInput: { // input type
     email?: string | null; // String
-    gender?: NexusGenScalars['Gender'] | null; // Gender
+    gender?: NexusGenScalars['GenderType'] | null; // GenderType
     imageUrl?: string | null; // String
     name?: string | null; // String
   }
@@ -61,31 +69,120 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  Date: any
+  AuthType: any
   DateTime: any
-  Gender: any
+  Decimal: any
+  GenderType: any
+  JSON: any
+  Upload: any
 }
 
 export interface NexusGenObjects {
+  DoobooStats: { // root type
+    githubId: string; // String!
+    json: NexusGenRootTypes['PluginJSON']; // PluginJSON!
+    plugin: NexusGenRootTypes['Plugin']; // Plugin!
+    pluginStats: NexusGenRootTypes['PluginStats']; // PluginStats!
+    score: number; // Int!
+  }
+  Image: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // ID
+    imageUrl?: string | null; // String
+    thumbUrl?: string | null; // String
+    thumbUrlHigh?: string | null; // String
+  }
+  Language: { // root type
+    color?: string | null; // String
+    name?: string | null; // String
+    size?: number | null; // Int
+  }
   Mutation: {};
-  Post: { // root type
-    content: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
+  Newsletter: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email?: string | null; // ID
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  Plugin: { // root type
+    apiURL: string; // String!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
     id: string; // ID!
-    title: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    json?: NexusGenScalars['JSON'] | null; // JSON
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  PluginJSON: { // root type
+    avatarUrl?: string | null; // String
+    bio?: string | null; // String
+    languages: NexusGenRootTypes['Language'][]; // [Language!]!
+    login: string; // String!
+    score?: number | null; // Int
+  }
+  PluginStats: { // root type
+    earth: NexusGenRootTypes['Stats']; // Stats!
+    fire: NexusGenRootTypes['Stats']; // Stats!
+    gold: NexusGenRootTypes['Stats']; // Stats!
+    person: NexusGenRootTypes['Stats']; // Stats!
+    tree: NexusGenRootTypes['Stats']; // Stats!
+    water: NexusGenRootTypes['Stats']; // Stats!
   }
   Query: {};
-  User: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    email?: string | null; // String
-    gender?: NexusGenScalars['Gender'] | null; // Gender
+  Stats: { // root type
+    description?: string | null; // String
+    icon?: string | null; // String
+    id?: string | null; // ID
+    name: string; // String!
+    score?: NexusGenScalars['Decimal'] | null; // Decimal
+    statsElements?: NexusGenScalars['JSON'] | null; // JSON
+  }
+  Tier: { // root type
+    description?: string | null; // String
+    icon?: string | null; // String
     id: string; // ID!
-    imageUrl?: string | null; // String
+    name: string; // String!
+    score?: NexusGenScalars['Decimal'] | null; // Decimal
+  }
+  Trophy: { // root type
+    id: string; // ID!
+    points: number; // Int!
+    score: NexusGenScalars['Decimal']; // Decimal!
+    type: string; // String!
+  }
+  User: { // root type
+    birthday?: NexusGenScalars['DateTime'] | null; // DateTime
+    blog?: string | null; // String
+    certified?: boolean | null; // Boolean
+    company?: string | null; // String
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    email?: string | null; // String
+    gender?: NexusGenScalars['GenderType'] | null; // GenderType
+    githubLogin?: string | null; // String
+    githubURL?: string | null; // String
+    id: string; // ID!
+    locale?: string | null; // String
+    location?: string | null; // String
     name?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    phone?: string | null; // String
+    twitter?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserPlugin: { // root type
+    avatarUrl?: string | null; // String
+    certificationNo?: number | null; // Int
+    certifiedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    githubId: string; // String!
+    id: string; // ID!
+    json?: NexusGenScalars['JSON'] | null; // JSON
+    login: string; // String!
+    score: number; // Int!
+    userName?: string | null; // String
+    viewCount?: number | null; // Int
   }
 }
 
@@ -100,80 +197,247 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  DoobooStats: { // field return type
+    githubId: string; // String!
+    json: NexusGenRootTypes['PluginJSON']; // PluginJSON!
+    plugin: NexusGenRootTypes['Plugin']; // Plugin!
+    pluginStats: NexusGenRootTypes['PluginStats']; // PluginStats!
+    score: number; // Int!
+  }
+  Image: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // ID
+    imageUrl: string | null; // String
+    thumbUrl: string | null; // String
+    thumbUrlHigh: string | null; // String
+  }
+  Language: { // field return type
+    color: string | null; // String
+    name: string | null; // String
+    size: number | null; // Int
+  }
   Mutation: { // field return type
-    updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
-  Post: { // field return type
-    content: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
+  Newsletter: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string | null; // ID
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  Plugin: { // field return type
+    apiURL: string; // String!
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string | null; // String
     id: string; // ID!
-    title: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    json: NexusGenScalars['JSON'] | null; // JSON
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    userPlugins: Array<NexusGenRootTypes['UserPlugin'] | null> | null; // [UserPlugin]
+  }
+  PluginJSON: { // field return type
+    avatarUrl: string | null; // String
+    bio: string | null; // String
+    languages: NexusGenRootTypes['Language'][]; // [Language!]!
+    login: string; // String!
+    score: number | null; // Int
+  }
+  PluginStats: { // field return type
+    earth: NexusGenRootTypes['Stats']; // Stats!
+    fire: NexusGenRootTypes['Stats']; // Stats!
+    gold: NexusGenRootTypes['Stats']; // Stats!
+    person: NexusGenRootTypes['Stats']; // Stats!
+    tree: NexusGenRootTypes['Stats']; // Stats!
+    water: NexusGenRootTypes['Stats']; // Stats!
   }
   Query: { // field return type
-    post: NexusGenRootTypes['Post'] | null; // Post
-    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     user: NexusGenRootTypes['User'] | null; // User
   }
-  User: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
-    email: string | null; // String
-    gender: NexusGenScalars['Gender'] | null; // Gender
+  Stats: { // field return type
+    description: string | null; // String
+    icon: string | null; // String
+    id: string | null; // ID
+    name: string; // String!
+    score: NexusGenScalars['Decimal'] | null; // Decimal
+    statsElements: NexusGenScalars['JSON'] | null; // JSON
+  }
+  Tier: { // field return type
+    description: string | null; // String
+    icon: string | null; // String
     id: string; // ID!
-    imageUrl: string | null; // String
+    name: string; // String!
+    score: NexusGenScalars['Decimal'] | null; // Decimal
+  }
+  Trophy: { // field return type
+    id: string; // ID!
+    points: number; // Int!
+    score: NexusGenScalars['Decimal']; // Decimal!
+    type: string; // String!
+  }
+  User: { // field return type
+    birthday: NexusGenScalars['DateTime'] | null; // DateTime
+    blog: string | null; // String
+    certified: boolean | null; // Boolean
+    company: string | null; // String
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string | null; // String
+    email: string | null; // String
+    gender: NexusGenScalars['GenderType'] | null; // GenderType
+    githubLogin: string | null; // String
+    githubURL: string | null; // String
+    id: string; // ID!
+    image: NexusGenRootTypes['Image'] | null; // Image
+    locale: string | null; // String
+    location: string | null; // String
     name: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    phone: string | null; // String
+    twitter: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserPlugin: { // field return type
+    avatarUrl: string | null; // String
+    certificationNo: number | null; // Int
+    certifiedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string | null; // String
+    githubId: string; // String!
+    id: string; // ID!
+    json: NexusGenScalars['JSON'] | null; // JSON
+    login: string; // String!
+    score: number; // Int!
+    stats: Array<NexusGenRootTypes['Stats'] | null> | null; // [Stats]
+    trophies: Array<NexusGenRootTypes['Trophy'] | null> | null; // [Trophy]
+    userName: string | null; // String
+    viewCount: number | null; // Int
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  Mutation: { // field return type name
-    updatePost: 'Post'
-    updateUser: 'User'
+  DoobooStats: { // field return type name
+    githubId: 'String'
+    json: 'PluginJSON'
+    plugin: 'Plugin'
+    pluginStats: 'PluginStats'
+    score: 'Int'
   }
-  Post: { // field return type name
-    content: 'String'
+  Image: { // field return type name
     createdAt: 'DateTime'
-    deletedAt: 'DateTime'
-    id: 'ID'
-    title: 'String'
-    updatedAt: 'DateTime'
-  }
-  Query: { // field return type name
-    post: 'Post'
-    posts: 'Post'
-    user: 'User'
-  }
-  User: { // field return type name
-    createdAt: 'DateTime'
-    deletedAt: 'DateTime'
-    email: 'String'
-    gender: 'Gender'
     id: 'ID'
     imageUrl: 'String'
+    thumbUrl: 'String'
+    thumbUrlHigh: 'String'
+  }
+  Language: { // field return type name
+    color: 'String'
+    name: 'String'
+    size: 'Int'
+  }
+  Mutation: { // field return type name
+    updateUser: 'User'
+  }
+  Newsletter: { // field return type name
+    createdAt: 'DateTime'
+    deletedAt: 'DateTime'
+    email: 'ID'
+    updatedAt: 'DateTime'
+  }
+  Plugin: { // field return type name
+    apiURL: 'String'
+    createdAt: 'DateTime'
+    deletedAt: 'DateTime'
+    description: 'String'
+    id: 'ID'
+    json: 'JSON'
     name: 'String'
     updatedAt: 'DateTime'
+    userPlugins: 'UserPlugin'
+  }
+  PluginJSON: { // field return type name
+    avatarUrl: 'String'
+    bio: 'String'
+    languages: 'Language'
+    login: 'String'
+    score: 'Int'
+  }
+  PluginStats: { // field return type name
+    earth: 'Stats'
+    fire: 'Stats'
+    gold: 'Stats'
+    person: 'Stats'
+    tree: 'Stats'
+    water: 'Stats'
+  }
+  Query: { // field return type name
+    user: 'User'
+  }
+  Stats: { // field return type name
+    description: 'String'
+    icon: 'String'
+    id: 'ID'
+    name: 'String'
+    score: 'Decimal'
+    statsElements: 'JSON'
+  }
+  Tier: { // field return type name
+    description: 'String'
+    icon: 'String'
+    id: 'ID'
+    name: 'String'
+    score: 'Decimal'
+  }
+  Trophy: { // field return type name
+    id: 'ID'
+    points: 'Int'
+    score: 'Decimal'
+    type: 'String'
+  }
+  User: { // field return type name
+    birthday: 'DateTime'
+    blog: 'String'
+    certified: 'Boolean'
+    company: 'String'
+    createdAt: 'DateTime'
+    deletedAt: 'DateTime'
+    description: 'String'
+    email: 'String'
+    gender: 'GenderType'
+    githubLogin: 'String'
+    githubURL: 'String'
+    id: 'ID'
+    image: 'Image'
+    locale: 'String'
+    location: 'String'
+    name: 'String'
+    phone: 'String'
+    twitter: 'String'
+    updatedAt: 'DateTime'
+  }
+  UserPlugin: { // field return type name
+    avatarUrl: 'String'
+    certificationNo: 'Int'
+    certifiedAt: 'DateTime'
+    description: 'String'
+    githubId: 'String'
+    id: 'ID'
+    json: 'JSON'
+    login: 'String'
+    score: 'Int'
+    stats: 'Stats'
+    trophies: 'Trophy'
+    userName: 'String'
+    viewCount: 'Int'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    updatePost: { // args
-      post: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!
-      postId?: string | null; // ID
-    }
     updateUser: { // args
       user: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
       userId?: string | null; // ID
     }
   }
   Query: {
-    post: { // args
-      id: string; // ID!
-    }
     user: { // args
       id: string; // ID!
     }

@@ -1,13 +1,16 @@
-import {idArg, nonNull, queryField} from 'nexus';
+import {assert} from '../../../src/utils/assert';
+import {queryField} from 'nexus';
 
-export const user = queryField('user', {
-  type: 'User',
-  args: {id: nonNull(idArg())},
-  description: 'Fetch the user with given id',
+// export const me = queryField('me', {
+//   type: 'User',
 
-  resolve: async (parent, args, ctx) => {
-    const {id} = args;
+//   resolve: async (_, __, {prisma, getUID}) => {
+//     const uid = await getUID;
 
-    return await ctx.prisma.user.findUnique({where: {id}});
-  },
-});
+//     assert(uid, 'Not authorized');
+
+//     return prisma.user.findUnique({
+//       where: {id: uid},
+//     });
+//   },
+// });
