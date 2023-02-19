@@ -1,4 +1,6 @@
-# dooboo landing page
+# dooboo.io
+
+> Project is built mainly with `nextjs`, `react server component` and `supabase`.
 
 [![CI](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml/badge.svg)](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml)
 
