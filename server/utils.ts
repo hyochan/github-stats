@@ -6,14 +6,19 @@ import type {SupabaseClient} from '@supabase/supabase-js';
 import {acceptLanguage} from 'next/dist/server/accept-header';
 import {assert} from '../src/utils/assert';
 import {createClient} from '@supabase/supabase-js';
+import type {Database} from '../src/types/supabase';
 
-export const createSupabaseClient = (): SupabaseClient<any, 'public', any> => {
+export const createSupabaseClient = (): SupabaseClient<
+  Database,
+  'public',
+  Database['public']
+> => {
   const {SUPABASE_URL, SUPABASE_API_KEY} = process.env;
 
   assert(SUPABASE_URL, 'SUPABASE_URL is not defined');
   assert(SUPABASE_API_KEY, 'SUPABASE_API_KEY is not defined');
 
-  return createClient(SUPABASE_URL, SUPABASE_API_KEY);
+  return createClient<Database>(SUPABASE_URL, SUPABASE_API_KEY);
 };
 
 export function currentLocale(req: NextApiRequest): Locale {

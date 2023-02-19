@@ -10,11 +10,12 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "dotenv -e .env.local -- prisma db seed",
-    "migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
+    "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "migrate:deploy": "dotenv -e .env.local -- prisma migrate deploy",
-    "generate:nexus": "ts-node --transpile-only ./server/schema",
     "generate:prisma": "prisma generate",
-    "generate": "yarn generate:nexus && yarn generate:prisma"
+    "generate:nexus": "ts-node --transpile-only ./server/schema",
+    "generate:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_DOOBOOIO --schema public > src/types/supabase.ts",
+    "generate": "yarn generate:prisma && yarn generate:nexus && yarn generate:supabase"
   },
   "dependencies": {
     "@apollo/server": "^4.4.0",
@@ -23,9 +24,6 @@
     "@next/font": "v13.1.7-canary.6",
     "@prisma/client": "4.10.1",
     "@supabase/supabase-js": "^2.8.0",
-    "@types/node": "18.14.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
     "client-only": "^0.0.1",
     "graphql": "^16.6.0",
     "graphql-iso-date": "^3.6.1",
@@ -47,6 +45,9 @@
     "@tailwindcss/forms": "^0.5.3",
     "@types/graphql-iso-date": "^3.4.0",
     "@types/negotiator": "^0.6.1",
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "autoprefixer": "^10.4.13",
@@ -60,6 +61,7 @@
     "flatten-tailwindcss-theme": "^1.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
+    "supabase": ">=1.8.1",
     "tailwind-merge": "^1.9.1",
     "tailwindcss": "^3.2.7",
     "ts-node": "^10.9.1"

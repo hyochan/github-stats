@@ -16,7 +16,10 @@ export const Plugin = objectType({
     t.list.field('userPlugins', {
       type: 'UserPlugin',
       resolve: async ({id}, _, {supabase}) => {
-        const {data} = await supabase.from('User').select().eq('pluginId', id);
+        const {data} = await supabase
+          .from('UserPlugin')
+          .select()
+          .eq('pluginId', id);
 
         return data;
       },

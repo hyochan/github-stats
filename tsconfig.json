@@ -25,7 +25,7 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/types/supabase.ts"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS" // For seed script in ./server/prisma/seed.ts

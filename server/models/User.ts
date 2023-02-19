@@ -36,7 +36,7 @@ export const User = objectType({
           .eq('userId', id)
           .single();
 
-        return data?.[0];
+        return data;
       },
     });
   },

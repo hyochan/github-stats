@@ -26,8 +26,10 @@ export default async function handler(
         .eq('name', name)
         .single();
 
-      if (!data || data.length === 0) {
+      if (!data) {
         res.status(404).json({message: 'No plugins found.'});
+
+        return;
       }
 
       const tiers = <Tier[]>data.json;

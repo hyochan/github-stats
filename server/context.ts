@@ -1,5 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
+import type {Database} from '../src/types/supabase';
 import type {SupabaseClient} from '@supabase/supabase-js';
 
 type CreateContextParams = {
@@ -10,7 +11,7 @@ type CreateContextParams = {
 export interface Context {
   request: CreateContextParams;
   appSecret: string | undefined;
-  supabase: SupabaseClient<any, 'public', any>;
+  supabase: SupabaseClient<Database, 'public', Database['public']>;
   // getUID: Promise<string | null>;
   // pubsub: PubSub;
 }
