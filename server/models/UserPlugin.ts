@@ -3,8 +3,7 @@ import {objectType} from 'nexus';
 export const UserPlugin = objectType({
   name: 'UserPlugin',
   definition(t) {
-    t.nonNull.id('id');
-    t.nonNull.string('login');
+    t.nonNull.id('login');
     t.nonNull.string('githubId');
     t.nonNull.int('score');
     t.string('userName');
@@ -17,11 +16,11 @@ export const UserPlugin = objectType({
 
     t.list.field('stats', {
       type: 'Stats',
-      resolve: async ({id}, _, {supabase}) => {
+      resolve: async ({login}, _, {supabase}) => {
         const {data} = await supabase
           .from('Stats')
           .select()
-          .eq('userPluginId', id);
+          .eq('userPluginLogin', login);
 
         return data;
       },
@@ -29,11 +28,11 @@ export const UserPlugin = objectType({
 
     t.list.field('trophies', {
       type: 'Trophy',
-      resolve: async ({id}, _, {supabase}) => {
+      resolve: async ({login}, _, {supabase}) => {
         const {data} = await supabase
           .from('Trophy')
           .select()
-          .eq('userPluginId', id);
+          .eq('userPluginLogin', login);
 
         return data;
       },

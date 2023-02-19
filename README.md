@@ -27,6 +27,18 @@ Database connection url to access database in [Supabase](https://supabase.io).
 </details>
 
 <details>
+<summary>SUPABASE_URL</summary>
+
+Supabase database url.
+</details>
+
+<details>
+<summary>SUPABASE_API_KEY</summary>
+
+Supabase api key.
+</details>
+
+<details>
 <summary>GITHUB_CLIENT_ID</summary>
 
 The github client id to access github api.
@@ -42,18 +54,6 @@ The github client secret to access github api.
 <summary>GH_TOKEN</summary>
 
 The github token to use github authentication.
-</details>
-
-<details>
-<summary>SUPABASE_URL</summary>
-
-Supabase database url.
-</details>
-
-<details>
-<summary>SUPABASE_API_KEY</summary>
-
-Supabase api key.
 </details>
 
 <details>

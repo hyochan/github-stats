@@ -53,10 +53,16 @@ declare global {
 
 export interface NexusGenInputs {
   UserUpdateInput: { // input type
+    birthday?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
     email?: string | null; // String
     gender?: NexusGenScalars['GenderType'] | null; // GenderType
-    imageUrl?: string | null; // String
+    githubLogin?: string | null; // String
+    id: string; // ID!
     name?: string | null; // String
+    phone?: string | null; // String
+    photoURL?: string | null; // String
+    thumbURL?: string | null; // String
   }
 }
 
@@ -109,9 +115,8 @@ export interface NexusGenObjects {
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
-    id: string; // ID!
     json?: NexusGenScalars['JSON'] | null; // JSON
-    name: string; // String!
+    name: string; // ID!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   PluginJSON: { // root type
@@ -177,9 +182,8 @@ export interface NexusGenObjects {
     certifiedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     githubId: string; // String!
-    id: string; // ID!
     json?: NexusGenScalars['JSON'] | null; // JSON
-    login: string; // String!
+    login: string; // ID!
     score: number; // Int!
     userName?: string | null; // String
     viewCount?: number | null; // Int
@@ -217,7 +221,7 @@ export interface NexusGenFieldTypes {
     size: number | null; // Int
   }
   Mutation: { // field return type
-    updateUser: NexusGenRootTypes['User'] | null; // User
+    updateDoobooGithub: NexusGenRootTypes['DoobooStats'] | null; // DoobooStats
   }
   Newsletter: { // field return type
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -230,9 +234,8 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
-    id: string; // ID!
     json: NexusGenScalars['JSON'] | null; // JSON
-    name: string; // String!
+    name: string; // ID!
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     userPlugins: Array<NexusGenRootTypes['UserPlugin'] | null> | null; // [UserPlugin]
   }
@@ -252,7 +255,7 @@ export interface NexusGenFieldTypes {
     water: NexusGenRootTypes['Stats']; // Stats!
   }
   Query: { // field return type
-    user: NexusGenRootTypes['User'] | null; // User
+    ok: boolean; // Boolean!
   }
   Stats: { // field return type
     description: string | null; // String
@@ -302,9 +305,8 @@ export interface NexusGenFieldTypes {
     certifiedAt: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     githubId: string; // String!
-    id: string; // ID!
     json: NexusGenScalars['JSON'] | null; // JSON
-    login: string; // String!
+    login: string; // ID!
     score: number; // Int!
     stats: Array<NexusGenRootTypes['Stats'] | null> | null; // [Stats]
     trophies: Array<NexusGenRootTypes['Trophy'] | null> | null; // [Trophy]
@@ -334,7 +336,7 @@ export interface NexusGenFieldTypeNames {
     size: 'Int'
   }
   Mutation: { // field return type name
-    updateUser: 'User'
+    updateDoobooGithub: 'DoobooStats'
   }
   Newsletter: { // field return type name
     createdAt: 'DateTime'
@@ -347,9 +349,8 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     deletedAt: 'DateTime'
     description: 'String'
-    id: 'ID'
     json: 'JSON'
-    name: 'String'
+    name: 'ID'
     updatedAt: 'DateTime'
     userPlugins: 'UserPlugin'
   }
@@ -369,7 +370,7 @@ export interface NexusGenFieldTypeNames {
     water: 'Stats'
   }
   Query: { // field return type name
-    user: 'User'
+    ok: 'Boolean'
   }
   Stats: { // field return type name
     description: 'String'
@@ -419,9 +420,8 @@ export interface NexusGenFieldTypeNames {
     certifiedAt: 'DateTime'
     description: 'String'
     githubId: 'String'
-    id: 'ID'
     json: 'JSON'
-    login: 'String'
+    login: 'ID'
     score: 'Int'
     stats: 'Stats'
     trophies: 'Trophy'
@@ -432,14 +432,8 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    updateUser: { // args
-      user: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
-      userId?: string | null; // ID
-    }
-  }
-  Query: {
-    user: { // args
-      id: string; // ID!
+    updateDoobooGithub: { // args
+      login: string; // String!
     }
   }
 }

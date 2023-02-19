@@ -23,9 +23,7 @@ export default async function Page({
         {index.title}
       </H1>
 
-      <div>
-        <LocaleSwitcher />
-      </div>
+      <LocaleSwitcher />
     </div>
   );
 }

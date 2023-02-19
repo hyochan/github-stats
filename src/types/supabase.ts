@@ -99,7 +99,6 @@ export interface Database {
           createdAt: string | null
           deletedAt: string | null
           description: string | null
-          id: string
           json: Json | null
           name: string
           updatedAt: string | null
@@ -109,7 +108,6 @@ export interface Database {
           createdAt?: string | null
           deletedAt?: string | null
           description?: string | null
-          id: string
           json?: Json | null
           name: string
           updatedAt?: string | null
@@ -119,7 +117,6 @@ export interface Database {
           createdAt?: string | null
           deletedAt?: string | null
           description?: string | null
-          id?: string
           json?: Json | null
           name?: string
           updatedAt?: string | null
@@ -134,7 +131,7 @@ export interface Database {
           name: string
           score: number
           statsElements: Json | null
-          userPluginId: string | null
+          userPluginLogin: string | null
         }
         Insert: {
           description?: string | null
@@ -144,7 +141,7 @@ export interface Database {
           name: string
           score: number
           statsElements?: Json | null
-          userPluginId?: string | null
+          userPluginLogin?: string | null
         }
         Update: {
           description?: string | null
@@ -154,7 +151,7 @@ export interface Database {
           name?: string
           score?: number
           statsElements?: Json | null
-          userPluginId?: string | null
+          userPluginLogin?: string | null
         }
       }
       Trophy: {
@@ -163,21 +160,21 @@ export interface Database {
           points: number
           score: number
           type: string
-          userPluginId: string | null
+          userPluginLogin: string | null
         }
         Insert: {
           id: string
           points?: number
           score: number
           type: string
-          userPluginId?: string | null
+          userPluginLogin?: string | null
         }
         Update: {
           id?: string
           points?: number
           score?: number
           type?: string
-          userPluginId?: string | null
+          userPluginLogin?: string | null
         }
       }
       User: {
@@ -251,10 +248,9 @@ export interface Database {
           deletedAt: string | null
           description: string | null
           githubId: string
-          id: string
           json: Json | null
           login: string
-          pluginId: string | null
+          pluginName: string | null
           score: number
           updatedAt: string | null
           userId: string | null
@@ -269,10 +265,9 @@ export interface Database {
           deletedAt?: string | null
           description?: string | null
           githubId: string
-          id: string
           json?: Json | null
           login: string
-          pluginId?: string | null
+          pluginName?: string | null
           score?: number
           updatedAt?: string | null
           userId?: string | null
@@ -287,10 +282,9 @@ export interface Database {
           deletedAt?: string | null
           description?: string | null
           githubId?: string
-          id?: string
           json?: Json | null
           login?: string
-          pluginId?: string | null
+          pluginName?: string | null
           score?: number
           updatedAt?: string | null
           userId?: string | null

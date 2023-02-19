@@ -5,6 +5,7 @@ import type {GithubUser} from '../plugins/types';
 import type {Locale} from '../../src/i18n';
 import type {PluginTrophy} from '../plugins/trophies';
 import type {TopLanguage} from '../plugins/topLanguages';
+import {createSupabaseClient} from '../utils';
 import {diffHours} from '../plugins/pluginUtils';
 import {getGithubStatus} from '../plugins';
 import {getTopLanguages} from '../plugins/topLanguages';
@@ -321,6 +322,7 @@ const upsertGithubStats = async ({
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
+    const supabase = createSupabaseClient();
     const {plugins} = await getTranslates(lang);
 
     // NOTE: Unknown user or user without commits will gracefully fail here.
@@ -375,14 +377,16 @@ const upsertGithubStats = async ({
     ];
 
     if (userPlugin) {
-      await prisma.$transaction([
-        prisma.stats.deleteMany({
-          where: {userPluginId: userPlugin.id},
-        }),
-        prisma.trophy.deleteMany({
-          where: {userPluginId: userPlugin.id},
-        }),
-      ]);
+      const deleteStatsPromise = supabase
+        .from('Stats')
+        .delete()
+        .match({userPluginLogin: userPlugin.login});
+
+      const deleteTrophiesPromise = supabase.from('Trophy').delete().match({
+        userPluginLogin: userPlugin.login,
+      });
+
+      await Promise.all([deleteStatsPromise, deleteTrophiesPromise]);
     }
 
     const sum =
@@ -395,13 +399,42 @@ const upsertGithubStats = async ({
 
     const score = Math.round((sum / 6) * 100);
 
+    supabase.from('UserPlugin').upsert({
+      login,
+      userName: githubUser.name,
+      avatarUrl: githubUser.avatarUrl,
+      description: githubUser.bio,
+      pluginName: plugin.name,
+      score,
+      githubId: githubUser.id,
+      json: {
+        login: githubUser.login,
+        avatarUrl: githubUser.avatarUrl,
+        bio: githubUser.bio,
+        score,
+        languages,
+      },
+      // trophies: {
+      //   createMany: {
+      //     skipDuplicates: true,
+      //     data: trophies,
+      //   },
+      // },
+      // stats: {
+      //   createMany: {
+      //     skipDuplicates: true,
+      //     data: stats,
+      //   },
+      // },
+    });
+
     await prisma.userPlugin.upsert({
       create: {
         login,
         userName: githubUser.name,
         avatarUrl: githubUser.avatarUrl,
         description: githubUser.bio,
-        pluginId: plugin.id,
+        pluginName: plugin.name,
         score,
         githubId: githubUser.id,
         json: {
@@ -443,9 +476,9 @@ const upsertGithubStats = async ({
         },
       },
       where: {
-        login_pluginId: {
+        login_pluginName: {
           login,
-          pluginId: plugin.id,
+          pluginName: plugin.name,
         },
       },
     });
@@ -508,9 +541,9 @@ export const getDoobooStats = async ({
 
     const userPlugin = await prisma.userPlugin.findUnique({
       where: {
-        login_pluginId: {
+        login_pluginName: {
           login,
-          pluginId: plugin.id,
+          pluginName: plugin.name,
         },
       },
     });
@@ -519,7 +552,7 @@ export const getDoobooStats = async ({
     if (userPlugin) {
       const stats = await prisma.stats.findMany({
         where: {
-          userPluginId: userPlugin.id,
+          userPluginLogin: userPlugin.login,
         },
       });
 
@@ -530,6 +563,7 @@ export const getDoobooStats = async ({
           score: el.score as unknown as number,
           name: el.name,
           statsElements: el.statsElements,
+          userPluginLogin: el.userPluginLogin,
         };
       });
 
@@ -585,10 +619,10 @@ export const getDoobooStats = async ({
       // When user was queried after 3 hours, update the data in background.
       let isCachedResult = false;
 
-      if (userPlugin.id) {
+      if (userPlugin.login) {
         await prisma.userPlugin.update({
           data: {viewCount: {increment: 1}},
-          where: {id: userPlugin.id},
+          where: {login: userPlugin.login},
         });
 
         if (diffHours(updatedAt, today) < 3) {
@@ -608,9 +642,7 @@ export const getDoobooStats = async ({
           points: true,
           type: true,
         },
-        where: {
-          userPluginId: userPlugin.id,
-        },
+        where: {userPluginLogin: userPlugin.login},
       });
 
       return {

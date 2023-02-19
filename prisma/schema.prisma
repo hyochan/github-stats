@@ -28,7 +28,7 @@ model NewsLetter {
 }
 
 model User {
-  id          String    @id @db.VarChar(50)
+  id          String    @id @db.Uuid @default(cuid())
   email       String?   @db.VarChar(255)
   name        String?   @db.VarChar(255)
   description String?
@@ -53,7 +53,7 @@ model User {
 }
 
 model Image {
-  id           String    @id @default(cuid()) @db.VarChar(50)
+  id           String    @id @db.Uuid @default(cuid())
   thumbUrl     String?   @db.VarChar(1000)
   thumbUrlHigh String?   @db.VarChar(1000)
   imageUrl     String?   @db.VarChar(1000)
@@ -61,13 +61,12 @@ model Image {
   updatedAt    DateTime? @updatedAt
   deletedAt    DateTime?
 
-  userId String? @unique @db.VarChar(50)
+  userId String? @unique @db.Uuid
   user   User?   @relation(fields: [userId], references: [id])
 }
 
 model UserPlugin {
-  id              String    @id @default(cuid()) @db.VarChar(50)
-  login           String    @db.VarChar(255)
+  login           String    @id @db.VarChar(255)
   githubId        String    @db.VarChar(255)
   score           Int       @default(0) @db.SmallInt
   userName        String?   @db.VarChar(255)
@@ -82,22 +81,21 @@ model UserPlugin {
   deletedAt DateTime?
 
   user   User?   @relation(fields: [userId], references: [id])
-  userId String? @db.VarChar(50)
+  userId String? @db.Uuid
 
-  plugin   Plugin? @relation(fields: [pluginId], references: [id])
-  pluginId String? @db.VarChar(50)
+  plugin     Plugin? @relation(fields: [pluginName], references: [name])
+  pluginName String? @db.VarChar(255)
 
   viewCount Int? @default(0)
 
   stats    Stats[]
   trophies Trophy[]
 
-  @@unique([login, pluginId])
+  @@unique([login, pluginName])
 }
 
 model Plugin {
-  id          String  @id @default(cuid()) @db.VarChar(50)
-  name        String  @unique @db.VarChar(255)
+  name        String  @id @db.VarChar(255)
   apiURL      String  @db.VarChar(255)
   description String?
   json        Json?   @db.Json
@@ -110,19 +108,19 @@ model Plugin {
 }
 
 model Trophy {
-  id     String  @id @default(cuid()) @db.VarChar(50)
+  id     String  @id @db.Uuid @default(cuid())
   type   String  @db.VarChar(255)
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
 
-  userPlugin   UserPlugin? @relation(fields: [userPluginId], references: [id])
-  userPluginId String?     @db.VarChar(50)
+  userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
+  userPluginLogin String?     @db.VarChar(255)
 
-  @@unique([type, userPluginId])
+  @@unique([type, userPluginLogin])
 }
 
 model Stats {
-  id              String  @id @default(cuid()) @db.VarChar(50)
+  id              String  @id @db.Uuid @default(cuid())
   name            String  @db.VarChar(255)
   iconURL         String? @db.VarChar(255)
   iconURLSelected String? @db.VarChar(255)
@@ -130,8 +128,8 @@ model Stats {
   description     String?
   statsElements   Json?   @db.Json
 
-  userPlugin   UserPlugin? @relation(fields: [userPluginId], references: [id])
-  userPluginId String?     @db.VarChar(50)
+  userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
+  userPluginLogin String?     @db.VarChar(255)
 
-  @@index([userPluginId])
+  @@index([userPluginLogin])
 }

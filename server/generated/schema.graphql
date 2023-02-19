@@ -43,8 +43,10 @@ type Language {
 }
 
 type Mutation {
-  """update the user fields"""
-  updateUser(user: UserUpdateInput!, userId: ID): User
+  updateDoobooGithub(
+    """The unique github login value of the user."""
+    login: String!
+  ): DoobooStats
 }
 
 type Newsletter {
@@ -59,9 +61,8 @@ type Plugin {
   createdAt: DateTime
   deletedAt: DateTime
   description: String
-  id: ID!
   json: JSON
-  name: String!
+  name: ID!
   updatedAt: DateTime
   userPlugins: [UserPlugin]
 }
@@ -84,8 +85,7 @@ type PluginStats {
 }
 
 type Query {
-  """Fetch the user with given id"""
-  user(id: ID!): User
+  ok: Boolean!
 }
 
 type Stats {
@@ -145,9 +145,8 @@ type UserPlugin {
   certifiedAt: DateTime
   description: String
   githubId: String!
-  id: ID!
   json: JSON
-  login: String!
+  login: ID!
   score: Int!
   stats: [Stats]
   trophies: [Trophy]
@@ -156,8 +155,14 @@ type UserPlugin {
 }
 
 input UserUpdateInput {
+  birthday: DateTime
+  description: String
   email: String
   gender: GenderType
-  imageUrl: String
+  githubLogin: String
+  id: ID!
   name: String
+  phone: String
+  photoURL: String
+  thumbURL: String
 }

@@ -16,7 +16,7 @@ CREATE TABLE "NewsLetter" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" VARCHAR(50) NOT NULL,
+    "id" UUID NOT NULL,
     "email" VARCHAR(255),
     "name" VARCHAR(255),
     "description" TEXT,
@@ -40,21 +40,20 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Image" (
-    "id" VARCHAR(50) NOT NULL,
+    "id" UUID NOT NULL,
     "thumbUrl" VARCHAR(1000),
     "thumbUrlHigh" VARCHAR(1000),
     "imageUrl" VARCHAR(1000),
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
     "deletedAt" TIMESTAMP(3),
-    "userId" VARCHAR(50),
+    "userId" UUID,
 
     CONSTRAINT "Image_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "UserPlugin" (
-    "id" VARCHAR(50) NOT NULL,
     "login" VARCHAR(255) NOT NULL,
     "githubId" VARCHAR(255) NOT NULL,
     "score" SMALLINT NOT NULL DEFAULT 0,
@@ -67,16 +66,15 @@ CREATE TABLE "UserPlugin" (
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
     "deletedAt" TIMESTAMP(3),
-    "userId" VARCHAR(50),
-    "pluginId" VARCHAR(50),
+    "userId" UUID,
+    "pluginName" VARCHAR(255),
     "viewCount" INTEGER DEFAULT 0,
 
-    CONSTRAINT "UserPlugin_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "UserPlugin_pkey" PRIMARY KEY ("login")
 );
 
 -- CreateTable
 CREATE TABLE "Plugin" (
-    "id" VARCHAR(50) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "apiURL" VARCHAR(255) NOT NULL,
     "description" TEXT,
@@ -85,30 +83,30 @@ CREATE TABLE "Plugin" (
     "updatedAt" TIMESTAMP(3),
     "deletedAt" TIMESTAMP(3),
 
-    CONSTRAINT "Plugin_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Plugin_pkey" PRIMARY KEY ("name")
 );
 
 -- CreateTable
 CREATE TABLE "Trophy" (
-    "id" VARCHAR(50) NOT NULL,
+    "id" UUID NOT NULL,
     "type" VARCHAR(255) NOT NULL,
     "score" DECIMAL(7,2) NOT NULL,
     "points" INTEGER NOT NULL DEFAULT 0,
-    "userPluginId" VARCHAR(50),
+    "userPluginLogin" VARCHAR(255),
 
     CONSTRAINT "Trophy_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Stats" (
-    "id" VARCHAR(50) NOT NULL,
+    "id" UUID NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "iconURL" VARCHAR(255),
     "iconURLSelected" VARCHAR(255),
     "score" DECIMAL(7,2) NOT NULL,
     "description" TEXT,
     "statsElements" JSON,
-    "userPluginId" VARCHAR(50),
+    "userPluginLogin" VARCHAR(255),
 
     CONSTRAINT "Stats_pkey" PRIMARY KEY ("id")
 );
@@ -120,16 +118,13 @@ CREATE UNIQUE INDEX "User_githubLogin_key" ON "User"("githubLogin");
 CREATE UNIQUE INDEX "Image_userId_key" ON "Image"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "UserPlugin_login_pluginId_key" ON "UserPlugin"("login", "pluginId");
+CREATE UNIQUE INDEX "UserPlugin_login_pluginName_key" ON "UserPlugin"("login", "pluginName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Plugin_name_key" ON "Plugin"("name");
+CREATE UNIQUE INDEX "Trophy_type_userPluginLogin_key" ON "Trophy"("type", "userPluginLogin");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Trophy_type_userPluginId_key" ON "Trophy"("type", "userPluginId");
-
--- CreateIndex
-CREATE INDEX "Stats_userPluginId_idx" ON "Stats"("userPluginId");
+CREATE INDEX "Stats_userPluginLogin_idx" ON "Stats"("userPluginLogin");
 
 -- AddForeignKey
 ALTER TABLE "Image" ADD CONSTRAINT "Image_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -138,10 +133,10 @@ ALTER TABLE "Image" ADD CONSTRAINT "Image_userId_fkey" FOREIGN KEY ("userId") RE
 ALTER TABLE "UserPlugin" ADD CONSTRAINT "UserPlugin_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserPlugin" ADD CONSTRAINT "UserPlugin_pluginId_fkey" FOREIGN KEY ("pluginId") REFERENCES "Plugin"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "UserPlugin" ADD CONSTRAINT "UserPlugin_pluginName_fkey" FOREIGN KEY ("pluginName") REFERENCES "Plugin"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Trophy" ADD CONSTRAINT "Trophy_userPluginId_fkey" FOREIGN KEY ("userPluginId") REFERENCES "UserPlugin"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Trophy" ADD CONSTRAINT "Trophy_userPluginLogin_fkey" FOREIGN KEY ("userPluginLogin") REFERENCES "UserPlugin"("login") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Stats" ADD CONSTRAINT "Stats_userPluginId_fkey" FOREIGN KEY ("userPluginId") REFERENCES "UserPlugin"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Stats" ADD CONSTRAINT "Stats_userPluginLogin_fkey" FOREIGN KEY ("userPluginLogin") REFERENCES "UserPlugin"("login") ON DELETE SET NULL ON UPDATE CASCADE;
