@@ -1,0 +1,40 @@
+{
+  "plugins": {
+    "tree": "목",
+    "treeDescription": "목은 호기심이 강한 모험가를 상징합니다. 추진력이 강하고 새로운 일에 두려움이 없습니다.",
+    "fire": "화",
+    "fireDescription": "불은 에너지와 열정을 상징합니다.  호기심에서 그치지 않고 더 앞으로 나아가는 일을 해내기 위해 필요한 성질입니다.",
+    "earth": "토",
+    "earthDescription": "토는 흔들리지 않고 본인의 자리를 잘 지키는 성질을 가지고 있습니다.  성실하게 임하는 만큼 좋은 평가를 얻게 됩니다.",
+    "gold": "금",
+    "goldDescription": "금은 실속 그리고 기술을 의미합니다. 갈고 닦은 것들이 많을수록 좋은 평가를 받을 수 있습니다.",
+    "water": "수",
+    "waterDescription": "수는 지혜와 통찰력을 상징합니다. 이는 대게 여러 훌륭한 기여를 통해 사람들에게 좋은 영향을 주었음을 암시합니다.",
+    "person": "인",
+    "personDescription": "인은 신분을 상징합니다. 해당 능력치는 여러분이 가진 다른 능력치들의 조화로 이루어집니다.",
+    "bio": "바이오"
+  },
+  "common": {
+    "notAuthorized": "권한이 없습니다",
+    "notFound": "찾을 수 없습니다",
+    "pluginNotFound": "확인되지 않은 플러그인입니다",
+    "badRequest": "잘못된 요청입니다",
+    "unknownError": "알 수  없는 오류입니다",
+    "missingParams": "요청인자가 누락되었습니다",
+    "notValidEmail": "올바른 이메일 주소가 아닙니다",
+    "successEmailSubscription": "뉴스레터를 구독해주셔서 감사합니다",
+    "issues": "이슈",
+    "comments": "커멘트",
+    "pullRequests": "풀 요청",
+    "repositories": "저장소",
+    "review": "리뷰",
+    "contributedRepos": "기여한 저장소",
+    "collaboratedRepos": "헙력한 저장소",
+    "stars": "스타수",
+    "followers": "팔로워"
+  },
+  "index": {
+    "title": "두부아이오",
+    "worksNormally": "정상 동작합니다"
+  }
+}

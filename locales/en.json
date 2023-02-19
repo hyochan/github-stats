@@ -1,0 +1,40 @@
+{
+  "plugins": {
+    "tree": "Tree",
+    "treeDescription": "The tree symbolizes a curious adventurer. Strong drive and no fear of new things.",
+    "fire": "Fire",
+    "fireDescription": "Fire symbolizes energy and passion. It's a quality you need to get things done that go beyond curiosity.",
+    "earth": "Earth",
+    "earthDescription": "The earth has the property of keeping its place well without being shaken. As long as you work diligently, you will get good grades.",
+    "gold": "Gold",
+    "goldDescription": "Gold stands for substance and skill. The more things you polish, the better you are valued.",
+    "water": "Water",
+    "waterDescription": "The water symbolizes wisdom and insight. This usually suggests that you have had a good influence on people through a number of great contributions.",
+    "person": "People",
+    "personDescription": "The people stat symbolize identity. These stats are a combination of the other stats you have.",
+    "bio": "Bio"
+  },
+  "common": {
+    "notAuthorized": "Not authorized",
+    "notFound": "Not found",
+    "pluginNotFound": "Plugin not found",
+    "badRequest": "Bad request",
+    "unknownError": "Unknown error",
+    "missingParams": "Missing parameter",
+    "notValidEmail": "Not a valid email address",
+    "successEmailSubscription": "Thank you for subscribing to our newsletter",
+    "issues": "Issues",
+    "comments": "Comments",
+    "pullRequests": "Pull requests",
+    "repositories": "Repositories",
+    "review": "Reviews",
+    "contributedRepos": "Contributed Repos",
+    "collaboratedRepos": "Collaborated Repos",
+    "stars": "Stars",
+    "followers": "Followers"
+  },
+  "index": {
+    "title": "doobooio",
+    "worksNormally": "Works normally"
+  }
+}
