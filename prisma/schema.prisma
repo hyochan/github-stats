@@ -20,7 +20,7 @@ enum AuthType {
 }
 
 model NewsLetter {
-  email String @id @db.VarChar(255)
+  email String @id
 
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
@@ -28,21 +28,21 @@ model NewsLetter {
 }
 
 model User {
-  id          String    @id @db.Uuid @default(cuid())
-  email       String?   @db.VarChar(255)
-  name        String?   @db.VarChar(255)
+  id          String    @id @default(cuid()) @db.Uuid
+  email       String?
+  name        String?
   description String?
   birthday    DateTime?
   gender      Gender?
-  phone       String?   @db.VarChar(255)
-  locale      String?   @db.VarChar(8)
+  phone       String?
+  locale      String?
   certified   Boolean?  @default(false)
-  githubLogin String?   @unique @db.VarChar(255)
-  location    String?   @db.VarChar(255)
-  company     String?   @db.VarChar(255)
-  blog        String?   @db.VarChar(255)
-  twitter     String?   @db.VarChar(255)
-  githubURL   String?   @db.VarChar(255)
+  githubLogin String?   @unique
+  location    String?
+  company     String?
+  blog        String?
+  twitter     String?
+  githubURL   String?
 
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
@@ -53,10 +53,10 @@ model User {
 }
 
 model Image {
-  id           String    @id @db.Uuid @default(cuid())
-  thumbUrl     String?   @db.VarChar(1000)
-  thumbUrlHigh String?   @db.VarChar(1000)
-  imageUrl     String?   @db.VarChar(1000)
+  id           String    @id @default(cuid()) @db.Uuid
+  thumbUrl     String?
+  thumbUrlHigh String?
+  imageUrl     String?
   createdAt    DateTime? @default(now())
   updatedAt    DateTime? @updatedAt
   deletedAt    DateTime?
@@ -66,11 +66,11 @@ model Image {
 }
 
 model UserPlugin {
-  login           String    @id @db.VarChar(255)
-  githubId        String    @db.VarChar(255)
+  login           String    @id
+  githubId        String
   score           Int       @default(0) @db.SmallInt
-  userName        String?   @db.VarChar(255)
-  avatarUrl       String?   @db.VarChar(1000)
+  userName        String?
+  avatarUrl       String?
   description     String?
   json            Json?     @db.Json
   certifiedAt     DateTime?
@@ -83,20 +83,20 @@ model UserPlugin {
   user   User?   @relation(fields: [userId], references: [id])
   userId String? @db.Uuid
 
-  plugin     Plugin? @relation(fields: [pluginName], references: [name])
-  pluginName String? @db.VarChar(255)
+  plugin   Plugin? @relation(fields: [pluginId], references: [id])
+  pluginId String?
 
   viewCount Int? @default(0)
 
   stats    Stats[]
   trophies Trophy[]
 
-  @@unique([login, pluginName])
+  @@unique([login, pluginId])
 }
 
 model Plugin {
-  name        String  @id @db.VarChar(255)
-  apiURL      String  @db.VarChar(255)
+  id          String  @id
+  apiURL      String
   description String?
   json        Json?   @db.Json
 
@@ -108,28 +108,28 @@ model Plugin {
 }
 
 model Trophy {
-  id     String  @id @db.Uuid @default(cuid())
-  type   String  @db.VarChar(255)
+  id     String  @id @default(cuid()) @db.Uuid
+  type   String
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
 
   userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
-  userPluginLogin String?     @db.VarChar(255)
+  userPluginLogin String?
 
   @@unique([type, userPluginLogin])
 }
 
 model Stats {
-  id              String  @id @db.Uuid @default(cuid())
-  name            String  @db.VarChar(255)
-  iconURL         String? @db.VarChar(255)
-  iconURLSelected String? @db.VarChar(255)
+  id              String  @id @default(cuid()) @db.Uuid
+  name            String
+  iconURL         String?
+  iconURLSelected String?
   score           Decimal @db.Decimal(7, 2)
   description     String?
   statsElements   Json?   @db.Json
 
   userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
-  userPluginLogin String?     @db.VarChar(255)
+  userPluginLogin String?
 
   @@index([userPluginLogin])
 }
