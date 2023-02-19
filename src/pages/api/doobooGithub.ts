@@ -1,44 +1,39 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {createSupabaseClient} from '../../../server/utils';
-
-type Tier = {
-  tier: string;
-  score: number;
-};
-
-type Reply =
-  | {message: string}
-  | {id: string; description?: string | null; tiers: Tier[]};
+import type {DoobooStatsResponse} from '../../../server/services/githubService';
+import {getDoobooStats} from '../../../server/services/githubService';
+import {currentLocale} from '../../../server/utils';
+import {getTranslates} from '../../localization';
+import {assert} from '../../utils/assert';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Reply>,
+  res: NextApiResponse<(DoobooStatsResponse | null) | {message: string}>,
 ): Promise<void> {
   const {body, method} = req;
-  const id = <string>body.id;
+  const login = <string>body.login;
+  const locale = currentLocale(req);
 
   switch (method) {
     case 'POST':
-      const supabase = createSupabaseClient();
-      const {data} = await supabase
-        .from('Plugin')
-        .select('*')
-        .eq('id', id)
-        .single();
+      const {common} = await getTranslates(locale);
+      assert(login, common.notAuthorized);
+      try {
+        const data = await getDoobooStats({
+          login,
+          lang: locale,
+        });
 
-      if (!data) {
-        res.status(404).json({message: 'No plugins found.'});
+        if (!data) {
+          res.status(404).json({message: 'No plugins found.'});
 
-        return;
+          return;
+        }
+
+        res.status(200).json(data);
+      } catch (err) {
+        res.status(500).json({message: `Error: ${err}`});
       }
 
-      const tiers = <Tier[]>data.json;
-
-      res.status(200).json({
-        id: data.id,
-        description: data.description,
-        tiers,
-      });
       break;
     default:
       res.status(404).end();

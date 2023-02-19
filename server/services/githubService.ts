@@ -5,6 +5,7 @@ import type {GithubUser} from '../plugins/types';
 import type {Locale} from '../../src/i18n';
 import type {PluginTrophy} from '../plugins/trophies';
 import type {TopLanguage} from '../plugins/topLanguages';
+import axios from 'axios';
 import {createSupabaseClient} from '../utils';
 import {diffHours} from '../plugins/pluginUtils';
 import {getGithubStatus} from '../plugins';
@@ -18,20 +19,21 @@ export const getAccessToken = async (
   code: string,
   state?: string,
 ): Promise<string> => {
-  const {json} = await fetch('https://github.com/login/oauth/access_token', {
+  const {data} = await axios({
     method: 'post',
+    url: 'https://github.com/login/oauth/access_token',
     headers: {
-      Accept: 'application/json',
+      accept: 'application/json',
     },
-    body: JSON.stringify({
+    data: {
       client_id: GITHUB_CLIENT_ID,
       client_secret: GITHUB_CLIENT_SECRET,
       code,
       state,
-    }),
+    },
   });
 
-  return (await json()).access_token;
+  return data.access_token;
 };
 
 export const getGithubUser = async (
@@ -41,14 +43,15 @@ export const getGithubUser = async (
   const date = new Date();
   date.setMonth(date.getMonth() - 12);
 
-  const {json} = await fetch('https://api.github.com/graphql', {
+  const {data} = await axios({
     method: 'post',
+    url: 'https://api.github.com/graphql',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: `token ${GH_TOKEN}`,
     },
-    body: JSON.stringify({
+    data: {
       query: /* GraphQL */ `
         query userInfo($username: String!, $date: DateTime!) {
           user(login: $username) {
@@ -250,39 +253,38 @@ export const getGithubUser = async (
         }
       `,
       variables: {username: login, date: date.toISOString()},
-    }),
+    },
   });
 
-  return await json();
+  return data;
 };
 
 export const getGithubLogin = async (login: string): Promise<GithubUser> => {
-  const {json} = await fetch(`https://api.github.com/users/${login}`, {
+  const {data} = await axios({
     method: 'GET',
+    url: `https://api.github.com/users/${login}`,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
   });
 
-  return await json();
+  return data;
 };
 
 export const getGithubCommits = async (
   login: string,
 ): Promise<AuthorCommits> => {
-  const {json} = await fetch(
-    `https://api.github.com/search/commits?q=author:${login}&sort=author-date&order=desc`,
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+  const {data} = await axios({
+    method: 'GET',
+    url: `https://api.github.com/search/commits?q=author:${login}&sort=author-date&order=desc`,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-  );
+  });
 
-  return await json();
+  return data;
 };
 
 type GithubStats = Omit<
