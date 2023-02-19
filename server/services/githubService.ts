@@ -1,5 +1,5 @@
 import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
-import type {Plugin, Prisma, Stats, UserPlugin} from '@prisma/client';
+import type {Json, Model} from '../../src/types/supabase';
 
 import type {GithubUser} from '../plugins/types';
 import type {Locale} from '../../src/i18n';
@@ -286,7 +286,7 @@ export const getGithubCommits = async (
 };
 
 type GithubStats = Omit<
-  Stats,
+  Model['Stats']['Row'],
   'score' | 'userPluginId' | 'id' | 'iconURL' | 'iconURLSelected'
 > & {
   score: number;
@@ -294,7 +294,7 @@ type GithubStats = Omit<
 };
 
 export type DoobooStatsResponse = {
-  plugin: Plugin;
+  plugin: Model['Plugin']['Row'];
   pluginStats: PluginStats;
   pluginTrophies: PluginTrophy[];
   json: {
@@ -317,8 +317,8 @@ const upsertGithubStats = async ({
   lang = 'en',
 }: {
   login: string;
-  plugin: Plugin;
-  userPlugin: UserPlugin | null;
+  plugin: Model['Plugin']['Row'];
+  userPlugin: Model['UserPlugin']['Row'] | null;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
@@ -337,7 +337,7 @@ const upsertGithubStats = async ({
     const languages = getTopLanguages(githubUser);
     const trophies = getTrophies(githubUser);
 
-    const stats: Prisma.StatsCreateManyUserPluginInput[] = [
+    const stats: Model['Stats']['Insert'][] = [
       {
         name: 'TREE',
         score: githubStatus.tree.score,
@@ -399,7 +399,7 @@ const upsertGithubStats = async ({
 
     const score = Math.round((sum / 6) * 100);
 
-    supabase.from('UserPlugin').upsert({
+    await supabase.from('UserPlugin').upsert({
       login,
       userName: githubUser.name,
       avatarUrl: githubUser.avatarUrl,
@@ -414,82 +414,31 @@ const upsertGithubStats = async ({
         score,
         languages,
       },
-      // trophies: {
-      //   createMany: {
-      //     skipDuplicates: true,
-      //     data: trophies,
-      //   },
-      // },
-      // stats: {
-      //   createMany: {
-      //     skipDuplicates: true,
-      //     data: stats,
-      //   },
-      // },
     });
 
-    await prisma.userPlugin.upsert({
-      create: {
-        login,
-        userName: githubUser.name,
-        avatarUrl: githubUser.avatarUrl,
-        description: githubUser.bio,
-        pluginId: plugin.id,
-        score,
-        githubId: githubUser.id,
-        json: {
-          login: githubUser.login,
-          avatarUrl: githubUser.avatarUrl,
-          bio: githubUser.bio,
-          score,
-          languages,
-        },
-        trophies: {
-          createMany: {
-            skipDuplicates: true,
-            data: trophies,
-          },
-        },
-        stats: {
-          createMany: {
-            skipDuplicates: true,
-            data: stats,
-          },
-        },
-      },
-      update: {
-        avatarUrl: githubUser.avatarUrl,
-        description: githubUser.bio,
-        score,
-        githubId: githubUser.id,
-        stats: {
-          createMany: {
-            skipDuplicates: true,
-            data: stats,
-          },
-        },
-        trophies: {
-          createMany: {
-            skipDuplicates: true,
-            data: trophies,
-          },
-        },
-      },
-      where: {
-        login_pluginId: {
-          login,
-          pluginId: plugin.id,
-        },
-      },
+    trophies.forEach(async (el) => {
+      const trophyScore = el.score as number;
+
+      await supabase.from('Trophy').upsert({
+        ...el,
+        score: trophyScore,
+      });
     });
 
-    const result = {
-      ...githubStatus,
-    };
+    stats.forEach(async (el) => {
+      const statScore = el.score as number;
+      const statsElements = el.statsElements as Json;
+
+      await supabase.from('Stats').upsert({
+        ...el,
+        score: statScore,
+        statsElements: statsElements,
+      });
+    });
 
     return {
       plugin,
-      pluginStats: result,
+      pluginStats: githubStatus,
       pluginTrophies: trophies.map((el) => {
         const type = el.type as keyof typeof plugins;
 
@@ -525,47 +474,49 @@ export const getDoobooStats = async ({
   login: string;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
+  const supabase = createSupabaseClient();
   const {common, plugins} = await getTranslates(lang);
   login = login.toLowerCase();
 
   try {
     const PLUGIN_ID = 'dooboo-github';
 
-    const plugin = await prisma.plugin.findUnique({
-      where: {id: PLUGIN_ID},
-    });
+    const {data: plugin} = await supabase
+      .from('Plugin')
+      .select()
+      .eq('id', PLUGIN_ID)
+      .single();
 
     if (!plugin) {
       throw new Error(common.pluginNotFound);
     }
 
-    const userPlugin = await prisma.userPlugin.findUnique({
-      where: {
-        login_pluginId: {
-          login,
-          pluginId: plugin.id,
-        },
-      },
-    });
+    const {data: userPlugin} = await supabase
+      .from('UserPlugin')
+      .select()
+      .match({
+        pluginId: plugin.id,
+        login,
+      })
+      .single();
 
     // NOTE: Return the data when user was fetched.
     if (userPlugin) {
-      const stats = await prisma.stats.findMany({
-        where: {
-          userPluginLogin: userPlugin.login,
-        },
+      const {data: stats} = await supabase.from('Stats').select().match({
+        userPluginLogin: userPlugin.login,
       });
 
-      const ghStats: GithubStats[] = stats.map((el) => {
-        return {
-          id: el.id,
-          description: el.description,
-          score: el.score as unknown as number,
-          name: el.name,
-          statsElements: el.statsElements,
-          userPluginLogin: el.userPluginLogin,
-        };
-      });
+      const ghStats: GithubStats[] =
+        stats?.map((el) => {
+          return {
+            id: el.id,
+            description: el.description,
+            score: el.score,
+            name: el.name,
+            statsElements: el.statsElements,
+            userPluginLogin: el.userPluginLogin,
+          };
+        }) || [];
 
       const tree = ghStats.find((el) => el.name === 'TREE');
       const fire = ghStats.find((el) => el.name === 'FIRE');
@@ -613,17 +564,19 @@ export const getDoobooStats = async ({
         },
       };
 
-      const updatedAt = userPlugin?.updatedAt as Date;
+      const updatedAt = new Date(userPlugin?.updatedAt || '');
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
       let isCachedResult = false;
 
       if (userPlugin.login) {
-        await prisma.userPlugin.update({
-          data: {viewCount: {increment: 1}},
-          where: {login: userPlugin.login},
-        });
+        await supabase
+          .from('UserPlugin')
+          .update({
+            viewCount: userPlugin?.viewCount ? userPlugin.viewCount + 1 : 1,
+          })
+          .match({login: userPlugin.login});
 
         if (diffHours(updatedAt, today) < 3) {
           upsertGithubStats({
@@ -636,26 +589,23 @@ export const getDoobooStats = async ({
         }
       }
 
-      const trophies = await prisma.trophy.findMany({
-        select: {
-          score: true,
-          points: true,
-          type: true,
-        },
-        where: {userPluginLogin: userPlugin.login},
-      });
+      const {data: trophies} = await supabase
+        .from('Trophy')
+        .select('score, points,type')
+        .eq('userPluginLogin', userPlugin.login);
 
       return {
         plugin,
         pluginStats: result,
-        pluginTrophies: trophies.map((el) => {
-          const type = el.type as keyof typeof plugins;
+        pluginTrophies:
+          trophies?.map((el) => {
+            const type = el.type as keyof typeof plugins;
 
-          return {
-            ...el,
-            type,
-          };
-        }),
+            return {
+              ...el,
+              type,
+            };
+          }) || [],
         json: JSON.parse(JSON.stringify(userPlugin.json)),
         isCachedResult,
         userName: userPlugin.userName,

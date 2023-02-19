@@ -6,6 +6,8 @@ export type Json =
   | { [key: string]: Json }
   | Json[]
 
+export type Model = Database['public']['Tables'];
+
 export interface Database {
   public: {
     Tables: {
@@ -55,7 +57,7 @@ export interface Database {
         Insert: {
           createdAt?: string | null
           deletedAt?: string | null
-          id: string
+          id?: string
           imageUrl?: string | null
           thumbUrl?: string | null
           thumbUrlHigh?: string | null
@@ -99,8 +101,8 @@ export interface Database {
           createdAt: string | null
           deletedAt: string | null
           description: string | null
+          id: string
           json: Json | null
-          name: string
           updatedAt: string | null
         }
         Insert: {
@@ -108,8 +110,8 @@ export interface Database {
           createdAt?: string | null
           deletedAt?: string | null
           description?: string | null
+          id: string
           json?: Json | null
-          name: string
           updatedAt?: string | null
         }
         Update: {
@@ -117,8 +119,8 @@ export interface Database {
           createdAt?: string | null
           deletedAt?: string | null
           description?: string | null
+          id?: string
           json?: Json | null
-          name?: string
           updatedAt?: string | null
         }
       }
@@ -137,7 +139,7 @@ export interface Database {
           description?: string | null
           iconURL?: string | null
           iconURLSelected?: string | null
-          id: string
+          id?: string
           name: string
           score: number
           statsElements?: Json | null
@@ -163,7 +165,7 @@ export interface Database {
           userPluginLogin: string | null
         }
         Insert: {
-          id: string
+          id?: string
           points?: number
           score: number
           type: string
@@ -210,7 +212,7 @@ export interface Database {
           gender?: Database["public"]["Enums"]["Gender"] | null
           githubLogin?: string | null
           githubURL?: string | null
-          id: string
+          id?: string
           locale?: string | null
           location?: string | null
           name?: string | null
@@ -250,7 +252,7 @@ export interface Database {
           githubId: string
           json: Json | null
           login: string
-          pluginName: string | null
+          pluginId: string | null
           score: number
           updatedAt: string | null
           userId: string | null
@@ -267,7 +269,7 @@ export interface Database {
           githubId: string
           json?: Json | null
           login: string
-          pluginName?: string | null
+          pluginId?: string | null
           score?: number
           updatedAt?: string | null
           userId?: string | null
@@ -284,7 +286,7 @@ export interface Database {
           githubId?: string
           json?: Json | null
           login?: string
-          pluginName?: string | null
+          pluginId?: string | null
           score?: number
           updatedAt?: string | null
           userId?: string | null
