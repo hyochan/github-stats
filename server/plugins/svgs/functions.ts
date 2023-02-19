@@ -1,3 +1,5 @@
+'use server';
+
 import {renderGithubStatsSvg, renderGithubStatsSvgWithLangs} from './common';
 import {
   tierBronzeSvg,

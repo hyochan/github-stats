@@ -3,7 +3,7 @@ import {objectType} from 'nexus';
 export const Plugin = objectType({
   name: 'Plugin',
   definition(t) {
-    t.nonNull.id('name');
+    t.nonNull.id('id');
     t.nonNull.string('apiURL');
     t.string('description');
     t.json('json');
@@ -14,11 +14,11 @@ export const Plugin = objectType({
 
     t.list.field('userPlugins', {
       type: 'UserPlugin',
-      resolve: async ({name}, _, {supabase}) => {
+      resolve: async ({id}, _, {supabase}) => {
         const {data} = await supabase
           .from('UserPlugin')
           .select()
-          .eq('pluginName', name);
+          .eq('pluginId', id);
 
         return data;
       },

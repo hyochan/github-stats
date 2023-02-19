@@ -404,7 +404,7 @@ const upsertGithubStats = async ({
       userName: githubUser.name,
       avatarUrl: githubUser.avatarUrl,
       description: githubUser.bio,
-      pluginName: plugin.name,
+      pluginId: plugin.id,
       score,
       githubId: githubUser.id,
       json: {
@@ -434,7 +434,7 @@ const upsertGithubStats = async ({
         userName: githubUser.name,
         avatarUrl: githubUser.avatarUrl,
         description: githubUser.bio,
-        pluginName: plugin.name,
+        pluginId: plugin.id,
         score,
         githubId: githubUser.id,
         json: {
@@ -476,9 +476,9 @@ const upsertGithubStats = async ({
         },
       },
       where: {
-        login_pluginName: {
+        login_pluginId: {
           login,
-          pluginName: plugin.name,
+          pluginId: plugin.id,
         },
       },
     });
@@ -529,10 +529,10 @@ export const getDoobooStats = async ({
   login = login.toLowerCase();
 
   try {
-    const PLUGIN_NAME = 'dooboo-github';
+    const PLUGIN_ID = 'dooboo-github';
 
     const plugin = await prisma.plugin.findUnique({
-      where: {name: PLUGIN_NAME},
+      where: {id: PLUGIN_ID},
     });
 
     if (!plugin) {
@@ -541,9 +541,9 @@ export const getDoobooStats = async ({
 
     const userPlugin = await prisma.userPlugin.findUnique({
       where: {
-        login_pluginName: {
+        login_pluginId: {
           login,
-          pluginName: plugin.name,
+          pluginId: plugin.id,
         },
       },
     });

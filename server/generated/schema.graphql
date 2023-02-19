@@ -61,8 +61,8 @@ type Plugin {
   createdAt: DateTime
   deletedAt: DateTime
   description: String
+  id: ID!
   json: JSON
-  name: ID!
   updatedAt: DateTime
   userPlugins: [UserPlugin]
 }
