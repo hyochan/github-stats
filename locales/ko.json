@@ -1,4 +1,12 @@
 {
+  "nav": {
+    "recentList": "최근 목록",
+    "certifiedUsers": "인증 목록"
+  },
+  "langs": {
+    "en": "영어",
+    "ko": "한국어"
+  },
   "plugins": {
     "tree": "목",
     "treeDescription": "목은 호기심이 강한 모험가를 상징합니다. 추진력이 강하고 새로운 일에 두려움이 없습니다.",

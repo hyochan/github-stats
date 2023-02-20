@@ -7,6 +7,8 @@
   body {
     width: 100vw;
     height: 100vh;
+
+    display: flex;
   }
 
   /* search input - Internet Explorer */
@@ -29,66 +31,20 @@
   }
 
   .bg-basic {
-    @apply bg-white dark:bg-black;
+    @apply bg-white dark:bg-dark;
   }
-  .bg-paper {
-    @apply bg-gray1 dark:bg-gray9;
-  }
-  .bg-disabled {
-    @apply bg-gray3 dark:bg-gray7;
-  }
-  .bg-border {
-    @apply bg-gray2 dark:bg-gray6;
-  }
-  .bg-border-contrast {
-    @apply bg-gray7 dark:bg-gray2;
-  }
-  .role-primary {
-    @apply bg-primary-light dark:bg-primary-dark;
-  }
-  .role-secondary {
-    @apply bg-secondary-light dark:bg-secondary-dark;
-  }
-  .role-accent {
-    @apply bg-accent-light dark:bg-accent-dark;
-  }
-  .role-info {
-    @apply bg-info-light dark:bg-info-dark;
-  }
-  .role-link {
-    @apply bg-link-light dark:bg-info-dark;
-  }
-  .role-success {
-    @apply bg-success-light dark:bg-success-dark;
-  }
-  .role-warning {
-    @apply bg-warning-light dark:bg-warning-dark;
-  }
-  .role-danger {
-    @apply bg-danger-light dark:bg-danger-dark;
-  }
-  .text-basic {
-    @apply text-black dark:text-white;
-    @apply fill-black dark:fill-white;
-  }
-  .text-label {
-    @apply text-gray6 dark:text-gray3;
-    @apply fill-gray6 dark:fill-gray3;
-  }
-  .text-placeholder {
-    @apply text-gray5 dark:text-gray4;
-    @apply fill-gray5 dark:fill-gray4;
-  }
-  .text-disabled {
-    @apply text-gray3 dark:text-gray6;
-    @apply fill-gray3 dark:fill-gray6;
-  }
-  .text-validation {
-    @apply text-red2 dark:text-red1;
-    @apply fill-red2 dark:fill-red1;
-  }
-  .text-contrast {
-    @apply text-white dark:text-black;
-    @apply fill-white dark:fill-black;
-  }
+
+  /* .bg-paper {
+    @apply bg-paper dark:bg-paper-dark;
+  } */
+
+  .h1 { @apply text-h1 font-bold text-black dark:text-white; }
+  .h2 { @apply text-h2 font-bold text-black dark:text-white; }
+  .h3 { @apply text-h3 font-bold text-black dark:text-white; }
+  .h4 { @apply text-h4 font-bold text-black dark:text-white; }
+
+  .body1 { @apply text-body1 text-black dark:text-white; }
+  .body2 { @apply text-body2 text-black dark:text-white; }
+  .body3 { @apply text-body3 text-black dark:text-white; }
+  .body4 { @apply text-body4 text-black dark:text-white; }
 }

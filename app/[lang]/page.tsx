@@ -1,29 +1,45 @@
-import {H1} from '~/components/Typography';
-import {Inter} from '@next/font/google';
+import Header from './(home)/Header';
+import Home from './(home)/Home';
 import type {Locale} from '~/i18n';
-import LocaleSwitcher from '~/components/LocaleSwitcher';
 import type {ReactElement} from 'react';
-import clsx from 'clsx';
-import {getTranslates} from '~/localization';
-
-const inter = Inter({subsets: ['latin']});
+import {getTranslates} from '../../src/localization';
 
 type Props = {
   params: {lang: Locale};
 };
 
+export type NavLink = {
+  name: string;
+  path: string;
+};
+
 export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
-  const [{index}] = await Promise.all([getTranslates(lang)]);
+  const {nav, langs} = await getTranslates(lang);
+
+  const navLinks: NavLink[] = [
+    {
+      name: nav.recentList,
+      path: '/recentList',
+    },
+    // TODO: remove this comment when the feature is ready.
+    // {
+    //   name: nav.certifiedUsers,
+    //   path: '/certifiedUsers',
+    // },
+  ];
 
   return (
-    <div className="h-full flex flex-col justify-center items-center">
-      <H1 className={clsx('text-h1', 'mb-8', inter.className)}>
-        {index.title}
-      </H1>
-
-      <LocaleSwitcher />
+    <div className="h-full flex flex-col">
+      <Header
+        navLinks={navLinks}
+        langs={{
+          en: langs.en,
+          ko: langs.ko,
+        }}
+      />
+      <Home lang={lang} />
     </div>
   );
 }
