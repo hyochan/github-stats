@@ -3,6 +3,10 @@
     "recentList": "Recent List",
     "certifiedUsers": "Certified Users"
   },
+  "langs": {
+    "en": "English",
+    "ko": "Korean"
+  },
   "plugins": {
     "tree": "Tree",
     "treeDescription": "The tree symbolizes a curious adventurer. Strong drive and no fear of new things.",

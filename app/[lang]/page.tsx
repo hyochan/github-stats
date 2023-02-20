@@ -1,4 +1,4 @@
-import Header from './(home)/header';
+import Header from './(home)/Header';
 import Home from './(home)/Home';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
@@ -16,7 +16,8 @@ export type NavLink = {
 export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
-  const {nav} = await getTranslates(lang);
+  const {nav, langs} = await getTranslates(lang);
+
   const navLinks: NavLink[] = [
     {
       name: nav.recentList,
@@ -31,7 +32,13 @@ export default async function Page({
 
   return (
     <div className="h-full flex flex-col">
-      <Header navLinks={navLinks} />
+      <Header
+        navLinks={navLinks}
+        langs={{
+          en: langs.en,
+          ko: langs.ko,
+        }}
+      />
       <Home lang={lang} />
     </div>
   );

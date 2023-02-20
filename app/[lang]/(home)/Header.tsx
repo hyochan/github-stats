@@ -1,7 +1,7 @@
 import {H1} from '../../../src/components/Typography';
 import {Inter} from '@next/font/google';
 import Link from 'next/link';
-import LocaleSwitcher from '../../../src/components/LocaleSwitcher';
+import LocaleSwitcher from './LocaleSwitcher';
 import Logo from '../../../src/components/Logo';
 import type {ReactElement} from 'react';
 import clsx from 'clsx';
@@ -15,25 +15,27 @@ export type NavLink = {
 
 type Props = {
   navLinks: NavLink[];
+  langs: {en: string; ko: string};
 };
 
-export default function Header({navLinks}: Props): ReactElement {
+export default function Header({navLinks, langs}: Props): ReactElement {
   return (
     <header
       className="
-      h-16 decoration-0 bg-basic
-      flex flex-row items-center justify-between
-      px-[40px]"
+        h-16 decoration-0 bg-basic
+        flex flex-row items-center justify-between
+        pl-[40px] pr-[28px]
+      "
     >
       <div className="flex flex-row items-center">
         <div
           className="
-          decoration-0
-          flex flex-row items-center
-          transition duration-300
-          hover:opacity-70 hover:translate-y-2px
-          active:opacity-100
-        "
+            decoration-0
+            flex flex-row items-center
+            transition duration-300
+            hover:opacity-70 hover:translate-y-2px
+            active:opacity-100
+          "
         >
           <Logo />
           <H1 className={clsx('body3 font-bold ml-[8px]', inter.className)}>
@@ -55,7 +57,7 @@ export default function Header({navLinks}: Props): ReactElement {
           })}
         </nav>
       </div>
-      <LocaleSwitcher />
+      <LocaleSwitcher languages={langs} />
     </header>
   );
 }
