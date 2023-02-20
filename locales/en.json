@@ -1,4 +1,8 @@
 {
+  "nav": {
+    "recentList": "Recent List",
+    "certifiedUsers": "Certified Users"
+  },
   "plugins": {
     "tree": "Tree",
     "treeDescription": "The tree symbolizes a curious adventurer. Strong drive and no fear of new things.",

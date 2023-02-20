@@ -1,7 +1,5 @@
 'use client';
 
-import 'client-only';
-
 import type {Locale} from '~/i18n';
 import createCtx from '~/utils/createCtx';
 import {useState} from 'react';

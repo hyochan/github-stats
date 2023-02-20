@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@dooboo/eslint-config-react', 'next/core-web-vitals'],
+  extends: ['next/core-web-vitals', '@dooboo/eslint-config-react'],
   env: {
     browser: true,
     es2021: true,

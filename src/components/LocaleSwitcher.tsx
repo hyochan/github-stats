@@ -1,7 +1,5 @@
 'use client';
 
-import 'client-only';
-
 import type {ChangeEventHandler, ReactElement} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 

@@ -1,15 +1,19 @@
 'use client';
 
+import type {ReactElement, ReactNode} from 'react';
+
 import type {Locale} from '~/i18n';
 import {LocaleProvider} from '~/components/LocaleProvider';
 
-export default function Providers({
+export type ThemeType = 'light' | 'dark';
+
+export default function RootProvider({
   children,
   initialLocale,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   initialLocale: Locale;
-}): React.ReactElement {
+}): ReactElement {
   return (
     <LocaleProvider initialLocale={initialLocale}>{children}</LocaleProvider>
   );

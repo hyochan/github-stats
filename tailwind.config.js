@@ -77,37 +77,58 @@ module.exports = {
       black: '#000000',
       red1: '#FF2C2C',
       red2: '#DA0000',
+      dark: '#182128',
       primary: {
-        light: '#47498A',
+        DEFAULT: '#47498A',
         dark: '#585DFA',
       },
       secondary: {
-        light: '#9E45B3',
+        DEFAULT: '#9E45B3',
         dark: '#C93AEB',
       },
       accept: {
-        light: '#6BF3C5',
+        DEFAULT: '#6BF3C5',
         dark: '#6BF3C5',
       },
       info: {
-        light: '#307EF1',
+        DEFAULT: '#307EF1',
         dark: '#2998FF',
       },
-      link: {
-        light: '#A351F4',
-        dark: '#A351F4',
-      },
       success: {
-        light: '#0FC70C',
+        DEFAULT: '#0FC70C',
         dark: '#2FFA86',
       },
       warning: {
-        light: '#EBBD1A',
+        DEFAULT: '#EBBD1A',
         dark: '#F4CC3E',
       },
       danger: {
-        light: '#F84444',
+        DEFAULT: '#F84444',
         dark: '#FF3C3C',
+      },
+      border: {
+        DEFAULT: '#C2C8D0',
+        dark: '#333333',
+      },
+      paper: {
+        DEFAULT: 'rgb(243, 245, 253)',
+        dark: 'rgb(28, 38, 54)',
+      },
+      accent: {
+        DEFAULT: '#B446BF',
+        dark: '#8A96DC',
+      },
+      link: {
+        DEFAULT: '#1C89B6',
+        dark: '#E0E0E0',
+      },
+      'btn-primary': {
+        DEFAULT: '#47498A',
+        dark: '#585DFA',
+      },
+      'btn-primary-text': {
+        Default: '#FFFFFF',
+        dark: '#000000',
       },
     },
     fontWeight: {
@@ -121,8 +142,10 @@ module.exports = {
       h2: '22px',
       h3: '18px',
       h4: '16px',
-      h5: '14px',
-      h6: '12px',
+      body1: '18px',
+      body2: '16px',
+      body3: '14px',
+      body4: '12px',
     },
     extend: {
       lineHeight: {
