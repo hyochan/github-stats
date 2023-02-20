@@ -6,9 +6,7 @@
 
 <img width="415" alt="landing" src="https://user-images.githubusercontent.com/27461460/189487529-f2942a04-63af-4d6d-9600-d84e50cabeb9.png">
 
-## Configuration
-
-### 1. Environment variables
+## Environment variables
 
 <details>
 <summary>ROOT_URL</summary>
@@ -117,7 +115,7 @@ cp `.env.sample` `.env.local` // For developing
 
 Run `yarn migrate:dev` to you local database then when every is done right, you can then run `yarn migrate:prod` to update production database in Supabase.
 
-### 2. Copy environment variables
+### 4. Copy environment variables
 
 ```
 cp .env.sample .env.local
