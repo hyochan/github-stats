@@ -79,55 +79,55 @@ module.exports = {
       red2: '#DA0000',
       dark: '#182128',
       primary: {
-        DEFAULT: '#47498A',
+        light: '#47498A',
         dark: '#585DFA',
       },
       secondary: {
-        DEFAULT: '#9E45B3',
+        light: '#9E45B3',
         dark: '#C93AEB',
       },
       accept: {
-        DEFAULT: '#6BF3C5',
+        light: '#6BF3C5',
         dark: '#6BF3C5',
       },
       info: {
-        DEFAULT: '#307EF1',
+        light: '#307EF1',
         dark: '#2998FF',
       },
       success: {
-        DEFAULT: '#0FC70C',
+        light: '#0FC70C',
         dark: '#2FFA86',
       },
       warning: {
-        DEFAULT: '#EBBD1A',
+        light: '#EBBD1A',
         dark: '#F4CC3E',
       },
       danger: {
-        DEFAULT: '#F84444',
+        light: '#F84444',
         dark: '#FF3C3C',
       },
       border: {
-        DEFAULT: '#C2C8D0',
+        light: '#C2C8D0',
         dark: '#333333',
       },
       paper: {
-        DEFAULT: 'rgb(243, 245, 253)',
+        light: 'rgb(243, 245, 253)',
         dark: 'rgb(28, 38, 54)',
       },
       accent: {
-        DEFAULT: '#B446BF',
+        light: '#B446BF',
         dark: '#8A96DC',
       },
       link: {
-        DEFAULT: '#1C89B6',
+        light: '#1C89B6',
         dark: '#E0E0E0',
       },
       'btn-primary': {
-        DEFAULT: '#47498A',
+        light: '#47498A',
         dark: '#585DFA',
       },
       'btn-primary-text': {
-        Default: '#FFFFFF',
+        light: '#FFFFFF',
         dark: '#000000',
       },
     },

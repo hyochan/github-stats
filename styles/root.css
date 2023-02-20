@@ -34,9 +34,9 @@
     @apply bg-white dark:bg-dark;
   }
 
-  /* .bg-paper {
-    @apply bg-paper dark:bg-paper-dark;
-  } */
+  .bg-paper {
+    @apply bg-paper-light dark:bg-paper-dark;
+  }
 
   .h1 { @apply text-h1 font-bold text-black dark:text-white; }
   .h2 { @apply text-h2 font-bold text-black dark:text-white; }
