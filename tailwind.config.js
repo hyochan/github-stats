@@ -79,8 +79,8 @@ module.exports = {
       red2: '#DA0000',
       dark: '#182128',
       primary: {
-        light: '#47498A',
-        dark: '#585DFA',
+        light: '#585DFA',
+        dark: '#47498A',
       },
       secondary: {
         light: '#9E45B3',
@@ -110,13 +110,29 @@ module.exports = {
         light: '#C2C8D0',
         dark: '#333333',
       },
+      disabled: {
+        light: '#BEBEBE',
+        dark: '#474747',
+      },
       paper: {
         light: 'rgb(243, 245, 253)',
         dark: 'rgb(28, 38, 54)',
       },
+      placeholder: {
+        light: '#787878',
+        dark: '#909090',
+      },
+      validation: {
+        light: '#DA0000',
+        dark: '#FF2C2C',
+      },
       accent: {
         light: '#B446BF',
         dark: '#8A96DC',
+      },
+      contrast: {
+        light: '#000000',
+        dark: '#FFFFFF',
       },
       link: {
         light: '#1C89B6',

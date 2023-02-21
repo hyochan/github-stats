@@ -479,7 +479,7 @@ export const getDoobooStats = async ({
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   const supabase = createSupabaseClient();
-  const {common, plugins} = await getTranslates(lang);
+  const {common, plugins, trophies} = await getTranslates(lang);
   login = login.toLowerCase();
 
   try {
@@ -593,7 +593,7 @@ export const getDoobooStats = async ({
         }
       }
 
-      const {data: trophies} = await supabase
+      const {data: trophyData} = await supabase
         .from('Trophy')
         .select('score, points,type')
         .eq('userPluginLogin', userPlugin.login);
@@ -602,12 +602,12 @@ export const getDoobooStats = async ({
         plugin,
         pluginStats: result,
         pluginTrophies:
-          trophies?.map((el) => {
-            const type = el.type as keyof typeof plugins;
+          trophyData?.map((el) => {
+            const type = el.type as keyof typeof trophies;
 
             return {
               ...el,
-              type,
+              type: trophies[type],
             };
           }) || [],
         json: JSON.parse(JSON.stringify(userPlugin.json)),

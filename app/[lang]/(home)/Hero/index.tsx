@@ -1,0 +1,231 @@
+'use client';
+
+import {MarkGithubIcon, SearchIcon} from '@primer/octicons-react';
+
+import Button from '../../(common)/Button';
+import ButtonGroup from '../../(common)/ButtonGroup';
+import Dropdown from '../../(common)/Dropdown';
+import type {ReactElement} from 'react';
+import type {StatsInfo} from '../../../../src/pages/fetch/github';
+import StatsSymbols from './StatsSymbol';
+import StatsUrlCard from './StatsUrlCards';
+import TextInput from '../../(common)/TextInput';
+import type {Translates} from '../../../../src/localization';
+import {fetchGithubStats} from '../../../../src/pages/fetch/github';
+import {useForm} from 'react-hook-form';
+import {useState} from 'react';
+
+const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
+
+const generateSvgUrlToCopy = (login: string, isBasic?: boolean): string => {
+  if (isBasic) {
+    return `![${login} GitHub Stats](${rootUrl}/github-stats?login=${login})`;
+  }
+
+  return `![${login} GitHub Stats](${rootUrl}/github-stats-advanced?login=${login})`;
+};
+
+type SvgType = 'basic' | 'advanced' | 'trophies';
+
+const getSVGUrl = (type: SvgType, login: string): string => {
+  return type === 'advanced'
+    ? `${rootUrl}/github-stats-advanced?login=${login}`
+    : type === 'trophies'
+    ? `${rootUrl}/github-trophies?login=${login}`
+    : `${rootUrl}/github-stats?login=${login}`;
+};
+
+type Props = {
+  t: Translates['home'];
+  statsInfo: StatsInfo;
+};
+
+export type PluginType = {
+  domain: string;
+  icon: ReactElement;
+};
+
+function Hero({t, statsInfo}: Props): ReactElement {
+  const statTypes: PluginType[] = [
+    {
+      domain: 'github.com',
+      icon: <MarkGithubIcon size={24} />,
+    },
+  ];
+
+  const [selectedPluginType, setSelectedPluginType] = useState(statTypes[0]);
+  const [uid, setUID] = useState('');
+  const [searchedUID, setSearchedUID] = useState('');
+  const [githubSVG, setGithubSVG] = useState<string | null>(null);
+  const [noTrophies, setNoTrophies] = useState(false);
+  const [svgStatsURL, setSvgStatsURL] = useState<string>('');
+  const [isBasic, setIsBasic] = useState<boolean | undefined>(undefined);
+  const {register, formState, handleSubmit} = useForm();
+
+  const searchUser = async (): Promise<void> => {
+    if (selectedPluginType.domain === 'github.com') {
+      try {
+        const svgStats = await fetchGithubStats(uid);
+
+        // NOTE: Should use `unescape` to translate chinese letters. The new api `decodeURIComponent` won't work.
+        // Related issue https://stackoverflow.com/questions/23223718/failed-to-execute-btoa-on-window-the-string-to-be-encoded-contains-characte
+        const base64dataStats = btoa(unescape(encodeURIComponent(svgStats)));
+        setGithubSVG(base64dataStats);
+
+        setSvgStatsURL(generateSvgUrlToCopy(uid, false));
+        setSearchedUID(uid);
+        setIsBasic(false);
+        setNoTrophies(false);
+      } catch (err) {
+        setGithubSVG(null);
+        setSvgStatsURL('');
+        setIsBasic(undefined);
+      }
+    }
+  };
+
+  return (
+    <div
+      className="
+        self-stretch bg-cover
+        flex flex-col justify-center items-center
+        max-[425px]:p-0
+      "
+    >
+      <div
+        className="
+          self-stretch px-[80px] 
+          flex flex-col align-start justify-start
+          max-[425px]:px-[20px]
+        "
+      >
+        <p className="h1 text-[44px] mt-[80px] mb-[16px] text-left font-bold">
+          {t.visualizeDevStats}
+        </p>
+        <p className="body1 text-[20px] mb-[40px] opacity-50">
+          {t.visualizeDevStatsDesc}
+        </p>
+        {/* Begin: Search Form */}
+        <form
+          onSubmit={handleSubmit(searchUser)}
+          className="self-stretch "
+          autoComplete="off"
+        >
+          <div
+            className="
+              rounded-[4px] bg-gray7 px-3 h-[64px] relative body2 max-w-[800px]
+              flex flex-row-reverse items-center
+              max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto
+              max-[320px]:py-3 max-[320px]:flex-col max-[320px]:items-center max-[320px]:justify-center
+            "
+          >
+            <Button
+              isLoading={formState.isSubmitting}
+              type="submit"
+              className="
+                bg-transparent border-0 text-center max-w-[100px] p-2
+              "
+              text={<SearchIcon size={22} fill="#FFF" />}
+            />
+            <div className="flex-1 flex flex-row items-center">
+              <Dropdown
+                data={statTypes}
+                selected={selectedPluginType}
+                setSelected={(el) => {
+                  setSelectedPluginType(el);
+                }}
+              />
+              <span
+                className="
+                  text-white
+                  mx-3 body3 text-[22px]
+                  max-[425px]:invisible max-[425px]:hidden
+                "
+              >
+                /
+              </span>
+              <TextInput
+                {...register('githubID')}
+                placeholder={t.githubUsername}
+                onChange={(e) => {
+                  setUID(e.target.value.trim());
+                }}
+              />
+            </div>
+          </div>
+        </form>
+        {/* End: Search Form */}
+        {/* Begin: Stats */}
+        {githubSVG ? (
+          <div
+            className="
+            max-w-[800px] flex-1 self-stretch
+            flex flex-col
+          "
+          >
+            <ButtonGroup
+              className="py-[4px] w-[98%] mt-[18px] mb-[10px]"
+              selectedIndex={isBasic ? 0 : 1}
+              buttons={[{label: t.basic}, {label: t.advanced}]}
+              onClick={(index) => {
+                const shouldBeBasic = index === 0;
+                setSvgStatsURL(generateSvgUrlToCopy(uid, shouldBeBasic));
+                setIsBasic(shouldBeBasic);
+              }}
+            />
+            {/* Begin: Scouter */}
+            <div
+              className="
+              flex-1 relative self-stretch max-w-[800px] mb-[8px] mt-[4px]
+              max-[425px]:w-full max-[425px]:max-w-[425px]
+            "
+            >
+              {!isBasic ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className="w-full"
+                  alt="github svg"
+                  src={`data:image/svg+xml;base64,${githubSVG}`}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className="w-full"
+                  alt="github svg"
+                  src={getSVGUrl(isBasic ? 'basic' : 'advanced', searchedUID)}
+                />
+              )}
+            </div>
+            {/* End: Scouter */}
+            {!noTrophies ? (
+              <div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getSVGUrl('trophies', searchedUID)}
+                  onError={() => setNoTrophies(true)}
+                  alt="github trophies"
+                  className="w-full mx-[4px] m-b[6px]"
+                />
+              </div>
+            ) : null}
+            {svgStatsURL ? (
+              <StatsUrlCard
+                t={t}
+                selectedPluginType={selectedPluginType}
+                svgStatsURL={svgStatsURL}
+                svgTrophiesURL={
+                  !noTrophies ? getSVGUrl('trophies', searchedUID) : ''
+                }
+                uid={searchedUID}
+              />
+            ) : null}
+          </div>
+        ) : null}
+        {/* End: Stats */}
+        <StatsSymbols statsInfo={statsInfo} className="mt-2 mb-14" />
+      </div>
+    </div>
+  );
+}
+
+export default Hero;

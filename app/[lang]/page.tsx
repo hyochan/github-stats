@@ -2,6 +2,7 @@ import Header from './(home)/Header';
 import Home from './(home)/Home';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
+import type {StatsInfo} from '../../src/pages/fetch/github';
 import {getTranslates} from '../../src/localization';
 
 type Props = {
@@ -16,7 +17,7 @@ export type NavLink = {
 export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
-  const {nav, langs} = await getTranslates(lang);
+  const {nav, langs, home, plugins} = await getTranslates(lang);
 
   const navLinks: NavLink[] = [
     {
@@ -30,6 +31,39 @@ export default async function Page({
     // },
   ];
 
+  const statsInfo: StatsInfo = {
+    tree: {
+      id: 'tree',
+      name: plugins.tree,
+      description: plugins.treeDescription,
+    },
+    fire: {
+      id: 'fire',
+      name: plugins.fire,
+      description: plugins.fireDescription,
+    },
+    earth: {
+      id: 'earth',
+      name: plugins.earth,
+      description: plugins.earthDescription,
+    },
+    gold: {
+      id: 'gold',
+      name: plugins.gold,
+      description: plugins.goldDescription,
+    },
+    water: {
+      id: 'water',
+      name: plugins.water,
+      description: plugins.waterDescription,
+    },
+    person: {
+      id: 'person',
+      name: plugins.person,
+      description: plugins.personDescription,
+    },
+  };
+
   return (
     <div className="h-full flex flex-col">
       <Header
@@ -39,7 +73,7 @@ export default async function Page({
           ko: langs.ko,
         }}
       />
-      <Home lang={lang} />
+      <Home t={home} statsInfo={statsInfo} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default function GlobalError({
   reset: () => void;
 }): React.ReactElement {
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.error(error);
   }, [error]);
 

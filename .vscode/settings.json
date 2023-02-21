@@ -35,6 +35,9 @@
     "mcollina",
     "nextjs",
     "nojekyll",
-    "tailwindcss"
+    "svgs",
+    "tailwindcss",
+    "testid",
+    "usehooks"
   ]
 }

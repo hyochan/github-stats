@@ -22,6 +22,18 @@
     "personDescription": "The people stat symbolize identity. These stats are a combination of the other stats you have.",
     "bio": "Bio"
   },
+  "trophies": {
+    "issues": "Issues",
+    "commits": "Commits",
+    "comments": "Comments",
+    "pullRequests": "Pull requests",
+    "repositories": "Repositories",
+    "reviews": "Reviews",
+    "contributedRepos": "Contributed Stars",
+    "collaboratedRepos": "Collaborated Stars",
+    "stars": "Stars",
+    "followers": "Followers"
+  },
   "common": {
     "notAuthorized": "Not authorized",
     "notFound": "Not found",
@@ -30,19 +42,38 @@
     "unknownError": "Unknown error",
     "missingParams": "Missing parameter",
     "notValidEmail": "Not a valid email address",
-    "successEmailSubscription": "Thank you for subscribing to our newsletter",
-    "issues": "Issues",
-    "comments": "Comments",
-    "pullRequests": "Pull requests",
-    "repositories": "Repositories",
-    "review": "Reviews",
-    "contributedRepos": "Contributed Repos",
-    "collaboratedRepos": "Collaborated Repos",
-    "stars": "Stars",
-    "followers": "Followers"
+    "successEmailSubscription": "Thank you for subscribing to our newsletter"
   },
   "index": {
     "title": "doobooio",
     "worksNormally": "Works normally"
+  },
+  "home": {
+    "visualizeDevStats": "Visualize your dev stats",
+    "visualizeDevStatsDesc": "Enter your github username and visualize your contributions",
+    "howItWorks": "How it works",
+    "howItWorksDesc": "dooboo uses the github API to measure your development combat power",
+    "enjoyStats": "Check your development combat power with your own eyes",
+    "githubUsername": "GitHub username",
+    "urlCopiedToClipboard": "The URL has been copied to the clipboard",
+    "copyPasteToGithubReadme": "Click to copy the URL above and paste it into your github readme.",
+    "copy": "Copy",
+    "yourGithub": "your github",
+    "viewDetails": "View details",
+    "goBack": "Go back",
+    "findOutMore": "Find out more",
+    "basic": "Basic",
+    "advanced": "Advanced",
+    "newsLetter": "NEWSLETTER",
+    "emailAddress": "Email address",
+    "subscribeForMoreUpdates": "New updates await to inform the hard work of developers around the world. If you would like to hear from us, please send us your email address",
+    "notValidEmail": "Not a valid email address",
+    "successEmailSubscription": "Thank you for subscribing to our newsletter",
+    "serverResponseError": "Failed to fetch information. Please refresh or try again later",
+    "recentList": "Recent List",
+    "certifiedUsers": "Certified Users",
+    "tier": "Tier",
+    "score": "Score",
+    "more": "More"
   }
 }

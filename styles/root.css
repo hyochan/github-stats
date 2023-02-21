@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @media (prefers-color-scheme: light) {
+    body {
+      background: rgb(243, 245, 253);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: rgb(28, 38, 54);
+    }
+  }
+}
+
 @layer components {
   html,
   body {
@@ -30,19 +44,24 @@
     display: none;
   }
 
-  .bg-basic {
-    @apply bg-white dark:bg-dark;
-  }
+  .bg-basic { @apply bg-white dark:bg-dark; }
+  .bg-paper { @apply bg-paper-light dark:bg-paper-dark; }
+  .bg-disabled { @apply bg-disabled-light dark:bg-disabled-dark; }
 
-  .bg-paper {
-    @apply bg-paper-light dark:bg-paper-dark;
-  }
+  .text-basic { @apply text-black dark:text-white; }
+  .text-placeholder { @apply text-placeholder-light dark:text-placeholder-dark; }
+  .text-disabled { @apply text-disabled-light dark:text-disabled-dark; }
+  .text-validation { @apply text-validation-light dark:text-validation-dark; }
+  .text-contrast { @apply text-contrast-light dark:text-contrast-dark; }
+
+  .role-primary { @apply bg-primary-light dark:bg-primary-dark; }
 
   .h1 { @apply text-h1 font-bold text-black dark:text-white; }
   .h2 { @apply text-h2 font-bold text-black dark:text-white; }
   .h3 { @apply text-h3 font-bold text-black dark:text-white; }
   .h4 { @apply text-h4 font-bold text-black dark:text-white; }
 
+  .body1 { @apply text-body1 text-black dark:text-white; }
   .body1 { @apply text-body1 text-black dark:text-white; }
   .body2 { @apply text-body2 text-black dark:text-white; }
   .body3 { @apply text-body3 text-black dark:text-white; }

@@ -1,19 +1,30 @@
-import type {Locale} from '../../../src/i18n';
+'use client';
+
+import Hero from './Hero';
 import type {ReactElement} from 'react';
+import type {StatsInfo} from '../../../src/pages/fetch/github';
+import type {Translates} from '../../../src/localization';
 
 type Props = {
-  lang: Locale;
+  t: Translates['home'];
+  statsInfo: StatsInfo;
 };
 
-function Home({lang}: Props): ReactElement {
+export type PluginType = {
+  domain: string;
+  icon: ReactElement;
+};
+
+function Home({t, statsInfo}: Props): ReactElement {
   return (
     <div
       className="
-        align-self-stretch flex-1 bg-paper
-        flex flex-col justify-start items-center overflow-scroll
+        self-stretch bg-paper
+        flex flex-col justify-start items-center
+        max-[425px]: p-0
       "
     >
-      <p className="text-2xl">{lang}</p>
+      <Hero t={t} statsInfo={statsInfo} />
     </div>
   );
 }

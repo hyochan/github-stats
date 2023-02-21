@@ -48,14 +48,16 @@ export default function Header({navLinks, langs}: Props): ReactElement {
           "
         >
           <Logo isDark={isDark} />
-          <H1
-            className={clsx(
-              'body3 font-bold ml-[6px] mr-[12px]',
-              inter.className,
-            )}
-          >
-            dooboo.io
-          </H1>
+          <Link href="/">
+            <H1
+              className={clsx(
+                'body3 font-bold ml-[6px] mr-[12px]',
+                inter.className,
+              )}
+            >
+              dooboo.io
+            </H1>
+          </Link>
         </div>
         <nav className="mr-[6px]">
           {navLinks.map((link, index) => {

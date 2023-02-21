@@ -8,7 +8,7 @@ const translates = {
   /* add more locales here */
 };
 
-type Translates = Awaited<ReturnType<(typeof translates)['en']>>;
+export type Translates = Awaited<ReturnType<(typeof translates)['en']>>;
 
 export type Translation = {
   [K in keyof Translates]: Translates[K];

@@ -14,7 +14,6 @@ import {
 
 import type {DoobooStatsResponse} from '../../services/githubService';
 import fs from 'fs';
-import path from 'path';
 import {uploadFileToAzureBlobFromFile} from '../../../src/utils/azure';
 
 const {ROOT_URL} = process.env;
@@ -248,10 +247,7 @@ export const uploadTrophiesSvg = async (
   login: string,
   svg: string,
 ): Promise<void> => {
-  const filePath = path.join(
-    __dirname,
-    `../../../files/github/${login}-trophies.svg`,
-  );
+  const filePath = `./public/github/${login}-trophies.svg`;
   fs.writeFileSync(filePath, svg);
 
   try {

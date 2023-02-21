@@ -22,6 +22,18 @@
     "personDescription": "인은 신분을 상징합니다. 해당 능력치는 여러분이 가진 다른 능력치들의 조화로 이루어집니다.",
     "bio": "바이오"
   },
+  "trophies": {
+    "issues": "이슈",
+    "commits": "커밋",
+    "comments": "커멘트",
+    "pullRequests": "풀요청",
+    "repositories": "레포",
+    "reviews": "리뷰",
+    "contributedRepos": "기여 레포 스타",
+    "collaboratedRepos": "콜라보 레포 스타",
+    "stars": "스타",
+    "followers": "팔로워"
+  },
   "common": {
     "notAuthorized": "권한이 없습니다",
     "notFound": "찾을 수 없습니다",
@@ -44,5 +56,33 @@
   "index": {
     "title": "두부아이오",
     "worksNormally": "정상 동작합니다"
+  },
+  "home": {
+    "visualizeDevStats": "Visualize your dev stats",
+    "visualizeDevStatsDesc": "Github 사용자 이름을 입력하고 기고를 뽐내보세요",
+    "howItWorks": "작동 원리 ",
+    "howItWorksDesc": "dooboo는 github API를 사용하여 여러분들의 개발 전투력을 측정합니다",
+    "enjoyStats": "여러분의 개발 전투력을 눈으로 확인하세요",
+    "githubUsername": "깃허브 유저명",
+    "urlCopiedToClipboard": "URL이 클립보드에 복사되었습니다",
+    "copyPasteToGithubReadme": "위에서 원하는 URL을 여러분의 깃허브에 복사 붙여넣기 해보세요.",
+    "copy": "복사",
+    "yourGithub": "당신의 깃허브",
+    "viewDetails": "상세 보기",
+    "goBack": "뒤로가기",
+    "findOutMore": "더 알아보기",
+    "basic": "기본",
+    "advanced": "고급",
+    "newsLetter": "뉴스 레터",
+    "emailAddress": "이메일 주소",
+    "subscribeForMoreUpdates": "세계 각지의 개발자들의 노고를 알리기 위한 새로운 업데이트들이 기다리고 있습니다. 소식을 듣고 싶으시면 이메일주소를 보내주세요",
+    "notValidEmail": "올바른 이메일 주소가 아닙니다",
+    "successEmailSubscription": "뉴스레터를 구독해 주셔서 감사합니다",
+    "serverResponseError": "정보를 불러오지 못했습니다. 새로고침 혹은 잠시 후 다시 시도해주세요",
+    "recentList": "최근 리스트",
+    "certifiedUsers": "인증 유저",
+    "tier": "티어",
+    "score": "점수",
+    "more": "더보기"
   }
 }

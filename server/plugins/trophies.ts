@@ -17,7 +17,7 @@ const getIssueTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'ISSUE',
+    type: 'issues',
   };
 };
 
@@ -30,7 +30,7 @@ const getCommentTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'COMMENT',
+    type: 'comments',
   };
 };
 
@@ -43,7 +43,7 @@ const getCommitTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'ISSUE',
+    type: 'commits',
   };
 };
 
@@ -56,7 +56,7 @@ const getPullRequestTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'PULL_REQUEST',
+    type: 'pullRequests',
   };
 };
 
@@ -69,7 +69,7 @@ const getRepositoryTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'REPOSITORY',
+    type: 'repositories',
   };
 };
 
@@ -82,7 +82,7 @@ const getReviewTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'REVIEW',
+    type: 'reviews',
   };
 };
 
@@ -95,11 +95,11 @@ const getContribStarTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'CONTRIBUTED_REPO_STARS',
+    type: 'contributedRepos',
   };
 };
 
-const getCollaboStarTrophy = (count: number): PluginTrophy => {
+const getCollaboratedStarTrophy = (count: number): PluginTrophy => {
   const offset = 0.2;
   const weight = 15;
   const sum: number = (count * offset) / weight;
@@ -108,7 +108,7 @@ const getCollaboStarTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'COLLABORATED_REPO_STARS',
+    type: 'collaboratedRepos',
   };
 };
 
@@ -121,7 +121,7 @@ const getStarsTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'STARS',
+    type: 'stars',
   };
 };
 
@@ -134,7 +134,7 @@ const getFollowerTrophy = (count: number): PluginTrophy => {
   return {
     points: count,
     score,
-    type: 'FOLLOWER',
+    type: 'followers',
   };
 };
 
@@ -268,8 +268,10 @@ export const getTrophies = (githubUser: UserGraph): PluginTrophy[] => {
   const contribStarTrophy = getContribStarTrophy(contribReposStarCount);
   trophies.push(contribStarTrophy);
 
-  const collaboStarTrophy = getCollaboStarTrophy(collaboratedReposStarCount);
-  trophies.push(collaboStarTrophy);
+  const collaboratedStarTrophy = getCollaboratedStarTrophy(
+    collaboratedReposStarCount,
+  );
+  trophies.push(collaboratedStarTrophy);
 
   const starsTrophy = getStarsTrophy(myRepoStarCount);
   trophies.push(starsTrophy);
