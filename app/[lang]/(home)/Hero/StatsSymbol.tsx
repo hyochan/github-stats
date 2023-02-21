@@ -3,9 +3,7 @@
 import type {CSSProperties, ReactElement} from 'react';
 import TextTransition, {presets} from 'react-text-transition';
 
-import ErrorBoundary from '../../../../src/components/ErrorBoundary';
 import Image from 'next/image';
-import Loading from '../../loading';
 import type {StatsInfo} from '../../../../src/fetches/github';
 import {useState} from 'react';
 
@@ -46,11 +44,11 @@ const PluginStatsInfo = ({
   selectedStatName: StatName;
 }): React.ReactElement => {
   return (
-    <div className="py-[24px] px-[8x] max-w-[600px] w-full flex-1 flex flex-col relative">
+    <div className="ml-[8px] py-[24px] px-[8x] max-w-[600px] w-full flex-1 flex flex-col relative">
       <TextTransition
         springConfig={presets.gentle}
         direction="down"
-        className="body1 font-bold mb-3"
+        className="body1 font-bold mb-3 text-left"
       >
         {selectedStatName === 'fire'
           ? statsInfo.fire.name
@@ -65,7 +63,7 @@ const PluginStatsInfo = ({
           : statsInfo.tree.name}
       </TextTransition>
       <TextTransition
-        className="body3 leading-[160%]"
+        className="body3 leading-[160%] text-left"
         springConfig={presets.wobbly}
         direction="down"
       >
@@ -125,12 +123,10 @@ const StatsSymbols = ({
           </a>
         ))}
       </div>
-      <ErrorBoundary fallback={<Loading />}>
-        <PluginStatsInfo
-          selectedStatName={selectedStatName}
-          statsInfo={statsInfo}
-        />
-      </ErrorBoundary>
+      <PluginStatsInfo
+        selectedStatName={selectedStatName}
+        statsInfo={statsInfo}
+      />
     </div>
   );
 };

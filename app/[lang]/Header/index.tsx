@@ -1,9 +1,9 @@
 'use client';
 
-import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
+import {isDarkMode, toggleTheme} from '../../../src/utils/theme';
 import {useEffect, useState} from 'react';
 
-import {H1} from '../../../../src/components/Typography';
+import {H1} from '../../../src/components/Typography';
 import {Inter} from '@next/font/google';
 import Link from 'next/link';
 import LocaleSwitcher from './LocaleSelect';

@@ -1,6 +1,6 @@
 'use server';
 
-import {renderGithubStatsSvg, renderGithubStatsSvgWithLangs} from './common';
+import {renderGithubStatsSvg, renderGithubStatsSvgWithLangs} from './assets';
 import {
   tierBronzeSvg,
   tierChallengerSvg,

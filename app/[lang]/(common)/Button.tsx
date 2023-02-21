@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({
     <button
       data-testid={testID}
       className={`
-        px-4 py-2
+        
         border rounded-md cursor-pointer
         opacity-100 transition duration-200
         flex items-center justify-center

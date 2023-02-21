@@ -2,20 +2,37 @@ import '../../styles/output.css';
 
 import type {ReactElement, ReactNode} from 'react';
 
+import Header from './Header';
 import type {Locale} from '~/i18n';
+import type {NavLink} from './Header';
 import NextHead from 'next/head';
 import RootProvider from '../../src/components/RootProvider';
+import {getTranslates} from '../../src/localization';
 
 type Props = {
   children: ReactNode;
   params: {lang: Locale};
 };
 
-export default function RootLayout(props: Props): ReactElement {
+export default async function RootLayout(props: Props): Promise<ReactElement> {
   const {
     params: {lang},
     children,
   } = props;
+
+  const {langs, nav} = await getTranslates(lang);
+
+  const navLinks: NavLink[] = [
+    {
+      name: nav.recentList,
+      path: '/recent-list',
+    },
+    // TODO: remove this comment when the feature is ready.
+    // {
+    //   name: nav.certifiedUsers,
+    //   path: '/certifiedUsers',
+    // },
+  ];
 
   return (
     <html lang={lang} className="dark">
@@ -27,7 +44,21 @@ export default function RootLayout(props: Props): ReactElement {
       </NextHead>
       <body>
         <RootProvider initialLocale={lang}>
-          <div className=" w-screen h-screen bg-paper">{children}</div>
+          <div
+            className="
+            text-center w-screen h-screen
+            flex flex-col
+          "
+          >
+            <Header
+              navLinks={navLinks}
+              langs={{
+                en: langs.en,
+                ko: langs.ko,
+              }}
+            />
+            <div className="flex-1 overflow-scroll">{children}</div>
+          </div>
         </RootProvider>
       </body>
     </html>

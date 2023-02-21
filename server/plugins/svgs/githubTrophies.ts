@@ -1,7 +1,7 @@
-import type {Grade} from './common';
+import type {Grade} from './assets';
 import {LOWEST_TROPHIES_SCORE} from '..';
 import type {PluginTrophy} from '../trophies';
-import {renderTrophySvg} from './common';
+import {renderTrophySvg} from './assets';
 
 /* eslint-disable max-len */
 export const renderGithubTrophies = (

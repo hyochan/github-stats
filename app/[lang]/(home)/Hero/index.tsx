@@ -99,10 +99,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
           max-[425px]:px-[20px]
         "
       >
-        <p className="h1 text-[44px] mt-[80px] mb-[16px] text-left font-bold">
+        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-[16px]">
           {t.visualizeDevStats}
         </p>
-        <p className="body1 text-[20px] mb-[40px] opacity-50">
+        <p className="body1 text-[20px] text-left mb-[40px] opacity-50">
           {t.visualizeDevStatsDesc}
         </p>
         {/* Begin: Search Form */}
@@ -145,6 +145,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 /
               </span>
               <TextInput
+                className="text-white"
                 {...register('githubID')}
                 placeholder={t.githubUsername}
                 onChange={(e) => {

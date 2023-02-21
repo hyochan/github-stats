@@ -14,6 +14,7 @@ export default function Logo({isDark}: Props): ReactElement {
       width={17.5}
       height={20}
       alt="logo"
+      style={{width: 'auto'}}
     />
   );
 }

@@ -1,7 +1,7 @@
-import Header from './(home)/Header';
-import Home from './(home)/Home';
+import Home from '@/app/(home)/Home';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
+import SectionHowItWorks from './(home)/SectionHowItWorks';
 import type {StatsInfo} from '../../src/fetches/github';
 import {getTranslates} from '../../src/localization';
 
@@ -9,27 +9,10 @@ type Props = {
   params: {lang: Locale};
 };
 
-export type NavLink = {
-  name: string;
-  path: string;
-};
-
 export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
-  const {nav, langs, home, plugins} = await getTranslates(lang);
-
-  const navLinks: NavLink[] = [
-    {
-      name: nav.recentList,
-      path: '/recentList',
-    },
-    // TODO: remove this comment when the feature is ready.
-    // {
-    //   name: nav.certifiedUsers,
-    //   path: '/certifiedUsers',
-    // },
-  ];
+  const {home, plugins} = await getTranslates(lang);
 
   const statsInfo: StatsInfo = {
     tree: {
@@ -66,14 +49,8 @@ export default async function Page({
 
   return (
     <div className="h-full flex flex-col">
-      <Header
-        navLinks={navLinks}
-        langs={{
-          en: langs.en,
-          ko: langs.ko,
-        }}
-      />
       <Home t={home} statsInfo={statsInfo} />
+      <SectionHowItWorks t={home} />
     </div>
   );
 }

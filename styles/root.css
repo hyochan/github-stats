@@ -46,6 +46,7 @@
 
   .bg-basic { @apply bg-white dark:bg-dark; }
   .bg-paper { @apply bg-paper-light dark:bg-paper-dark; }
+  .bg-contrast { @apply bg-paper-dark dark:bg-paper-light; }
   .bg-disabled { @apply bg-disabled-light dark:bg-disabled-dark; }
 
   .text-basic { @apply text-black dark:text-white; }
@@ -53,6 +54,7 @@
   .text-disabled { @apply text-disabled-light dark:text-disabled-dark; }
   .text-validation { @apply text-validation-light dark:text-validation-dark; }
   .text-contrast { @apply text-contrast-light dark:text-contrast-dark; }
+  .text-success { @apply text-success-light dark:text-success-dark; }
 
   .role-primary { @apply bg-primary-light dark:bg-primary-dark; }
 
