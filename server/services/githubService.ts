@@ -424,6 +424,7 @@ const upsertGithubStats = async ({
       await supabase.from('Trophy').upsert({
         ...el,
         score: trophyScore,
+        userPluginLogin: login,
       });
     });
 
@@ -435,6 +436,7 @@ const upsertGithubStats = async ({
         ...el,
         score: statScore,
         statsElements: statsElements,
+        userPluginLogin: login,
       });
     });
 

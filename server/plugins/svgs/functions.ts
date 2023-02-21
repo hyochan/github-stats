@@ -13,7 +13,6 @@ import {
 } from './githubTiers';
 
 import type {DoobooStatsResponse} from '../../services/githubService';
-import type {TopLanguage} from '../topLanguages';
 import fs from 'fs';
 import path from 'path';
 import {uploadFileToAzureBlobFromFile} from '../../../src/utils/azure';
@@ -58,23 +57,21 @@ export const getTierName = (
 export const generateGithubSVG = async (
   login: string,
   stats: DoobooStatsResponse,
-  languages: TopLanguage[],
+  shouldIncludeLanguage?: boolean,
 ): Promise<{
   file: string;
   path: string;
 }> => {
-  const shouldIncludeLanguage = languages?.length && languages.length > 0;
   const fileName = shouldIncludeLanguage
     ? `${login}-advanced.svg`
     : `${login}.svg`;
 
-  languages = stats.json.languages;
-
-  const svgURL = `${ROOT_URL}/files/github/${fileName}`;
+  const languages = stats.json.languages;
+  const svgUrl = `${ROOT_URL}/files/github/${fileName}`;
 
   // Note: Temporarily remove cached result. This will be applied when there are much memory usage by heavy traffics.
   // if (
-  //   fs.existsSync(path.join(__dirname, `../../../files/github/${fileName}`)) &&
+  //   fs.existsSync(`./public/github/${fileName}`) &&
   //   stats.isCachedResult
   // ) {
   //   return svgURL;
@@ -161,8 +158,8 @@ export const generateGithubSVG = async (
     +pluginStats.water.score;
 
   const avgScore = Math.round((sum * 100) / 6);
-
   const tierName = getTierName(avgScore, stats.plugin.json);
+
   const tierSvg =
     tierName === 'Challenger'
       ? tierChallengerSvg
@@ -210,16 +207,17 @@ export const generateGithubSVG = async (
   });
 
   try {
-    const dir = path.join(__dirname, '../../../files/github');
+    const dir = './public/github';
+
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
 
     const generateBasicSVG = async (isAdvanced: boolean): Promise<void> => {
-      const filePath = path.join(
-        __dirname,
-        `../../../files/github/${isAdvanced ? `${login}-advanced` : login}.svg`,
-      );
+      const filePath = `./public/github/${
+        isAdvanced ? `${login}-advanced` : login
+      }.svg`;
+
       fs.writeFileSync(filePath, isAdvanced ? svgWithLangs : svg);
 
       try {
@@ -239,7 +237,7 @@ export const generateGithubSVG = async (
 
     return {
       file: shouldIncludeLanguage ? svgWithLangs : svg,
-      path: svgURL,
+      path: svgUrl,
     };
   } catch (err: any) {
     throw new Error(err.message);
