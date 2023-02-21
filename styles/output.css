@@ -852,6 +852,10 @@ input[type='search']::-webkit-search-decoration,
   justify-content: space-between;
 }
 
+.self-stretch {
+  align-self: stretch;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
