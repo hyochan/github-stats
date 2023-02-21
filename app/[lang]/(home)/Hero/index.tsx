@@ -6,12 +6,12 @@ import Button from '../../(common)/Button';
 import ButtonGroup from '../../(common)/ButtonGroup';
 import Dropdown from '../../(common)/Dropdown';
 import type {ReactElement} from 'react';
-import type {StatsInfo} from '../../../../src/pages/fetch/github';
+import type {StatsInfo} from '../../../../src/fetches/github';
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
 import TextInput from '../../(common)/TextInput';
 import type {Translates} from '../../../../src/localization';
-import {fetchGithubStats} from '../../../../src/pages/fetch/github';
+import {fetchGithubStats} from '../../../../src/fetches/github';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 

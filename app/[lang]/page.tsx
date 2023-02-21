@@ -2,7 +2,7 @@ import Header from './(home)/Header';
 import Home from './(home)/Home';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
-import type {StatsInfo} from '../../src/pages/fetch/github';
+import type {StatsInfo} from '../../src/fetches/github';
 import {getTranslates} from '../../src/localization';
 
 type Props = {

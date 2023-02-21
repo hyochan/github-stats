@@ -6,7 +6,7 @@ import TextTransition, {presets} from 'react-text-transition';
 import ErrorBoundary from '../../../../src/components/ErrorBoundary';
 import Image from 'next/image';
 import Loading from '../../loading';
-import type {StatsInfo} from '../../../../src/pages/fetch/github';
+import type {StatsInfo} from '../../../../src/fetches/github';
 import {useState} from 'react';
 
 const statTypes = [

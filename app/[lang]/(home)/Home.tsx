@@ -2,7 +2,7 @@
 
 import Hero from './Hero';
 import type {ReactElement} from 'react';
-import type {StatsInfo} from '../../../src/pages/fetch/github';
+import type {StatsInfo} from '../../../src/fetches/github';
 import type {Translates} from '../../../src/localization';
 
 type Props = {
