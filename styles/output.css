@@ -985,6 +985,11 @@ input[type='search']::-webkit-search-decoration,
   margin-right: 6px;
 }
 
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -1510,6 +1515,16 @@ input[type='search']::-webkit-search-decoration,
 .py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pl-3 {
