@@ -2,6 +2,8 @@
 
 import Hero from './Hero';
 import type {ReactElement} from 'react';
+import SectionFooter from './SectionFooter';
+import SectionHowItWorks from './SectionHowItWorks';
 import type {StatsInfo} from '../../../src/fetches/github';
 import type {Translates} from '../../../src/localization';
 
@@ -25,6 +27,8 @@ function Home({t, statsInfo}: Props): ReactElement {
       "
     >
       <Hero t={t} statsInfo={statsInfo} />
+      <SectionHowItWorks t={t} />
+      <SectionFooter t={t} />
     </div>
   );
 }

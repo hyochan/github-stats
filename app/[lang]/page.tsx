@@ -1,7 +1,6 @@
 import Home from '@/app/(home)/Home';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
-import SectionHowItWorks from './(home)/SectionHowItWorks';
 import type {StatsInfo} from '../../src/fetches/github';
 import {getTranslates} from '../../src/localization';
 
@@ -47,10 +46,5 @@ export default async function Page({
     },
   };
 
-  return (
-    <div className="h-full flex flex-col">
-      <Home t={home} statsInfo={statsInfo} />
-      <SectionHowItWorks t={home} />
-    </div>
-  );
+  return <Home t={home} statsInfo={statsInfo} />;
 }

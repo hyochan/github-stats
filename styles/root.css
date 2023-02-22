@@ -3,6 +3,52 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+
+    display: flex;
+  }
+
+  body {
+    line-height: 1.4;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+  }
+
+  div {
+    text-align: left;
+
+    display: flex;
+  }
+
+  a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+  }
+
+  a:link {
+    color: white;
+  }
+
+  a:visited {
+    color: hotpink;
+  }
+
+  a:hover {
+    color: antiquewhite;
+  }
+
+  a:active {
+    color: white;
+  }
+
   @media (prefers-color-scheme: light) {
     body {
       background: rgb(243, 245, 253);

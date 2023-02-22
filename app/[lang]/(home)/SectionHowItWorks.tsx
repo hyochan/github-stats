@@ -6,7 +6,7 @@ import Image from 'next/image';
 import type {ReactElement} from 'react';
 import TextInput from '../(common)/TextInput';
 import type {Translates} from '../../../src/localization';
-import imgBgSection from '@/public/assets/bg_section1.png';
+import imgBgSection2 from '@/public/assets/bg_section2.png';
 import {subscribeNewsletter} from '../../../src/fetches/newsLetter';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
@@ -52,7 +52,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
         md:p-0 md:flex md:flex-col md:justify-center md:items-center
       "
       style={{
-        backgroundImage: `url(${imgBgSection})`,
+        backgroundImage: `url(${imgBgSection2})`,
         backgroundRepeat: 'no-repeat',
       }}
     >
@@ -72,7 +72,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
         />
         <div
           className="
-            max-w-[600px] text-left leading-[28px]
+            max-w-[600px] text-left leading-[28px] mb-8
             flex flex-col flex-wrap
           "
         >
