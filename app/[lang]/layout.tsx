@@ -2,9 +2,9 @@ import '../../styles/output.css';
 
 import type {ReactElement, ReactNode} from 'react';
 
-import Header from './Header';
+import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
-import type {NavLink} from './Header';
+import type {NavLink} from './(common)/Header';
 import NextHead from 'next/head';
 import RootProvider from '../../src/components/RootProvider';
 import {getTranslates} from '../../src/localization';
