@@ -1097,6 +1097,30 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 80px;
 }
 
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.mb-\[36px\] {
+  margin-bottom: 36px;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mb-28 {
+  margin-bottom: 7rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .flex {
   display: flex;
 }
@@ -1520,6 +1544,14 @@ input[type='search']::-webkit-search-decoration,
 
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-left {

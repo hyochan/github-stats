@@ -15,11 +15,11 @@ type Props = {
 export default function SectionFooter({t}: Props): ReactElement {
   return (
     <div
-      className="
-        self-stretch bg-paper bg-cover
-        flex flex-col justify-center items-center
-        md:p-0
-      "
+      className={clsx(
+        'self-stretch bg-paper bg-cover',
+        'flex flex-col justify-center items-center',
+        'md:p-0',
+      )}
       style={{
         backgroundImage: `url(${imgBgSection1})`,
         backgroundRepeat: 'no-repeat',
@@ -27,7 +27,7 @@ export default function SectionFooter({t}: Props): ReactElement {
     >
       <div
         className={clsx(
-          'bg-paper-dark self-stretch min-h-[400px] pt-6',
+          'bg-paper-dark self-stretch min-h-[400px] pt-4',
           'flex flex-col justify-center items-center',
           'md:p-0"',
         )}
@@ -43,7 +43,7 @@ export default function SectionFooter({t}: Props): ReactElement {
         <Image alt="scouter" src={SvgScouter} />
         <div
           className={clsx(
-            'h-[22px] mb-40 mt-16',
+            'h-[22px] mb-28 mt-12',
             'flex flex-row items-center',
             inter.className,
           )}

@@ -84,7 +84,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
           {/* Begin: NewsLetter */}
           <div
             className="
-              mt-4 min-h-20 self-stretch rounded-md p-6
+              mt-4 min-h-20 self-stretch rounded-md p-4
               flex flex-row items-center bg-paper
             "
           >

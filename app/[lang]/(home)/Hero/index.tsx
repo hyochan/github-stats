@@ -11,6 +11,7 @@ import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
 import TextInput from '../../(common)/TextInput';
 import type {Translates} from '../../../../src/localization';
+import clsx from 'clsx';
 import {fetchGithubStats} from '../../../../src/fetches/github';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
@@ -99,10 +100,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
           max-[425px]:px-[20px]
         "
       >
-        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-[16px]">
+        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">
           {t.visualizeDevStats}
         </p>
-        <p className="body1 text-[20px] text-left mb-[40px] opacity-50">
+        <p className="body1 text-[20px] text-left mb-[36px] opacity-50">
           {t.visualizeDevStatsDesc}
         </p>
         {/* Begin: Search Form */}
@@ -112,12 +113,12 @@ function Hero({t, statsInfo}: Props): ReactElement {
           autoComplete="off"
         >
           <div
-            className="
-              rounded-[4px] bg-gray7 px-3 h-[64px] relative body2 max-w-[800px]
-              flex flex-row-reverse items-center
-              max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto
-              max-[320px]:py-3 max-[320px]:flex-col max-[320px]:items-center max-[320px]:justify-center
-            "
+            className={clsx(
+              'rounded-[4px] bg-gray7 px-3 h-[64px] relative body2 max-w-[800px]',
+              'flex flex-row-reverse items-center',
+              'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto',
+              'max-[320px]:py-3 max-[320px]:flex-col max-[320px]:items-center max-[320px]:justify-center',
+            )}
           >
             <Button
               isLoading={formState.isSubmitting}
@@ -223,7 +224,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
           </div>
         ) : null}
         {/* End: Stats */}
-        <StatsSymbols statsInfo={statsInfo} className="mt-2 mb-14" />
+        <StatsSymbols statsInfo={statsInfo} className="mt-3 mb-14" />
       </div>
     </div>
   );
