@@ -6,9 +6,9 @@ import type {Locale} from '../../src/i18n';
 import type {PluginTrophy} from '../plugins/trophies';
 import type {TopLanguage} from '../plugins/topLanguages';
 import axios from 'axios';
-import {createSupabaseClient} from '../utils';
 import {diffHours} from '../plugins/pluginUtils';
 import {getGithubStatus} from '../plugins';
+import {getSupabaseClient} from '../utils';
 import {getTopLanguages} from '../plugins/topLanguages';
 import {getTranslates} from '../../src/localization';
 import {getTrophies} from '../plugins/trophies';
@@ -324,7 +324,7 @@ const upsertGithubStats = async ({
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
-    const supabase = createSupabaseClient();
+    const supabase = getSupabaseClient();
     const {plugins} = await getTranslates(lang);
 
     // NOTE: Unknown user or user without commits will gracefully fail here.
@@ -478,7 +478,7 @@ export const getDoobooStats = async ({
   login: string;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
-  const supabase = createSupabaseClient();
+  const supabase = getSupabaseClient();
   const {common, plugins, trophies} = await getTranslates(lang);
   login = login.toLowerCase();
 

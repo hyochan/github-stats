@@ -9,7 +9,7 @@
 ## Environment variables
 
 <details>
-<summary>ROOT_URL</summary>
+<summary>NEXT_PUBLIC_ROOT_URL</summary>
 
 Base url of your web app.
 </details>
@@ -56,25 +56,6 @@ The github client secret to access github api.
 The github token to use github authentication.
 </details>
 
-<details>
-<summary>STORAGE_KEY</summary>
-Azure storage key.
-
-You can read about [managing storage account access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=azure-portal) for more details.
-</details>
-
-<details>
-<summary>STORAGE_ACCOUNT</summary>
-Azure storage account.
-
-You can read about [managing storage account access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=azure-portal) for more details.
-</details>
-
-<details>
-<summary>STORAGE_ENDPOINT</summary>
-Azure storage end point. This is a base url to access your file via url.
-</details>
-
 > We strongly recommend to organize multiple environment files for prisma migration or testing.
 
 ```
@@ -89,16 +70,6 @@ cp `.env.sample` `.env.local` // For developing
 
 1. Create [Supabase](https://supabase.com) project
 
-### 2. Prepare Azure storage account
-
-1. Create [Azure](https://azure.microsoft.com) project
-
-1. Create [Azure Storage Account](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
-
-1. Create container with `blob storage`
-
-   <img width="360" alt="Screenshot 2023-02-19 at 2 10 11 PM" src="https://user-images.githubusercontent.com/27461460/219923456-894f3b53-a8bc-4485-b30d-f94183a9a652.png">
-
 1. Set alias in your bash and set supabase project reference id
 
    ```
@@ -111,11 +82,11 @@ cp `.env.sample` `.env.local` // For developing
    generate:supabase
    ```
 
-### 3. Prepare Database
+### 2. Prepare Database
 
 Run `yarn migrate:dev` to you local database then when every is done right, you can then run `yarn migrate:prod` to update production database in Supabase.
 
-### 4. Copy environment variables
+### 3. Copy environment variables
 
 ```
 cp .env.sample .env.local

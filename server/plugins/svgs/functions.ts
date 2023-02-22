@@ -14,9 +14,7 @@ import {
 
 import type {DoobooStatsResponse} from '../../services/githubService';
 import fs from 'fs';
-import {uploadFileToAzureBlobFromFile} from '../../../src/utils/azure';
-
-const {ROOT_URL} = process.env;
+import {uploadFileToSupabase} from '../../../src/utils/storage';
 
 type ScoreType = {
   tierName:
@@ -66,7 +64,6 @@ export const generateGithubSVG = async (
     : `${login}.svg`;
 
   const languages = stats.json.languages;
-  const svgUrl = `${ROOT_URL}/files/github/${fileName}`;
 
   // Note: Temporarily remove cached result. This will be applied when there are much memory usage by heavy traffics.
   // if (
@@ -212,7 +209,7 @@ export const generateGithubSVG = async (
       fs.mkdirSync(dir);
     }
 
-    const generateBasicSVG = async (isAdvanced: boolean): Promise<void> => {
+    const generateBasicSVG = async (isAdvanced: boolean): Promise<string> => {
       const filePath = `./public/github/${
         isAdvanced ? `${login}-advanced` : login
       }.svg`;
@@ -220,23 +217,22 @@ export const generateGithubSVG = async (
       fs.writeFileSync(filePath, isAdvanced ? svgWithLangs : svg);
 
       try {
-        await uploadFileToAzureBlobFromFile(
-          filePath,
-          fileName,
-          'github',
-          'dooboo',
-        );
+        return await uploadFileToSupabase({
+          file: filePath,
+          bucket: 'public',
+          destPath: `dooboo-github/${fileName}`,
+        });
       } finally {
         fs.unlinkSync(filePath);
       }
     };
 
-    await generateBasicSVG(false);
-    await generateBasicSVG(true);
+    const svgUrl = await generateBasicSVG(false);
+    const svgUrlAdvanced = await generateBasicSVG(true);
 
     return {
       file: shouldIncludeLanguage ? svgWithLangs : svg,
-      path: svgUrl,
+      path: shouldIncludeLanguage ? svgUrlAdvanced : svgUrl,
     };
   } catch (err: any) {
     throw new Error(err.message);
@@ -251,12 +247,11 @@ export const uploadTrophiesSvg = async (
   fs.writeFileSync(filePath, svg);
 
   try {
-    await uploadFileToAzureBlobFromFile(
-      filePath,
-      `${login}-trophies.svg`,
-      'github',
-      'dooboo',
-    );
+    await uploadFileToSupabase({
+      file: filePath,
+      bucket: 'public',
+      destPath: `dooboo-github/${login}-trophies.svg`,
+    });
   } finally {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);

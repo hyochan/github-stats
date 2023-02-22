@@ -8,7 +8,7 @@ import {assert} from '../src/utils/assert';
 import {createClient} from '@supabase/supabase-js';
 import type {Database} from '../src/types/supabase';
 
-export const createSupabaseClient = (): SupabaseClient<
+export const getSupabaseClient = (): SupabaseClient<
   Database,
   'public',
   Database['public']

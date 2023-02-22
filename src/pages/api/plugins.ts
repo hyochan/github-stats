@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {createSupabaseClient} from '../../../server/utils';
+import {getSupabaseClient} from '../../../server/utils';
 
 type Tier = {
   tier: string;
@@ -19,7 +19,7 @@ export default async function handler(
 
   switch (method) {
     case 'POST':
-      const supabase = createSupabaseClient();
+      const supabase = getSupabaseClient();
       const {data} = await supabase
         .from('Plugin')
         .select('*')
