@@ -5,6 +5,7 @@ import TextTransition, {presets} from 'react-text-transition';
 
 import Image from 'next/image';
 import type {StatsInfo} from '../../../../src/fetches/github';
+import clsx from 'clsx';
 import {useState} from 'react';
 
 const statTypes = [
@@ -44,7 +45,12 @@ const PluginStatsInfo = ({
   selectedStatName: StatName;
 }): React.ReactElement => {
   return (
-    <div className="ml-[8px] py-[24px] px-[8x] max-w-[600px] w-full flex-1 flex flex-col relative">
+    <div
+      className={clsx(
+        'ml-[8px] py-[24px] px-[8x] max-w-[600px] w-full',
+        'flex-1 flex flex-col relative',
+      )}
+    >
       <TextTransition
         springConfig={presets.gentle}
         direction="down"
@@ -100,7 +106,13 @@ const StatsSymbols = ({
 
   return (
     <div className={`flex flex-col  ${className}`} style={style}>
-      <div className="flex flex-row bg-gray4 rounded-[4px] dark:bg-paper-dark max-w-[200px]">
+      <div
+        className={clsx(
+          'bg-gray4 rounded-[4px]',
+          'dark:bg-paper-dark max-w-[200px]',
+          'flex flex-row',
+        )}
+      >
         {statTypes.map((el) => (
           <a
             key={el.name}

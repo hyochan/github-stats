@@ -1,6 +1,7 @@
 import type {CSSProperties, FC, ReactElement} from 'react';
 
 import Image from 'next/image';
+import clsx from 'clsx';
 
 interface ButtonProps {
   testID?: string;
@@ -48,10 +49,10 @@ const Button: FC<ButtonProps> = ({
         <div className="self-center border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin" />
       ) : (
         <div
-          className="
-            relative flex-1 h-max text-center
-            flex flex-row justify-center items-center
-          "
+          className={clsx(
+            'relative flex-1 h-max text-center',
+            'flex flex-row justify-center items-center',
+          )}
         >
           {imgSrc && (
             <Image

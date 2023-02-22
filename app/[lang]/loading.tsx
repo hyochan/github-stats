@@ -4,10 +4,16 @@ import * as animationData from '../../public/lotties/dooboo-loading.json';
 
 import {Lottie} from '@crello/react-lottie';
 import type {ReactElement} from 'react';
+import clsx from 'clsx';
 
 function Loading(): ReactElement {
   return (
-    <div className="self-stretch flex flex-row justify-center items-center">
+    <div
+      className={clsx(
+        'self-stretch p-4',
+        'flex flex-row justify-center items-center',
+      )}
+    >
       <Lottie
         config={{
           loop: true,

@@ -6,6 +6,7 @@ import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
 import type {NavLink} from './(common)/Header';
 import RootProvider from '../../src/components/RootProvider';
+import clsx from 'clsx';
 import {getTranslates} from '../../src/localization';
 
 type Props = {
@@ -42,10 +43,7 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
       <body>
         <RootProvider initialLocale={lang}>
           <div
-            className="
-            text-center w-screen h-screen
-            flex flex-col
-          "
+            className={clsx('text-center w-screen h-screen', 'flex flex-col')}
           >
             <Header
               navLinks={navLinks}
@@ -54,7 +52,7 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
                 ko: langs.ko,
               }}
             />
-            <div className="flex-1 overflow-scroll flex flex-col">
+            <div className={clsx('flex-1 overflow-scroll', 'flex flex-col')}>
               {children}
             </div>
           </div>

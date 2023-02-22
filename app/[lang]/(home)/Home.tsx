@@ -6,6 +6,7 @@ import SectionFooter from './SectionFooter';
 import SectionHowItWorks from './SectionHowItWorks';
 import type {StatsInfo} from '../../../src/fetches/github';
 import type {Translates} from '../../../src/localization';
+import clsx from 'clsx';
 
 type Props = {
   t: Translates['home'];
@@ -20,11 +21,11 @@ export type PluginType = {
 function Home({t, statsInfo}: Props): ReactElement {
   return (
     <div
-      className="
-        self-stretch bg-paper
-        flex flex-col justify-start items-center
-        max-[425px]: p-0
-      "
+      className={clsx(
+        'self-stretch bg-paper',
+        'flex flex-col justify-start items-center',
+        'max-[425px]: p-0',
+      )}
     >
       <Hero t={t} statsInfo={statsInfo} />
       <SectionHowItWorks t={t} />

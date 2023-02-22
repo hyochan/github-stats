@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type {ReactElement} from 'react';
 import TextInput from '../(common)/TextInput';
 import type {Translates} from '../../../src/localization';
+import clsx from 'clsx';
 import imgBgSection2 from '@/public/assets/bg_section2.png';
 import {subscribeNewsletter} from '../../../src/fetches/newsLetter';
 import {useForm} from 'react-hook-form';
@@ -46,11 +47,11 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
 
   return (
     <div
-      className="
-        self-stretch bg-basic bg-cover
-        flex flex-col justify-center items-center
-        md:p-0 md:flex md:flex-col md:justify-center md:items-center
-      "
+      className={clsx(
+        'self-stretch bg-basic bg-cover',
+        'flex flex-col justify-center items-center',
+        'md:p-0 md:flex md:flex-col md:justify-center md:items-center',
+      )}
       style={{
         backgroundImage: `url(${imgBgSection2})`,
         backgroundRepeat: 'no-repeat',
@@ -58,10 +59,10 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
     >
       <form
         onSubmit={handleSubmit(reqNewsLetterSubs)}
-        className="
-          self-stretch p-20 min-h-[400px] relative
-          flex flex-col justify-start items-start
-        "
+        className={clsx(
+          'self-stretch p-20 min-h-[400px] relative',
+          'flex flex-col justify-start items-start',
+        )}
       >
         <Image
           className="max-w-[256] h-auto"
@@ -71,10 +72,10 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
           height={256}
         />
         <div
-          className="
-            max-w-[600px] text-left leading-[28px] mb-8
-            flex flex-col flex-wrap
-          "
+          className={clsx(
+            'max-w-[600px] text-left leading-[28px] mb-8',
+            'flex flex-col flex-wrap',
+          )}
         >
           <p className="mt-20 mb-10 text-left font-bold text-[40px] text-basic leading-5">
             {t.howItWorks}
@@ -83,10 +84,10 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
           <p className={descriptionClassNames}>{t.subscribeForMoreUpdates}.</p>
           {/* Begin: NewsLetter */}
           <div
-            className="
-              mt-4 min-h-20 self-stretch rounded-md p-4
-              flex flex-row items-center bg-paper
-            "
+            className={clsx(
+              'mt-4 min-h-20 self-stretch rounded-md p-4',
+              'flex flex-row items-center bg-paper',
+            )}
           >
             <label className={newLetterLabelClassNames}>{t.newsLetter}</label>
             <TextInput
@@ -95,10 +96,10 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
               {...register('email', {required: true})}
             />
             <Button
-              className="
-                w-9 h-9 rounded-[18px] border-0 bg-basic
-                flex items-center justify-center
-              "
+              className={clsx(
+                'w-9 h-9 rounded-[18px] border-0 bg-basic',
+                'flex items-center justify-center',
+              )}
               type="submit"
               isLoading={isSubmitting}
               text={<ArrowRightIcon size={24} className="pt-1" />}

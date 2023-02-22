@@ -4,6 +4,7 @@ import type {ChangeEventHandler, ReactElement} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 
 import type {TupleToUnion} from '~/types/utils';
+import clsx from 'clsx';
 import type {i18n} from '~/i18n';
 import {useLocaleContext} from '../../../../src/components/LocaleProvider';
 
@@ -33,11 +34,11 @@ export default function LocaleSwitcher({languages}: Props): ReactElement {
         onChange={handleChange}
         defaultValue={curLocale}
         style={{fontSize: 12}}
-        className="
-          appearance-non
-          bg-gray-50 border border-gray-300 text-gray-900
-          rounded-md shadow-sm py-1
-          focus:ring-blue-500 focus:border-blue-500"
+        className={clsx(
+          'appearance-none bg-gray-50 border border-gray-300 text-gray-900',
+          'rounded-md shadow-sm py-1',
+          'focus:ring-blue-500 focus:border-blue-500',
+        )}
       >
         {Object.keys(languages).map((lang) => {
           const curLang = lang === 'en' ? 'en' : 'ko';

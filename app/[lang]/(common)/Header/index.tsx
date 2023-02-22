@@ -31,21 +31,20 @@ export default function Header({navLinks, langs}: Props): ReactElement {
 
   return (
     <header
-      className="
-        h-16 decoration-0 bg-basic
-        flex flex-row items-center justify-between
-        px-[28px]
-      "
+      className={clsx(
+        'h-16 decoration-0 bg-basic',
+        'flex flex-row items-center justify-between',
+        'px-[28px]',
+      )}
     >
       <div className="flex flex-row items-center">
         <div
-          className="
-            decoration-0
-            flex flex-row items-center
-            transition duration-300
-            hover:opacity-70 hover:translate-y-2px
-            active:opacity-100
-          "
+          className={clsx(
+            'decoration-0 transition duration-300',
+            'hover:opacity-70 hover:translate-y-2px',
+            'active:opacity-100',
+            'flex flex-row items-center',
+          )}
         >
           <Logo isDark={isDark} />
           <Link href="/">
@@ -64,7 +63,10 @@ export default function Header({navLinks, langs}: Props): ReactElement {
             return (
               <ul
                 key={link.name}
-                className="hover:opacity-70 hover:translate-y-[2px] body3 font-bold"
+                className={clsx(
+                  'body3 font-bold',
+                  'hover:opacity-70 hover:translate-y-[2px]',
+                )}
               >
                 <Link
                   href={link.path}

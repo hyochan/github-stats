@@ -87,18 +87,18 @@ function Hero({t, statsInfo}: Props): ReactElement {
 
   return (
     <div
-      className="
-        self-stretch bg-cover
-        flex flex-col justify-center items-center
-        max-[425px]:p-0
-      "
+      className={clsx(
+        'self-stretch bg-cover',
+        'flex flex-col justify-center items-center',
+        'max-[425px]:p-0',
+      )}
     >
       <div
-        className="
-          self-stretch px-[80px] 
-          flex flex-col align-start justify-start
-          max-[425px]:px-[20px]
-        "
+        className={clsx(
+          'self-stretch px-[80px]',
+          'flex flex-col align-start justify-start',
+          'max-[425px]:px-[20px]',
+        )}
       >
         <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">
           {t.visualizeDevStats}
@@ -137,11 +137,11 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 }}
               />
               <span
-                className="
-                  text-white
-                  mx-3 body3 text-[22px]
-                  max-[425px]:invisible max-[425px]:hidden
-                "
+                className={clsx(
+                  'text-white',
+                  'mx-3 body3 text-[22px]',
+                  'max-[425px]:invisible max-[425px]:hidden',
+                )}
               >
                 /
               </span>
@@ -160,10 +160,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
         {/* Begin: Stats */}
         {githubSVG ? (
           <div
-            className="
-            max-w-[800px] flex-1 self-stretch
-            flex flex-col
-          "
+            className={clsx(
+              'max-w-[800px] flex-1 self-stretch',
+              'flex flex-col',
+            )}
           >
             <ButtonGroup
               className="py-[4px] w-[98%] mt-[18px] mb-[10px]"
@@ -177,10 +177,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
             />
             {/* Begin: Scouter */}
             <div
-              className="
-              flex-1 relative self-stretch max-w-[800px] mb-[8px] mt-[4px]
-              max-[425px]:w-full max-[425px]:max-w-[425px]
-            "
+              className={clsx(
+                'flex-1 relative self-stretch max-w-[800px] mb-[8px] mt-[4px]',
+                'max-[425px]:w-full max-[425px]:max-w-[425px]',
+              )}
             >
               {!isBasic ? (
                 // eslint-disable-next-line @next/next/no-img-element
