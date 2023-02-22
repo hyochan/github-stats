@@ -34,7 +34,7 @@ export default function SectionFooter({t}: Props): ReactElement {
       >
         <p
           className={clsx(
-            'text-white max-w-[800px] leading-8 mb-[4%] text-[24px] text-center mt-20',
+            'text-white max-w-[800px] leading-8 mb-20 text-[24px] text-center mt-32',
             inter.className,
           )}
         >
@@ -43,7 +43,7 @@ export default function SectionFooter({t}: Props): ReactElement {
         <Image alt="scouter" src={SvgScouter} />
         <div
           className={clsx(
-            'h-[22px] mb-20 mt-8',
+            'h-[22px] mb-40 mt-16',
             'flex flex-row items-center',
             inter.className,
           )}
