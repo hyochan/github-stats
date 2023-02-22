@@ -5,7 +5,6 @@ import type {ReactElement, ReactNode} from 'react';
 import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
 import type {NavLink} from './(common)/Header';
-import NextHead from 'next/head';
 import RootProvider from '../../src/components/RootProvider';
 import {getTranslates} from '../../src/localization';
 
@@ -36,12 +35,10 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
 
   return (
     <html lang={lang} className="dark">
-      <NextHead>
-        <title>doobooio</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta name="description" content="All stats for developers" />
-        <link rel="icon" href="/favicon.ico" />
-      </NextHead>
+      <title>doobooio</title>
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <meta name="description" content="All stats for developers" />
+      <link rel="icon" href="/favicon.ico" />
       <body>
         <RootProvider initialLocale={lang}>
           <div
