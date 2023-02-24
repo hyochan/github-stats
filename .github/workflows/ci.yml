@@ -38,6 +38,9 @@ jobs:
           # update the Node version to meet your needs
           node-version: 18
 
+      - name: Copy env
+        run: cp .env.sample .env.local
+
       - name: Install modules
         run: yarn
 
