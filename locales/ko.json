@@ -78,11 +78,17 @@
     "subscribeForMoreUpdates": "세계 각지의 개발자들의 노고를 알리기 위한 새로운 업데이트들이 기다리고 있습니다. 소식을 듣고 싶으시면 이메일주소를 보내주세요",
     "notValidEmail": "올바른 이메일 주소가 아닙니다",
     "successEmailSubscription": "뉴스레터를 구독해 주셔서 감사합니다",
-    "serverResponseError": "정보를 불러오지 못했습니다. 새로고침 혹은 잠시 후 다시 시도해주세요",
-    "recentList": "최근 리스트",
-    "certifiedUsers": "인증 유저",
+    "serverResponseError": "정보를 불러오지 못했습니다. 새로고침 혹은 잠시 후 다시 시도해주세요"
+  },
+  "recentList": {
+    "title": "최근 리스트",
+    "githubUsername": "깃허브 유저명",
+    "noRecentList": "최근 리스트가 없습니다",
     "tier": "티어",
-    "score": "점수",
-    "more": "더보기"
+    "score": "점수"
+  },
+  "certifiedUsers": {
+    "title": "인증된 사용자",
+    "noCertifiedUsers": "인증된 사용자가 없습니다"
   }
 }
