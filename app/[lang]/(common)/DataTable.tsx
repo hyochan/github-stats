@@ -33,13 +33,21 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
 
   return (
     <table className={clsx(['flex-1 self-stretch', props.className])}>
-      <thead className={clsx('p-1', props.classNames?.tHead)}>
-        <tr className={clsx('flex-1 px-1 flex', props.classNames?.tHeadRow)}>
+      <thead className={clsx('', props.classNames?.tHead)}>
+        <tr
+          className={clsx(
+            'flex-1 px-1 flex items-center',
+            props.classNames?.tHeadRow,
+          )}
+        >
           {columns.map((column, i) => {
             return (
               <th
                 key={`${column}-${i}`}
-                className={clsx('flex-1', column.headerClassName)}
+                className={clsx(
+                  `flex-1 ${i === 0 && 'pl-3'}`,
+                  column.headerClassName,
+                )}
               >
                 {column.header({accessorKey: column.id})}
               </th>
@@ -48,7 +56,10 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
         </tr>
       </thead>
       <tbody
-        className={clsx('p-2 h-full', props.classNames?.tBody)}
+        className={clsx(
+          'pl-2 py-1 h-full flex flex-col justify-center',
+          props.classNames?.tBody,
+        )}
         ref={tBodyRef}
       >
         {data.map((elm, i) => {
@@ -64,7 +75,11 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               {columns.map((column) => (
                 <td
                   key={column.id.toString()}
-                  className={clsx('flex-1', column.cellClassName)}
+                  className={clsx(
+                    'flex-1',
+                    'flex flex-row items-center',
+                    column.cellClassName,
+                  )}
                 >
                   {column.cell(elm)}
                 </td>
