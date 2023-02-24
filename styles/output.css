@@ -1101,6 +1101,10 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 80px;
 }
 
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
 .flex {
   display: flex;
 }

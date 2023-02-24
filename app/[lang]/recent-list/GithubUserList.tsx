@@ -19,7 +19,6 @@ type Props = {
 };
 
 export default function GithubUserList({t, initialData}: Props): ReactElement {
-  const divRef = useRef<HTMLDivElement>(null);
   const tBodyRef = useRef<HTMLTableSectionElement>(null);
   const [data, setData] = useState(initialData);
   const [cursor, setCursor] = useState<Date | null>(null);
@@ -77,13 +76,16 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   const handleScroll: UIEventHandler<HTMLTableSectionElement> = async (
     e,
   ): Promise<void> => {
-    const hasReachedEnd =
-      e.currentTarget.scrollHeight - e.currentTarget.scrollTop ===
-      e.currentTarget.clientHeight;
+    const hasEndReached =
+      Math.abs(
+        e.currentTarget.scrollHeight -
+          e.currentTarget.scrollTop -
+          e.currentTarget.clientHeight,
+      ) < 1;
 
-    if (hasReachedEnd) {
+    if (hasEndReached) {
       const {users} = await fetchRecentList({
-        name: 'dooboo-github',
+        pluginId: 'dooboo-github',
         take: 20,
         cursor: cursor ?? new Date(),
       });
@@ -94,7 +96,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   };
 
   return (
-    <div ref={divRef} className="flex-1 bg-paper">
+    <div className="overflow-scroll bg-paper mb-12" onScroll={handleScroll}>
       <DataTable
         tBodyRef={tBodyRef}
         columns={columnsDef}
@@ -103,10 +105,8 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
           const login = user.login;
           window.location.assign('http://github.com/' + login);
         }}
-        onScroll={handleScroll}
         classNames={{
           tHead: 'bg-basic border-b-[0.1px] px-2',
-          tBody: 'overflow-y-scroll',
           tBodyRow: 'hover:opacity-[0.6]',
         }}
       />

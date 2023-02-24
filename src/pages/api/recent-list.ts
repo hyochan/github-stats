@@ -13,12 +13,12 @@ export default async function handler(
 
   switch (method) {
     case 'POST':
-      const name = <string>body.name;
+      const pluginId = <string>body.pluginId;
       const take = <number>body.take;
       const dateStr = <string>body.date;
 
-      if (!name) {
-        res.status(404).send({message: 'Plugin name is required'});
+      if (!pluginId) {
+        res.status(404).send({message: 'pluginId is required'});
 
         return;
       }
@@ -28,7 +28,7 @@ export default async function handler(
       const {data: plugin} = await supabase
         .from('Plugin')
         .select('*')
-        .eq('name', name)
+        .eq('id', pluginId)
         .single();
 
       if (!plugin) {

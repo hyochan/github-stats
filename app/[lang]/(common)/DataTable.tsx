@@ -1,4 +1,4 @@
-import type {ReactElement, Ref, UIEventHandler} from 'react';
+import type {ReactElement, Ref} from 'react';
 
 import clsx from 'clsx';
 
@@ -22,7 +22,6 @@ type ClassNames = {
 export type DataTableProps<T> = {
   data: T[];
   onClickRow?: (row: T, index: number) => void;
-  onScroll?: UIEventHandler<HTMLTableSectionElement> | undefined;
   columns: ColumnDef<T>;
   className?: string;
   classNames?: ClassNames;
@@ -30,12 +29,10 @@ export type DataTableProps<T> = {
 };
 
 export function DataTable<T>(props: DataTableProps<T>): ReactElement {
-  const {data, columns, onClickRow, onScroll, tBodyRef} = props;
+  const {data, columns, onClickRow, tBodyRef} = props;
 
   return (
-    <table
-      className={clsx(['flex-1 self-stretch flex flex-col', props.className])}
-    >
+    <table className={clsx(['flex-1 self-stretch', props.className])}>
       <thead className={clsx('p-1', props.classNames?.tHead)}>
         <tr className={clsx('flex-1 px-1 flex', props.classNames?.tHeadRow)}>
           {columns.map((column, i) => {
@@ -51,8 +48,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
         </tr>
       </thead>
       <tbody
-        className={clsx('p-2', props.classNames?.tBody)}
-        onScroll={onScroll}
+        className={clsx('p-2 h-full', props.classNames?.tBody)}
         ref={tBodyRef}
       >
         {data.map((elm, i) => {

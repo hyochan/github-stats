@@ -30,7 +30,12 @@ export default async function Page({
   const userPlugins = plugin ? await getUserPlugins({plugin}) : [];
 
   return (
-    <div className={clsx('h-full px-6 bg-paper', 'flex flex-col')}>
+    <div
+      className={clsx(
+        'w-screen h-screen px-6 bg-paper overflow-hidden',
+        'flex flex-col',
+      )}
+    >
       <H1
         className={clsx(
           'text-[44px] font-bold',
@@ -41,12 +46,10 @@ export default async function Page({
         {recentList.title}
       </H1>
 
-      <div className="bg-gray-9 w-full flex-1">
-        <GithubUserList
-          initialData={userPlugins as UserListItem[]}
-          t={recentList}
-        />
-      </div>
+      <GithubUserList
+        initialData={userPlugins as UserListItem[]}
+        t={recentList}
+      />
     </div>
   );
 }

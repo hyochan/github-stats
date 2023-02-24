@@ -16,11 +16,11 @@ export type RecentListResponse = {
 };
 
 export const fetchRecentList = async ({
-  name,
+  pluginId,
   take,
   cursor,
 }: {
-  name: 'dooboo-github';
+  pluginId: 'dooboo-github';
   take?: number;
   cursor?: Date;
 }): Promise<RecentListResponse> => {
@@ -32,7 +32,7 @@ export const fetchRecentList = async ({
       'accept-language': i18n.defaultLocale,
     },
     body: JSON.stringify({
-      name,
+      pluginId,
       take,
       cursor,
     }),
