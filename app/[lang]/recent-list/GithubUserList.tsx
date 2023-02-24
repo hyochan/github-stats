@@ -18,7 +18,7 @@ type Props = {
   initialData: UserListItem[];
 };
 
-export default function TableView({t, initialData}: Props): ReactElement {
+export default function GithubUserList({t, initialData}: Props): ReactElement {
   const divRef = useRef<HTMLDivElement>(null);
   const tBodyRef = useRef<HTMLTableSectionElement>(null);
   const [data, setData] = useState(initialData);
