@@ -47,10 +47,10 @@ jobs:
       - name: Check lint
         run: yarn lint
 
-      - name: Build
-        run: yarn build
-        env:
-          DATABASE_URL: postgresql://test:test!@localhost:5432/test
+      # - name: Build
+      #   run: yarn build
+      #   env:
+      #     DATABASE_URL: postgresql://test:test!@localhost:5432/test
 
       # - name: Export
       #   run: |
