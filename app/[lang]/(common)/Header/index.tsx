@@ -11,6 +11,7 @@ import Logo from './Logo';
 import type {ReactElement} from 'react';
 import SwitchToggle from './SwitchToggle';
 import clsx from 'clsx';
+import {usePathname} from 'next/navigation';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -26,6 +27,7 @@ type Props = {
 
 export default function Header({navLinks, langs}: Props): ReactElement {
   const [isDark, setIsDark] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => setIsDark(isDarkMode()), []);
 
@@ -70,7 +72,12 @@ export default function Header({navLinks, langs}: Props): ReactElement {
               >
                 <Link
                   href={link.path}
-                  className="text-body4 opacity-30 truncate"
+                  className={clsx(
+                    'text-body4 truncate',
+                    pathname?.includes(link.path)
+                      ? 'opacity-100'
+                      : 'opacity-30',
+                  )}
                 >
                   <li key={index} className="text-ellipsis">
                     {link.name}

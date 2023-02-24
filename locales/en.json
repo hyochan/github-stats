@@ -69,11 +69,17 @@
     "subscribeForMoreUpdates": "New updates await to inform the hard work of developers around the world. If you would like to hear from us, please send us your email address",
     "notValidEmail": "Not a valid email address",
     "successEmailSubscription": "Thank you for subscribing to our newsletter",
-    "serverResponseError": "Failed to fetch information. Please refresh or try again later",
-    "recentList": "Recent List",
-    "certifiedUsers": "Certified Users",
+    "serverResponseError": "Failed to fetch information. Please refresh or try again later"
+  },
+  "recentList": {
+    "title": "Recent List",
+    "githubUsername": "GitHub username",
+    "noRecentList": "No recent list",
     "tier": "Tier",
-    "score": "Score",
-    "more": "More"
+    "score": "Score"
+  },
+  "certifiedUsers": {
+    "title": "Certified Users",
+    "noCertifiedUsers": "No certified users"
   }
 }

@@ -1,3 +1,5 @@
+'use client';
+
 export const subscribeNewsletter = async (email: string): Promise<string> => {
   const fetchOption: RequestInit = {
     method: 'POST',

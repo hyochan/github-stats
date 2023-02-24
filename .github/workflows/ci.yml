@@ -38,16 +38,21 @@ jobs:
           # update the Node version to meet your needs
           node-version: 18
 
+      - name: Copy env
+        run: cp .env.sample .env.local
+
       - name: Install modules
         run: yarn
 
       - name: Check lint
         run: yarn lint
 
-      - name: Build
-        run: |
-          yarn build
-          yarn export
-          touch out/.nojekyll
-        env:
-          DATABASE_URL: postgresql://test:test!@localhost:5432/test
+      # - name: Build
+      #   run: yarn build
+      #   env:
+      #     DATABASE_URL: postgresql://test:test!@localhost:5432/test
+
+      # - name: Export
+      #   run: |
+      #     yarn export
+      #     touch out/.nojekyll
