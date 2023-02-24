@@ -48,9 +48,11 @@ jobs:
         run: yarn lint
 
       - name: Build
-        run: |
-          yarn build
-          yarn export
-          touch out/.nojekyll
+        run: yarn build
         env:
           DATABASE_URL: postgresql://test:test!@localhost:5432/test
+
+      # - name: Export
+      #   run: |
+      #     yarn export
+      #     touch out/.nojekyll
