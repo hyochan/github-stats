@@ -47,6 +47,19 @@ jobs:
       - name: Check lint
         run: yarn lint
 
+      - name: Test
+        run: yarn test --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          flags: integration
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          verbose: true
+
       # - name: Build
       #   run: yarn build
       #   env:
