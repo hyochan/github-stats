@@ -33,6 +33,8 @@ export const isDarkMode = (): boolean => {
     document.documentElement.classList.contains('dark')
       ? setThemeType('dark')
       : setThemeType('light');
+
+    return document.documentElement.classList.contains('dark');
   }
 
   return themeType === 'dark';
