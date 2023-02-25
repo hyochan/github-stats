@@ -13,6 +13,7 @@ import TextInput from '../../(common)/TextInput';
 import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
 import {fetchGithubStats} from '../../../../src/fetches/github';
+import {track} from '@amplitude/analytics-browser';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 
@@ -55,8 +56,8 @@ function Hero({t, statsInfo}: Props): ReactElement {
   ];
 
   const [selectedPluginType, setSelectedPluginType] = useState(statTypes[0]);
-  const [uid, setUID] = useState('');
-  const [searchedUID, setSearchedUID] = useState('');
+  const [login, setLogin] = useState('');
+  const [searchLogin, setSearchedUID] = useState('');
   const [githubSVG, setGithubSVG] = useState<string | null>(null);
   const [noTrophies, setNoTrophies] = useState(false);
   const [svgStatsURL, setSvgStatsURL] = useState<string>('');
@@ -66,15 +67,17 @@ function Hero({t, statsInfo}: Props): ReactElement {
   const searchUser = async (): Promise<void> => {
     if (selectedPluginType.domain === 'github.com') {
       try {
-        const svgStats = await fetchGithubStats(uid);
+        const svgStats = await fetchGithubStats(login);
+
+        track('Search User', {login});
 
         // NOTE: Should use `unescape` to translate chinese letters. The new api `decodeURIComponent` won't work.
         // Related issue https://stackoverflow.com/questions/23223718/failed-to-execute-btoa-on-window-the-string-to-be-encoded-contains-characte
         const base64dataStats = btoa(unescape(encodeURIComponent(svgStats)));
         setGithubSVG(base64dataStats);
 
-        setSvgStatsURL(generateSvgUrlToCopy(uid, false));
-        setSearchedUID(uid);
+        setSvgStatsURL(generateSvgUrlToCopy(login, false));
+        setSearchedUID(login);
         setIsBasic(false);
         setNoTrophies(false);
       } catch (err) {
@@ -150,7 +153,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 {...register('githubID')}
                 placeholder={t.githubUsername}
                 onChange={(e) => {
-                  setUID(e.target.value.trim());
+                  setLogin(e.target.value.trim());
                 }}
               />
             </div>
@@ -171,8 +174,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
               buttons={[{label: t.basic}, {label: t.advanced}]}
               onClick={(index) => {
                 const shouldBeBasic = index === 0;
-                setSvgStatsURL(generateSvgUrlToCopy(uid, shouldBeBasic));
+                setSvgStatsURL(generateSvgUrlToCopy(login, shouldBeBasic));
                 setIsBasic(shouldBeBasic);
+
+                track('Press Stat Tab', {login, basic: shouldBeBasic});
               }}
             />
             {/* Begin: Scouter */}
@@ -194,7 +199,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 <img
                   className="w-full"
                   alt="github svg"
-                  src={getSVGUrl(isBasic ? 'basic' : 'advanced', searchedUID)}
+                  src={getSVGUrl(isBasic ? 'basic' : 'advanced', searchLogin)}
                 />
               )}
             </div>
@@ -203,7 +208,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={getSVGUrl('trophies', searchedUID)}
+                  src={getSVGUrl('trophies', searchLogin)}
                   onError={() => setNoTrophies(true)}
                   alt="github trophies"
                   className="w-full mx-[4px] m-b[6px]"
@@ -216,9 +221,9 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 selectedPluginType={selectedPluginType}
                 svgStatsURL={svgStatsURL}
                 svgTrophiesURL={
-                  !noTrophies ? getSVGUrl('trophies', searchedUID) : ''
+                  !noTrophies ? getSVGUrl('trophies', searchLogin) : ''
                 }
-                uid={searchedUID}
+                login={searchLogin}
               />
             ) : null}
           </div>
