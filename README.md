@@ -24,6 +24,7 @@ Used in server-side when you want to encode & decode data when communicating wit
 <summary>DATABASE_URL</summary>
 
 Database connection url to access database in [Supabase](https://supabase.io).
+You do not need to set this variable in [Vercel](https://vercel.com).
 </details>
 
 <details>
