@@ -32,12 +32,6 @@ export const fetchGithubStats = async (login: string): Promise<string> => {
   }
 };
 
-/**
- *
- * Below fetch APIs happens in render time which interacts with suspense.
- * APIs that interacts with react suspense are returned with `wrapPromise` function.
- */
-
 type ResultAttr = {
   id: string;
   name: string;

@@ -14,6 +14,7 @@ import {
 
 import type {DoobooStatsResponse} from '../../services/githubService';
 import fs from 'fs';
+import {isDev} from '../../../src/utils/const';
 import path from 'path';
 import {uploadFileToSupabase} from '../../../src/utils/storage';
 
@@ -60,11 +61,11 @@ export const generateGithubSVG = async (
   file: string;
   path: string;
 }> => {
-  const fileName = shouldIncludeLanguage
-    ? `${login}-advanced.svg`
-    : `${login}.svg`;
-
   const languages = stats.json.languages;
+
+  // const fileName = shouldIncludeLanguage
+  // ? `${login}-advanced.svg`
+  // : `${login}.svg`;
 
   // Note: Temporarily remove cached result. This will be applied when there are much memory usage by heavy traffics.
   // if (
@@ -205,25 +206,24 @@ export const generateGithubSVG = async (
 
   try {
     const generateBasicSVG = async (isAdvanced: boolean): Promise<string> => {
-      const filePath = `${isAdvanced ? `${login}-advanced` : login}.svg`;
-
-      // Nextjs issue
-      // https://stackoverflow.com/questions/70484606/writefilesync-not-creating-and-writing-to-file
-      const ROUTE_CACHE_PATH = path.resolve(path.join(process.cwd(), filePath));
-      fs.writeFileSync(ROUTE_CACHE_PATH, isAdvanced ? svgWithLangs : svg);
+      const tmpName = `${isAdvanced ? `${login}-advanced` : login}.svg`;
+      // https://stackoverflow.com/questions/53765403/how-to-access-tmp-folder-in-lambda-with-in-node/53770877#53770877
+      const filePath = isDev
+        ? path.resolve('public', tmpName)
+        : `/tmp/${tmpName}`;
 
       try {
+        fs.writeFileSync(filePath, isAdvanced ? svgWithLangs : svg);
+
         return await uploadFileToSupabase({
           file: filePath,
           bucket: 'public',
-          destPath: `dooboo-github/${fileName}`,
+          destPath: `dooboo-github/${tmpName}`,
         });
       } catch (err: any) {
         throw new Error(err);
       } finally {
-        if (fs.existsSync(ROUTE_CACHE_PATH)) {
-          fs.unlinkSync(ROUTE_CACHE_PATH);
-        }
+        fs.unlinkSync(filePath);
       }
     };
 
@@ -243,19 +243,21 @@ export const uploadTrophiesSvg = async (
   login: string,
   svg: string,
 ): Promise<void> => {
-  const filePath = `${login}-trophies.svg`;
-  const ROUTE_CACHE_PATH = path.resolve(path.join(process.cwd(), filePath));
-  fs.writeFileSync(ROUTE_CACHE_PATH, svg);
+  const tmpName = `${login}-trophies.svg`;
+  // https://stackoverflow.com/questions/53765403/how-to-access-tmp-folder-in-lambda-with-in-node/53770877#53770877
+  const filePath = isDev ? path.resolve('public', tmpName) : `/tmp/${tmpName}`;
 
   try {
+    fs.writeFileSync(filePath, svg);
+
     await uploadFileToSupabase({
       file: filePath,
       bucket: 'public',
       destPath: `dooboo-github/${login}-trophies.svg`,
     });
   } finally {
-    if (fs.existsSync(ROUTE_CACHE_PATH)) {
-      fs.unlinkSync(ROUTE_CACHE_PATH);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
     }
   }
 };
