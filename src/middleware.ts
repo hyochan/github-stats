@@ -5,7 +5,7 @@ import {i18n} from '~/i18n';
 import {match as matchLocale} from '@formatjs/intl-localematcher';
 
 const isProd = process.env.NODE_ENV === 'production';
-const repoName = 'prisma-next-rsc';
+const repoName = 'dooboo.io';
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
