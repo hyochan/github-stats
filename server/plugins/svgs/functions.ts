@@ -211,9 +211,7 @@ export const generateGithubSVG = async (
     }
 
     const generateBasicSVG = async (isAdvanced: boolean): Promise<string> => {
-      const filePath = `./public/github/${
-        isAdvanced ? `${login}-advanced` : login
-      }.svg`;
+      const filePath = `${isAdvanced ? `${login}-advanced` : login}.svg`;
 
       // Nextjs issue
       // https://stackoverflow.com/questions/70484606/writefilesync-not-creating-and-writing-to-file
@@ -249,7 +247,7 @@ export const uploadTrophiesSvg = async (
   login: string,
   svg: string,
 ): Promise<void> => {
-  const filePath = `./public/github/${login}-trophies.svg`;
+  const filePath = `${login}-trophies.svg`;
   const ROUTE_CACHE_PATH = path.resolve(path.join(process.cwd(), filePath));
   fs.writeFileSync(ROUTE_CACHE_PATH, svg);
 
