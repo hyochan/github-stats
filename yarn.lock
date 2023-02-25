@@ -2491,6 +2491,7 @@ __metadata:
   resolution: "dooboo.io@workspace:."
   dependencies:
     "@amplitude/analytics-browser": ^1.9.0-beta.2
+    "@amplitude/node": ^1.10.2
     "@crello/react-lottie": ^0.0.11
     "@dooboo/eslint-config-react": ^1.0.4
     "@formatjs/intl-localematcher": ^0.2.32
@@ -6354,7 +6355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:^2.5.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:^2.5.0":
   version: 2.5.0
   resolution: "tslib@npm:2.5.0"
   checksum: ae3ed5f9ce29932d049908ebfdf21b3a003a85653a9a140d614da6b767a93ef94f460e52c3d787f0e4f383546981713f165037dc2274df212ea9f8a4541004e1

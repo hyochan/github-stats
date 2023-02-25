@@ -1,7 +1,8 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
+
 import {getDoobooStats} from '../../../server/services/githubService';
-import {currentLocale} from '../../../server/utils';
+import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
 
@@ -13,6 +14,7 @@ export default async function handler(
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
+  const {logEvent} = initNodeAmplitude();
 
   switch (method) {
     case 'GET':
@@ -31,6 +33,15 @@ export default async function handler(
         }
 
         const {file} = await generateGithubSVG(login, stats, true);
+
+        logEvent(
+          {event_type: 'github-stats-advanced'},
+          {
+            login,
+            lang: locale,
+          },
+        );
+
         res.setHeader('Content-Type', 'image/svg+xml');
         res.send(file);
       } catch (err) {
