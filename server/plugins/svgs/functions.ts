@@ -14,6 +14,7 @@ import {
 
 import type {DoobooStatsResponse} from '../../services/githubService';
 import fs from 'fs';
+import path from 'path';
 import {uploadFileToSupabase} from '../../../src/utils/storage';
 
 type ScoreType = {
@@ -214,7 +215,10 @@ export const generateGithubSVG = async (
         isAdvanced ? `${login}-advanced` : login
       }.svg`;
 
-      fs.writeFileSync(filePath, isAdvanced ? svgWithLangs : svg);
+      // Nextjs issue
+      // https://stackoverflow.com/questions/70484606/writefilesync-not-creating-and-writing-to-file
+      const ROUTE_CACHE_PATH = path.resolve(path.join(process.cwd(), filePath));
+      fs.writeFileSync(ROUTE_CACHE_PATH, isAdvanced ? svgWithLangs : svg);
 
       try {
         return await uploadFileToSupabase({
@@ -223,7 +227,9 @@ export const generateGithubSVG = async (
           destPath: `dooboo-github/${fileName}`,
         });
       } finally {
-        fs.unlinkSync(filePath);
+        if (fs.existsSync(ROUTE_CACHE_PATH)) {
+          fs.unlinkSync(ROUTE_CACHE_PATH);
+        }
       }
     };
 
@@ -244,7 +250,8 @@ export const uploadTrophiesSvg = async (
   svg: string,
 ): Promise<void> => {
   const filePath = `./public/github/${login}-trophies.svg`;
-  fs.writeFileSync(filePath, svg);
+  const ROUTE_CACHE_PATH = path.resolve(path.join(process.cwd(), filePath));
+  fs.writeFileSync(ROUTE_CACHE_PATH, svg);
 
   try {
     await uploadFileToSupabase({
@@ -253,8 +260,8 @@ export const uploadTrophiesSvg = async (
       destPath: `dooboo-github/${login}-trophies.svg`,
     });
   } finally {
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    if (fs.existsSync(ROUTE_CACHE_PATH)) {
+      fs.unlinkSync(ROUTE_CACHE_PATH);
     }
   }
 };
