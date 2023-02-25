@@ -7,14 +7,19 @@ import {acceptLanguage} from 'next/dist/server/accept-header';
 import {assert} from '../src/utils/assert';
 import {createClient} from '@supabase/supabase-js';
 import type {Database} from '../src/types/supabase';
+import {init} from '@amplitude/analytics-node';
+
+const {SUPABASE_URL, SUPABASE_API_KEY, AMPLITUDE_KEY} = process.env;
+
+export const initNodeAmplitude = (): void => {
+  init(<string>AMPLITUDE_KEY);
+};
 
 export const getSupabaseClient = (): SupabaseClient<
   Database,
   'public',
   Database['public']
 > => {
-  const {SUPABASE_URL, SUPABASE_API_KEY} = process.env;
-
   assert(SUPABASE_URL, 'SUPABASE_URL is not defined');
   assert(SUPABASE_API_KEY, 'SUPABASE_API_KEY is not defined');
 

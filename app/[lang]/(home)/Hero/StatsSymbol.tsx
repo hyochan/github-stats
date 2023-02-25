@@ -6,6 +6,7 @@ import TextTransition, {presets} from 'react-text-transition';
 import Image from 'next/image';
 import type {StatsInfo} from '../../../../src/fetches/github';
 import clsx from 'clsx';
+import {track} from '@amplitude/analytics-browser';
 import {useState} from 'react';
 
 const statTypes = [
@@ -102,6 +103,7 @@ const StatsSymbols = ({
 
   const pressStat = (type: StatName): void => {
     setSelectedStatName(type);
+    track('Press Stat Info', {type});
   };
 
   return (

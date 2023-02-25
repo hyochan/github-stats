@@ -19,6 +19,7 @@ export default async function handler(
   switch (method) {
     case 'POST':
       const email = <string>body.email;
+
       if (!email) {
         res.status(500).send({message: 'Email is required'});
 

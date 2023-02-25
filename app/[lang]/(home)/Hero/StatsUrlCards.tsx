@@ -6,13 +6,14 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import type {PluginType} from '../Home';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../../src/localization';
+import {track} from '@amplitude/analytics-browser';
 import {useSnackbar} from 'react-simple-snackbar';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 
 type Props = {
   t: Translates['home'];
-  uid: string;
+  login: string;
   svgStatsURL: string;
   svgTrophiesURL: string;
   selectedPluginType: PluginType;
@@ -20,16 +21,18 @@ type Props = {
 
 export default function StatsUrlCard({
   t,
-  uid,
+  login,
   svgStatsURL,
   svgTrophiesURL,
 }: Props): ReactElement {
   const [openSnackbar] = useSnackbar();
-  const copyURLToClipboard = (): void => {
+
+  const copyURLToClipboard = (type: 'stats' | 'trophies'): void => {
     openSnackbar(`${t.urlCopiedToClipboard}`);
+    track('Copy URL to clipboard', {login, type});
   };
 
-  const trophiesURL = `![${uid} GitHub Trophies](${rootUrl}/github-trophies?login=${uid})`;
+  const trophiesURL = `![${login} GitHub Trophies](${rootUrl}/github-trophies?login=${login})`;
 
   return (
     <div className="mb-[32px] self-stretch relative flex flex-col">
@@ -40,7 +43,7 @@ export default function StatsUrlCard({
             className="
               flex-1 self-stretch cursor-pointer rounded-[4px]
             "
-            onClick={copyURLToClipboard}
+            onClick={() => copyURLToClipboard('stats')}
           >
             <div className="px-[18px] py-[8px] flex flex-row items-center">
               <CopyIcon className="text-contrast" />
@@ -57,7 +60,7 @@ export default function StatsUrlCard({
               className="
                 flex-1 self-stretch cursor-pointer rounded-[4px]
               "
-              onClick={copyURLToClipboard}
+              onClick={() => copyURLToClipboard('trophies')}
             >
               <div className="px-[18px] py-[8px] flex flex-row items-center">
                 <CopyIcon className="text-contrast" />
@@ -74,7 +77,7 @@ export default function StatsUrlCard({
         className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
         text={t.findOutMore}
         onClick={() => {
-          window.open(`https://app.dooboo.io/${uid}`, '_blank');
+          window.open(`https://app.dooboo.io/${login}`, '_blank');
         }}
       />
     </div>

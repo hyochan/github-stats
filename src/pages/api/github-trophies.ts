@@ -3,14 +3,17 @@ import {LOWEST_TROPHIES_SCORE} from '../../../server/plugins';
 import {uploadTrophiesSvg} from '../../../server/plugins/svgs/functions';
 import {renderGithubTrophies} from '../../../server/plugins/svgs/githubTrophies';
 import {getDoobooStats} from '../../../server/services/githubService';
-import {currentLocale} from '../../../server/utils';
+import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
+import {track} from '@amplitude/analytics-node';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | unknown | {message: string}>,
 ): Promise<void> {
+  initNodeAmplitude();
+
   const locale = currentLocale(req);
   const method = <string>req.method;
   const login = <string>req.query.login;
@@ -31,6 +34,12 @@ export default async function handler(
 
           return;
         }
+
+        track('github-trophies', undefined, {
+          language: locale,
+          user_id: login,
+          extra: {login, lang: locale},
+        });
 
         const trophies = stats.pluginTrophies.filter(
           (el) => el.score > LOWEST_TROPHIES_SCORE,

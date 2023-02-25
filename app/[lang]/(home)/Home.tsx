@@ -7,6 +7,7 @@ import SectionHowItWorks from './SectionHowItWorks';
 import type {StatsInfo} from '../../../src/fetches/github';
 import type {Translates} from '../../../src/localization';
 import clsx from 'clsx';
+import {initAmplitude} from '../../../src/utils/webUtils';
 
 type Props = {
   t: Translates['home'];
@@ -19,6 +20,8 @@ export type PluginType = {
 };
 
 function Home({t, statsInfo}: Props): ReactElement {
+  initAmplitude();
+
   return (
     <div
       className={clsx(
