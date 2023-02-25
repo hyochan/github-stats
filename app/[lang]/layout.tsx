@@ -47,6 +47,7 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
           >
             <Header
               navLinks={navLinks}
+              lang={lang}
               langs={{
                 en: langs.en,
                 ko: langs.ko,

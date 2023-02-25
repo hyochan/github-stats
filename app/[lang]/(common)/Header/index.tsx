@@ -22,10 +22,11 @@ export type NavLink = {
 
 type Props = {
   navLinks: NavLink[];
+  lang: 'en' | 'ko';
   langs: {en: string; ko: string};
 };
 
-export default function Header({navLinks, langs}: Props): ReactElement {
+export default function Header({navLinks, lang, langs}: Props): ReactElement {
   const [isDark, setIsDark] = useState(false);
   const pathname = usePathname();
 
@@ -49,7 +50,7 @@ export default function Header({navLinks, langs}: Props): ReactElement {
           )}
         >
           <Logo isDark={isDark} />
-          <Link href="/">
+          <Link href={`${lang}/`}>
             <H1
               className={clsx(
                 'body3 font-bold ml-[6px] mr-[12px]',
@@ -71,7 +72,7 @@ export default function Header({navLinks, langs}: Props): ReactElement {
                 )}
               >
                 <Link
-                  href={link.path}
+                  href={`${lang}/${link.path}`}
                   className={clsx(
                     'text-body4 truncate',
                     pathname?.includes(link.path)
