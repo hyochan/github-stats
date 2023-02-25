@@ -14,7 +14,8 @@
     "migrate:deploy": "dotenv -e .env.local -- prisma migrate deploy",
     "generate:prisma": "prisma generate",
     "generate:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_DOOBOOIO --schema public > src/types/supabase.ts",
-    "generate": "yarn generate:prisma && yarn generate:supabase"
+    "generate": "yarn generate:prisma && yarn generate:supabase",
+    "test": "vitest"
   },
   "dependencies": {
     "@crello/react-lottie": "^0.0.11",
@@ -42,11 +43,14 @@
   "devDependencies": {
     "@dooboo/eslint-config-react": "^1.0.4",
     "@tailwindcss/forms": "^0.5.3",
+    "@testing-library/react": "^14.0.0",
     "@types/negotiator": "^0.6.1",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "@vitest/coverage-c8": "^0.29.1",
     "autoprefixer": "^10.4.13",
     "clsx": "^1.2.1",
     "concurrently": "^7.6.0",
@@ -54,12 +58,14 @@
     "eslint": "^8.34.0",
     "eslint-config-next": "13.1.6",
     "flatten-tailwindcss-theme": "^1.0.0",
+    "jsdom": "^21.1.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "supabase": ">=1.8.1",
     "tailwind-merge": "^1.9.1",
     "tailwindcss": "^3.2.7",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "vitest": "^0.29.1"
   },
   "prisma": {
     "seed": "ts-node --transpile-only ./prisma/seed.ts"

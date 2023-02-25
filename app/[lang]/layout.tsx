@@ -53,9 +53,9 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
                 ko: langs.ko,
               }}
             />
-            <div className={clsx('flex-1 overflow-scroll', 'flex flex-col')}>
+            <main className={clsx('flex-1 overflow-scroll', 'flex flex-col')}>
               {children}
-            </div>
+            </main>
           </div>
         </RootProvider>
       </body>
