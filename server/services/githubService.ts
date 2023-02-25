@@ -504,12 +504,13 @@ export const getDoobooStats = async ({
       })
       .single();
 
-    // NOTE: Return the data when user was fetched.
-    if (userPlugin) {
-      const {data: stats} = await supabase.from('Stats').select().match({
-        userPluginLogin: userPlugin.login,
-      });
+    const {data: stats} = await supabase
+      .from('Stats')
+      .select('*')
+      .match({userPluginLogin: login});
 
+    // NOTE: Return the data when user was fetched.
+    if (userPlugin && stats?.length === 6) {
       const ghStats: GithubStats[] =
         stats?.map((el) => {
           return {
