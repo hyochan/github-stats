@@ -204,12 +204,6 @@ export const generateGithubSVG = async (
   });
 
   try {
-    const dir = './public/github';
-
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-
     const generateBasicSVG = async (isAdvanced: boolean): Promise<string> => {
       const filePath = `${isAdvanced ? `${login}-advanced` : login}.svg`;
 
@@ -224,6 +218,8 @@ export const generateGithubSVG = async (
           bucket: 'public',
           destPath: `dooboo-github/${fileName}`,
         });
+      } catch (err: any) {
+        throw new Error(err);
       } finally {
         if (fs.existsSync(ROUTE_CACHE_PATH)) {
           fs.unlinkSync(ROUTE_CACHE_PATH);
@@ -239,7 +235,7 @@ export const generateGithubSVG = async (
       path: shouldIncludeLanguage ? svgUrlAdvanced : svgUrl,
     };
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };
 
