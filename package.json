@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^1.9.0-beta.2",
-    "@amplitude/node": "^1.10.2",
+    "@amplitude/analytics-node": "^1.1.0-beta.0",
     "@crello/react-lottie": "^0.0.11",
     "@formatjs/intl-localematcher": "^0.2.32",
     "@next/font": "v13.1.7-canary.6",

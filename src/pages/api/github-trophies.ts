@@ -6,16 +6,18 @@ import {getDoobooStats} from '../../../server/services/githubService';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
+import {track} from '@amplitude/analytics-node';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | unknown | {message: string}>,
 ): Promise<void> {
+  initNodeAmplitude();
+
   const locale = currentLocale(req);
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
-  const {logEvent} = initNodeAmplitude();
 
   switch (method) {
     case 'GET':
@@ -33,13 +35,11 @@ export default async function handler(
           return;
         }
 
-        logEvent(
-          {event_type: 'github-trophies'},
-          {
-            login,
-            lang: locale,
-          },
-        );
+        track('github-trophies', undefined, {
+          language: locale,
+          user_id: login,
+          extra: {login, lang: locale},
+        });
 
         const trophies = stats.pluginTrophies.filter(
           (el) => el.score > LOWEST_TROPHIES_SCORE,

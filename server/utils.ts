@@ -7,14 +7,12 @@ import {acceptLanguage} from 'next/dist/server/accept-header';
 import {assert} from '../src/utils/assert';
 import {createClient} from '@supabase/supabase-js';
 import type {Database} from '../src/types/supabase';
-import {init, OfflineRetryHandler} from '@amplitude/node';
+import {init} from '@amplitude/analytics-node';
 
 const {SUPABASE_URL, SUPABASE_API_KEY, AMPLITUDE_KEY} = process.env;
 
-export const initNodeAmplitude = (): ReturnType<typeof init> => {
-  return init(<string>AMPLITUDE_KEY, {
-    retryClass: new OfflineRetryHandler(<string>AMPLITUDE_KEY),
-  });
+export const initNodeAmplitude = (): void => {
+  init(<string>AMPLITUDE_KEY);
 };
 
 export const getSupabaseClient = (): SupabaseClient<

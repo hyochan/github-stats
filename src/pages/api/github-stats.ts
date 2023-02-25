@@ -1,3 +1,4 @@
+import {track} from '@amplitude/analytics-node';
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 import {getDoobooStats} from '../../../server/services/githubService';
@@ -9,11 +10,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | unknown | {message: string}>,
 ): Promise<void> {
+  initNodeAmplitude();
+
   const locale = currentLocale(req);
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
-  const {logEvent} = initNodeAmplitude();
 
   switch (method) {
     case 'GET':
@@ -31,13 +33,11 @@ export default async function handler(
           return;
         }
 
-        logEvent(
-          {event_type: 'github-stats'},
-          {
-            login,
-            lang: locale,
-          },
-        );
+        track('github-stats', undefined, {
+          language: locale,
+          user_id: login,
+          extra: {login, lang: locale},
+        });
 
         const {file} = await generateGithubSVG(login, stats, false);
         res.setHeader('Content-Type', 'image/svg+xml');

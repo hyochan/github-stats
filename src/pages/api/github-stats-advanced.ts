@@ -1,3 +1,4 @@
+import {track} from '@amplitude/analytics-browser';
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 
@@ -10,11 +11,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | unknown | {message: string}>,
 ): Promise<void> {
+  initNodeAmplitude();
+
   const locale = currentLocale(req);
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
-  const {logEvent} = initNodeAmplitude();
 
   switch (method) {
     case 'GET':
@@ -34,13 +36,11 @@ export default async function handler(
 
         const {file} = await generateGithubSVG(login, stats, true);
 
-        logEvent(
-          {event_type: 'github-stats-advanced'},
-          {
-            login,
-            lang: locale,
-          },
-        );
+        track('github-stats-advanced', undefined, {
+          language: locale,
+          user_id: login,
+          extra: {login, lang: locale},
+        });
 
         res.setHeader('Content-Type', 'image/svg+xml');
         res.send(file);
