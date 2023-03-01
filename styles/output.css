@@ -589,6 +589,13 @@ html {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.4;
+  /*
+     * for Internet Explorer, Edge
+       https://css-tricks.com/snippets/css/hide-scrollbar-in-edge-ie-1011/
+    */
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: none;
+  /* for Firefox */
   display: flex;
 }
 
