@@ -131,7 +131,12 @@ function Hero({t, statsInfo}: Props): ReactElement {
               "
               text={<SearchIcon size={22} fill="#FFF" />}
             />
-            <div className="flex-1 flex flex-row items-center">
+            <div
+              className={clsx(
+                'flex-1',
+                'flex flex-row items-center overflow-hidden',
+              )}
+            >
               <Dropdown
                 data={statTypes}
                 selected={selectedPluginType}
