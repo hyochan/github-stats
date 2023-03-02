@@ -28,7 +28,7 @@ model NewsLetter {
 }
 
 model User {
-  id          String    @id @default(cuid()) @db.Uuid
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email       String?
   name        String?
   description String?
@@ -53,7 +53,7 @@ model User {
 }
 
 model Image {
-  id           String    @id @default(cuid()) @db.Uuid
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   thumbUrl     String?
   thumbUrlHigh String?
   imageUrl     String?
@@ -66,7 +66,7 @@ model Image {
 }
 
 model UserPlugin {
-  login           String    @id
+  login           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   githubId        String
   score           Int       @default(0) @db.SmallInt
   userName        String?
@@ -108,7 +108,7 @@ model Plugin {
 }
 
 model Trophy {
-  id     String  @id @default(cuid()) @db.Uuid
+  id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   type   String
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
@@ -120,7 +120,7 @@ model Trophy {
 }
 
 model Stats {
-  id              String  @id @default(cuid()) @db.Uuid
+  id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String
   iconURL         String?
   iconURLSelected String?

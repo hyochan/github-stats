@@ -87,6 +87,12 @@ cp `.env.sample` `.env.local` // For developing
 
 Run `yarn migrate:dev` to you local database then when every is done right, you can then run `yarn migrate:prod` to update production database in Supabase.
 
+Add below script in `supabase` to use `@default(dbgenerated("gen_random_uuid()"))`.
+
+```
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+```
+
 ### 3. Copy environment variables
 
 ```
@@ -97,7 +103,7 @@ Check the environment variables stated in [Environment variables](#1-environment
 
 ### Tips
 
-> When using yarn berry and TS fails after upgrading packages, try to follow below steps.
+#### When using yarn berry and TS fails after upgrading packages, try to follow below steps.
 
 1. `yarn set version berry`
 1. `yarn`
