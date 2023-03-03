@@ -72,7 +72,7 @@ export const getUserPlugins = async ({
     .select('*')
     .match({pluginId: 'dooboo-github'})
     .order('createdAt', {ascending: false})
-    .lt('createdAt', dateStr)
+    .lt('createdAt', dateStr?.toLocaleString())
     .limit(take || 20);
 
   const users = (userPlugins || [])

@@ -15,7 +15,7 @@ export default async function handler(
     case 'POST':
       const pluginId = <string>body.pluginId;
       const take = <number>body.take;
-      const dateStr = <string>body.date;
+      const dateStr = <string>body.cursor;
 
       if (!pluginId) {
         res.status(404).send({message: 'pluginId is required'});

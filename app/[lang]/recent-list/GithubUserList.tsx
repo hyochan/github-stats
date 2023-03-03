@@ -23,7 +23,11 @@ type Props = {
 export default function GithubUserList({t, initialData}: Props): ReactElement {
   const tBodyRef = useRef<HTMLTableSectionElement>(null);
   const [data, setData] = useState(initialData);
-  const [cursor, setCursor] = useState<Date | null>(null);
+  const [cursor, setCursor] = useState<Date | null>(
+    (initialData?.length || 0) > 0
+      ? new Date(initialData?.[initialData?.length - 1]?.createdAt)
+      : null,
+  );
 
   const columnsDef: ColumnDef<UserListItem> = useMemo(
     () => [
@@ -79,21 +83,22 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
     e,
   ): Promise<void> => {
     const hasEndReached =
-      Math.abs(
-        e.currentTarget.scrollHeight -
-          e.currentTarget.scrollTop -
-          e.currentTarget.clientHeight,
-      ) < 1;
+      e.currentTarget.scrollTop + e.currentTarget.clientHeight >=
+      e.currentTarget.scrollHeight;
 
     if (hasEndReached) {
+      if (!cursor) return;
+
       const {users} = await fetchRecentList({
         pluginId: 'dooboo-github',
         take: 20,
-        cursor: cursor ?? new Date(),
+        cursor,
       });
 
-      setData((prev) => [...prev, ...users]);
-      setCursor(new Date(users?.[users.length - 1].createdAt));
+      const filteredUsers = users.filter((el) => !data.includes(el));
+
+      setData([...data, ...filteredUsers]);
+      setCursor(new Date(filteredUsers?.[filteredUsers.length - 1]?.createdAt));
     }
   };
 
