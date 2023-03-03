@@ -1,5 +1,6 @@
 'use client';
 
+import styles from './GithubUserList.module.css';
 import {H4, H5} from '~/components/Typography';
 import type {ReactElement, UIEventHandler} from 'react';
 import {useMemo, useRef, useState} from 'react';
@@ -12,6 +13,7 @@ import TierRowItem from './TierRowItem';
 import type {Translates} from '../../../src/localization';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {fetchRecentList} from '../../../src/fetches/recentList';
+import clsx from 'clsx';
 
 type Props = {
   t: Translates['recentList'];
@@ -96,7 +98,13 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   };
 
   return (
-    <div className="overflow-scroll bg-paper mb-12" onScroll={handleScroll}>
+    <div
+      className={clsx(
+        'flex-1 bg-paper mb-12 overflow-scroll',
+        styles.container,
+      )}
+      onScroll={handleScroll}
+    >
       <DataTable
         tBodyRef={tBodyRef}
         columns={columnsDef}

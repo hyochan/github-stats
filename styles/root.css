@@ -7,10 +7,12 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.4;
+
     /*
      * for Internet Explorer, Edge
        https://css-tricks.com/snippets/css/hide-scrollbar-in-edge-ie-1011/
     */
+    overflow: -moz-scrollbars-none;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     scrollbar-width: none; /* for Firefox */
 
@@ -23,6 +25,10 @@
     height: 100vh;
 
     display: flex;
+  }
+
+  body ::-webkit-scrollbar {
+    width: 0px;
   }
 
   div {
@@ -96,28 +102,68 @@
     display: none;
   }
 
-  .bg-basic { @apply bg-white dark:bg-dark; }
-  .bg-paper { @apply bg-paper-light dark:bg-paper-dark; }
-  .bg-contrast { @apply bg-paper-dark dark:bg-paper-light; }
-  .bg-disabled { @apply bg-disabled-light dark:bg-disabled-dark; }
+  .bg-basic {
+    @apply bg-white dark:bg-dark;
+  }
+  .bg-paper {
+    @apply bg-paper-light dark:bg-paper-dark;
+  }
+  .bg-contrast {
+    @apply bg-paper-dark dark:bg-paper-light;
+  }
+  .bg-disabled {
+    @apply bg-disabled-light dark:bg-disabled-dark;
+  }
 
-  .text-basic { @apply text-black dark:text-white; }
-  .text-placeholder { @apply text-placeholder-light dark:text-placeholder-dark; }
-  .text-disabled { @apply text-disabled-light dark:text-disabled-dark; }
-  .text-validation { @apply text-validation-light dark:text-validation-dark; }
-  .text-contrast { @apply text-contrast-light dark:text-contrast-dark; }
-  .text-success { @apply text-success-light dark:text-success-dark; }
+  .text-basic {
+    @apply text-black dark:text-white;
+  }
+  .text-placeholder {
+    @apply text-placeholder-light dark:text-placeholder-dark;
+  }
+  .text-disabled {
+    @apply text-disabled-light dark:text-disabled-dark;
+  }
+  .text-validation {
+    @apply text-validation-light dark:text-validation-dark;
+  }
+  .text-contrast {
+    @apply text-contrast-light dark:text-contrast-dark;
+  }
+  .text-success {
+    @apply text-success-light dark:text-success-dark;
+  }
 
-  .role-primary { @apply bg-primary-light dark:bg-primary-dark; }
+  .role-primary {
+    @apply bg-primary-light dark:bg-primary-dark;
+  }
 
-  .h1 { @apply text-h1 font-bold text-black dark:text-white; }
-  .h2 { @apply text-h2 font-bold text-black dark:text-white; }
-  .h3 { @apply text-h3 font-bold text-black dark:text-white; }
-  .h4 { @apply text-h4 font-bold text-black dark:text-white; }
+  .h1 {
+    @apply text-h1 font-bold text-black dark:text-white;
+  }
+  .h2 {
+    @apply text-h2 font-bold text-black dark:text-white;
+  }
+  .h3 {
+    @apply text-h3 font-bold text-black dark:text-white;
+  }
+  .h4 {
+    @apply text-h4 font-bold text-black dark:text-white;
+  }
 
-  .body1 { @apply text-body1 text-black dark:text-white; }
-  .body1 { @apply text-body1 text-black dark:text-white; }
-  .body2 { @apply text-body2 text-black dark:text-white; }
-  .body3 { @apply text-body3 text-black dark:text-white; }
-  .body4 { @apply text-body4 text-black dark:text-white; }
+  .body1 {
+    @apply text-body1 text-black dark:text-white;
+  }
+  .body1 {
+    @apply text-body1 text-black dark:text-white;
+  }
+  .body2 {
+    @apply text-body2 text-black dark:text-white;
+  }
+  .body3 {
+    @apply text-body3 text-black dark:text-white;
+  }
+  .body4 {
+    @apply text-body4 text-black dark:text-white;
+  }
 }

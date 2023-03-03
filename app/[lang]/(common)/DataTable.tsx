@@ -57,7 +57,8 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
       </thead>
       <tbody
         className={clsx(
-          'pl-2 py-1 h-full flex flex-col justify-center',
+          'pl-2 py-1 h-full',
+          'flex flex-col justify-center',
           props.classNames?.tBody,
         )}
         ref={tBodyRef}

@@ -593,6 +593,7 @@ html {
      * for Internet Explorer, Edge
        https://css-tricks.com/snippets/css/hide-scrollbar-in-edge-ie-1011/
     */
+  overflow: -moz-scrollbars-none;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   scrollbar-width: none;
   /* for Firefox */
@@ -604,6 +605,10 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
+}
+
+body ::-webkit-scrollbar {
+  width: 0px;
 }
 
 div {
@@ -739,6 +744,40 @@ a:active {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+}
+
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
 }
 
 html,
