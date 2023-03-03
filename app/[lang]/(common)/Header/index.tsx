@@ -66,10 +66,7 @@ export default function Header({navLinks, lang, langs}: Props): ReactElement {
             return (
               <ul
                 key={link.name}
-                className={clsx(
-                  'body3 font-bold',
-                  'hover:opacity-70 hover:translate-y-[2px]',
-                )}
+                className={clsx('hover:opacity-70 hover:translate-y-[2px]')}
               >
                 <Link
                   href={`${lang}/${link.path}`}
@@ -80,7 +77,10 @@ export default function Header({navLinks, lang, langs}: Props): ReactElement {
                       : 'opacity-30',
                   )}
                 >
-                  <li key={index} className="text-ellipsis">
+                  <li
+                    key={index}
+                    className={clsx('text-ellipsis', 'body3 font-bold')}
+                  >
                     {link.name}
                   </li>
                 </Link>
