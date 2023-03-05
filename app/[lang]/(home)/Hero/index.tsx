@@ -134,7 +134,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
             <div
               className={clsx(
                 'flex-1',
-                'flex flex-row items-center overflow-hidden',
+                'flex flex-row items-center flex-wrap gap-1',
               )}
             >
               <Dropdown
