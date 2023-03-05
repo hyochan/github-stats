@@ -1,6 +1,5 @@
 'use client';
 
-import styles from './GithubUserList.module.css';
 import {H4, H5} from '~/components/Typography';
 import type {ReactElement, UIEventHandler} from 'react';
 import {useMemo, useRef, useState} from 'react';
@@ -12,8 +11,9 @@ import type {Tier} from './TierRowItem';
 import TierRowItem from './TierRowItem';
 import type {Translates} from '../../../src/localization';
 import type {UserListItem} from '../../../src/fetches/recentList';
-import {fetchRecentList} from '../../../src/fetches/recentList';
 import clsx from 'clsx';
+import {fetchRecentList} from '../../../src/fetches/recentList';
+import styles from './GithubUserList.module.css';
 
 type Props = {
   t: Translates['recentList'];
@@ -83,11 +83,13 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
     e,
   ): Promise<void> => {
     const hasEndReached =
-      e.currentTarget.scrollTop + e.currentTarget.clientHeight >=
+      Math.ceil(e.currentTarget.scrollTop + e.currentTarget.clientHeight) >=
       e.currentTarget.scrollHeight;
 
     if (hasEndReached) {
-      if (!cursor) return;
+      if (!cursor) {
+        return;
+      }
 
       const {users} = await fetchRecentList({
         pluginId: 'dooboo-github',
