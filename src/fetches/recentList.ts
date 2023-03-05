@@ -15,6 +15,8 @@ export type RecentListResponse = {
   users: UserListItem[];
 };
 
+const requestedRecentUsersDate: Date[] = [];
+
 export const fetchRecentList = async ({
   pluginId,
   take,
@@ -24,6 +26,14 @@ export const fetchRecentList = async ({
   take?: number;
   cursor?: Date;
 }): Promise<RecentListResponse> => {
+  if (cursor) {
+    if (isNaN(cursor.valueOf()) || requestedRecentUsersDate.includes(cursor)) {
+      return {users: []};
+    }
+
+    requestedRecentUsersDate.push(cursor);
+  }
+
   const fetchOption: RequestInit = {
     method: 'POST',
     headers: {
