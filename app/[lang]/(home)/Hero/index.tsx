@@ -98,7 +98,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
     >
       <div
         className={clsx(
-          'self-stretch px-[80px]',
+          'self-stretch px-14',
           'flex flex-col align-start justify-start',
           'max-[425px]:px-[20px]',
         )}
@@ -112,7 +112,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
         {/* Begin: Search Form */}
         <form
           onSubmit={handleSubmit(searchUser)}
-          className="self-stretch "
+          className="self-stretch"
           autoComplete="off"
         >
           <div

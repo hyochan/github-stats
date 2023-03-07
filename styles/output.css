@@ -1031,6 +1031,31 @@ input[type='search']::-webkit-search-decoration,
   margin-right: 6px;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.mx-14 {
+  margin-left: 3.5rem;
+  margin-right: 3.5rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -1292,6 +1317,10 @@ input[type='search']::-webkit-search-decoration,
   max-width: 800px;
 }
 
+.max-w-\[680px\] {
+  max-width: 680px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1370,16 +1399,12 @@ input[type='search']::-webkit-search-decoration,
   justify-content: space-between;
 }
 
-.gap-\[8px\] {
-  gap: 8px;
-}
-
 .gap-1 {
   gap: 0.25rem;
 }
 
-.gap-2 {
-  gap: 0.5rem;
+.gap-\[8px\] {
+  gap: 8px;
 }
 
 .self-center {
@@ -1394,16 +1419,8 @@ input[type='search']::-webkit-search-decoration,
   overflow: hidden;
 }
 
-.overflow-clip {
-  overflow: clip;
-}
-
 .overflow-scroll {
   overflow: scroll;
-}
-
-.overflow-x-hidden {
-  overflow-x: hidden;
 }
 
 .truncate {
@@ -1525,6 +1542,11 @@ input[type='search']::-webkit-search-decoration,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-cover {
   background-size: cover;
 }
@@ -1552,6 +1574,10 @@ input[type='search']::-webkit-search-decoration,
 
 .p-\[8px\] {
   padding: 8px;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .px-1 {
@@ -1632,6 +1658,26 @@ input[type='search']::-webkit-search-decoration,
 .py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.px-14 {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .pl-2 {
@@ -1935,6 +1981,16 @@ input[type='search']::-webkit-search-decoration,
   .max-\[425px\]\:px-\[20px\] {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .max-\[425px\]\:px-\[14px\] {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .max-\[425px\]\:px-\[0px\] {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 

@@ -34,13 +34,13 @@ export default function SectionFooter({t}: Props): ReactElement {
       >
         <p
           className={clsx(
-            'text-white max-w-[800px] leading-8 mb-20 text-[24px] text-center mt-32',
+            'text-white max-w-[800px] leading-8 text-[24px] text-center mt-32 mb-20 mx-10',
             inter.className,
           )}
         >
           {t.enjoyStats}
         </p>
-        <Image alt="scouter" src={SvgScouter} className=" px-8 " />
+        <Image alt="scouter" src={SvgScouter} className="px-8" />
         <div
           className={clsx(
             'h-[22px] mb-28 mt-12',

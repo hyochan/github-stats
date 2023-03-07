@@ -60,7 +60,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
       <form
         onSubmit={handleSubmit(reqNewsLetterSubs)}
         className={clsx(
-          'self-stretch p-20 min-h-[400px] relative',
+          'self-stretch py-20 px-14 min-h-[400px] relative',
           'flex flex-col justify-start items-start',
         )}
       >
@@ -73,7 +73,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
         />
         <div
           className={clsx(
-            'max-w-[600px] text-left leading-[28px] mb-8',
+            'max-w-[680px] text-left leading-[28px] mb-8',
             'flex flex-col flex-wrap',
           )}
         >
