@@ -583,7 +583,7 @@ export const getDoobooStats = async ({
         await supabase
           .from('user_plugins')
           .update({
-            viewCount: userPlugin?.viewCount ? userPlugin.viewCount + 1 : 1,
+            view_count: userPlugin?.view_count ? userPlugin.view_count + 1 : 1,
           })
           .match({login: userPlugin.login});
 

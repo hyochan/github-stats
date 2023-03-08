@@ -87,7 +87,7 @@ model user_plugins {
   plugin    plugins? @relation(fields: [plugin_id], references: [id])
   plugin_id String?
 
-  viewCount Int? @default(0)
+  view_count Int? @default(0)
 
   stats    stats[]
   trophies trophies[]

@@ -108,7 +108,7 @@ export interface Database {
           created_at?: string | null
           deleted_at?: string | null
           description?: string | null
-          id?: string
+          id: string
           json?: Json | null
           updated_at?: string | null
         }
@@ -193,7 +193,7 @@ export interface Database {
           updated_at: string | null
           user_id: string | null
           user_name: string | null
-          viewCount: number | null
+          view_count: number | null
         }
         Insert: {
           avatar_url?: string | null
@@ -210,7 +210,7 @@ export interface Database {
           updated_at?: string | null
           user_id?: string | null
           user_name?: string | null
-          viewCount?: number | null
+          view_count?: number | null
         }
         Update: {
           avatar_url?: string | null
@@ -227,7 +227,7 @@ export interface Database {
           updated_at?: string | null
           user_id?: string | null
           user_name?: string | null
-          viewCount?: number | null
+          view_count?: number | null
         }
       }
       users: {
