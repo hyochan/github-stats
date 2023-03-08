@@ -19,7 +19,7 @@ enum AuthType {
   apple
 }
 
-model NewsLetter {
+model news_letters {
   email String @id
 
   createdAt DateTime? @default(now())
@@ -27,7 +27,7 @@ model NewsLetter {
   deletedAt DateTime?
 }
 
-model User {
+model users {
   id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email       String?
   name        String?
@@ -48,11 +48,11 @@ model User {
   updatedAt DateTime? @updatedAt
   deletedAt DateTime?
 
-  image       Image?
-  userPlugins UserPlugin[]
+  image       images?
+  userPlugins user_plugins[]
 }
 
-model Image {
+model images {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   thumbUrl     String?
   thumbUrlHigh String?
@@ -62,11 +62,11 @@ model Image {
   deletedAt    DateTime?
 
   userId String? @unique @db.Uuid
-  user   User?   @relation(fields: [userId], references: [id])
+  user   users?  @relation(fields: [userId], references: [id])
 }
 
-model UserPlugin {
-  login           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model user_plugins {
+  login           String    @id
   githubId        String
   score           Int       @default(0) @db.SmallInt
   userName        String?
@@ -80,22 +80,22 @@ model UserPlugin {
   updatedAt DateTime? @updatedAt
   deletedAt DateTime?
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String? @db.Uuid
+  user      users?  @relation(fields: [userId], references: [id])
+  userId String? @unique @db.Uuid
 
-  plugin   Plugin? @relation(fields: [pluginId], references: [id])
-  pluginId String?
+  plugin   plugins? @relation(fields: [pluginId], references: [id])
+  pluginId String? @db.Uuid
 
   viewCount Int? @default(0)
 
-  stats    Stats[]
-  trophies Trophy[]
+  stats    stats[]
+  trophies trophies[]
 
   @@unique([login, pluginId])
 }
 
-model Plugin {
-  id          String  @id
+model plugins {
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   apiURL      String
   description String?
   json        Json?   @db.Json
@@ -104,22 +104,22 @@ model Plugin {
   updatedAt DateTime? @updatedAt
   deletedAt DateTime?
 
-  userPlugins UserPlugin[]
+  userPlugins user_plugins[]
 }
 
-model Trophy {
+model trophies {
   id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   type   String
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
 
-  userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
+  userPlugin      user_plugins? @relation(fields: [userPluginLogin], references: [login])
   userPluginLogin String?
 
   @@unique([type, userPluginLogin])
 }
 
-model Stats {
+model stats {
   id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String
   iconURL         String?
@@ -128,7 +128,7 @@ model Stats {
   description     String?
   statsElements   Json?   @db.Json
 
-  userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
+  userPlugin      user_plugins? @relation(fields: [userPluginLogin], references: [login])
   userPluginLogin String?
 
   @@index([userPluginLogin])
