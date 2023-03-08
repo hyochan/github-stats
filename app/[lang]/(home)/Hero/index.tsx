@@ -100,7 +100,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
         className={clsx(
           'self-stretch px-14',
           'flex flex-col align-start justify-start',
-          'max-[425px]:px-[20px]',
+          'max-[425px]:px-8',
         )}
       >
         <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">
@@ -119,24 +119,20 @@ function Hero({t, statsInfo}: Props): ReactElement {
             className={clsx(
               'rounded-[4px] bg-gray7 px-3 h-[64px] relative body2 max-w-[800px]',
               'flex flex-row-reverse items-center',
-              'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto',
-              'max-[320px]:py-3 max-[320px]:flex-col max-[320px]:items-center max-[320px]:justify-center',
+              'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto max-[425px]:flex-wrap',
+              'max-[320px]:py-3 max-[320px]:items-start',
             )}
           >
             <Button
               isLoading={formState.isSubmitting}
               type="submit"
-              className="
-                bg-transparent border-0 text-center max-w-[100px] p-2
-              "
+              className={clsx(
+                'bg-transparent border-0 text-center max-w-[100px] p-2',
+                'absolute',
+              )}
               text={<SearchIcon size={22} fill="#FFF" />}
             />
-            <div
-              className={clsx(
-                'flex-1',
-                'flex flex-row items-center flex-wrap gap-1',
-              )}
-            >
+            <div className={clsx('flex-1', 'flex flex-row items-center')}>
               <Dropdown
                 data={statTypes}
                 selected={selectedPluginType}

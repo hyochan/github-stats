@@ -25,8 +25,8 @@ function Home({t, statsInfo}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-paper',
-        'flex flex-col justify-start items-center',
+        'flex-1 w-screen bg-paper',
+        'flex flex-col',
         'max-[425px]: p-0',
       )}
     >

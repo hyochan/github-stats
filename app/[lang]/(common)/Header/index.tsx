@@ -40,7 +40,7 @@ export default function Header({navLinks, lang, langs}: Props): ReactElement {
         'px-[28px]',
       )}
     >
-      <div className="flex flex-row items-center">
+      <div className="flex-1 flex flex-row items-center">
         <div
           className={clsx(
             'decoration-0 transition duration-300',

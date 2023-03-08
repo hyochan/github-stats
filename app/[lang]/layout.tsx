@@ -42,8 +42,8 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
       <link rel="icon" href="/favicon.ico" />
       <body>
         <RootProvider initialLocale={lang}>
-          <div
-            className={clsx('text-center w-screen h-screen', 'flex flex-col')}
+          <main
+            className={clsx('text-center flex-1 self-stretch', 'flex flex-col')}
           >
             <Header
               navLinks={navLinks}
@@ -53,10 +53,10 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
                 ko: langs.ko,
               }}
             />
-            <main className={clsx('flex-1 overflow-scroll', 'flex flex-col')}>
+            <div className={clsx('flex-1 self-stretch', 'flex')}>
               {children}
-            </main>
-          </div>
+            </div>
+          </main>
         </RootProvider>
       </body>
     </html>

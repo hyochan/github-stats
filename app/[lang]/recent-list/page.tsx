@@ -32,7 +32,7 @@ export default async function Page({
   return (
     <div
       className={clsx(
-        'w-screen h-screen px-6 bg-paper overflow-hidden',
+        'w-screen h-[calc(100vh-64px)] px-6 bg-paper overflow-hidden bg-black',
         'flex flex-col',
       )}
     >
