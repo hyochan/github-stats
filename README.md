@@ -93,13 +93,26 @@ Add below script in `supabase` to use `@default(dbgenerated("gen_random_uuid()")
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 ```
 
-### 3. Copy environment variables
+### 3. Prepare Storage
+
+Create storage bucket `public` as `Public bucket` and create `new policy to public` with custom rule as shown below.
+
+<img width="720" alt="storage" src="https://user-images.githubusercontent.com/27461460/223626135-b4f4fc59-8feb-4f1d-9c70-cfb347606b38.png">
+
+### 4. Copy environment variables
 
 ```
 cp .env.sample .env.local
 ```
 
 Check the environment variables stated in [Environment variables](#1-environment-variables) and replace to your own.
+
+We recommend to have 3 environments as shown below.
+- .env.dev
+- .env.local
+- .env.prod
+
+> Try migrating database to `.env.dev` then run on `.env.local` when developing and in staging. If everything is done, `.env.prod` is for you for production.
 
 ### Tips
 
