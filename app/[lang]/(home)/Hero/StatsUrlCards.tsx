@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '../../(common)/Button';
+// import Button from '../../(common)/Button';
 import {CopyIcon} from '@primer/octicons-react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import type {PluginType} from '../Home';
@@ -73,13 +73,13 @@ export default function StatsUrlCard({
       <div className="text-[14px] text-placeholder flex-wrap flex-row items-center justify-center self-center mt-4">
         {t.copyPasteToGithubReadme}
       </div>
-      <Button
+      {/* <Button
         className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
         text={t.findOutMore}
         onClick={() => {
-          window.open(`https://app.dooboo.io/${login}`, '_blank');
+          window.open(`${login}`, '_blank');
         }}
-      />
+      /> */}
     </div>
   );
 }
