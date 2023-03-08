@@ -22,7 +22,7 @@ export default async function Page({
 
   const supabase = getSupabaseClient();
   const {data: plugin} = await supabase
-    .from('Plugin')
+    .from('plugins')
     .select('*')
     .eq('id', 'dooboo-github')
     .single();

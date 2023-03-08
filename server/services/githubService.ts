@@ -1,8 +1,9 @@
 import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
-import type {Json, Model} from '../../src/types/supabase';
 
 import type {GithubUser} from '../plugins/types';
+import type {Json} from '../../src/types/supabase';
 import type {Locale} from '../../src/i18n';
+import type {Model} from '../../src/types/utils';
 import type {PluginTrophy} from '../plugins/trophies';
 import type {TopLanguage} from '../plugins/topLanguages';
 import axios from 'axios';
@@ -288,7 +289,7 @@ export const getGithubCommits = async (
 };
 
 type GithubStats = Omit<
-  Model['Stats']['Row'],
+  Model['stats']['Row'],
   'score' | 'userPluginId' | 'id' | 'iconURL' | 'iconURLSelected'
 > & {
   score: number;
@@ -296,7 +297,7 @@ type GithubStats = Omit<
 };
 
 export type DoobooStatsResponse = {
-  plugin: Model['Plugin']['Row'];
+  plugin: Model['plugins']['Row'];
   pluginStats: PluginStats;
   pluginTrophies: PluginTrophy[];
   json: {
@@ -319,8 +320,8 @@ const upsertGithubStats = async ({
   lang = 'en',
 }: {
   login: string;
-  plugin: Model['Plugin']['Row'];
-  userPlugin: Model['UserPlugin']['Row'] | null;
+  plugin: Model['plugins']['Row'];
+  userPlugin: Model['user_plugins']['Row'] | null;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
@@ -339,7 +340,7 @@ const upsertGithubStats = async ({
     const languages = getTopLanguages(githubUser);
     const trophies = getTrophies(githubUser);
 
-    const stats: Model['Stats']['Insert'][] = [
+    const stats: Model['stats']['Insert'][] = [
       {
         name: 'TREE',
         score: githubStatus.tree.score,
@@ -479,24 +480,28 @@ export const getDoobooStats = async ({
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   const supabase = getSupabaseClient();
-  const {common, plugins, trophies} = await getTranslates(lang);
+  const {
+    common: tCommon,
+    plugins: tPlugins,
+    trophies: tTrophies,
+  } = await getTranslates(lang);
   login = login.toLowerCase();
 
   try {
     const PLUGIN_ID = 'dooboo-github';
 
     const {data: plugin} = await supabase
-      .from('Plugin')
+      .from('plugins')
       .select()
       .eq('id', PLUGIN_ID)
       .single();
 
     if (!plugin) {
-      throw new Error(common.pluginNotFound);
+      throw new Error(tCommon.pluginNotFound);
     }
 
     const {data: userPlugin} = await supabase
-      .from('UserPlugin')
+      .from('user_plugins')
       .select()
       .match({
         pluginId: plugin.id,
@@ -532,38 +537,38 @@ export const getDoobooStats = async ({
 
       const result: PluginStats = {
         tree: {
-          name: plugins.tree,
-          description: plugins.treeDescription,
+          name: tPlugins.tree,
+          description: tPlugins.treeDescription,
           score: tree?.score || 0,
           statsElements: tree?.statsElements,
         },
         fire: {
-          name: plugins.fire,
-          description: plugins.fireDescription,
+          name: tPlugins.fire,
+          description: tPlugins.fireDescription,
           score: fire?.score || 0,
           statsElements: fire?.statsElements,
         },
         earth: {
-          name: plugins.earth,
-          description: plugins.earthDescription,
+          name: tPlugins.earth,
+          description: tPlugins.earthDescription,
           score: earth?.score || 0,
           statsElements: earth?.statsElements,
         },
         gold: {
-          name: plugins.gold,
-          description: plugins.goldDescription,
+          name: tPlugins.gold,
+          description: tPlugins.goldDescription,
           score: gold?.score || 0,
           statsElements: gold?.statsElements,
         },
         water: {
-          name: plugins.water,
-          description: plugins.waterDescription,
+          name: tPlugins.water,
+          description: tPlugins.waterDescription,
           score: water?.score || 0,
           statsElements: water?.statsElements,
         },
         person: {
-          name: plugins.person,
-          description: plugins.personDescription,
+          name: tPlugins.person,
+          description: tPlugins.personDescription,
           score: person?.score || 0,
           statsElements: person?.statsElements,
         },
@@ -604,11 +609,11 @@ export const getDoobooStats = async ({
         pluginStats: result,
         pluginTrophies:
           trophyData?.map((el) => {
-            const type = el.type as keyof typeof trophies;
+            const type = el.type as keyof typeof tTrophies;
 
             return {
               ...el,
-              type: trophies[type],
+              type: tTrophies[type],
             };
           }) || [],
         json: JSON.parse(JSON.stringify(userPlugin.json)),

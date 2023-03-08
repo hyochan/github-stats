@@ -1,5 +1,5 @@
-import type {Model} from '../types/supabase';
 import {getSupabaseClient} from '../../server/utils';
+import type {Model} from '../types/utils';
 
 export const isEmptyObject = (param: any): boolean =>
   Object.keys(param).length === 0 && param.constructor === Object;
@@ -61,7 +61,7 @@ export const getUserPlugins = async ({
   take = 20,
   dateStr = new Date().toISOString(),
 }: {
-  plugin: Model['Plugin']['Row'];
+  plugin: Model['plugins']['Row'];
   take?: number;
   dateStr?: string;
 }): Promise<PluginUser[]> => {

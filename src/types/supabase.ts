@@ -6,8 +6,6 @@ export type Json =
   | { [key: string]: Json }
   | Json[]
 
-export type Model = Database['public']['Tables'];
-
 export interface Database {
   public: {
     Tables: {
@@ -43,7 +41,7 @@ export interface Database {
           started_at?: string
         }
       }
-      Image: {
+      images: {
         Row: {
           createdAt: string | null
           deletedAt: string | null
@@ -75,7 +73,7 @@ export interface Database {
           userId?: string | null
         }
       }
-      NewsLetter: {
+      news_letters: {
         Row: {
           createdAt: string | null
           deletedAt: string | null
@@ -95,7 +93,7 @@ export interface Database {
           updatedAt?: string | null
         }
       }
-      Plugin: {
+      plugins: {
         Row: {
           apiURL: string
           createdAt: string | null
@@ -110,7 +108,7 @@ export interface Database {
           createdAt?: string | null
           deletedAt?: string | null
           description?: string | null
-          id: string
+          id?: string
           json?: Json | null
           updatedAt?: string | null
         }
@@ -124,7 +122,7 @@ export interface Database {
           updatedAt?: string | null
         }
       }
-      Stats: {
+      stats: {
         Row: {
           description: string | null
           iconURL: string | null
@@ -156,7 +154,7 @@ export interface Database {
           userPluginLogin?: string | null
         }
       }
-      Trophy: {
+      trophies: {
         Row: {
           id: string
           points: number
@@ -179,7 +177,60 @@ export interface Database {
           userPluginLogin?: string | null
         }
       }
-      User: {
+      user_plugins: {
+        Row: {
+          avatarUrl: string | null
+          certificationNo: number | null
+          certifiedAt: string | null
+          createdAt: string | null
+          deletedAt: string | null
+          description: string | null
+          githubId: string
+          json: Json | null
+          login: string
+          pluginId: string | null
+          score: number
+          updatedAt: string | null
+          userId: string | null
+          userName: string | null
+          viewCount: number | null
+        }
+        Insert: {
+          avatarUrl?: string | null
+          certificationNo?: number | null
+          certifiedAt?: string | null
+          createdAt?: string | null
+          deletedAt?: string | null
+          description?: string | null
+          githubId: string
+          json?: Json | null
+          login: string
+          pluginId?: string | null
+          score?: number
+          updatedAt?: string | null
+          userId?: string | null
+          userName?: string | null
+          viewCount?: number | null
+        }
+        Update: {
+          avatarUrl?: string | null
+          certificationNo?: number | null
+          certifiedAt?: string | null
+          createdAt?: string | null
+          deletedAt?: string | null
+          description?: string | null
+          githubId?: string
+          json?: Json | null
+          login?: string
+          pluginId?: string | null
+          score?: number
+          updatedAt?: string | null
+          userId?: string | null
+          userName?: string | null
+          viewCount?: number | null
+        }
+      }
+      users: {
         Row: {
           birthday: string | null
           blog: string | null
@@ -239,59 +290,6 @@ export interface Database {
           phone?: string | null
           twitter?: string | null
           updatedAt?: string | null
-        }
-      }
-      UserPlugin: {
-        Row: {
-          avatarUrl: string | null
-          certificationNo: number | null
-          certifiedAt: string | null
-          createdAt: string | null
-          deletedAt: string | null
-          description: string | null
-          githubId: string
-          json: Json | null
-          login: string
-          pluginId: string | null
-          score: number
-          updatedAt: string | null
-          userId: string | null
-          userName: string | null
-          viewCount: number | null
-        }
-        Insert: {
-          avatarUrl?: string | null
-          certificationNo?: number | null
-          certifiedAt?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
-          description?: string | null
-          githubId: string
-          json?: Json | null
-          login: string
-          pluginId?: string | null
-          score?: number
-          updatedAt?: string | null
-          userId?: string | null
-          userName?: string | null
-          viewCount?: number | null
-        }
-        Update: {
-          avatarUrl?: string | null
-          certificationNo?: number | null
-          certifiedAt?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
-          description?: string | null
-          githubId?: string
-          json?: Json | null
-          login?: string
-          pluginId?: string | null
-          score?: number
-          updatedAt?: string | null
-          userId?: string | null
-          userName?: string | null
-          viewCount?: number | null
         }
       }
     }
