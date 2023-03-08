@@ -290,10 +290,10 @@ export const getGithubCommits = async (
 
 type GithubStats = Omit<
   Model['stats']['Row'],
-  'score' | 'userPluginId' | 'id' | 'iconURL' | 'iconURLSelected'
+  'score' | 'user_plugin_login' | 'id' | 'icon_url' | 'icon_url_selected'
 > & {
   score: number;
-  statsElements: any;
+  stat_element: any;
 };
 
 export type DoobooStatsResponse = {
@@ -316,12 +316,12 @@ export type DoobooStatsResponse = {
 const upsertGithubStats = async ({
   login,
   plugin,
-  userPlugin,
+  user_plugin,
   lang = 'en',
 }: {
   login: string;
   plugin: Model['plugins']['Row'];
-  userPlugin: Model['user_plugins']['Row'] | null;
+  user_plugin: Model['user_plugins']['Row'] | null;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
@@ -345,48 +345,48 @@ const upsertGithubStats = async ({
         name: 'TREE',
         score: githubStatus.tree.score,
         description: 'The dooboo default tree stats.',
-        statsElements: githubStatus.tree.statsElements,
+        stat_element: githubStatus.tree.stat_element,
       },
       {
         name: 'FIRE',
         score: githubStatus.fire.score,
         description: 'The dooboo default fire stats.',
-        statsElements: githubStatus.fire.statsElements,
+        stat_element: githubStatus.fire.stat_element,
       },
       {
         name: 'EARTH',
         score: githubStatus.earth.score,
         description: 'The dooboo default earth stats.',
-        statsElements: githubStatus.earth.statsElements,
+        stat_element: githubStatus.earth.stat_element,
       },
       {
         name: 'GOLD',
         score: githubStatus.gold.score,
         description: 'The dooboo default gold stats.',
-        statsElements: githubStatus.gold.statsElements,
+        stat_element: githubStatus.gold.stat_element,
       },
       {
         name: 'WATER',
         score: githubStatus.water.score,
         description: 'The dooboo default water stats.',
-        statsElements: githubStatus.water.statsElements,
+        stat_element: githubStatus.water.stat_element,
       },
       {
         name: 'PERSON',
         score: githubStatus.person.score,
         description: 'The dooboo default person stats.',
-        statsElements: githubStatus.person.statsElements,
+        stat_element: githubStatus.person.stat_element,
       },
     ];
 
-    if (userPlugin) {
+    if (user_plugin) {
       const deleteStatsPromise = supabase
-        .from('Stats')
+        .from('stats')
         .delete()
-        .match({userPluginLogin: userPlugin.login});
+        .match({user_plugin_login: user_plugin.login});
 
-      const deleteTrophiesPromise = supabase.from('Trophy').delete().match({
-        userPluginLogin: userPlugin.login,
+      const deleteTrophiesPromise = supabase.from('trophies').delete().match({
+        user_plugin_login: user_plugin.login,
       });
 
       await Promise.all([deleteStatsPromise, deleteTrophiesPromise]);
@@ -402,14 +402,14 @@ const upsertGithubStats = async ({
 
     const score = Math.round((sum / 6) * 100);
 
-    await supabase.from('UserPlugin').upsert({
+    await supabase.from('user_plugins').upsert({
       login,
-      userName: githubUser.name,
-      avatarUrl: githubUser.avatarUrl,
+      user_name: githubUser.name,
+      avatar_url: githubUser.avatarUrl,
       description: githubUser.bio,
-      pluginId: plugin.id,
+      plugin_id: plugin.id,
       score,
-      githubId: githubUser.id,
+      github_id: githubUser.id,
       json: {
         login: githubUser.login,
         avatarUrl: githubUser.avatarUrl,
@@ -422,22 +422,22 @@ const upsertGithubStats = async ({
     trophies.forEach(async (el) => {
       const trophyScore = el.score as number;
 
-      await supabase.from('Trophy').upsert({
+      await supabase.from('trophies').upsert({
         ...el,
         score: trophyScore,
-        userPluginLogin: login,
+        user_plugin_login: login,
       });
     });
 
     stats.forEach(async (el) => {
       const statScore = el.score as number;
-      const statsElements = el.statsElements as Json;
+      const stat_element = el.stat_element as Json;
 
-      await supabase.from('Stats').upsert({
+      await supabase.from('stats').upsert({
         ...el,
         score: statScore,
-        statsElements: statsElements,
-        userPluginLogin: login,
+        stat_element: stat_element,
+        user_plugin_login: login,
       });
     });
 
@@ -504,15 +504,14 @@ export const getDoobooStats = async ({
       .from('user_plugins')
       .select()
       .match({
-        pluginId: plugin.id,
+        plugin_id: plugin.id,
         login,
       })
       .single();
 
-    const {data: stats} = await supabase
-      .from('Stats')
-      .select('*')
-      .match({userPluginLogin: login});
+    const {data: stats} = await supabase.from('stats').select('*').match({
+      user_plugin_login: login,
+    });
 
     // NOTE: Return the data when user was fetched.
     if (userPlugin && stats?.length === 6) {
@@ -523,8 +522,8 @@ export const getDoobooStats = async ({
             description: el.description,
             score: el.score,
             name: el.name,
-            statsElements: el.statsElements,
-            userPluginLogin: el.userPluginLogin,
+            stat_element: el.stat_element,
+            user_plugin_login: el.user_plugin_login,
           };
         }) || [];
 
@@ -540,41 +539,41 @@ export const getDoobooStats = async ({
           name: tPlugins.tree,
           description: tPlugins.treeDescription,
           score: tree?.score || 0,
-          statsElements: tree?.statsElements,
+          stat_element: tree?.stat_element,
         },
         fire: {
           name: tPlugins.fire,
           description: tPlugins.fireDescription,
           score: fire?.score || 0,
-          statsElements: fire?.statsElements,
+          stat_element: fire?.stat_element,
         },
         earth: {
           name: tPlugins.earth,
           description: tPlugins.earthDescription,
           score: earth?.score || 0,
-          statsElements: earth?.statsElements,
+          stat_element: earth?.stat_element,
         },
         gold: {
           name: tPlugins.gold,
           description: tPlugins.goldDescription,
           score: gold?.score || 0,
-          statsElements: gold?.statsElements,
+          stat_element: gold?.stat_element,
         },
         water: {
           name: tPlugins.water,
           description: tPlugins.waterDescription,
           score: water?.score || 0,
-          statsElements: water?.statsElements,
+          stat_element: water?.stat_element,
         },
         person: {
           name: tPlugins.person,
           description: tPlugins.personDescription,
           score: person?.score || 0,
-          statsElements: person?.statsElements,
+          stat_element: person?.stat_element,
         },
       };
 
-      const updatedAt = new Date(userPlugin?.updatedAt || '');
+      const updatedAt = new Date(userPlugin?.updated_at || '');
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
@@ -582,7 +581,7 @@ export const getDoobooStats = async ({
 
       if (userPlugin.login) {
         await supabase
-          .from('UserPlugin')
+          .from('user_plugins')
           .update({
             viewCount: userPlugin?.viewCount ? userPlugin.viewCount + 1 : 1,
           })
@@ -591,7 +590,7 @@ export const getDoobooStats = async ({
         if (diffHours(updatedAt, today) < 3) {
           upsertGithubStats({
             plugin,
-            userPlugin,
+            user_plugin: userPlugin,
             login,
             lang,
           });
@@ -600,9 +599,9 @@ export const getDoobooStats = async ({
       }
 
       const {data: trophyData} = await supabase
-        .from('Trophy')
+        .from('trophies')
         .select('score, points,type')
-        .eq('userPluginLogin', userPlugin.login);
+        .eq('user_plugin_login', userPlugin.login);
 
       return {
         plugin,
@@ -618,15 +617,15 @@ export const getDoobooStats = async ({
           }) || [],
         json: JSON.parse(JSON.stringify(userPlugin.json)),
         isCachedResult,
-        userName: userPlugin.userName,
-        githubId: userPlugin.githubId,
+        userName: userPlugin.user_name,
+        githubId: userPlugin.github_id,
         score: userPlugin.score,
       };
     }
 
     return await upsertGithubStats({
       plugin,
-      userPlugin,
+      user_plugin: userPlugin,
       login,
       lang,
     });

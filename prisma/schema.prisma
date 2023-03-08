@@ -22,89 +22,90 @@ enum AuthType {
 model news_letters {
   email String @id
 
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  deletedAt DateTime?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
 }
 
 model users {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email       String?
-  name        String?
-  description String?
-  birthday    DateTime?
-  gender      Gender?
-  phone       String?
-  locale      String?
-  certified   Boolean?  @default(false)
-  githubLogin String?   @unique
-  location    String?
-  company     String?
-  blog        String?
-  twitter     String?
-  githubURL   String?
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email        String?
+  name         String?
+  description  String?
+  birthday     DateTime?
+  gender       Gender?
+  phone        String?
+  locale       String?
+  certified    Boolean?  @default(false)
+  github_login String?   @unique
+  location     String?
+  company      String?
+  blog         String?
+  twitter      String?
+  github_url   String?
 
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  deletedAt DateTime?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
 
-  image       images?
-  userPlugins user_plugins[]
+  image        images?
+  user_plugins user_plugins[]
 }
 
 model images {
-  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  thumbUrl     String?
-  thumbUrlHigh String?
-  imageUrl     String?
-  createdAt    DateTime? @default(now())
-  updatedAt    DateTime? @updatedAt
-  deletedAt    DateTime?
+  id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  thumb_url      String?
+  thumb_url_high String?
+  image_url      String?
 
-  userId String? @unique @db.Uuid
-  user   users?  @relation(fields: [userId], references: [id])
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
+
+  user_id String? @unique @db.Uuid
+  user    users?  @relation(fields: [user_id], references: [id])
 }
 
 model user_plugins {
-  login           String    @id
-  githubId        String
-  score           Int       @default(0) @db.SmallInt
-  userName        String?
-  avatarUrl       String?
-  description     String?
-  json            Json?     @db.Json
-  certifiedAt     DateTime?
-  certificationNo Int?
+  login            String    @id
+  github_id        String
+  score            Int       @default(0) @db.SmallInt
+  user_name        String?
+  avatar_url       String?
+  description      String?
+  json             Json?     @db.Json
+  certified_at     DateTime?
+  certification_no Int?
 
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  deletedAt DateTime?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
 
-  user      users?  @relation(fields: [userId], references: [id])
-  userId String? @unique @db.Uuid
+  user    users?  @relation(fields: [user_id], references: [id])
+  user_id String? @unique @db.Uuid
 
-  plugin   plugins? @relation(fields: [pluginId], references: [id])
-  pluginId String? @db.Uuid
+  plugin    plugins? @relation(fields: [plugin_id], references: [id])
+  plugin_id String?
 
   viewCount Int? @default(0)
 
   stats    stats[]
   trophies trophies[]
 
-  @@unique([login, pluginId])
+  @@unique([login, plugin_id])
 }
 
 model plugins {
-  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  apiURL      String
+  id          String  @id
+  api_url     String
   description String?
   json        Json?   @db.Json
 
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  deletedAt DateTime?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
 
-  userPlugins user_plugins[]
+  user_plugins user_plugins[]
 }
 
 model trophies {
@@ -113,23 +114,23 @@ model trophies {
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
 
-  userPlugin      user_plugins? @relation(fields: [userPluginLogin], references: [login])
-  userPluginLogin String?
+  user_plugin       user_plugins? @relation(fields: [user_plugin_login], references: [login])
+  user_plugin_login String?
 
-  @@unique([type, userPluginLogin])
+  @@unique([type, user_plugin_login])
 }
 
 model stats {
-  id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name            String
-  iconURL         String?
-  iconURLSelected String?
-  score           Decimal @db.Decimal(7, 2)
-  description     String?
-  statsElements   Json?   @db.Json
+  id                String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String
+  icon_url          String?
+  icon_url_selected String?
+  score             Decimal @db.Decimal(7, 2)
+  description       String?
+  stat_element      Json?   @db.Json
 
-  userPlugin      user_plugins? @relation(fields: [userPluginLogin], references: [login])
-  userPluginLogin String?
+  user_plugin       user_plugins? @relation(fields: [user_plugin_login], references: [login])
+  user_plugin_login String?
 
-  @@index([userPluginLogin])
+  @@index([user_plugin_login])
 }

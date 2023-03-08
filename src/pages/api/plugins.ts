@@ -21,7 +21,7 @@ export default async function handler(
     case 'POST':
       const supabase = getSupabaseClient();
       const {data} = await supabase
-        .from('Plugin')
+        .from('plugins')
         .select('*')
         .eq('id', id)
         .single();

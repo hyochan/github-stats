@@ -7,7 +7,7 @@ const main = async (): Promise<void> => {
     where: {id: 'dooboo-github'},
     update: {},
     create: {
-      apiURL: 'https://',
+      api_url: 'https://',
       id: 'dooboo-github',
       description: 'Github plugin for dooboo stats',
       json: [

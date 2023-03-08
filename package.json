@@ -11,9 +11,10 @@
     "lint": "next lint",
     "seed": "dotenv -e .env.local -- prisma db seed",
     "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
-    "migrate:deploy": "dotenv -e .env.local -- prisma migrate deploy",
+    "migrate:staging": "dotenv -e .env.local -- prisma migrate deploy",
+    "migrate:prod": "dotenv -e .env.prod -- prisma migrate deploy",
     "generate:prisma": "prisma generate",
-    "generate:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_DOOBOOIO --schema public > src/types/supabase.ts",
+    "generate:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_DOOBOOIO_STAGING --schema public > src/types/supabase.ts",
     "generate": "yarn generate:prisma && yarn generate:supabase",
     "test": "vitest"
   },
