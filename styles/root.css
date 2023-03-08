@@ -77,6 +77,8 @@
 @layer components {
   html,
   body {
+    overflow-x: hidden;
+
     display: flex;
   }
 

@@ -60,7 +60,7 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
         <span
           className={clsx(
             'font-semibold align-middle text-[14px] ml-2',
-            'max-[425px]:hidden',
+            'max-[480px]:hidden',
           )}
         >
           {selected?.domain || ''}
@@ -72,7 +72,7 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
           isOpened
             ? 'opacity-100 visible translate-y-0'
             : 'opacity-0 invisible translate-y-2'
-        } bg-gray6 absolute top-12 right-0 rounded-md transition-all duration-400`}
+        } bg-gray6 absolute top-12 left-0 rounded-md transition-all duration-400`}
         style={{
           boxShadow: '0 1px 8px rgba(0, 0, 0, 0.3)',
         }}

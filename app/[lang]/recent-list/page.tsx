@@ -32,14 +32,13 @@ export default async function Page({
   return (
     <div
       className={clsx(
-        'w-screen h-[calc(100vh-64px)] px-6 bg-paper overflow-hidden bg-black',
+        'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden bg-black',
         'flex flex-col',
       )}
     >
       <H1
         className={clsx(
-          'text-[44px] font-bold',
-          'mt-20 mb-10',
+          'text-[44px] font-bold mt-20 mb-10 mx-6',
           inter.className,
         )}
       >

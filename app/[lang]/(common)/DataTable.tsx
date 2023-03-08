@@ -45,7 +45,8 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               <th
                 key={`${column}-${i}`}
                 className={clsx(
-                  `flex-1 ${i === 0 && 'pl-3'}`,
+                  (i + 1) % 3 === 0 ? 'w-14' : `flex-1 ${i === 0 && 'pl-3'}`,
+                  'items-center flex',
                   column.headerClassName,
                 )}
               >
@@ -57,7 +58,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
       </thead>
       <tbody
         className={clsx(
-          'pl-2 py-1 h-full',
+          'pl-2 py-1 flex-1',
           'flex flex-col justify-center',
           props.classNames?.tBody,
         )}
@@ -73,11 +74,11 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               )}
               onClick={() => onClickRow?.(elm, i)}
             >
-              {columns.map((column) => (
+              {columns.map((column, i) => (
                 <td
                   key={column.id.toString()}
                   className={clsx(
-                    'flex-1',
+                    (i + 1) % 3 === 0 ? 'w-14 pl-2' : 'flex-1',
                     'flex flex-row items-center',
                     column.cellClassName,
                   )}

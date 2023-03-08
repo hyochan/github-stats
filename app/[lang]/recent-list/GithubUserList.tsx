@@ -107,7 +107,8 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'flex-1 bg-paper mb-12 overflow-scroll',
+        'flex-1 bg-paper mb-12 mx-6 overflow-y-scroll',
+        'max-[480px]:mx-0 max-[480px]:mb-0',
         styles.container,
       )}
       onScroll={handleScroll}
