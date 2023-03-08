@@ -68,7 +68,7 @@ CREATE TABLE "user_plugins" (
     "deleted_at" TIMESTAMP(3),
     "user_id" UUID,
     "plugin_id" TEXT,
-    "viewCount" INTEGER DEFAULT 0,
+    "view_count" INTEGER DEFAULT 0,
 
     CONSTRAINT "user_plugins_pkey" PRIMARY KEY ("login")
 );

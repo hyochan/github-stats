@@ -479,13 +479,15 @@ export const getDoobooStats = async ({
   login: string;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
+  login = login.toLowerCase();
+
   const supabase = getSupabaseClient();
+
   const {
     common: tCommon,
     plugins: tPlugins,
     trophies: tTrophies,
   } = await getTranslates(lang);
-  login = login.toLowerCase();
 
   try {
     const PLUGIN_ID = 'dooboo-github';
@@ -600,7 +602,7 @@ export const getDoobooStats = async ({
 
       const {data: trophyData} = await supabase
         .from('trophies')
-        .select('score, points,type')
+        .select('score, points, type')
         .eq('user_plugin_login', userPlugin.login);
 
       return {

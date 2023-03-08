@@ -19,8 +19,8 @@ export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
   const {recentList} = await getTranslates(lang);
-
   const supabase = getSupabaseClient();
+
   const {data: plugin} = await supabase
     .from('plugins')
     .select('*')
