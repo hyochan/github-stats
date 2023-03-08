@@ -37,7 +37,7 @@ export const getGithubEarthScore = (
   return {
     name: 'EARTH',
     score: score / 100,
-    statsElements: [
+    stat_element: [
       {
         key: 'COMMITS',
         name: 'Commits',

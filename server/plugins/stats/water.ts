@@ -10,7 +10,7 @@ export const getGithubWaterScore = (githubUser: UserGraph): PluginValue => {
     return {
       name: 'Water',
       score: 0,
-      statsElements: [],
+      stat_element: [],
     };
   }
 
@@ -88,7 +88,7 @@ export const getGithubWaterScore = (githubUser: UserGraph): PluginValue => {
   return {
     name: 'WATER',
     score: score / 100,
-    statsElements: [
+    stat_element: [
       {
         key: 'FOLLOWERS',
         name: 'Followers',

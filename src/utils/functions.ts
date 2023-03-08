@@ -68,25 +68,25 @@ export const getUserPlugins = async ({
   const supabase = getSupabaseClient();
 
   const {data: userPlugins} = await supabase
-    .from('UserPlugin')
+    .from('user_plugins')
     .select('*')
-    .match({pluginId: 'dooboo-github'})
-    .order('createdAt', {ascending: false})
-    .lt('createdAt', dateStr?.toLocaleString())
+    .match({plugin_id: 'dooboo-github'})
+    .order('created_at', {ascending: false})
+    .lt('created_at', dateStr?.toLocaleString())
     .limit(take || 20);
 
   const users = (userPlugins || [])
-    .filter((user) => user.githubId !== null)
+    .filter((user) => user.github_id !== null)
     .map((user) => {
       const tierName = getTierName(user.score || 0, plugin.json);
 
       return {
         login: user.login,
-        githubId: user.githubId,
+        githubId: user.github_id,
         score: user.score,
-        avatarUrl: user.avatarUrl,
+        avatarUrl: user.avatar_url,
         tierName,
-        createdAt: <string>user.createdAt,
+        createdAt: <string>user.created_at,
       };
     });
 

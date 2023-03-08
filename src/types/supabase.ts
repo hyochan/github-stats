@@ -43,115 +43,115 @@ export interface Database {
       }
       images: {
         Row: {
-          createdAt: string | null
-          deletedAt: string | null
+          created_at: string | null
+          deleted_at: string | null
           id: string
-          imageUrl: string | null
-          thumbUrl: string | null
-          thumbUrlHigh: string | null
-          updatedAt: string | null
-          userId: string | null
+          image_url: string | null
+          thumb_url: string | null
+          thumb_url_high: string | null
+          updated_at: string | null
+          user_id: string | null
         }
         Insert: {
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           id?: string
-          imageUrl?: string | null
-          thumbUrl?: string | null
-          thumbUrlHigh?: string | null
-          updatedAt?: string | null
-          userId?: string | null
+          image_url?: string | null
+          thumb_url?: string | null
+          thumb_url_high?: string | null
+          updated_at?: string | null
+          user_id?: string | null
         }
         Update: {
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           id?: string
-          imageUrl?: string | null
-          thumbUrl?: string | null
-          thumbUrlHigh?: string | null
-          updatedAt?: string | null
-          userId?: string | null
+          image_url?: string | null
+          thumb_url?: string | null
+          thumb_url_high?: string | null
+          updated_at?: string | null
+          user_id?: string | null
         }
       }
       news_letters: {
         Row: {
-          createdAt: string | null
-          deletedAt: string | null
+          created_at: string | null
+          deleted_at: string | null
           email: string
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           email: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           email?: string
-          updatedAt?: string | null
+          updated_at?: string | null
         }
       }
       plugins: {
         Row: {
-          apiURL: string
-          createdAt: string | null
-          deletedAt: string | null
+          api_url: string
+          created_at: string | null
+          deleted_at: string | null
           description: string | null
           id: string
           json: Json | null
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
-          apiURL: string
-          createdAt?: string | null
-          deletedAt?: string | null
+          api_url: string
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
           id?: string
           json?: Json | null
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
-          apiURL?: string
-          createdAt?: string | null
-          deletedAt?: string | null
+          api_url?: string
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
           id?: string
           json?: Json | null
-          updatedAt?: string | null
+          updated_at?: string | null
         }
       }
       stats: {
         Row: {
           description: string | null
-          iconURL: string | null
-          iconURLSelected: string | null
+          icon_url: string | null
+          icon_url_selected: string | null
           id: string
           name: string
           score: number
-          statsElements: Json | null
-          userPluginLogin: string | null
+          stat_element: Json | null
+          user_plugin_login: string | null
         }
         Insert: {
           description?: string | null
-          iconURL?: string | null
-          iconURLSelected?: string | null
+          icon_url?: string | null
+          icon_url_selected?: string | null
           id?: string
           name: string
           score: number
-          statsElements?: Json | null
-          userPluginLogin?: string | null
+          stat_element?: Json | null
+          user_plugin_login?: string | null
         }
         Update: {
           description?: string | null
-          iconURL?: string | null
-          iconURLSelected?: string | null
+          icon_url?: string | null
+          icon_url_selected?: string | null
           id?: string
           name?: string
           score?: number
-          statsElements?: Json | null
-          userPluginLogin?: string | null
+          stat_element?: Json | null
+          user_plugin_login?: string | null
         }
       }
       trophies: {
@@ -160,73 +160,73 @@ export interface Database {
           points: number
           score: number
           type: string
-          userPluginLogin: string | null
+          user_plugin_login: string | null
         }
         Insert: {
           id?: string
           points?: number
           score: number
           type: string
-          userPluginLogin?: string | null
+          user_plugin_login?: string | null
         }
         Update: {
           id?: string
           points?: number
           score?: number
           type?: string
-          userPluginLogin?: string | null
+          user_plugin_login?: string | null
         }
       }
       user_plugins: {
         Row: {
-          avatarUrl: string | null
-          certificationNo: number | null
-          certifiedAt: string | null
-          createdAt: string | null
-          deletedAt: string | null
+          avatar_url: string | null
+          certification_no: number | null
+          certified_at: string | null
+          created_at: string | null
+          deleted_at: string | null
           description: string | null
-          githubId: string
+          github_id: string
           json: Json | null
           login: string
-          pluginId: string | null
+          plugin_id: string | null
           score: number
-          updatedAt: string | null
-          userId: string | null
-          userName: string | null
+          updated_at: string | null
+          user_id: string | null
+          user_name: string | null
           viewCount: number | null
         }
         Insert: {
-          avatarUrl?: string | null
-          certificationNo?: number | null
-          certifiedAt?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
+          avatar_url?: string | null
+          certification_no?: number | null
+          certified_at?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
-          githubId: string
+          github_id: string
           json?: Json | null
           login: string
-          pluginId?: string | null
+          plugin_id?: string | null
           score?: number
-          updatedAt?: string | null
-          userId?: string | null
-          userName?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          user_name?: string | null
           viewCount?: number | null
         }
         Update: {
-          avatarUrl?: string | null
-          certificationNo?: number | null
-          certifiedAt?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
+          avatar_url?: string | null
+          certification_no?: number | null
+          certified_at?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
-          githubId?: string
+          github_id?: string
           json?: Json | null
           login?: string
-          pluginId?: string | null
+          plugin_id?: string | null
           score?: number
-          updatedAt?: string | null
-          userId?: string | null
-          userName?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          user_name?: string | null
           viewCount?: number | null
         }
       }
@@ -236,60 +236,60 @@ export interface Database {
           blog: string | null
           certified: boolean | null
           company: string | null
-          createdAt: string | null
-          deletedAt: string | null
+          created_at: string | null
+          deleted_at: string | null
           description: string | null
           email: string | null
           gender: Database["public"]["Enums"]["Gender"] | null
-          githubLogin: string | null
-          githubURL: string | null
+          github_login: string | null
+          github_url: string | null
           id: string
           locale: string | null
           location: string | null
           name: string | null
           phone: string | null
           twitter: string | null
-          updatedAt: string | null
+          updated_at: string | null
         }
         Insert: {
           birthday?: string | null
           blog?: string | null
           certified?: boolean | null
           company?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
           email?: string | null
           gender?: Database["public"]["Enums"]["Gender"] | null
-          githubLogin?: string | null
-          githubURL?: string | null
+          github_login?: string | null
+          github_url?: string | null
           id?: string
           locale?: string | null
           location?: string | null
           name?: string | null
           phone?: string | null
           twitter?: string | null
-          updatedAt?: string | null
+          updated_at?: string | null
         }
         Update: {
           birthday?: string | null
           blog?: string | null
           certified?: boolean | null
           company?: string | null
-          createdAt?: string | null
-          deletedAt?: string | null
+          created_at?: string | null
+          deleted_at?: string | null
           description?: string | null
           email?: string | null
           gender?: Database["public"]["Enums"]["Gender"] | null
-          githubLogin?: string | null
-          githubURL?: string | null
+          github_login?: string | null
+          github_url?: string | null
           id?: string
           locale?: string | null
           location?: string | null
           name?: string | null
           phone?: string | null
           twitter?: string | null
-          updatedAt?: string | null
+          updated_at?: string | null
         }
       }
     }
