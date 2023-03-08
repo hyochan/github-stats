@@ -6,8 +6,6 @@ export type Json =
   | { [key: string]: Json }
   | Json[]
 
-export type Model = Database['public']['Tables'];
-
 export interface Database {
   public: {
     Tables: {
