@@ -26,7 +26,7 @@ export default async function handler(
       const supabase = getSupabaseClient();
 
       const {data: plugin} = await supabase
-        .from('Plugin')
+        .from('plugins')
         .select('*')
         .eq('id', pluginId)
         .single();

@@ -61,7 +61,7 @@ export const getUserPlugins = async ({
   take = 20,
   dateStr = new Date().toISOString(),
 }: {
-  plugin: Model['Plugin']['Row'];
+  plugin: Model['plugins']['Row'];
   take?: number;
   dateStr?: string;
 }): Promise<PluginUser[]> => {
