@@ -3,7 +3,7 @@ import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
 import type {GithubUser} from '../plugins/types';
 import type {Json} from '../../src/types/supabase';
 import type {Locale} from '../../src/i18n';
-import type {Model} from '../../src/types/utils';
+import type {Model} from '../../src/types/types';
 import type {PluginTrophy} from '../plugins/trophies';
 import type {TopLanguage} from '../plugins/topLanguages';
 import axios from 'axios';

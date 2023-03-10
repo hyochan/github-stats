@@ -6,10 +6,7 @@ import type {ReactElement, ReactNode} from 'react';
 import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
 import RootProvider from '../../src/components/RootProvider';
-import SupabaseListener from '../../src/components/SupabaseListener';
-import SupabaseProvider from '../../src/components/SupabaseProvider';
 import clsx from 'clsx';
-import {getSupabaseServerComponentClient} from '../../server/supabaseServerClient';
 import {getTranslates} from '../../src/localization';
 
 type Props = {
@@ -18,16 +15,10 @@ type Props = {
 };
 
 export default async function RootLayout(props: Props): Promise<ReactElement> {
-  const supabase = getSupabaseServerComponentClient();
-
   const {
     params: {lang},
     children,
   } = props;
-
-  const {
-    data: {session},
-  } = await supabase.auth.getSession();
 
   const {langs, nav} = await getTranslates(lang);
 
@@ -42,21 +33,17 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
           <main
             className={clsx('text-center flex-1 self-stretch', 'flex flex-col')}
           >
-            <SupabaseProvider>
-              <SupabaseListener serverAccessToken={session?.access_token}>
-                <Header
-                  t={nav}
-                  lang={lang}
-                  langs={{
-                    en: langs.en,
-                    ko: langs.ko,
-                  }}
-                />
-                <div className={clsx('flex-1 self-stretch', 'flex')}>
-                  {children}
-                </div>
-              </SupabaseListener>
-            </SupabaseProvider>
+            <Header
+              t={nav}
+              lang={lang}
+              langs={{
+                en: langs.en,
+                ko: langs.ko,
+              }}
+            />
+            <div className={clsx('flex-1 self-stretch', 'flex')}>
+              {children}
+            </div>
           </main>
         </RootProvider>
       </body>

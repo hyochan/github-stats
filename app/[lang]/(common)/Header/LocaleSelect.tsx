@@ -3,7 +3,7 @@
 import type {ChangeEventHandler, ReactElement} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 
-import type {TupleToUnion} from '~/types/utils';
+import type {TupleToUnion} from '~/types/types';
 import clsx from 'clsx';
 import type {i18n} from '~/i18n';
 import {useLocaleContext} from '../../../../src/components/LocaleProvider';

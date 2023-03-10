@@ -13,7 +13,7 @@ import type {ReactElement} from 'react';
 import SwitchToggle from './SwitchToggle';
 import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
-import {getSupabaseBrowserClient} from '../../../../src/components/SupabaseProvider';
+import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
 
 const inter = Inter({subsets: ['latin']});
 
