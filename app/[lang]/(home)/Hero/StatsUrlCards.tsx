@@ -7,6 +7,7 @@ import type {PluginType} from '../Home';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../../src/localization';
 import {track} from '@amplitude/analytics-browser';
+import {useRouter} from 'next/navigation';
 import {useSnackbar} from 'react-simple-snackbar';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
@@ -25,6 +26,7 @@ export default function StatsUrlCard({
   svgStatsURL,
   svgTrophiesURL,
 }: Props): ReactElement {
+  const router = useRouter();
   const [openSnackbar] = useSnackbar();
 
   const copyURLToClipboard = (type: 'stats' | 'trophies'): void => {
@@ -76,9 +78,7 @@ export default function StatsUrlCard({
       <Button
         className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
         text={t.findOutMore}
-        onClick={() => {
-          window.open(`${login}`, '_blank');
-        }}
+        onClick={() => router.push('/sign-in')}
       />
     </div>
   );

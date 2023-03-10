@@ -1068,6 +1068,10 @@ input[type='search']::-webkit-search-decoration,
   margin-bottom: 3.5rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -1176,10 +1180,6 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 80px;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
 .flex {
   display: flex;
 }
@@ -1202,6 +1202,10 @@ input[type='search']::-webkit-search-decoration,
 
 .h-16 {
   height: 4rem;
+}
+
+.h-20 {
+  height: 5rem;
 }
 
 .h-5 {
@@ -1243,14 +1247,6 @@ input[type='search']::-webkit-search-decoration,
 .h-max {
   height: -moz-max-content;
   height: max-content;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-20 {
-  height: 5rem;
 }
 
 .min-h-\[400px\] {

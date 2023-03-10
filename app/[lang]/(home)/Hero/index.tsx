@@ -124,7 +124,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
             )}
           >
             <Button
-              isLoading={formState.isSubmitting}
+              loading={formState.isSubmitting}
               type="submit"
               className={clsx(
                 'bg-transparent border-0 text-center max-w-[100px] p-2',
