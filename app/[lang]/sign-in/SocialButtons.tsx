@@ -28,6 +28,9 @@ export default function SocialButtons({
       onClick: async () => {
         await supabase.auth.signInWithOAuth({
           provider: 'github',
+          options: {
+            redirectTo: window.location.origin,
+          },
         });
       },
     },
