@@ -71,6 +71,15 @@
     "successEmailSubscription": "Thank you for subscribing to our newsletter",
     "serverResponseError": "Failed to fetch information. Please refresh or try again later"
   },
+  "signIn": {
+    "signInWithGithub": "Sign in with Github",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithApple": "Sign in with Apple",
+    "signIn": "Sign in",
+    "byProceedingToTheNextStep": "By proceeding to the next step, you agree to the {termsOfService} and {privacyPolicy}",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy"
+  },
   "recentList": {
     "title": "Recent List",
     "githubUsername": "GitHub username",

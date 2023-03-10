@@ -7,7 +7,7 @@ import {H1} from '../../../../src/components/Typography';
 import {Inter} from '@next/font/google';
 import Link from 'next/link';
 import LocaleSwitcher from './LocaleSelect';
-import Logo from './Logo';
+import Logo from 'public/assets/logo.svg';
 import type {ReactElement} from 'react';
 import SwitchToggle from './SwitchToggle';
 import clsx from 'clsx';
@@ -49,7 +49,7 @@ export default function Header({navLinks, lang, langs}: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Logo isDark={isDark} />
+          <Logo className="h-5" />
           <Link href={`${lang}/`}>
             <H1
               className={clsx(

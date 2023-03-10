@@ -101,7 +101,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
                 'flex items-center justify-center',
               )}
               type="submit"
-              isLoading={isSubmitting}
+              loading={isSubmitting}
               text={<ArrowRightIcon size={24} className="pt-1" />}
             />
           </div>

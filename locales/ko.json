@@ -80,6 +80,15 @@
     "successEmailSubscription": "뉴스레터를 구독해 주셔서 감사합니다",
     "serverResponseError": "정보를 불러오지 못했습니다. 새로고침 혹은 잠시 후 다시 시도해주세요"
   },
+  "signIn": {
+    "signInWithGithub": "Github로 계속하기",
+    "signInWithGoogle": "Google로 계속하기",
+    "signInWithApple": "Apple로 계속하기",
+    "signIn": "로그인",
+    "byProceedingToTheNextStep": "다음 단계로 진행과 동시에 {termsOfService} 및 {privacyPolicy}에 동의하는 것으로 간주합니다",
+    "termsOfService": "서비스 약관",
+    "privacyPolicy": "개인 정보 보호 정책"
+  },
   "recentList": {
     "title": "최근 리스트",
     "githubUsername": "깃허브 유저명",

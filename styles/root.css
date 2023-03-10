@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+ font-family: 'doobooui';
+ src: url('/fonts/doobooui.ttf?ixpxfq') format('truetype');
+ font-weight: normal;
+ font-style: normal;
+ font-display: block;
+}
+
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
@@ -112,6 +120,12 @@
   }
   .bg-disabled {
     @apply bg-disabled-light dark:bg-disabled-dark;
+  }
+  .bg-modal {
+    @apply bg-modal-light dark:bg-modal-dark;
+  }
+  .bg-modal-background {
+    @apply bg-modal-background-light dark:bg-modal-background-dark;
   }
 
   .text-basic {

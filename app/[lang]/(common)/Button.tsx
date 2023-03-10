@@ -1,40 +1,46 @@
 import type {CSSProperties, FC, ReactElement} from 'react';
 
-import Image from 'next/image';
+import {Inter} from '@next/font/google';
+import {cloneElement} from 'react';
 import clsx from 'clsx';
+
+const inter = Inter({subsets: ['latin']});
 
 interface ButtonProps {
   testID?: string;
   id?: string;
   className?: string;
+  classNames?: {
+    text?: string;
+  };
   style?: CSSProperties;
-  imgSrc?: string;
+  startElement?: ReactElement;
   text?: string | ReactElement;
   onClick?: () => void;
-  isLoading?: boolean;
+  loading?: boolean;
   type?: 'submit' | 'reset' | 'button';
 }
 
 const Button: FC<ButtonProps> = ({
   testID,
   onClick,
-  imgSrc,
   text,
   className,
+  classNames,
   style,
-  isLoading,
+  loading,
   type = 'button',
+  startElement,
 }) => {
   return (
     <button
       data-testid={testID}
       className={`
-        
-        border rounded-md cursor-pointer
+        border rounded-md cursor-pointer p-3 border-border-light dark:border-border-dark
         opacity-100 transition duration-200
         flex items-center justify-center
         ${
-          isLoading
+          loading
             ? 'opacity-50 cursor-not-allowed'
             : 'hover:opacity-50 active:opacity-50'
         }
@@ -43,9 +49,9 @@ const Button: FC<ButtonProps> = ({
       style={style}
       onClick={onClick}
       type={type}
-      disabled={isLoading}
+      disabled={loading}
     >
-      {isLoading ? (
+      {loading ? (
         <div className="self-center border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin" />
       ) : (
         <div
@@ -54,16 +60,25 @@ const Button: FC<ButtonProps> = ({
             'flex flex-row justify-center items-center',
           )}
         >
-          {imgSrc && (
-            <Image
-              src={imgSrc}
-              alt="logo"
-              width={24}
-              height={24}
-              className="absolute left-4 w-6 h-6 object-contain"
-            />
-          )}
-          <span className="body3 m-auto">{text}</span>
+          <>
+            {startElement
+              ? cloneElement(startElement, {
+                  style: {
+                    position: 'absolute',
+                    left: 0,
+                  },
+                })
+              : null}
+            <span
+              className={clsx(
+                'm-auto body2',
+                inter.className,
+                classNames?.text,
+              )}
+            >
+              {text}
+            </span>
+          </>
         </div>
       )}
     </button>
