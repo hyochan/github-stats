@@ -1257,6 +1257,10 @@ input[type='search']::-webkit-search-decoration,
   min-height: 100vh;
 }
 
+.min-h-\[480px\] {
+  min-height: 480px;
+}
+
 .w-11 {
   width: 2.75rem;
 }
@@ -1690,6 +1694,10 @@ input[type='search']::-webkit-search-decoration,
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pb-16 {
+  padding-bottom: 4rem;
 }
 
 .text-left {
