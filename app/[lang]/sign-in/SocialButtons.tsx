@@ -29,7 +29,7 @@ export default function SocialButtons({
         await supabase.auth.signInWithOAuth({
           provider: 'github',
           options: {
-            redirectTo: process.env.NEXTAUTH_URL,
+            redirectTo: process.env.NEXT_PUBLIC_ROOT_URL,
           },
         });
       },
