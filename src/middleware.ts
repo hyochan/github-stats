@@ -1,6 +1,7 @@
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
+import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 // import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
 import {match as matchLocale} from '@formatjs/intl-localematcher';
@@ -27,9 +28,7 @@ export async function middleware(
 
   const res = NextResponse.next();
 
-  // TODO: Below is needed in the tutorial but not actually needed when tried.
-  // const supabase = createMiddlewareSupabaseClient({req, res});
-  // await supabase.auth.getSession();
+  createMiddlewareSupabaseClient({req, res});
 
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // If you have one

@@ -1,12 +1,13 @@
 'use client';
 
 // import Apple from 'public/assets/apple.svg';
+// import Google from 'public/assets/google.svg';
 import Button from '../(common)/Button';
 import Github from 'public/assets/github.svg';
-import Google from 'public/assets/google.svg';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../src/localization';
 import {getSupabaseBrowserClient} from '../../../src/components/SupabaseProvider';
+import {useRouter} from 'next/navigation';
 
 export default function SocialButtons({
   t,
@@ -20,6 +21,7 @@ export default function SocialButtons({
   };
 
   const supabase = getSupabaseBrowserClient();
+  const router = useRouter();
 
   const socialButtons: SocialButton[] = [
     {
@@ -29,13 +31,15 @@ export default function SocialButtons({
         await supabase.auth.signInWithOAuth({
           provider: 'github',
         });
+
+        router.refresh();
       },
     },
-    {
-      text: t.signInWithGoogle,
-      startElement: <Google className="h-6" />,
-      onClick: () => {},
-    },
+    // {
+    //   text: t.signInWithGoogle,
+    //   startElement: <Google className="h-6" />,
+    //   onClick: () => {},
+    // },
     // {
     //   text: t.signInWithApple,
     //   startElement: <Apple className="h-6 body2" />,

@@ -13,7 +13,7 @@ export const getSupabaseBrowserClient = (): SupabaseClient<
   Database['public']
 > =>
   createBrowserSupabaseClient({
-    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY,
+    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
   });
 
@@ -35,6 +35,7 @@ export default function SupabaseProvider({
 
 export const useSupabase = (): SupabaseContext => {
   let context = useContext(Context);
+
   if (context === undefined) {
     throw new Error('useSupabase must be used inside SupabaseProvider');
   } else {

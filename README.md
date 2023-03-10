@@ -34,7 +34,7 @@ Supabase database url. `NEXT_PUBLIC_` prefix is needed because this is used in b
 </details>
 
 <details>
-<summary>SUPABASE_API_KEY</summary>
+<summary>NEXT_PUBLIC_SUPABASE_ANON_KEY</summary>
 
 Supabase api key. `NEXT_PUBLIC_` prefix is needed because this is used in both browser and server.
 </details>

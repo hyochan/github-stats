@@ -5,7 +5,6 @@ import type {ReactElement, ReactNode} from 'react';
 
 import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
-import type {NavLink} from './(common)/Header';
 import RootProvider from '../../src/components/RootProvider';
 import SupabaseListener from '../../src/components/SupabaseListener';
 import SupabaseProvider from '../../src/components/SupabaseProvider';
@@ -32,18 +31,6 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
 
   const {langs, nav} = await getTranslates(lang);
 
-  const navLinks: NavLink[] = [
-    {
-      name: nav.recentList,
-      path: '/recent-list',
-    },
-    // TODO: remove this comment when the feature is ready.
-    // {
-    //   name: nav.certifiedUsers,
-    //   path: '/certifiedUsers',
-    // },
-  ];
-
   return (
     <html lang={lang} className="dark">
       <title>doobooio</title>
@@ -55,21 +42,21 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
           <main
             className={clsx('text-center flex-1 self-stretch', 'flex flex-col')}
           >
-            <Header
-              navLinks={navLinks}
-              lang={lang}
-              langs={{
-                en: langs.en,
-                ko: langs.ko,
-              }}
-            />
-            <div className={clsx('flex-1 self-stretch', 'flex')}>
-              <SupabaseProvider>
-                <SupabaseListener serverAccessToken={session?.access_token}>
+            <SupabaseProvider>
+              <SupabaseListener serverAccessToken={session?.access_token}>
+                <Header
+                  t={nav}
+                  lang={lang}
+                  langs={{
+                    en: langs.en,
+                    ko: langs.ko,
+                  }}
+                />
+                <div className={clsx('flex-1 self-stretch', 'flex')}>
                   {children}
-                </SupabaseListener>
-              </SupabaseProvider>
-            </div>
+                </div>
+              </SupabaseListener>
+            </SupabaseProvider>
           </main>
         </RootProvider>
       </body>

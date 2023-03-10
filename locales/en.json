@@ -1,7 +1,9 @@
 {
   "nav": {
     "recentList": "Recent List",
-    "certifiedUsers": "Certified Users"
+    "certifiedUsers": "Certified Users",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
   },
   "langs": {
     "en": "English",
