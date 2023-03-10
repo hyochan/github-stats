@@ -9,7 +9,7 @@ import type {TopLanguage} from '../plugins/topLanguages';
 import axios from 'axios';
 import {diffHours} from '../plugins/pluginUtils';
 import {getGithubStatus} from '../plugins';
-import {getSupabaseClient} from '../utils';
+import {getSupabaseClient} from '../supabaseClient';
 import {getTopLanguages} from '../plugins/topLanguages';
 import {getTranslates} from '../../src/localization';
 import {getTrophies} from '../plugins/trophies';

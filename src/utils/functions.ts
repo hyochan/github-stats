@@ -1,4 +1,4 @@
-import {getSupabaseClient} from '../../server/utils';
+import {getSupabaseClient} from '../../server/supabaseClient';
 import type {Model} from '../types/utils';
 
 export const isEmptyObject = (param: any): boolean =>

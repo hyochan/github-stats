@@ -28,15 +28,15 @@ You do not need to set this variable in [Vercel](https://vercel.com).
 </details>
 
 <details>
-<summary>SUPABASE_URL</summary>
+<summary>NEXT_PUBLIC_SUPABASE_URL</summary>
 
-Supabase database url.
+Supabase database url. `NEXT_PUBLIC_` prefix is needed because this is used in both browser and server.
 </details>
 
 <details>
 <summary>SUPABASE_API_KEY</summary>
 
-Supabase api key.
+Supabase api key. `NEXT_PUBLIC_` prefix is needed because this is used in both browser and server.
 </details>
 
 <details>

@@ -6,6 +6,7 @@ import Github from 'public/assets/github.svg';
 import Google from 'public/assets/google.svg';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../src/localization';
+import {getSupabaseBrowserClient} from '../../../src/components/SupabaseProvider';
 
 export default function SocialButtons({
   t,
@@ -18,11 +19,17 @@ export default function SocialButtons({
     onClick?: () => void;
   };
 
+  const supabase = getSupabaseBrowserClient();
+
   const socialButtons: SocialButton[] = [
     {
       text: t.signInWithGithub,
       startElement: <Github className="h-6 body2" />,
-      onClick: () => {},
+      onClick: async () => {
+        await supabase.auth.signInWithOAuth({
+          provider: 'github',
+        });
+      },
     },
     {
       text: t.signInWithGoogle,

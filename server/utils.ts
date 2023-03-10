@@ -2,28 +2,13 @@ import type {Locale} from '../src/i18n';
 import {i18n} from '../src/i18n';
 
 import type {NextApiRequest} from 'next';
-import type {SupabaseClient} from '@supabase/supabase-js';
 import {acceptLanguage} from 'next/dist/server/accept-header';
-import {assert} from '../src/utils/assert';
-import {createClient} from '@supabase/supabase-js';
-import type {Database} from '../src/types/supabase';
 import {init} from '@amplitude/analytics-node';
 
-const {SUPABASE_URL, SUPABASE_API_KEY, AMPLITUDE_KEY} = process.env;
+const {AMPLITUDE_KEY} = process.env;
 
 export const initNodeAmplitude = (): void => {
   init(<string>AMPLITUDE_KEY);
-};
-
-export const getSupabaseClient = (): SupabaseClient<
-  Database,
-  'public',
-  Database['public']
-> => {
-  assert(SUPABASE_URL, 'SUPABASE_URL is not defined');
-  assert(SUPABASE_API_KEY, 'SUPABASE_API_KEY is not defined');
-
-  return createClient<Database>(SUPABASE_URL, SUPABASE_API_KEY);
 };
 
 export function currentLocale(req: NextApiRequest): Locale {

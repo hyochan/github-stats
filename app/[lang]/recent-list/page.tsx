@@ -5,7 +5,7 @@ import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import clsx from 'clsx';
-import {getSupabaseClient} from '../../../server/utils';
+import {getSupabaseClient} from '../../../server/supabaseClient';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
 
