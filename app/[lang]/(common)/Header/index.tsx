@@ -2,16 +2,18 @@
 
 import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import {useEffect, useState} from 'react';
+import {usePathname, useRouter} from 'next/navigation';
 
+import Button from '../Button';
 import {H1} from '../../../../src/components/Typography';
 import {Inter} from '@next/font/google';
 import Link from 'next/link';
-import LocaleSwitcher from './LocaleSelect';
 import Logo from 'public/assets/logo.svg';
 import type {ReactElement} from 'react';
 import SwitchToggle from './SwitchToggle';
+import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
-import {usePathname} from 'next/navigation';
+import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -21,16 +23,44 @@ export type NavLink = {
 };
 
 type Props = {
-  navLinks: NavLink[];
+  t: Translates['nav'];
   lang: 'en' | 'ko';
   langs: {en: string; ko: string};
 };
 
-export default function Header({navLinks, lang, langs}: Props): ReactElement {
-  const [isDark, setIsDark] = useState(false);
+export default function Header({t, lang}: Props): ReactElement {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = getSupabaseBrowserClient();
+
+  const [isDark, setIsDark] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    const {
+      data: {subscription},
+    } = supabase.auth.onAuthStateChange((_, session) => {
+      setSignedIn(!!session?.access_token);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   useEffect(() => setIsDark(isDarkMode()), []);
+
+  const navLinks: NavLink[] = [
+    {
+      name: t.recentList,
+      path: '/recent-list',
+    },
+    // TODO: Remove this comment when the feature is ready.
+    // {
+    //   name: nav.certifiedUsers,
+    //   path: '/certifiedUsers',
+    // },
+  ];
 
   return (
     <header
@@ -90,7 +120,23 @@ export default function Header({navLinks, lang, langs}: Props): ReactElement {
         </nav>
       </div>
       <div className="flex flex-row items-center">
-        <LocaleSwitcher languages={langs} />
+        {/* <LocaleSwitcher languages={langs} /> */}
+        <Button
+          text={signedIn ? t.signOut : t.signIn}
+          className="mr-2 py-2 px-3"
+          classNames={{
+            text: 'body3',
+          }}
+          onClick={() => {
+            if (signedIn) {
+              supabase.auth.signOut();
+
+              return;
+            }
+
+            router.push(`/sign-in`);
+          }}
+        />
         <div className="w-[8px]" />
         <SwitchToggle
           isDark={isDark}

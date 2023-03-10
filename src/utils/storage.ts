@@ -1,4 +1,4 @@
-import {getSupabaseClient} from '../../server/utils';
+import {getSupabaseClient} from '../../server/supabaseClient';
 
 export const uploadFileToSupabase = async ({
   file,

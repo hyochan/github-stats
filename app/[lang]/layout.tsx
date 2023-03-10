@@ -1,10 +1,10 @@
+import 'server-only';
 import '../../styles/output.css';
 
 import type {ReactElement, ReactNode} from 'react';
 
 import Header from './(common)/Header';
 import type {Locale} from '~/i18n';
-import type {NavLink} from './(common)/Header';
 import RootProvider from '../../src/components/RootProvider';
 import clsx from 'clsx';
 import {getTranslates} from '../../src/localization';
@@ -22,18 +22,6 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
 
   const {langs, nav} = await getTranslates(lang);
 
-  const navLinks: NavLink[] = [
-    {
-      name: nav.recentList,
-      path: '/recent-list',
-    },
-    // TODO: remove this comment when the feature is ready.
-    // {
-    //   name: nav.certifiedUsers,
-    //   path: '/certifiedUsers',
-    // },
-  ];
-
   return (
     <html lang={lang} className="dark">
       <title>doobooio</title>
@@ -46,7 +34,7 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
             className={clsx('text-center flex-1 self-stretch', 'flex flex-col')}
           >
             <Header
-              navLinks={navLinks}
+              t={nav}
               lang={lang}
               langs={{
                 en: langs.en,

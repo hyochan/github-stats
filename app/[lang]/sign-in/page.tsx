@@ -27,12 +27,12 @@ export default async function Page({
     >
       <div
         className={clsx(
-          'bg-modal w-[480px] min-h-[480px] rounded-2xl px-12 py-16',
+          'bg-modal w-[480px] rounded-2xl px-12 py-16',
           'flex flex-col items-center justify-center',
         )}
       >
         <Logo className="h-20 mb-2" />
-        <p className={clsx('text-brand pb-16', inter.className)}>dooboo.io</p>
+        <p className={clsx('text-brand pb-28', inter.className)}>dooboo.io</p>
         <SocialButtons t={signIn} />
       </div>
     </div>

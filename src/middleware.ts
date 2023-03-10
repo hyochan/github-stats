@@ -1,6 +1,8 @@
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
+import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
+// import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
 import {match as matchLocale} from '@formatjs/intl-localematcher';
 
@@ -19,8 +21,14 @@ function getLocale(request: NextRequest): string | undefined {
   });
 }
 
-export function middleware(request: NextRequest): NextResponse | undefined {
-  let pathname = request.nextUrl.pathname;
+export async function middleware(
+  req: NextRequest,
+): Promise<NextResponse | undefined> {
+  let pathname = req.nextUrl.pathname;
+
+  const res = NextResponse.next();
+
+  createMiddlewareSupabaseClient({req, res});
 
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // If you have one
@@ -41,17 +49,13 @@ export function middleware(request: NextRequest): NextResponse | undefined {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    const origin = new URL(request.url).origin;
+    const locale = getLocale(req);
+    const origin = new URL(req.url).origin;
 
     return NextResponse.redirect(`${origin}/${locale}/${pathname}`);
-
-    // e.g. incoming request is /products
-    // The new URL is now /en-US/products
-    return NextResponse.redirect(
-      new URL(`/${locale}/${pathname}`, request.url),
-    );
   }
+
+  return res;
 }
 
 export const config = {

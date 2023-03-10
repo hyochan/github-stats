@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {getSupabaseClient} from '../../../server/utils';
+import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {PluginUser} from '../../utils/functions';
 import {getUserPlugins} from '../../utils/functions';
 

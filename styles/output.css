@@ -1253,10 +1253,6 @@ input[type='search']::-webkit-search-decoration,
   min-height: 400px;
 }
 
-.min-h-\[480px\] {
-  min-height: 480px;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1676,8 +1672,8 @@ input[type='search']::-webkit-search-decoration,
   padding-bottom: 8px;
 }
 
-.pb-16 {
-  padding-bottom: 4rem;
+.pb-28 {
+  padding-bottom: 7rem;
 }
 
 .pl-2 {
