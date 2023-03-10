@@ -1,6 +1,6 @@
 'use client';
 
-import Apple from 'public/assets/apple.svg';
+// import Apple from 'public/assets/apple.svg';
 import Button from '../(common)/Button';
 import Github from 'public/assets/github.svg';
 import Google from 'public/assets/google.svg';
@@ -36,11 +36,11 @@ export default function SocialButtons({
       startElement: <Google className="h-6" />,
       onClick: () => {},
     },
-    {
-      text: t.signInWithApple,
-      startElement: <Apple className="h-6 body2" />,
-      onClick: () => {},
-    },
+    // {
+    //   text: t.signInWithApple,
+    //   startElement: <Apple className="h-6 body2" />,
+    //   onClick: () => {},
+    // },
   ];
 
   return (
