@@ -78,6 +78,7 @@ module.exports = {
       red1: '#FF2C2C',
       red2: '#DA0000',
       dark: '#182128',
+      brand: '#4190EB',
       primary: {
         light: '#585DFA',
         dark: '#47498A',
@@ -144,6 +145,14 @@ module.exports = {
       },
       'btn-primary-text': {
         light: '#FFFFFF',
+        dark: '#000000',
+      },
+      modal: {
+        light: '#FFFFFF',
+        dark: '#0F1419',
+      },
+      'modal-background': {
+        light: '#F0F2F5',
         dark: '#000000',
       },
     },
