@@ -1309,6 +1309,10 @@ input[type='search']::-webkit-search-decoration,
   width: 100vw;
 }
 
+.max-w-6xl {
+  max-width: 72rem;
+}
+
 .max-w-\[100px\] {
   max-width: 100px;
 }
@@ -1615,11 +1619,6 @@ input[type='search']::-webkit-search-decoration,
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .px-\[18px\] {

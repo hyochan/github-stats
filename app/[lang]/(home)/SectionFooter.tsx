@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import {Inter} from '@next/font/google';
 import type {ReactElement} from 'react';
 import SvgScouter from '@/public/assets/scouter.svg';
@@ -40,7 +39,7 @@ export default function SectionFooter({t}: Props): ReactElement {
         >
           {t.enjoyStats}
         </p>
-        <Image alt="scouter" src={SvgScouter} className="px-8" />
+        <SvgScouter className="w-screen px-12 max-w-6xl" />
         <div
           className={clsx(
             'h-[22px] mb-28 mt-12',
