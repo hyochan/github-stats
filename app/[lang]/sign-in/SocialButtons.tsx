@@ -7,7 +7,6 @@ import Github from 'public/assets/github.svg';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../src/localization';
 import {getSupabaseBrowserClient} from '../../../src/utils/supabase';
-import {useRouter} from 'next/navigation';
 
 export default function SocialButtons({
   t,
@@ -21,7 +20,6 @@ export default function SocialButtons({
   };
 
   const supabase = getSupabaseBrowserClient();
-  const router = useRouter();
 
   const socialButtons: SocialButton[] = [
     {
@@ -31,8 +29,6 @@ export default function SocialButtons({
         await supabase.auth.signInWithOAuth({
           provider: 'github',
         });
-
-        router.refresh();
       },
     },
     // {
