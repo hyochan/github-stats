@@ -2233,12 +2233,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@primer/octicons-react@npm:^17.12.0":
-  version: 17.12.0
-  resolution: "@primer/octicons-react@npm:17.12.0"
+"@primer/octicons-react@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "@primer/octicons-react@npm:18.2.0"
   peerDependencies:
     react: ">=15"
-  checksum: 6af48465d24b02cae8bcc0d2a5f0ef59b7fbbdd4d09fa3a620c007fa4deba7c3cf6132f4b7abbdff24a0b1092f11ea89abc0f138c1174cd54eb7cd3d484fbad1
+  checksum: 95f1770f44628b3e0fe93133a89c615a14c2353af6074cf172e95200dd553c4171db418ce858dbbd6b5699431a5e51007cce325207836e209f6fe3ead0ba3758
   languageName: node
   linkType: hard
 
@@ -4530,7 +4530,7 @@ __metadata:
     "@dooboo/eslint-config-react": ^1.0.4
     "@formatjs/intl-localematcher": ^0.2.32
     "@next/font": v13.2.4
-    "@primer/octicons-react": ^17.12.0
+    "@primer/octicons-react": ^18.2.0
     "@prisma/client": 4.11.0
     "@supabase/auth-helpers-nextjs": ^0.5.6
     "@supabase/auth-helpers-react": ^0.3.1
