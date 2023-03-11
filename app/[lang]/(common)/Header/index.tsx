@@ -14,8 +14,6 @@ import SwitchToggle from './SwitchToggle';
 import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
 import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
-import {signedInState} from '../../../../src/recoils/atoms';
-import {useRecoilState} from 'recoil';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -36,7 +34,7 @@ export default function Header({t, lang}: Props): ReactElement {
   const supabase = getSupabaseBrowserClient();
 
   const [isDark, setIsDark] = useState(false);
-  const [signedIn, setSignedIn] = useRecoilState(signedInState);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     const {
