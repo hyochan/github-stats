@@ -4,7 +4,6 @@ import type {ReactElement, ReactNode} from 'react';
 
 import type {Locale} from '~/i18n';
 import {LocaleProvider} from '~/components/LocaleProvider';
-import {RecoilRoot} from 'recoil';
 import SnackbarProvider from 'react-simple-snackbar';
 
 export type ThemeType = 'light' | 'dark';
@@ -18,9 +17,7 @@ export default function RootProvider({
 }): ReactElement {
   return (
     <LocaleProvider initialLocale={initialLocale}>
-      <SnackbarProvider>
-        <RecoilRoot>{children}</RecoilRoot>
-      </SnackbarProvider>
+      <SnackbarProvider>{children}</SnackbarProvider>
     </LocaleProvider>
   );
 }
