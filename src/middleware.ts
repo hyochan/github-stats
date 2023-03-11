@@ -5,6 +5,7 @@ import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 // import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
 import {match as matchLocale} from '@formatjs/intl-localematcher';
+import {upsertUser} from './services/userService';
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -28,7 +29,14 @@ export async function middleware(
 
   const res = NextResponse.next();
 
-  createMiddlewareSupabaseClient({req, res});
+  const supabase = createMiddlewareSupabaseClient({req, res});
+  const {
+    data: {user},
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    upsertUser({supabase, user});
+  }
 
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // If you have one

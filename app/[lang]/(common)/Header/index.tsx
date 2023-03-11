@@ -39,14 +39,16 @@ export default function Header({t, lang}: Props): ReactElement {
   useEffect(() => {
     const {
       data: {subscription},
-    } = supabase.auth.onAuthStateChange((_, session) => {
-      setSignedIn(!!session?.access_token);
+    } = supabase.auth.onAuthStateChange((evt, session) => {
+      const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
+      setSignedIn(isLoggedIn);
     });
 
     return () => {
       subscription.unsubscribe();
     };
-  }, [supabase]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => setIsDark(isDarkMode()), []);
 
