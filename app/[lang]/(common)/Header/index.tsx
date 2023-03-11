@@ -14,6 +14,7 @@ import SwitchToggle from './SwitchToggle';
 import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
 import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
+import {useAuthContext} from '../../../../src/components/AuthProvider';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -34,14 +35,14 @@ export default function Header({t, lang}: Props): ReactElement {
   const supabase = getSupabaseBrowserClient();
 
   const [isDark, setIsDark] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
+  const {signedIn, changeSignedIn} = useAuthContext();
 
   useEffect(() => {
     const {
       data: {subscription},
     } = supabase.auth.onAuthStateChange((evt, session) => {
       const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
-      setSignedIn(isLoggedIn);
+      changeSignedIn(isLoggedIn);
     });
 
     return () => {
