@@ -18,9 +18,9 @@ export default function RootProvider({
 }): ReactElement {
   return (
     <LocaleProvider initialLocale={initialLocale}>
-      <RecoilRoot>
-        <SnackbarProvider>{children}</SnackbarProvider>
-      </RecoilRoot>
+      <SnackbarProvider>
+        <RecoilRoot>{children}</RecoilRoot>
+      </SnackbarProvider>
     </LocaleProvider>
   );
 }
