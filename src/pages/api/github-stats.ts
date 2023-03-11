@@ -47,6 +47,33 @@ export default async function handler(
       }
 
       break;
+    case 'POST':
+      assert(login, common.badRequest);
+
+      try {
+        const stats = await getDoobooStats({
+          login: login.toLocaleLowerCase(),
+          lang: locale,
+        });
+
+        if (!stats) {
+          res.status(404).json({message: common.notFound});
+
+          return;
+        }
+
+        track('github-stats-data', undefined, {
+          language: locale,
+          user_id: login,
+          extra: {login, lang: locale},
+        });
+
+        res.send({stats});
+      } catch (err) {
+        res.status(500).send(err);
+      }
+
+      break;
     default:
       res.status(404).json({message: common.notFound});
   }
