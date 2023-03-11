@@ -2,6 +2,7 @@
 
 import type {ReactElement, ReactNode} from 'react';
 
+import {AuthProvider} from './AuthProvider';
 import type {Locale} from '~/i18n';
 import {LocaleProvider} from '~/components/LocaleProvider';
 import SnackbarProvider from 'react-simple-snackbar';
@@ -17,7 +18,9 @@ export default function RootProvider({
 }): ReactElement {
   return (
     <LocaleProvider initialLocale={initialLocale}>
-      <SnackbarProvider>{children}</SnackbarProvider>
+      <SnackbarProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </SnackbarProvider>
     </LocaleProvider>
   );
 }
