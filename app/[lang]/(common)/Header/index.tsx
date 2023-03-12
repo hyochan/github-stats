@@ -35,14 +35,14 @@ export default function Header({t, lang}: Props): ReactElement {
   const supabase = getSupabaseBrowserClient();
 
   const [isDark, setIsDark] = useState(false);
-  const {signedIn, changeSignedIn} = useAuthContext();
+  const {login, changeLogin} = useAuthContext();
 
   useEffect(() => {
     const {
       data: {subscription},
     } = supabase.auth.onAuthStateChange((evt, session) => {
       const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
-      changeSignedIn(isLoggedIn);
+      changeLogin(isLoggedIn && session.user.user_metadata.user_name);
     });
 
     return () => {
@@ -53,11 +53,11 @@ export default function Header({t, lang}: Props): ReactElement {
 
   useEffect(() => setIsDark(isDarkMode()), []);
 
-  const navLinks: NavLink[] = signedIn
+  const navLinks: NavLink[] = !!login
     ? [
         {
           name: t.stats,
-          path: '/stats',
+          path: `/stats/${login}`,
         },
         {
           name: t.recentList,
@@ -129,13 +129,13 @@ export default function Header({t, lang}: Props): ReactElement {
       <div className="flex flex-row items-center">
         {/* <LocaleSwitcher languages={langs} /> */}
         <Button
-          text={signedIn ? t.signOut : t.signIn}
+          text={!!login ? t.signOut : t.signIn}
           className="mr-2 py-2 px-3"
           classNames={{
             text: 'body3',
           }}
           onClick={() => {
-            if (signedIn) {
+            if (!!login) {
               supabase.auth.signOut();
 
               return;

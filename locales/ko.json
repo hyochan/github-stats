@@ -100,7 +100,8 @@
     "score": "점수"
   },
   "stats": {
-    "title": "Stats"
+    "title": "스탯",
+    "githubUsername": "깃허브 유저명"
   },
   "certifiedUsers": {
     "title": "인증된 사용자",
