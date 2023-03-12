@@ -38,7 +38,7 @@ export default async function Page({
     >
       <H1
         className={clsx(
-          'text-[44px] font-bold mt-20 mb-10 mx-6',
+          'text-[44px] font-bold mt-12 mb-[32px] mx-6',
           inter.className,
         )}
       >
