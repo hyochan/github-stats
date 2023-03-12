@@ -116,8 +116,8 @@ module.exports = {
         dark: '#474747',
       },
       paper: {
-        light: 'rgb(243, 245, 253)',
-        dark: 'rgb(28, 38, 54)',
+        light: '#F0F2F5',
+        dark: '#0F1419',
       },
       placeholder: {
         light: '#787878',
