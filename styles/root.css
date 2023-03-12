@@ -167,9 +167,6 @@
   .body1 {
     @apply text-body1 text-black dark:text-white;
   }
-  .body1 {
-    @apply text-body1 text-black dark:text-white;
-  }
   .body2 {
     @apply text-body2 text-black dark:text-white;
   }

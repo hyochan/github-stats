@@ -48,7 +48,7 @@ export const fetchRecentList = async ({
     }),
   };
 
-  const response = await (await fetch(`/api/recent-list`, fetchOption)).json();
+  const response = await (await fetch(`/api/recent-users`, fetchOption)).json();
 
   return response;
 };
