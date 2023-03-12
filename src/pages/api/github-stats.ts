@@ -14,16 +14,16 @@ export default async function handler(
 
   const locale = currentLocale(req);
   const method = <string>req.method;
-  const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
 
   switch (method) {
     case 'GET':
-      assert(login, common.badRequest);
+      const loginParam = <string>req.query.login;
+      assert(loginParam, common.badRequest);
 
       try {
         const stats = await getDoobooStats({
-          login: login.toLocaleLowerCase(),
+          login: loginParam.toLocaleLowerCase(),
           lang: locale,
         });
 
@@ -35,11 +35,11 @@ export default async function handler(
 
         track('github-stats', undefined, {
           language: locale,
-          user_id: login,
-          extra: {login, lang: locale},
+          user_id: loginParam,
+          extra: {login: loginParam, lang: locale},
         });
 
-        const {file} = await generateGithubSVG(login, stats, false);
+        const {file} = await generateGithubSVG(loginParam, stats, false);
         res.setHeader('Content-Type', 'image/svg+xml');
         res.send(file);
       } catch (err) {
@@ -48,11 +48,12 @@ export default async function handler(
 
       break;
     case 'POST':
-      assert(login, common.badRequest);
+      const loginBody = <string>req.body.login;
+      assert(loginBody, common.badRequest);
 
       try {
         const stats = await getDoobooStats({
-          login: login.toLocaleLowerCase(),
+          login: loginBody.toLocaleLowerCase(),
           lang: locale,
         });
 
@@ -64,8 +65,8 @@ export default async function handler(
 
         track('github-stats-data', undefined, {
           language: locale,
-          user_id: login,
-          extra: {login, lang: locale},
+          user_id: loginBody,
+          extra: {login: loginBody, lang: locale},
         });
 
         res.send({stats});

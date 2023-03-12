@@ -30,7 +30,7 @@ export const upsertUser = async ({
     deleted_at: null,
     description: null,
     gender: null,
-    github_login: user.user_metadata.full_name,
+    github_login: user.user_metadata.user_name,
     github_url: `https://github.com/${user.user_metadata.user_name}`,
     locale: null,
     location: null,
