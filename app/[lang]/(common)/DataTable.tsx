@@ -74,11 +74,11 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               )}
               onClick={() => onClickRow?.(elm, i)}
             >
-              {columns.map((column, i) => (
+              {columns.map((column, idx) => (
                 <td
                   key={column.id.toString()}
                   className={clsx(
-                    (i + 1) % 3 === 0 ? 'w-14 pl-2' : 'flex-1',
+                    (idx + 1) % 3 === 0 ? 'w-14 pl-2' : 'flex-1',
                     'flex flex-row items-center',
                     column.cellClassName,
                   )}

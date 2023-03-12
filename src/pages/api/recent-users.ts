@@ -46,7 +46,5 @@ export default async function handler(
       res.status(200).send({users: userPlugins});
 
       break;
-    default:
-      res.status(404).end();
   }
 }
