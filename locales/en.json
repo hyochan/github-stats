@@ -78,7 +78,7 @@
     "signInWithGoogle": "Sign in with Google",
     "signInWithApple": "Sign in with Apple",
     "signIn": "Sign in",
-    "byProceedingToTheNextStep": "By proceeding to the next step, you agree to the {termsOfService} and {privacyPolicy}",
+    "byProceedingToTheNextStep": "We consider that you agree with {termsOfService} and {privacyPolicy} by going onto next step",
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy"
   },

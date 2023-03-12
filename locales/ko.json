@@ -87,7 +87,7 @@
     "signInWithGoogle": "Google로 계속하기",
     "signInWithApple": "Apple로 계속하기",
     "signIn": "로그인",
-    "byProceedingToTheNextStep": "다음 단계로 진행과 동시에 {termsOfService} 및 {privacyPolicy}에 동의하는 것으로 간주합니다",
+    "byProceedingToTheNextStep": "다음 단계로 진행함과 동시에 {termsOfService} 및 {privacyPolicy}에 동의하는 것으로 간주합니다",
     "termsOfService": "서비스 약관",
     "privacyPolicy": "개인 정보 보호 정책"
   },

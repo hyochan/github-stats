@@ -17,6 +17,29 @@ export default async function Page({
 }: Props): Promise<ReactElement> {
   const {signIn} = await getTranslates(lang);
 
+  // Next.js intl interpolation is not currently supported as of 2023-03-12.
+  const renderAgreements = (texts: string): (ReactElement | string)[] => {
+    return texts.split(/[{}]/).map((str, i) =>
+      i % 2 === 0 ? (
+        str
+      ) : (
+        <a
+          href={
+            str === 'termsOfService'
+              ? 'https://legacy.dooboolab.com/termsofservice'
+              : str === 'privacyPolicy'
+              ? 'https://legacy.dooboolab.com/privacyandpolicy'
+              : ''
+          }
+          key={str}
+          className="underline underline-offset-[1px]"
+        >
+          {signIn[str as keyof typeof signIn]}
+        </a>
+      ),
+    );
+  };
+
   return (
     <div
       className={clsx(
@@ -34,6 +57,14 @@ export default async function Page({
         <Logo className="h-20 mb-2" />
         <p className={clsx('text-brand pb-28', inter.className)}>dooboo.io</p>
         <SocialButtons t={signIn} />
+        <p
+          className={clsx(
+            'text-placeholder text-body4 leading-4 text-center mt-2',
+            inter.className,
+          )}
+        >
+          {renderAgreements(signIn.byProceedingToTheNextStep)}
+        </p>
       </div>
     </div>
   );
