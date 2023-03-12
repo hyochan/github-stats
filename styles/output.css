@@ -1209,6 +1209,10 @@ input[type='search']::-webkit-search-decoration,
   height: 37px;
 }
 
+.h-\[48px\] {
+  height: 48px;
+}
+
 .h-\[50px\] {
   height: 50px;
 }
@@ -1596,6 +1600,11 @@ input[type='search']::-webkit-search-decoration,
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .px-\[18px\] {

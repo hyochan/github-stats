@@ -91,7 +91,8 @@
     "score": "Score"
   },
   "stats": {
-    "title": "Stats"
+    "title": "Stats",
+    "githubUsername": "GitHub username"
   },
   "certifiedUsers": {
     "title": "Certified Users",
