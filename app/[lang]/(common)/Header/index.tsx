@@ -53,17 +53,19 @@ export default function Header({t, lang}: Props): ReactElement {
 
   useEffect(() => setIsDark(isDarkMode()), []);
 
-  const navLinks: NavLink[] = [
-    {
-      name: t.recentList,
-      path: '/recent-list',
-    },
-    // TODO: Remove this comment when the feature is ready.
-    // {
-    //   name: nav.certifiedUsers,
-    //   path: '/certifiedUsers',
-    // },
-  ];
+  const navLinks: NavLink[] = signedIn
+    ? [
+        {
+          name: t.recentList,
+          path: '/recent-list',
+        },
+        // TODO: Remove this comment when the feature is ready.
+        // {
+        //   name: nav.certifiedUsers,
+        //   path: '/certifiedUsers',
+        // },
+      ]
+    : [];
 
   return (
     <header
