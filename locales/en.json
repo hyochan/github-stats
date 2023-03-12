@@ -1,6 +1,7 @@
 {
   "nav": {
     "recentList": "Recent List",
+    "stats": "Stats",
     "certifiedUsers": "Certified Users",
     "signIn": "Sign in",
     "signOut": "Sign out"
@@ -88,6 +89,9 @@
     "noRecentList": "No recent list",
     "tier": "Tier",
     "score": "Score"
+  },
+  "stats": {
+    "title": "Stats"
   },
   "certifiedUsers": {
     "title": "Certified Users",

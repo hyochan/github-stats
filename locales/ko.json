@@ -1,6 +1,7 @@
 {
   "nav": {
     "recentList": "최근 목록",
+    "stats": "스탯",
     "certifiedUsers": "인증 목록",
     "signIn": "로그인",
     "signOut": "로그아웃"
@@ -97,6 +98,9 @@
     "noRecentList": "최근 리스트가 없습니다",
     "tier": "티어",
     "score": "점수"
+  },
+  "stats": {
+    "title": "Stats"
   },
   "certifiedUsers": {
     "title": "인증된 사용자",

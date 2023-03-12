@@ -816,7 +816,7 @@ input[type='search']::-webkit-search-decoration,
 
 .dark .bg-basic {
   --tw-bg-opacity: 1;
-  background-color: rgb(24 33 40 / var(--tw-bg-opacity));
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-paper {
@@ -1087,6 +1087,10 @@ input[type='search']::-webkit-search-decoration,
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
 }
 
 .ml-\[6px\] {

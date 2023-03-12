@@ -56,14 +56,13 @@ export default function Header({t, lang}: Props): ReactElement {
   const navLinks: NavLink[] = signedIn
     ? [
         {
+          name: t.stats,
+          path: '/stats',
+        },
+        {
           name: t.recentList,
           path: '/recent-list',
         },
-        // TODO: Remove this comment when the feature is ready.
-        // {
-        //   name: nav.certifiedUsers,
-        //   path: '/certifiedUsers',
-        // },
       ]
     : [];
 
@@ -96,12 +95,15 @@ export default function Header({t, lang}: Props): ReactElement {
             </H1>
           </Link>
         </div>
-        <nav className="mr-[6px]">
+        <nav className="mr-[6px] flex flex-row">
           {navLinks.map((link, index) => {
             return (
               <ul
                 key={link.name}
-                className={clsx('hover:opacity-70 hover:translate-y-[2px]')}
+                className={clsx(
+                  'hover:opacity-70 hover:translate-y-[2px]',
+                  index !== 0 && 'ml-3',
+                )}
               >
                 <Link
                   href={`${lang}/${link.path}`}

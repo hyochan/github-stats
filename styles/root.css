@@ -110,7 +110,7 @@
   }
 
   .bg-basic {
-    @apply bg-white dark:bg-dark;
+    @apply bg-white dark:bg-black;
   }
   .bg-paper {
     @apply bg-paper-light dark:bg-paper-dark;
