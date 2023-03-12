@@ -2233,12 +2233,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@primer/octicons-react@npm:^17.12.0":
-  version: 17.12.0
-  resolution: "@primer/octicons-react@npm:17.12.0"
+"@primer/octicons-react@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "@primer/octicons-react@npm:18.2.0"
   peerDependencies:
     react: ">=15"
-  checksum: 6af48465d24b02cae8bcc0d2a5f0ef59b7fbbdd4d09fa3a620c007fa4deba7c3cf6132f4b7abbdff24a0b1092f11ea89abc0f138c1174cd54eb7cd3d484fbad1
+  checksum: 95f1770f44628b3e0fe93133a89c615a14c2353af6074cf172e95200dd553c4171db418ce858dbbd6b5699431a5e51007cce325207836e209f6fe3ead0ba3758
   languageName: node
   linkType: hard
 
@@ -3449,12 +3449,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.13":
-  version: 10.4.13
-  resolution: "autoprefixer@npm:10.4.13"
+"autoprefixer@npm:^10.4.14":
+  version: 10.4.14
+  resolution: "autoprefixer@npm:10.4.14"
   dependencies:
-    browserslist: ^4.21.4
-    caniuse-lite: ^1.0.30001426
+    browserslist: ^4.21.5
+    caniuse-lite: ^1.0.30001464
     fraction.js: ^4.2.0
     normalize-range: ^0.1.2
     picocolors: ^1.0.0
@@ -3463,7 +3463,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: dcb1cb7ae96a3363d65d82e52f9a0a7d8c982256f6fd032d7e1ec311f099c23acfebfd517ff8e96bf93f716a66c4ea2b80c60aa19efd2f474ce434bd75ef7b79
+  checksum: e9f18e664a4e4a54a8f4ec5f6b49ed228ec45afaa76efcae361c93721795dc5ab644f36d2fdfc0dea446b02a8067b9372f91542ea431994399e972781ed46d95
   languageName: node
   linkType: hard
 
@@ -3598,7 +3598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.21.3, browserslist@npm:^4.21.4, browserslist@npm:^4.21.5":
+"browserslist@npm:^4.21.3, browserslist@npm:^4.21.5":
   version: 4.21.5
   resolution: "browserslist@npm:4.21.5"
   dependencies:
@@ -3726,10 +3726,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001406, caniuse-lite@npm:^1.0.30001426, caniuse-lite@npm:^1.0.30001449":
+"caniuse-lite@npm:^1.0.30001406, caniuse-lite@npm:^1.0.30001449":
   version: 1.0.30001457
   resolution: "caniuse-lite@npm:1.0.30001457"
   checksum: f311a7c5098681962402a86a0a367014ee91c3135395ee68bbfaf45caf0e36d581e42d7c5b1526ce99484a228e6cf5cf0e400678292c65f5a21512a3fc7a5fb6
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001464":
+  version: 1.0.30001464
+  resolution: "caniuse-lite@npm:1.0.30001464"
+  checksum: 67cdee102c1660d62d7b9dbd4740bb7af096236618f2509fd2e0039d50db5f02fb87c21d90b6d573fdcf50deaf3c84503d009e871502b5c221d0ba1dec18ba11
   languageName: node
   linkType: hard
 
@@ -4523,7 +4530,7 @@ __metadata:
     "@dooboo/eslint-config-react": ^1.0.4
     "@formatjs/intl-localematcher": ^0.2.32
     "@next/font": v13.1.7-canary.6
-    "@primer/octicons-react": ^17.12.0
+    "@primer/octicons-react": ^18.2.0
     "@prisma/client": ^4.11.0
     "@supabase/auth-helpers-nextjs": ^0.5.6
     "@supabase/auth-helpers-react": ^0.3.1
@@ -4539,7 +4546,7 @@ __metadata:
     "@types/react-dom": 18.0.11
     "@vitejs/plugin-react": ^3.1.0
     "@vitest/coverage-c8": ^0.29.2
-    autoprefixer: ^10.4.13
+    autoprefixer: ^10.4.14
     axios: ^1.3.4
     client-only: ^0.0.1
     clsx: ^1.2.1
