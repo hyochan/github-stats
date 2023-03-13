@@ -88,6 +88,7 @@ export default function Header({t, lang}: Props): ReactElement {
             <H1
               className={clsx(
                 'body3 font-bold ml-[6px] mr-[12px]',
+                'max-[480px]:hidden',
                 inter.className,
               )}
             >
@@ -95,7 +96,7 @@ export default function Header({t, lang}: Props): ReactElement {
             </H1>
           </Link>
         </div>
-        <nav className="mr-[6px] flex flex-row">
+        <nav className="mr-[6px] flex flex-row max-[480px]:ml-2">
           {navLinks.map((link, index) => {
             return (
               <ul
@@ -132,7 +133,7 @@ export default function Header({t, lang}: Props): ReactElement {
           text={!!login ? t.signOut : t.signIn}
           className="mr-2 py-2 px-3"
           classNames={{
-            text: 'body3',
+            text: 'body3 truncate',
           }}
           onClick={() => {
             if (!!login) {

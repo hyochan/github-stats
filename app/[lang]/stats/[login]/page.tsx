@@ -27,6 +27,7 @@ export default async function Page({
     <div
       className={clsx(
         'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden px-6',
+        'max-[480px]:px-0',
         'flex flex-col relative',
       )}
     >
@@ -38,6 +39,7 @@ export default async function Page({
       <H1
         className={clsx(
           'text-[44px] font-bold mt-12 mb-[32px]',
+          'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-0 max-[480px]:mt-4',
           inter.className,
         )}
       >

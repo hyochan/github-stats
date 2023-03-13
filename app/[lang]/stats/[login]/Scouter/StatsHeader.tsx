@@ -109,7 +109,7 @@ export default function StatsHeader({
   return (
     <div
       className={clsx(
-        'self-stretch py-4 px-2 border-b-[1px] border-b-border-light dark:border-b-border-dark',
+        'self-stretch py-4 px-0 border-b-[1px] border-b-border-light dark:border-b-border-dark',
         'flex flex-row justify-between',
       )}
     >

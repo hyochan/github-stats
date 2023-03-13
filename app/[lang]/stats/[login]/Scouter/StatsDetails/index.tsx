@@ -32,7 +32,10 @@ export default function StatsDetails({
 
   return (
     <div
-      className={clsx('mb-8 self-stretch p-8', 'flex flex-column items-center')}
+      className={clsx(
+        'mb-8 self-stretch p-8 ',
+        'flex flex-column items-center',
+      )}
     >
       {map[selectedStat]}
     </div>

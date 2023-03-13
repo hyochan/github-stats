@@ -59,7 +59,7 @@ export default async function Page({
         <SocialButtons t={signIn} />
         <p
           className={clsx(
-            'text-placeholder text-body4 leading-4 text-center mt-2',
+            'text-placeholder text-body4 leading-4 text-center mt-2 break-normal',
             inter.className,
           )}
         >

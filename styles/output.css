@@ -1480,6 +1480,11 @@ input[type='search']::-webkit-search-decoration,
   text-overflow: ellipsis;
 }
 
+.break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .break-words {
   overflow-wrap: break-word;
 }
@@ -1746,6 +1751,11 @@ input[type='search']::-webkit-search-decoration,
 .py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .pb-28 {
@@ -2112,6 +2122,12 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media not all and (min-width: 768px) {
+  .max-md\:w-12 {
+    width: 3rem;
+  }
+}
+
 @media (max-width: 480px) {
   .max-\[480px\]\:mx-0 {
     margin-left: 0px;
@@ -2122,8 +2138,35 @@ input[type='search']::-webkit-search-decoration,
     margin-bottom: 0px;
   }
 
+  .max-\[480px\]\:ml-2 {
+    margin-left: 0.5rem;
+  }
+
+  .max-\[480px\]\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .max-\[480px\]\:hidden {
     display: none;
+  }
+
+  .max-\[480px\]\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .max-\[480px\]\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .max-\[480px\]\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .max-\[480px\]\:text-\[28px\] {
+    font-size: 28px;
   }
 }
 

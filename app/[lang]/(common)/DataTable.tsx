@@ -45,8 +45,11 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               <th
                 key={`${column}-${i}`}
                 className={clsx(
-                  (i + 1) % 3 === 0 ? 'w-14' : `flex-1 ${i === 0 && 'pl-3'}`,
+                  (i + 1) % 3 === 0
+                    ? 'w-14 max-md:w-12'
+                    : `flex-1 ${i === 0 && 'pl-3'}`,
                   'items-center flex',
+                  'truncate',
                   column.headerClassName,
                 )}
               >
@@ -78,7 +81,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
                 <td
                   key={column.id.toString()}
                   className={clsx(
-                    (idx + 1) % 3 === 0 ? 'w-14 pl-2' : 'flex-1',
+                    (idx + 1) % 3 === 0 ? 'w-14 max-md:w-12 pl-2' : 'flex-1',
                     'flex flex-row items-center',
                     column.cellClassName,
                   )}
