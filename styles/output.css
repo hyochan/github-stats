@@ -1658,6 +1658,11 @@ input[type='search']::-webkit-search-decoration,
   padding: 8px;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1751,11 +1756,6 @@ input[type='search']::-webkit-search-decoration,
 .py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
-}
-
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
 }
 
 .pb-28 {
@@ -2153,11 +2153,6 @@ input[type='search']::-webkit-search-decoration,
   .max-\[480px\]\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
-  }
-
-  .max-\[480px\]\:px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 
   .max-\[480px\]\:px-6 {
