@@ -51,7 +51,7 @@ export type PluginValue = {
   name: string;
   description?: string;
   score: number;
-  stat_element: StatsElement[];
+  statElements: StatsElement[];
 };
 
 export type PluginStats = {

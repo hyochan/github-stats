@@ -100,7 +100,10 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
 
 function SectionBody({t, stats}: SectionProps): ReactElement {
   return (
-    <div className={clsx('flex flex-col flex-wrap')}>
+    <a
+      className={clsx('flex flex-col flex-wrap')}
+      href={`https://github.com/${stats.json.login}`}
+    >
       <p className={clsx('text-basic text-h3 font-bold', inter.className)}>
         {t.github}
       </p>
@@ -111,7 +114,7 @@ function SectionBody({t, stats}: SectionProps): ReactElement {
             src={stats.json.avatarUrl}
             width={64}
             height={64}
-            className="rounded-full"
+            className="w-16 h-16 rounded-full"
           />
         ) : (
           // placeholder image
@@ -131,7 +134,7 @@ function SectionBody({t, stats}: SectionProps): ReactElement {
           <p className="mt-1 body2">{stats.json.bio}</p>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

@@ -55,7 +55,7 @@ export const getGithubPersonScore = ({
   return {
     name: 'PERSON',
     score: score / 100,
-    stat_element: [
+    statElements: [
       {
         key: 'TREE',
         name: 'Tree',
