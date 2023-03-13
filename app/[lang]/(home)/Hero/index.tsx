@@ -235,7 +235,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
           </div>
         ) : null}
         {/* End: Stats */}
-        <StatsSymbols statsInfo={statsInfo} className="mt-3 mb-14" />
+        <StatsSymbols statsInfo={statsInfo} className="mt-2 mb-16" />
       </div>
     </div>
   );

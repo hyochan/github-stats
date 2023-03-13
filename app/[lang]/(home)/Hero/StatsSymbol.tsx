@@ -2,37 +2,42 @@
 
 import type {CSSProperties, ReactElement} from 'react';
 import TextTransition, {presets} from 'react-text-transition';
+import {cloneElement, useState} from 'react';
 
-import Image from 'next/image';
 import type {StatsInfo} from '../../../../src/fetches/github';
+import SvgEarth from '@/public/assets/stats_earth.svg';
+import SvgFire from '@/public/assets/stats_fire.svg';
+import SvgGold from '@/public/assets/stats_gold.svg';
+import SvgPeople from '@/public/assets/stats_people.svg';
+import SvgTree from '@/public/assets/stats_tree.svg';
+import SvgWater from '@/public/assets/stats_water.svg';
 import clsx from 'clsx';
 import {track} from '@amplitude/analytics-browser';
-import {useState} from 'react';
 
 const statTypes = [
   {
     name: 'tree',
-    icon: '/assets/stats_earth.svg',
+    svg: <SvgTree />,
   },
   {
     name: 'fire',
-    icon: '/assets/stats_fire.svg',
+    svg: <SvgFire />,
   },
   {
     name: 'earth',
-    icon: '/assets/stats_earth.svg',
+    svg: <SvgEarth />,
   },
   {
     name: 'gold',
-    icon: '/assets/stats_gold.svg',
+    svg: <SvgGold />,
   },
   {
     name: 'water',
-    icon: '/assets/stats_water.svg',
+    svg: <SvgWater />,
   },
   {
     name: 'people',
-    icon: '/assets/stats_people.svg',
+    svg: <SvgPeople />,
   },
 ] as const;
 
@@ -108,13 +113,7 @@ const StatsSymbols = ({
 
   return (
     <div className={`flex flex-col  ${className}`} style={style}>
-      <div
-        className={clsx(
-          'bg-gray4 rounded-[4px]',
-          'dark:bg-paper-dark max-w-[200px]',
-          'flex flex-row',
-        )}
-      >
+      <div className={clsx('max-w-[220px]', 'flex flex-row')}>
         {statTypes.map((el) => (
           <a
             key={el.name}
@@ -125,15 +124,13 @@ const StatsSymbols = ({
               pressStat(el.name);
             }}
           >
-            <Image
-              className={`text-contrast ${
-                selectedStatName === el.name ? 'opacity-100' : 'opacity-50'
-              }`}
-              width={20}
-              height={20}
-              src={el.icon}
-              alt={el.name}
-            />
+            {cloneElement(el.svg, {
+              width: 20,
+              height: 20,
+              className: `hover:opacity-70 ${el.svg.props.className} ${
+                selectedStatName === el.name ? 'text-basic' : 'text-placeholder'
+              }`,
+            })}
           </a>
         ))}
       </div>
