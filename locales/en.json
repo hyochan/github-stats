@@ -92,7 +92,18 @@
   },
   "stats": {
     "title": "Stats",
-    "githubUsername": "GitHub username"
+    "githubUsername": "GitHub username",
+    "achievement": "Achievement",
+    "achievementDetails": "Based on Github data",
+    "avgScore": "AVG. Score",
+    "tree": "Tree",
+    "fire": "Fire",
+    "earth": "Earth",
+    "gold": "Gold",
+    "water": "Water",
+    "people": "People",
+    "github": "Github",
+    "score": "score"
   },
   "certifiedUsers": {
     "title": "Certified Users",

@@ -18,7 +18,7 @@ import {isDev} from '../../../src/utils/const';
 import path from 'path';
 import {uploadFileToSupabase} from '../../../src/utils/storage';
 
-type ScoreType = {
+export type ScoreType = {
   tierName:
     | 'Iron'
     | 'Bronze'

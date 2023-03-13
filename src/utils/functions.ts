@@ -92,3 +92,21 @@ export const getUserPlugins = async ({
 
   return users;
 };
+
+export const getTierSvg = (tier: ScoreType['tierName']): string => {
+  return tier === 'Challenger'
+    ? '/assets/tier_challenger.svg'
+    : tier === 'Master'
+    ? '/assets/tier_master.svg'
+    : tier === 'Diamond'
+    ? '/assets/tier_diamond.svg'
+    : tier === 'Platinum'
+    ? '/assets/tier_platinum.svg'
+    : tier === 'Gold'
+    ? '/assets/tier_gold.svg'
+    : tier === 'Silver'
+    ? '/assets/tier_silver.svg'
+    : tier === 'Bronze'
+    ? '/assets/tier_bronze.svg'
+    : '/assets/tier_iron.svg';
+};

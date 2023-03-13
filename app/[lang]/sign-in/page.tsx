@@ -54,7 +54,7 @@ export default async function Page({
           'flex flex-col items-center justify-center',
         )}
       >
-        <Logo className="h-20 mb-2" />
+        <Logo className="h-20 mb-2 text-brand" />
         <p className={clsx('text-brand pb-28', inter.className)}>dooboo.io</p>
         <SocialButtons t={signIn} />
         <p

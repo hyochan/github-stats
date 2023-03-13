@@ -101,7 +101,18 @@
   },
   "stats": {
     "title": "스탯",
-    "githubUsername": "깃허브 유저명"
+    "githubUsername": "깃허브 유저명",
+    "achievement": "성취",
+    "achievementDetails": "깃허브 데이터에 따름",
+    "avgScore": "평균 점수",
+    "tree": "목",
+    "fire": "화",
+    "earth": "토",
+    "gold": "금",
+    "water": "수",
+    "people": "인",
+    "github": "Github",
+    "score": "점수"
   },
   "certifiedUsers": {
     "title": "인증된 사용자",

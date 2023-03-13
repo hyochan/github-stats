@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type {ReactElement} from 'react';
+import {getTierSvg} from '../../../src/utils/functions';
 
 export type Tier =
   | 'Iron'
@@ -22,23 +23,7 @@ export default function TierRowItem({tier}: {tier: Tier}): ReactElement {
       <Image
         className="mr-2"
         alt="challenger"
-        src={
-          tier === 'Challenger'
-            ? '/assets/tier_challenger.svg'
-            : tier === 'Master'
-            ? '/assets/tier_master.svg'
-            : tier === 'Diamond'
-            ? '/assets/tier_diamond.svg'
-            : tier === 'Platinum'
-            ? '/assets/tier_platinum.svg'
-            : tier === 'Gold'
-            ? '/assets/tier_gold.svg'
-            : tier === 'Silver'
-            ? '/assets/tier_silver.svg'
-            : tier === 'Bronze'
-            ? '/assets/tier_bronze.svg'
-            : '/assets/tier_iron.svg'
-        }
+        src={getTierSvg(tier)}
         width={20}
         height={20}
       />

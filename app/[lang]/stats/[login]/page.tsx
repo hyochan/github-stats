@@ -2,9 +2,10 @@ import {H1} from '~/components/Typography';
 import {Inter} from '@next/font/google';
 import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
+import Scouter from './Scouter';
 import SearchTextInput from './SearchTextInput';
 import clsx from 'clsx';
-import {getSupabaseClient} from '../../../../server/supabaseClient';
+import {getDoobooStats} from '../../../../server/services/githubService';
 import {getTranslates} from '../../../../src/localization';
 
 const inter = Inter({subsets: ['latin']});
@@ -16,8 +17,11 @@ type Props = {
 export default async function Page({
   params: {lang, login},
 }: Props): Promise<ReactElement> {
-  const {stats} = await getTranslates(lang);
-  const supabase = getSupabaseClient();
+  const {stats: tStats} = await getTranslates(lang);
+  const stats = await getDoobooStats({
+    login,
+    lang,
+  });
 
   return (
     <div
@@ -27,7 +31,7 @@ export default async function Page({
       )}
     >
       <SearchTextInput
-        t={stats}
+        t={tStats}
         className="flex-1 absolute right-6 top-3"
         initialValue={login}
       />
@@ -37,8 +41,9 @@ export default async function Page({
           inter.className,
         )}
       >
-        {stats.title}
+        {tStats.title}
       </H1>
+      {!!stats ? <Scouter stats={stats} t={tStats} /> : null}
     </div>
   );
 }

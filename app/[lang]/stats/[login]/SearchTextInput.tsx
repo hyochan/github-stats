@@ -16,14 +16,15 @@ export default function SearchTextInput({
 }: {
   t: Translates['stats'];
   className?: string;
-  initialValue?: string;
+  initialValue: string;
 }): ReactElement {
-  const [login, setLogin] = useState('');
-  const {register, formState, handleSubmit} = useForm();
+  const [login, setLogin] = useState(initialValue);
+  const {formState} = useForm();
 
   return (
     <form
-      // onSubmit={handleSubmit(searchUser)}
+      action={`/stats/${login}`}
+      method="post"
       className={clsx('', className)}
       autoComplete="off"
     >
@@ -35,8 +36,7 @@ export default function SearchTextInput({
       >
         <TextInput
           className="text-white"
-          value={initialValue}
-          {...register('githubID')}
+          value={login}
           placeholder={t.githubUsername}
           onChange={(e) => {
             setLogin(e.target.value.trim());

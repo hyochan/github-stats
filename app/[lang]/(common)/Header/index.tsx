@@ -83,7 +83,7 @@ export default function Header({t, lang}: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Logo className="h-5" />
+          <Logo className="h-5 text-brand" />
           <Link href={`${lang}/`}>
             <H1
               className={clsx(
