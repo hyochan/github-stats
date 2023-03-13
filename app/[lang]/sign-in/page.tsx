@@ -45,12 +45,13 @@ export default async function Page({
       className={clsx(
         'bg-modal-background',
         'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden',
+        'max-md:px-4',
         'flex flex-col justify-center items-center',
       )}
     >
       <div
         className={clsx(
-          'bg-modal w-[480px] rounded-2xl px-12 py-16',
+          'bg-modal max-w-[480px] rounded-2xl px-12 py-16',
           'flex flex-col items-center justify-center',
         )}
       >
