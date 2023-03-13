@@ -4,7 +4,9 @@ import type {ReactElement} from 'react';
 import SectionDooboo from './SectionDooboo';
 import SectionFire from './SectionFire';
 import SectionGold from './SectionGold';
+import SectionPeople from './SectionPeople';
 import SectionTree from './SectionTree';
+import SectionWater from './SectionWater';
 import clsx from 'clsx';
 
 export type TierType = {
@@ -23,8 +25,8 @@ export default function StatsDetails({
     fire: <SectionFire stats={stats} t={t} />,
     earth: <SectionDooboo stats={stats} t={t} />,
     gold: <SectionGold stats={stats} t={t} />,
-    water: <SectionDooboo stats={stats} t={t} />,
-    person: <SectionDooboo stats={stats} t={t} />,
+    water: <SectionWater stats={stats} t={t} />,
+    person: <SectionPeople stats={stats} t={t} />,
   };
 
   return (
