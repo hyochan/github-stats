@@ -26,7 +26,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
             'flex items-center',
           )}
         >
-          <span className="body3 font-bold mr-2">{`${t.tree} ${t.score}`}</span>{' '}
+          <span className="body3 font-bold mr-2">{`${stats.pluginStats.tree.name} ${t.score}`}</span>{' '}
           <div className="body3 p-1 bg-contrast-light dark:bg-contrast-dark rounded-md">
             <p className="text-[12px] text-white dark:text-black">
               {(pluginStats.tree.score * 100).toFixed(0)}

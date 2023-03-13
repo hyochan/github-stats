@@ -1191,6 +1191,14 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 2.5rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .flex {
   display: flex;
 }

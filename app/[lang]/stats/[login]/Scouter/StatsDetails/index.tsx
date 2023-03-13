@@ -2,6 +2,7 @@ import type {ScouterProps, StatName} from '..';
 
 import type {ReactElement} from 'react';
 import SectionDooboo from './SectionDooboo';
+import SectionFire from './SectionFire';
 import SectionTree from './SectionTree';
 import clsx from 'clsx';
 
@@ -18,7 +19,7 @@ export default function StatsDetails({
   const map: Record<StatName, ReactElement> = {
     dooboo: <SectionDooboo stats={stats} t={t} />,
     tree: <SectionTree stats={stats} t={t} />,
-    fire: <SectionDooboo stats={stats} t={t} />,
+    fire: <SectionFire stats={stats} t={t} />,
     earth: <SectionDooboo stats={stats} t={t} />,
     gold: <SectionDooboo stats={stats} t={t} />,
     water: <SectionDooboo stats={stats} t={t} />,
