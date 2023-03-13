@@ -90,10 +90,6 @@
     display: flex;
   }
 
-  p {
-    word-break: break-all;
-  }
-
   /* search input - Internet Explorer */
   input[type='search']::-ms-clear {
     display: none;

@@ -18,7 +18,7 @@ type Props = {
 };
 
 const descriptionClassNames =
-  'mb-4 text-left text-[16px] text-basic opacity-50 flex flex-wrap break-words';
+  'mb-4 text-left text-[16px] text-basic opacity-50 flex flex-wrap';
 
 const newLetterLabelClassNames =
   'text-[18px] font-bold text-basic mr-3 md:text-[18px] md:leading-[160%]';
