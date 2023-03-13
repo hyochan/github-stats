@@ -52,8 +52,8 @@
     "worksNormally": "Works normally"
   },
   "home": {
-    "visualizeDevStats": "Visualize your dev stats",
-    "visualizeDevStatsDesc": "Enter your github username and visualize your contributions",
+    "developerPowerMeter": "Developer Power Meter",
+    "developerPowerMeterDesc": "Enter your github username and visualize your contributions",
     "howItWorks": "How it works",
     "howItWorksDesc": "dooboo uses the github API to measure your development combat power",
     "enjoyStats": "Check your development combat power with your own eyes",

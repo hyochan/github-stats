@@ -61,8 +61,8 @@
     "worksNormally": "정상 동작합니다"
   },
   "home": {
-    "visualizeDevStats": "Visualize your dev stats",
-    "visualizeDevStatsDesc": "Github 사용자 이름을 입력하고 기고를 뽐내보세요",
+    "developerPowerMeter": "개발자 전투력 측정기",
+    "developerPowerMeterDesc": "Github 사용자 이름을 입력하고 기고를 뽐내보세요",
     "howItWorks": "작동 원리 ",
     "howItWorksDesc": "dooboo는 github API를 사용하여 여러분들의 개발 전투력을 측정합니다",
     "enjoyStats": "여러분의 개발 전투력을 눈으로 확인하세요",

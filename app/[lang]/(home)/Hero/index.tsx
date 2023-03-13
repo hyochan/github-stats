@@ -104,10 +104,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
         )}
       >
         <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">
-          {t.visualizeDevStats}
+          {t.developerPowerMeter}
         </p>
         <p className="body1 text-[20px] text-left mb-[36px] opacity-50">
-          {t.visualizeDevStatsDesc}
+          {t.developerPowerMeterDesc}
         </p>
         {/* Begin: Search Form */}
         <form
