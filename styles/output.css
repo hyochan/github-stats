@@ -1039,6 +1039,11 @@ input[type='search']::-webkit-search-decoration,
   margin-bottom: 2.5rem;
 }
 
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -1703,9 +1708,9 @@ input[type='search']::-webkit-search-decoration,
   padding-right: 18px;
 }
 
-.px-\[28px\] {
-  padding-left: 28px;
-  padding-right: 28px;
+.px-\[42px\] {
+  padding-left: 42px;
+  padding-right: 42px;
 }
 
 .px-\[8x\] {
@@ -1756,6 +1761,21 @@ input[type='search']::-webkit-search-decoration,
 .py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.px-\[28px\] {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
 }
 
 .pb-28 {
@@ -2125,6 +2145,11 @@ input[type='search']::-webkit-search-decoration,
 @media not all and (min-width: 768px) {
   .max-md\:w-12 {
     width: 3rem;
+  }
+
+  .max-md\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
