@@ -19,7 +19,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
     +pluginStats.earth.score +
     +pluginStats.fire.score +
     +pluginStats.gold.score +
-    +pluginStats.person.score +
+    +pluginStats.people.score +
     +pluginStats.tree.score +
     +pluginStats.water.score;
 

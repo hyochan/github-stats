@@ -372,10 +372,10 @@ const upsertGithubStats = async ({
         stat_element: githubStatus.water.statElements,
       },
       {
-        name: 'PERSON',
-        score: githubStatus.person.score,
-        description: 'The dooboo default person stats.',
-        stat_element: githubStatus.person.statElements,
+        name: 'PEOPLE',
+        score: githubStatus.people.score,
+        description: 'The dooboo default people stats.',
+        stat_element: githubStatus.people.statElements,
       },
     ];
 
@@ -398,7 +398,7 @@ const upsertGithubStats = async ({
       (githubStatus.earth?.score || 0) +
       (githubStatus.gold?.score || 0) +
       (githubStatus.water?.score || 0) +
-      (githubStatus.person?.score || 0);
+      (githubStatus.people?.score || 0);
 
     const score = Math.round((sum / 6) * 100);
 
@@ -534,7 +534,7 @@ export const getDoobooStats = async ({
       const earth = ghStats.find((el) => el.name === 'EARTH');
       const gold = ghStats.find((el) => el.name === 'GOLD');
       const water = ghStats.find((el) => el.name === 'WATER');
-      const person = ghStats.find((el) => el.name === 'PERSON');
+      const people = ghStats.find((el) => el.name === 'PEOPLE');
 
       const result: PluginStats = {
         tree: {
@@ -567,11 +567,11 @@ export const getDoobooStats = async ({
           score: water?.score || 0,
           statElements: water?.stat_element,
         },
-        person: {
-          name: tPlugins.person,
-          description: tPlugins.personDescription,
-          score: person?.score || 0,
-          statElements: person?.stat_element,
+        people: {
+          name: tPlugins.people,
+          description: tPlugins.peopleDescription,
+          score: people?.score || 0,
+          statElements: people?.stat_element,
         },
       };
 

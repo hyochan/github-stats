@@ -16,7 +16,7 @@ export const statNames = [
   'earth',
   'gold',
   'water',
-  'person',
+  'people',
 ] as const;
 
 export type ScouterProps = {

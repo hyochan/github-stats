@@ -2,9 +2,9 @@ import type {PluginValue, Score} from '..';
 
 import {convertToHundreds} from '../pluginUtils';
 
-const PERSON_WEIGHT = 0.005;
+const PEOPLE_WEIGHT = 0.005;
 
-export const getGithubPersonScore = ({
+export const getGithubPeopleScore = ({
   tree,
   fire,
   earth,
@@ -49,11 +49,11 @@ export const getGithubPersonScore = ({
   const allOffset = scores.reduce((pre, val) => pre + val.offset, 0);
   const sum: number =
     scores.reduce((pre, val) => pre + val.count * val.offset, 0) /
-    PERSON_WEIGHT;
+    PEOPLE_WEIGHT;
   const score = convertToHundreds(sum, allOffset);
 
   return {
-    name: 'PERSON',
+    name: 'PEOPLE',
     score: score / 100,
     statElements: [
       {

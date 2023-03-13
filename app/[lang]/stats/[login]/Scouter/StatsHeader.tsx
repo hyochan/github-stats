@@ -5,7 +5,7 @@ import StatDooboo from 'public/assets/stats_dooboo.svg';
 import StatEarth from 'public/assets/stats_earth.svg';
 import StatFire from 'public/assets/stats_fire.svg';
 import StatGold from 'public/assets/stats_gold.svg';
-import StatPerson from 'public/assets/stats_person.svg';
+import StatPeople from 'public/assets/stats_people.svg';
 import StatTree from 'public/assets/stats_tree.svg';
 import StatWater from 'public/assets/stats_water.svg';
 import type {StatsInfo} from '../../../../../src/fetches/github';
@@ -94,11 +94,11 @@ export default function StatsHeader({
       ),
     },
     {
-      name: 'person',
+      name: 'people',
       svg: (
-        <StatPerson
+        <StatPeople
           className="self-center hover:opacity-70"
-          alt="person"
+          alt="people"
           width={24}
           height={24}
         />

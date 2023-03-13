@@ -26,7 +26,7 @@ export default function StatsDetails({
     earth: <SectionDooboo stats={stats} t={t} />,
     gold: <SectionGold stats={stats} t={t} />,
     water: <SectionWater stats={stats} t={t} />,
-    person: <SectionPeople stats={stats} t={t} />,
+    people: <SectionPeople stats={stats} t={t} />,
   };
 
   return (

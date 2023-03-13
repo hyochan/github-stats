@@ -12,10 +12,10 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
   return (
     <div className={clsx('flex flex-col flex-wrap')}>
       <p className={clsx('font-bold text-basic text-h2', inter.className)}>
-        {pluginStats.person.name}
+        {pluginStats.people.name}
       </p>
       <p className={clsx('text-body3 text-placeholder')}>
-        {pluginStats.person.description}
+        {pluginStats.people.description}
       </p>
       {/* Badges */}
       <div className={clsx('mt-6', 'flex flex-row')}>
@@ -26,17 +26,17 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
             'flex items-center',
           )}
         >
-          <span className="body3 font-bold mr-2">{`${stats.pluginStats.person.name} ${t.score}`}</span>{' '}
+          <span className="body3 font-bold mr-2">{`${stats.pluginStats.people.name} ${t.score}`}</span>{' '}
           <div className="body3 p-1 bg-contrast-light dark:bg-contrast-dark rounded-md">
             <p className="text-[12px] text-white dark:text-black">
-              {(pluginStats.person.score * 100).toFixed(0)}
+              {(pluginStats.people.score * 100).toFixed(0)}
             </p>
           </div>
         </div>
       </div>
       {/* Scores */}
       <div className={clsx('mt-8', 'flex flex-row items-center flex-wrap')}>
-        {pluginStats.person.statElements.map((el) => {
+        {pluginStats.people.statElements.map((el) => {
           return (
             <div key={el.name} className={clsx('mr-4 mt-1', 'items-center')}>
               <span className="mr-2 text-basic font-bold text-[14px]">
@@ -70,7 +70,7 @@ type SectionProps = {
   stats: DoobooStatsResponse;
 };
 
-export default function SectionWater(props: SectionProps): ReactElement {
+export default function SectionPeople(props: SectionProps): ReactElement {
   return (
     <div className={clsx('flex-1', 'flex flex-col')}>
       <SectionHeader {...props} />

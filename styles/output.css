@@ -1071,6 +1071,10 @@ input[type='search']::-webkit-search-decoration,
   margin-bottom: 1rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -1089,6 +1093,10 @@ input[type='search']::-webkit-search-decoration,
 
 .mb-\[8px\] {
   margin-bottom: 8px;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .ml-2 {
@@ -1171,6 +1179,10 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 1.5rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .mt-\[18px\] {
   margin-top: 18px;
 }
@@ -1181,22 +1193,6 @@ input[type='search']::-webkit-search-decoration,
 
 .mt-\[80px\] {
   margin-top: 80px;
-}
-
-.mt-8 {
-  margin-top: 2rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .flex {
