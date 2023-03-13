@@ -1,6 +1,7 @@
 {
   "nav": {
     "recentList": "최근 목록",
+    "stats": "스탯",
     "certifiedUsers": "인증 목록",
     "signIn": "로그인",
     "signOut": "로그아웃"
@@ -20,8 +21,8 @@
     "goldDescription": "금은 실속 그리고 기술을 의미합니다. 갈고 닦은 것들이 많을수록 좋은 평가를 받을 수 있습니다.",
     "water": "수",
     "waterDescription": "수는 지혜와 통찰력을 상징합니다. 이는 대게 여러 훌륭한 기여를 통해 사람들에게 좋은 영향을 주었음을 암시합니다.",
-    "person": "인",
-    "personDescription": "인은 신분을 상징합니다. 해당 능력치는 여러분이 가진 다른 능력치들의 조화로 이루어집니다.",
+    "people": "인",
+    "peopleDescription": "인은 신분을 상징합니다. 해당 능력치는 여러분이 가진 다른 능력치들의 조화로 이루어집니다.",
     "bio": "바이오"
   },
   "trophies": {
@@ -96,6 +97,21 @@
     "githubUsername": "깃허브 유저명",
     "noRecentList": "최근 리스트가 없습니다",
     "tier": "티어",
+    "score": "점수"
+  },
+  "stats": {
+    "title": "스탯",
+    "githubUsername": "깃허브 유저명",
+    "achievement": "성취",
+    "achievementDetails": "깃허브 데이터에 따름",
+    "avgScore": "평균 점수",
+    "tree": "목",
+    "fire": "화",
+    "earth": "토",
+    "gold": "금",
+    "water": "수",
+    "people": "인",
+    "github": "Github",
     "score": "점수"
   },
   "certifiedUsers": {

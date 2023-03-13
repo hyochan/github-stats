@@ -9,7 +9,7 @@ type GithubStatsSvgType = {
   login: string;
   avgScore: number;
   tierName: string;
-  personAxis: string;
+  peopleAxis: string;
   treeAxis: string;
   fireAxis: string;
   earthAxis: string;
@@ -26,7 +26,7 @@ export const renderGithubStatsSvg = ({
   earthAxis,
   fireAxis,
   goldAxis,
-  personAxis,
+  peopleAxis,
   treeAxis,
   waterAxis,
 }: GithubStatsSvgType): string => `
@@ -213,7 +213,7 @@ export const renderGithubStatsSvg = ({
   </g>
   <g id="currentStatsNumberText" opacity="0">
       <text id="currentStatsNumberTextType1" x="279" y="32" class="textCurrentStatsNumberStyle">${Math.round(
-        stats.pluginStats.person.score * 100,
+        stats.pluginStats.people.score * 100,
       )}</text>
       <text id="currentStatsNumberTextType2" x="323" y="57" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.tree.score * 100,
@@ -269,7 +269,7 @@ export const renderGithubStatsSvg = ({
   <animate begin="0.00s" xlink:href="#userNameText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#titleText" attributeName="opacity" attributeType="XML" dur="0.8s" fill="freeze" from="0" to="1"/>
   <!-- Hexagon Morphing Animation -->
-  <animate begin="1.50s" xlink:href="#currentStats" attributeName="points" attributeType="XML" dur="0.5s" fill="freeze" to="${personAxis} ${treeAxis} ${fireAxis} ${earthAxis} ${goldAxis} ${waterAxis}"/>
+  <animate begin="1.50s" xlink:href="#currentStats" attributeName="points" attributeType="XML" dur="0.5s" fill="freeze" to="${peopleAxis} ${treeAxis} ${fireAxis} ${earthAxis} ${goldAxis} ${waterAxis}"/>
   <animate begin="1.60s" xlink:href="#currentStatsShapeLoading" attributeName="opacity" attributeType="XML" dur="0.4s" fill="freeze" from="1" to="0"/>
   <!-- 6 Stats Animation -->
   <animate begin="1.50s" xlink:href="#statsBaseIcons" attributeName="opacity" attributeType="XML" dur="0.2s" fill="freeze" from="0" to="1"/>
@@ -296,7 +296,7 @@ export const renderGithubStatsSvgWithLangs = ({
   earthAxis,
   fireAxis,
   goldAxis,
-  personAxis,
+  peopleAxis,
   treeAxis,
   waterAxis,
   languages,
@@ -511,7 +511,7 @@ export const renderGithubStatsSvgWithLangs = ({
   </g>
   <g id="currentStatsNumberText" opacity="0">
       <text id="currentStatsNumberTextType1" x="279" y="32" class="textCurrentStatsNumberStyle">${Math.round(
-        stats.pluginStats.person.score * 100,
+        stats.pluginStats.people.score * 100,
       )}</text>
       <text id="currentStatsNumberTextType2" x="323" y="57" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.tree.score * 100,
@@ -618,7 +618,7 @@ export const renderGithubStatsSvgWithLangs = ({
   <animate begin="0.00s" xlink:href="#userNameText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#titleText" attributeName="opacity" attributeType="XML" dur="0.8s" fill="freeze" from="0" to="1"/>
   <!-- Hexagon Morphing Animation -->
-  <animate begin="1.50s" xlink:href="#currentStats" attributeName="points" attributeType="XML" dur="0.5s" fill="freeze" to="${personAxis} ${treeAxis} ${fireAxis} ${earthAxis} ${goldAxis} ${waterAxis}"/>
+  <animate begin="1.50s" xlink:href="#currentStats" attributeName="points" attributeType="XML" dur="0.5s" fill="freeze" to="${peopleAxis} ${treeAxis} ${fireAxis} ${earthAxis} ${goldAxis} ${waterAxis}"/>
   <animate begin="1.60s" xlink:href="#currentStatsShapeLoading" attributeName="opacity" attributeType="XML" dur="0.4s" fill="freeze" from="1" to="0"/>
   <!-- 6 Stats Animation -->
   <animate begin="1.50s" xlink:href="#statsBaseIcons" attributeName="opacity" attributeType="XML" dur="0.2s" fill="freeze" from="0" to="1"/>

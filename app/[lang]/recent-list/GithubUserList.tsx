@@ -13,7 +13,7 @@ import type {Translates} from '../../../src/localization';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import clsx from 'clsx';
 import {fetchRecentList} from '../../../src/fetches/recentList';
-import styles from './GithubUserList.module.css';
+import styles from '../styles.module.css';
 
 type Props = {
   t: Translates['recentList'];
@@ -109,7 +109,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       className={clsx(
         'flex-1 bg-paper mb-12 mx-6 overflow-y-scroll',
         'max-[480px]:mx-0 max-[480px]:mb-0',
-        styles.container,
+        styles.scrollable,
       )}
       onScroll={handleScroll}
     >

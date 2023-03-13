@@ -5,8 +5,8 @@ import createCtx from '~/utils/createCtx';
 import {useState} from 'react';
 
 interface Context {
-  signedIn: boolean;
-  changeSignedIn: (val: boolean) => void;
+  login: string;
+  changeLogin: (val: string) => void;
 }
 
 const [useCtx, Provider] = createCtx<Context>();
@@ -16,17 +16,17 @@ interface Props {
 }
 
 function AuthProvider({children}: Props): React.ReactElement {
-  const [signedIn, setSignedIn] = useState(false);
+  const [login, setLogin] = useState('');
 
-  const changeSignedIn = (val: boolean): void => {
-    setSignedIn(val);
+  const changeLogin = (val: string): void => {
+    setLogin(val);
   };
 
   return (
     <Provider
       value={{
-        changeSignedIn,
-        signedIn,
+        changeLogin,
+        login,
       }}
     >
       {children}

@@ -18,7 +18,7 @@ import {isDev} from '../../../src/utils/const';
 import path from 'path';
 import {uploadFileToSupabase} from '../../../src/utils/storage';
 
-type ScoreType = {
+export type ScoreType = {
   tierName:
     | 'Iron'
     | 'Bronze'
@@ -99,8 +99,8 @@ export const generateGithubSVG = async (
 
   const pluginStats = stats.pluginStats;
 
-  const personAxis = calculateAxis({
-    score: pluginStats.person.score,
+  const peopleAxis = calculateAxis({
+    score: pluginStats.people.score,
     xMax: 278,
     xMin: 278,
     yMax: 39.5,
@@ -151,7 +151,7 @@ export const generateGithubSVG = async (
     +pluginStats.earth.score +
     +pluginStats.fire.score +
     +pluginStats.gold.score +
-    +pluginStats.person.score +
+    +pluginStats.people.score +
     +pluginStats.tree.score +
     +pluginStats.water.score;
 
@@ -181,7 +181,7 @@ export const generateGithubSVG = async (
     fireAxis,
     goldAxis,
     login,
-    personAxis,
+    peopleAxis: peopleAxis,
     stats,
     tierName,
     tierSvg,
@@ -196,7 +196,7 @@ export const generateGithubSVG = async (
     fireAxis,
     goldAxis,
     login,
-    personAxis,
+    peopleAxis: peopleAxis,
     stats,
     tierName,
     tierSvg,

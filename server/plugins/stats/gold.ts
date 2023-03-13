@@ -10,7 +10,7 @@ export const getGithubGoldScore = (githubUser: UserGraph): PluginValue => {
     return {
       name: 'GOLD',
       score: 0,
-      stat_element: [],
+      statElements: [],
     };
   }
 
@@ -177,7 +177,7 @@ export const getGithubGoldScore = (githubUser: UserGraph): PluginValue => {
   return {
     name: 'GOLD',
     score: score / 100,
-    stat_element: [
+    statElements: [
       {
         key: 'SPONSORS',
         name: 'Sponsors',

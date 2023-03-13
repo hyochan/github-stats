@@ -10,7 +10,7 @@ export const getGithubTreeScore = (githubUser: UserGraph): PluginValue => {
     return {
       name: 'TREE',
       score: 0,
-      stat_element: [],
+      statElements: [],
     };
   }
 
@@ -51,7 +51,7 @@ export const getGithubTreeScore = (githubUser: UserGraph): PluginValue => {
   return {
     name: 'TREE',
     score: score / 100,
-    stat_element: [
+    statElements: [
       {
         key: 'ISSUES',
         name: 'Issues',

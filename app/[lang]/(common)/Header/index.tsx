@@ -35,14 +35,14 @@ export default function Header({t, lang}: Props): ReactElement {
   const supabase = getSupabaseBrowserClient();
 
   const [isDark, setIsDark] = useState(false);
-  const {signedIn, changeSignedIn} = useAuthContext();
+  const {login, changeLogin} = useAuthContext();
 
   useEffect(() => {
     const {
       data: {subscription},
     } = supabase.auth.onAuthStateChange((evt, session) => {
       const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
-      changeSignedIn(isLoggedIn);
+      changeLogin(isLoggedIn && session.user.user_metadata.user_name);
     });
 
     return () => {
@@ -53,17 +53,16 @@ export default function Header({t, lang}: Props): ReactElement {
 
   useEffect(() => setIsDark(isDarkMode()), []);
 
-  const navLinks: NavLink[] = signedIn
+  const navLinks: NavLink[] = !!login
     ? [
+        {
+          name: t.stats,
+          path: `/stats/${login}`,
+        },
         {
           name: t.recentList,
           path: '/recent-list',
         },
-        // TODO: Remove this comment when the feature is ready.
-        // {
-        //   name: nav.certifiedUsers,
-        //   path: '/certifiedUsers',
-        // },
       ]
     : [];
 
@@ -84,7 +83,7 @@ export default function Header({t, lang}: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Logo className="h-5" />
+          <Logo className="h-5 text-brand" />
           <Link href={`${lang}/`}>
             <H1
               className={clsx(
@@ -96,12 +95,15 @@ export default function Header({t, lang}: Props): ReactElement {
             </H1>
           </Link>
         </div>
-        <nav className="mr-[6px]">
+        <nav className="mr-[6px] flex flex-row">
           {navLinks.map((link, index) => {
             return (
               <ul
                 key={link.name}
-                className={clsx('hover:opacity-70 hover:translate-y-[2px]')}
+                className={clsx(
+                  'hover:opacity-70 hover:translate-y-[2px]',
+                  index !== 0 && 'ml-3',
+                )}
               >
                 <Link
                   href={`${lang}/${link.path}`}
@@ -127,13 +129,13 @@ export default function Header({t, lang}: Props): ReactElement {
       <div className="flex flex-row items-center">
         {/* <LocaleSwitcher languages={langs} /> */}
         <Button
-          text={signedIn ? t.signOut : t.signIn}
+          text={!!login ? t.signOut : t.signIn}
           className="mr-2 py-2 px-3"
           classNames={{
             text: 'body3',
           }}
           onClick={() => {
-            if (signedIn) {
+            if (!!login) {
               supabase.auth.signOut();
 
               return;

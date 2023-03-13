@@ -31,8 +31,8 @@ const statTypes = [
     icon: '/assets/stats_water.svg',
   },
   {
-    name: 'person',
-    icon: '/assets/stats_person.svg',
+    name: 'people',
+    icon: '/assets/stats_people.svg',
   },
 ] as const;
 
@@ -65,8 +65,8 @@ const PluginStatsInfo = ({
           ? statsInfo.gold.name
           : selectedStatName === 'water'
           ? statsInfo.water.name
-          : selectedStatName === 'person'
-          ? statsInfo.person.name
+          : selectedStatName === 'people'
+          ? statsInfo.people.name
           : statsInfo.tree.name}
       </TextTransition>
       <TextTransition
@@ -82,8 +82,8 @@ const PluginStatsInfo = ({
           ? statsInfo.gold.description
           : selectedStatName === 'water'
           ? statsInfo.water.description
-          : selectedStatName === 'person'
-          ? statsInfo.person.description
+          : selectedStatName === 'people'
+          ? statsInfo.people.description
           : statsInfo.tree.description}
       </TextTransition>
     </div>

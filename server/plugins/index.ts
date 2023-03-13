@@ -3,7 +3,7 @@ import type {UserGraph} from './types/UserGraph';
 import {getGithubEarthScore} from './stats/earth';
 import {getGithubFireScore} from './stats/fire';
 import {getGithubGoldScore} from './stats/gold';
-import {getGithubPersonScore} from './stats/person';
+import {getGithubPeopleScore} from './stats/people';
 import {getGithubTreeScore} from './stats/tree';
 import {getGithubWaterScore} from './stats/water';
 
@@ -51,14 +51,14 @@ export type PluginValue = {
   name: string;
   description?: string;
   score: number;
-  stat_element: StatsElement[];
+  statElements: StatsElement[];
 };
 
 export type PluginStats = {
   earth: PluginValue;
   fire: PluginValue;
   gold: PluginValue;
-  person: PluginValue;
+  people: PluginValue;
   tree: PluginValue;
   water: PluginValue;
 };
@@ -72,7 +72,7 @@ export const getGithubStatus = (
   const earth = getGithubEarthScore(userCommits);
   const gold = getGithubGoldScore(githubUser);
   const water = getGithubWaterScore(githubUser);
-  const person = getGithubPersonScore({
+  const people = getGithubPeopleScore({
     tree: tree.score,
     fire: fire.score,
     earth: earth.score,
@@ -86,7 +86,7 @@ export const getGithubStatus = (
     earth,
     gold,
     water,
-    person,
+    people,
   };
 
   return stats;

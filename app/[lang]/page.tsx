@@ -39,10 +39,10 @@ export default async function Page({
       name: plugins.water,
       description: plugins.waterDescription,
     },
-    person: {
-      id: 'person',
-      name: plugins.person,
-      description: plugins.personDescription,
+    people: {
+      id: 'people',
+      name: plugins.people,
+      description: plugins.peopleDescription,
     },
   };
 

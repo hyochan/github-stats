@@ -10,7 +10,7 @@ export const getGithubFireScore = (githubUser: UserGraph): PluginValue => {
     return {
       name: 'FIRE',
       score: 0,
-      stat_element: [],
+      statElements: [],
     };
   }
 
@@ -68,7 +68,7 @@ export const getGithubFireScore = (githubUser: UserGraph): PluginValue => {
   return {
     name: 'FIRE',
     score: score / 100,
-    stat_element: [
+    statElements: [
       {
         key: 'COMMITS',
         name: 'Commits',

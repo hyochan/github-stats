@@ -42,7 +42,7 @@ export type StatsInfo = {
   earth: ResultAttr;
   fire: ResultAttr;
   gold: ResultAttr;
-  person: ResultAttr;
+  people: ResultAttr;
   tree: ResultAttr;
   water: ResultAttr;
 };
