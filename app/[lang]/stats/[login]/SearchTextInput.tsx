@@ -24,7 +24,7 @@ export default function SearchTextInput({
   return (
     <form
       action={`/stats/${login}`}
-      method="post"
+      method="get"
       className={clsx('', className)}
       autoComplete="off"
     >
