@@ -2,6 +2,7 @@ import type {DoobooStatsResponse} from '../../../../../../server/services/github
 import {Inter} from '@next/font/google';
 import type {ReactElement} from 'react';
 import type {StatsDetail} from '../../../../../../server/plugins';
+import SvgEnter from '@/public/assets/enter.svg';
 import type {Translates} from '../../../../../../src/localization';
 import clsx from 'clsx';
 
@@ -13,10 +14,10 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
   return (
     <div className={clsx('flex flex-col flex-wrap')}>
       <p className={clsx('font-bold text-basic text-h2', inter.className)}>
-        {pluginStats.gold.name}
+        {pluginStats.earth.name}
       </p>
       <p className={clsx('text-body3 text-placeholder')}>
-        {pluginStats.gold.description}
+        {pluginStats.earth.description}
       </p>
       {/* Badges */}
       <div className={clsx('mt-6', 'flex flex-row')}>
@@ -27,17 +28,17 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
             'flex items-center',
           )}
         >
-          <span className="body3 font-bold mr-2">{`${stats.pluginStats.gold.name} ${t.score}`}</span>{' '}
+          <span className="body3 font-bold mr-2">{`${stats.pluginStats.earth.name} ${t.score}`}</span>{' '}
           <div className="body3 p-1 bg-contrast-light dark:bg-contrast-dark rounded-md">
             <p className="text-[12px] text-white dark:text-black">
-              {(pluginStats.gold.score * 100).toFixed(0)}
+              {(pluginStats.earth.score * 100).toFixed(0)}
             </p>
           </div>
         </div>
       </div>
       {/* Scores */}
       <div className={clsx('mt-8', 'flex flex-row items-center flex-wrap')}>
-        {pluginStats.gold.statElements.map((el) => {
+        {pluginStats.earth.statElements.map((el) => {
           return (
             <div key={el.name} className={clsx('mr-4 mt-1', 'items-center')}>
               <span className="mr-2 text-basic font-bold text-[14px]">
@@ -63,7 +64,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
 }
 
 function SectionBody({stats}: SectionProps): ReactElement {
-  const statElements = stats.pluginStats.gold.statElements;
+  const statElements = stats.pluginStats.earth.statElements;
 
   return (
     <div className={clsx('flex flex-col flex-wrap')}>
@@ -95,7 +96,6 @@ function SectionBody({stats}: SectionProps): ReactElement {
             </p>
             {details.map((detail: StatsDetail) => {
               switch (detail.type) {
-                case 'commit':
                 case 'repository':
                   return (
                     <div key={`${el.name}-${detail.name}`}>
@@ -111,17 +111,41 @@ function SectionBody({stats}: SectionProps): ReactElement {
                       </a>
                     </div>
                   );
-                case 'language':
+                case 'commit':
                   return (
-                    <div key={`${el.name}-${detail.name}`}>
-                      <p
-                        className={clsx(
-                          'hover:opacity-70 p-2  text-body3 text-basic font-bold',
-                          'border-border-light dark:border-border-dark',
-                        )}
+                    <div
+                      key={`${el.name}-${detail.name}`}
+                      className="flex flex-col"
+                    >
+                      <div className="flex flex-row items-center">
+                        <a href={detail.url} className={clsx('mb-2')}>
+                          <p
+                            className={clsx(
+                              'hover:opacity-70 p-2 border border-1 text-body3 text-basic font-bold',
+                              'border-border-light dark:border-border-dark',
+                            )}
+                          >
+                            {detail.name}
+                          </p>
+                        </a>
+                      </div>
+
+                      <div
+                        className={clsx('mb-6', 'flex flex-row items-center')}
                       >
-                        {detail.name}
-                      </p>
+                        <SvgEnter className="body3 w-4 h-4 m-l" />
+
+                        <a href={detail.url} className={clsx('ml-2')}>
+                          <p
+                            className={clsx(
+                              'hover:opacity-70 p-2 text-basic font-bold body4 rounded-sm',
+                              'bg-disabled-light dark:bg-disabled-dark',
+                            )}
+                          >
+                            {detail.message}
+                          </p>
+                        </a>
+                      </div>
                     </div>
                   );
                 default:
@@ -140,7 +164,7 @@ type SectionProps = {
   stats: DoobooStatsResponse;
 };
 
-export default function SectionGold(props: SectionProps): ReactElement {
+export default function SectionEarth(props: SectionProps): ReactElement {
   return (
     <div className={clsx('flex-1', 'flex flex-col')}>
       <SectionHeader {...props} />

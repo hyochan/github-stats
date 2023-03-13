@@ -30,12 +30,11 @@ export default function SearchTextInput({
     >
       <div
         className={clsx(
-          'rounded-[4px] bg-gray7 px-3 h-[32px] relative body4',
+          'rounded-[4px] body4 bg-gray3 dark:bg-gray7 px-3 h-[32px] relative',
           'flex flex-row-reverse items-center',
         )}
       >
         <TextInput
-          className="text-white"
           value={login}
           placeholder={t.githubUsername}
           onChange={(e) => {
@@ -49,7 +48,7 @@ export default function SearchTextInput({
             'bg-transparent border-0 text-center px-2 pt-2',
             'absolute',
           )}
-          text={<SearchIcon size={14} fill="#FFF" />}
+          text={<SearchIcon size={14} className="text-basic" />}
         />
       </div>
     </form>
