@@ -118,7 +118,10 @@ function SectionBody({stats}: SectionProps): ReactElement {
                       className="flex flex-col"
                     >
                       <div className="flex flex-row items-center">
-                        <a href={detail.url} className={clsx('mb-2')}>
+                        <a
+                          href={`https://github.com/${detail.name}`}
+                          className={clsx('mb-2')}
+                        >
                           <p
                             className={clsx(
                               'hover:opacity-70 p-2 border border-1 text-body3 text-basic font-bold',
@@ -135,7 +138,10 @@ function SectionBody({stats}: SectionProps): ReactElement {
                       >
                         <SvgEnter className="body3 w-4 h-4 m-l" />
 
-                        <a href={detail.url} className={clsx('ml-2')}>
+                        <a
+                          href={`https://github.com/${detail.name}/commit/${detail.sha}`}
+                          className={clsx('ml-2')}
+                        >
                           <p
                             className={clsx(
                               'hover:opacity-70 p-2 text-basic font-bold body4 rounded-sm',
