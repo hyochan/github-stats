@@ -607,7 +607,7 @@ body {
   display: flex;
 }
 
-body ::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 0px;
 }
 

@@ -33,7 +33,7 @@ export default function Scouter(props: ScouterProps): ReactElement {
     <div
       className={clsx(
         styles.scrollable,
-        'flex flex-col max-w-[800px] flex-start items-center',
+        'flex flex-col flex-start items-center',
       )}
     >
       <StatsHeader
