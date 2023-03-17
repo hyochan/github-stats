@@ -7,6 +7,7 @@ import type {PluginType} from '../Home';
 import type {ReactElement} from 'react';
 import type {Translates} from '../../../../src/localization';
 import {track} from '@amplitude/analytics-browser';
+import {useAuthContext} from '../../../../src/components/AuthProvider';
 import {useRouter} from 'next/navigation';
 import {useSnackbar} from 'react-simple-snackbar';
 
@@ -28,6 +29,7 @@ export default function StatsUrlCard({
 }: Props): ReactElement {
   const router = useRouter();
   const [openSnackbar] = useSnackbar();
+  const {login: authLogin} = useAuthContext();
 
   const copyURLToClipboard = (type: 'stats' | 'trophies'): void => {
     openSnackbar(`${t.urlCopiedToClipboard}`);
@@ -75,11 +77,13 @@ export default function StatsUrlCard({
       <div className="text-[14px] text-placeholder flex-wrap flex-row items-center justify-center self-center mt-4">
         {t.copyPasteToGithubReadme}
       </div>
-      <Button
-        className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
-        text={t.findOutMore}
-        onClick={() => router.push('/sign-in')}
-      />
+      {!authLogin ? (
+        <Button
+          className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
+          text={t.findOutMore}
+          onClick={() => router.push('/sign-in')}
+        />
+      ) : null}
     </div>
   );
 }
