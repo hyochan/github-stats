@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "prHourlyLimit": 3,
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@types/"
+      ],
+      "automerge": true,
+      "automergeType": "pr-comment",
+      "automergeComment": "types: auto merge",
+      "major": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "lints",
+      "matchPackagePatterns": [
+        "^eslint",
+        "^prettier"
+      ],
+      "labels": [
+        "lint"
+      ]
+    }
+  ]
+}
