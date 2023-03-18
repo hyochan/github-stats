@@ -1897,6 +1897,11 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-dark {
+  --tw-text-opacity: 1;
+  color: rgb(24 33 40 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -2119,6 +2124,11 @@ input[type='search']::-webkit-search-decoration,
 .dark .dark\:text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-paper-light {
+  --tw-text-opacity: 1;
+  color: rgb(240 242 245 / var(--tw-text-opacity));
 }
 
 @media not all and (min-width: 768px) {

@@ -101,6 +101,7 @@
   },
   "stats": {
     "title": "스탯",
+    "searchUserHint": "점수 속성을 자세히 보려면 ​​오른쪽 상단 모서리에서 사용자를 검색하십시오",
     "githubUsername": "깃허브 유저명",
     "achievement": "성취",
     "achievementDetails": "깃허브 데이터에 따름",

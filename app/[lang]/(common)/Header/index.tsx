@@ -64,7 +64,12 @@ export default function Header({t, lang}: Props): ReactElement {
           path: '/recent-list',
         },
       ]
-    : [];
+    : [
+        {
+          name: t.stats,
+          path: `/stats/`,
+        },
+      ];
 
   return (
     <header
