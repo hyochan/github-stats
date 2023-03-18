@@ -1,10 +1,9 @@
-import type {Decimal} from '@prisma/client/runtime';
 import type {UserGraph} from './types/UserGraph';
 import {convertToHundreds} from './pluginUtils';
 
 export type PluginTrophy = {
   type: string;
-  score: number | Decimal;
+  score: number;
   points: number;
 };
 
