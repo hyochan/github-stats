@@ -81,7 +81,7 @@ export default function StatsUrlCard({
         <Button
           className="mt-6 border-0 bg-disabled p-2 rounded-[4px]"
           text={t.findOutMore}
-          onClick={() => router.push('/sign-in')}
+          onClick={() => router.push(`/stats/${login}`)}
         />
       ) : null}
     </div>
