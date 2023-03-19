@@ -6,7 +6,23 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=dooboo.io)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
+## Previews
+
+### [Webpage](https://dooboo.io)
+
 <img width="415" alt="landing" src="https://user-images.githubusercontent.com/27461460/189487529-f2942a04-63af-4d6d-9600-d84e50cabeb9.png">
+
+### Readme Stats
+
+#### 📊GitHub Stats :
+<a href="https://dooboo.io"><img src="https://dooboo.io/api/github-stats-advanced?login=hyochan" width="520" /></a>
+
+#### 🏆GitHub Trophies
+<a href="https://dooboo.io"><img src="https://dooboo.io/api/github-trophies?login=hyochan" width="520" /></a>
+
+> Every GitHub user can make use of their own 🙌
+
+## Project Overview
 
 `dooboo.io` is a project aimed at providing a comprehensive and visual representation of a developer's potential based on six key attributes. These attributes are tree, fire, earth, gold, water, and people. Each of these attributes symbolizes a different aspect of a developer's skill set, personality, and overall potential. The six attributes are described as follows:
 
