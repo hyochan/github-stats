@@ -110,7 +110,7 @@ export default function StatsHeader({
     <div
       className={clsx(
         'max-h-8 py-8 self-stretch items-center border-b-[1px] border-b-border-light dark:border-b-border-dark',
-        'flex flex-row justify-between overflow-x-scroll overflow-y-hidden',
+        'flex flex-row justify-between overflow-y-hidden',
       )}
     >
       {stats.map((stat) => {
