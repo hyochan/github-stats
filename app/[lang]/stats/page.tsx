@@ -14,7 +14,9 @@ export default async function Page({
 
   return (
     <Container t={t}>
-      <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
+      <div className="max-[480px]:p-6">
+        <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
+      </div>
     </Container>
   );
 }
