@@ -3,124 +3,52 @@
 > Project is built mainly with `nextjs`, `react server component` and `supabase`.
 
 [![CI](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml/badge.svg)](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=dooboo.io)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 <img width="415" alt="landing" src="https://user-images.githubusercontent.com/27461460/189487529-f2942a04-63af-4d6d-9600-d84e50cabeb9.png">
 
-## Environment variables
+`dooboo.io` is a project aimed at providing a comprehensive and visual representation of a developer's potential based on six key attributes. These attributes are tree, fire, earth, gold, water, and people. Each of these attributes symbolizes a different aspect of a developer's skill set, personality, and overall potential. The six attributes are described as follows:
 
-<details>
-<summary>NEXT_PUBLIC_ROOT_URL</summary>
+### Tree (Curiosity)
 
-Base url of your web app.
-</details>
+<img width="160" src="https://user-images.githubusercontent.com/27461460/226172447-5d165895-7f93-4ded-93bf-0f384dd28a59.png" />
 
-<details>
-<summary>JWT_SECRET</summary>
+This attribute represents a developer's inquisitiveness and their ability to continuously learn new things. A high tree score indicates that the developer is proactive in seeking knowledge and exploring new technologies or methods.
 
-Used in server-side when you want to encode & decode data when communicating with client.
-</details>
+### Fire (Passion)
+This attribute embodies a developer's enthusiasm and dedication to their craft. A high fire score signifies that the developer is genuinely passionate about programming and driven to create, innovate, and excel in their work.
 
-<details>
-<summary>DATABASE_URL</summary>
+<img width="160" src="https://user-images.githubusercontent.com/27461460/226172488-d2a2fa16-17ed-429c-94fd-9377d9f7f991.png" />
 
-Database connection url to access database in [Supabase](https://supabase.io).
-You do not need to set this variable in [Vercel](https://vercel.com).
-</details>
+### Earth (Patience and Persistence)
+This attribute represents a developer's ability to remain patient and persistent in the face of challenges. A high earth score indicates that the developer has the tenacity to keep pushing forward, even when encountering obstacles or setbacks.
 
-<details>
-<summary>NEXT_PUBLIC_SUPABASE_URL</summary>
+<img src="https://miro.medium.com/v2/resize:fit:340/0*xCwPy9j-l9HyWhYv" />
 
-Supabase database url. `NEXT_PUBLIC_` prefix is needed because this is used in both browser and server.
-</details>
+### Gold (Achievements)
+This attribute showcases a developer's accomplishments, such as completed projects, recognition within the industry, or other tangible milestones. A high gold score highlights the developer's success and ability to deliver results.
 
-<details>
-<summary>NEXT_PUBLIC_SUPABASE_ANON_KEY</summary>
+<img src="https://miro.medium.com/v2/resize:fit:256/format:webp/0*FRFcWaXFKFeMNf3G.png" />
 
-Supabase api key. `NEXT_PUBLIC_` prefix is needed because this is used in both browser and server.
-</details>
+### Water (Wisdom and Insights)
+This attribute represents a developer's capacity to apply their knowledge and experience effectively. A high water score indicates that the developer has gained valuable insights from their experiences and can make wise decisions in their work.
 
-<details>
-<summary>GITHUB_CLIENT_ID</summary>
+<img src="https://miro.medium.com/v2/resize:fit:256/format:webp/0*md8WAPdfvhZMojiU.png" />
 
-The github client id to access github api.
-</details>
+### People (Average of 5 elements)
+This attribute serves as an overall representation of a developer's potential. It is calculated by averaging the scores of the other five attributes, with water and gold being more heavily weighted to emphasize their importance.
 
-<details>
-<summary>GITHUB_CLIENT_SECRET</summary>
+<img width="160" src="https://user-images.githubusercontent.com/27461460/226172175-4b8e9ba3-37f9-4245-a22f-aa2a2046a302.png" />
 
-The github client secret to access github api.
-</details>
+By assessing and visualizing these six attributes, the `dooboo.io`, the Developer Power Meter project aims to provide a holistic view of a developer's potential. This tool can help both individuals and organizations to understand a developer's strengths and weaknesses, allowing for better collaboration, professional development, and more informed hiring decisions.
 
-<details>
-<summary>GH_TOKEN</summary>
+For a deeper understanding of this philosophy, you can refer to a [blog post](https://medium.com/dooboolab/a-new-fancy-way-to-visualize-your-github-stats-418b5d59498) that provides further insight and discussion.
 
-The github token to use github authentication.
-</details>
+Many people have asked me how to become a developer that companies desire or how to become a good developer. After reflecting on the general form of my responses and incorporating my 10 years of experience, I have formulated a comprehensive philosophy within the current framework.
 
-> We strongly recommend to organize multiple environment files for prisma migration or testing.
+This philosophy is composed of six elements, symbolized by a hexagon, which represents a flexible tofu-like substance. In Korean, tofu is called "dooboo" (두부), and it signifies a soft, adaptable, and growth-oriented individual, embodying the ideal qualities of a developer.
 
-```
-cp `.env.sample` `.env.dev` // For Prisma migration
-cp `.env.sample` `.env.test` // For testing
-cp `.env.sample` `.env.local` // For developing
-```
+If you find this philosophy appealing and believe that you embody these qualities, please feel free to reach out to me. I would greatly appreciate the opportunity to connect with you. You can contact me by emailing <a href="mailto:hyo@dooboolab.com">hyo@dooboolab.com</a>.
 
-## Installation
-
-### 1. Prepare Supabase account
-
-1. Create [Supabase](https://supabase.com) project
-
-1. Set alias in your bash and set supabase project reference id
-
-   ```
-   alias SUPABASE_PROJECT_DOOBOOIO = 
-   ```
-
-   Now, you can generate supabase types with our script.
-
-   ```
-   generate:supabase
-   ```
-
-### 2. Prepare Database
-
-Run `yarn migrate:dev` to you local database then when every is done right, you can then run `yarn migrate:prod` to update production database in Supabase.
-
-Add below script in `supabase` to use `@default(dbgenerated("gen_random_uuid()"))`.
-
-```
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-```
-
-### 3. Prepare Storage
-
-Create storage bucket `public` as `Public bucket` and create `new policy to public` with custom rule as shown below.
-
-<img width="720" alt="storage" src="https://user-images.githubusercontent.com/27461460/223626135-b4f4fc59-8feb-4f1d-9c70-cfb347606b38.png">
-
-### 4. Copy environment variables
-
-```
-cp .env.sample .env.local
-```
-
-Check the environment variables stated in [Environment variables](#1-environment-variables) and replace to your own.
-
-We recommend to have 3 environments as shown below.
-- .env.dev
-- .env.local
-- .env.prod
-
-> Try migrating database to `.env.dev` then run on `.env.local` when developing and in staging. If everything is done, `.env.prod` is for you for production.
-
-### Tips
-
-#### When using yarn berry and TS fails after upgrading packages, try to follow below steps.
-
-1. `yarn set version berry`
-1. `yarn`
-1. `yarn dlx @yarnpkg/sdks vscode`
-1. `yarn plugin import typescript`
-1. `yarn dlx @yarnpkg/sdks vscode`
-   - Useful when prettier extension is not working.
+We have a vision of people leading fulfilling and rewarding lives, using their time efficiently and embracing life's challenges. We are dedicated to helping individuals experience a sense of accomplishment and satisfaction in their achievements.

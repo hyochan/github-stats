@@ -1757,11 +1757,6 @@ input[type='search']::-webkit-search-decoration,
   padding-bottom: 8px;
 }
 
-.px-24 {
-  padding-left: 6rem;
-  padding-right: 6rem;
-}
-
 .pb-28 {
   padding-bottom: 7rem;
 }
