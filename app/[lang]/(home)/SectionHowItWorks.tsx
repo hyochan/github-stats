@@ -62,6 +62,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
         className={clsx(
           'self-stretch py-20 px-14 min-h-[400px] relative',
           'flex flex-col justify-start items-start',
+          'min-[1200px]:self-center min-[1200px]:w-[1200px]',
         )}
       >
         <Image

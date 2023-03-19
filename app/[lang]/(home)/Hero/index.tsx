@@ -101,6 +101,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
           'self-stretch px-14',
           'flex flex-col align-start justify-start',
           'max-[425px]:px-8',
+          'min-[1200px]:self-center min-[1200px]:w-[1200px]',
         )}
       >
         <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">

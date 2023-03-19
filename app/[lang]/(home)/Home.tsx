@@ -23,13 +23,7 @@ function Home({t, statsInfo}: Props): ReactElement {
   initAmplitude();
 
   return (
-    <div
-      className={clsx(
-        'flex-1 w-screen bg-paper',
-        'flex flex-col',
-        'max-[425px]: p-0',
-      )}
-    >
+    <div className={clsx('flex-1 w-screen bg-paper', 'flex flex-col')}>
       <Hero t={t} statsInfo={statsInfo} />
       <SectionHowItWorks t={t} />
       <SectionFooter t={t} />
