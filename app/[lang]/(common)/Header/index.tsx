@@ -179,7 +179,15 @@ function MobileNavMenus(
               className="flex flex-row items-center"
             >
               <Github className="h-6 body2 mr-2" />
-              <span className="text-basic text-body3">{t.github}</span>
+              <span
+                className={clsx(
+                  'text-placeholder-light text-body3 font-bold',
+                  'dark:text-placeholder-dark',
+                  'hover:text-basic',
+                )}
+              >
+                {t.github}
+              </span>
             </a>
           </div>
           <SwitchToggle
@@ -255,7 +263,7 @@ export default function Header(props: Props): ReactElement {
   return (
     <header
       className={clsx(
-        'h-16 decoration-0 bg-basic sticky',
+        'h-[56px] decoration-0 bg-basic sticky',
         'flex flex-row items-center justify-between',
         'px-[28px]',
       )}
@@ -288,22 +296,20 @@ export default function Header(props: Props): ReactElement {
             </H1>
           </Link>
         </div>
-        <>
-          <DesktopNavMenus
-            {...props}
-            navLinks={navLinks}
-            login={login}
-            isDark={isDark}
-            setIsDark={setIsDark}
-          />
-          <MobileNavMenus
-            {...props}
-            navLinks={navLinks}
-            login={login}
-            isDark={isDark}
-            setIsDark={setIsDark}
-          />
-        </>
+        <DesktopNavMenus
+          {...props}
+          navLinks={navLinks}
+          login={login}
+          isDark={isDark}
+          setIsDark={setIsDark}
+        />
+        <MobileNavMenus
+          {...props}
+          navLinks={navLinks}
+          login={login}
+          isDark={isDark}
+          setIsDark={setIsDark}
+        />
       </div>
     </header>
   );

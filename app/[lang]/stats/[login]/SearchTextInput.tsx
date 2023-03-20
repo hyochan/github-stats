@@ -30,7 +30,7 @@ export default function SearchTextInput({
     >
       <div
         className={clsx(
-          'rounded-[4px] body4 bg-gray3 dark:bg-gray7 px-3 h-[32px] relative',
+          'rounded-[4px] body4 bg-gray3 dark:bg-gray7 px-3 h-[32px]',
           'flex flex-row-reverse items-center',
         )}
       >

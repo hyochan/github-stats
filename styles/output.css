@@ -1025,6 +1025,34 @@ input[type='search']::-webkit-search-decoration,
   right: 28px;
 }
 
+.top-16 {
+  top: 4rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-24 {
+  top: 6rem;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-\[-1\] {
+  z-index: -1;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -1219,6 +1247,10 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 0.75rem;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
 .flex {
   display: flex;
 }
@@ -1318,6 +1350,14 @@ input[type='search']::-webkit-search-decoration,
 
 .h-\[48px\] {
   height: 48px;
+}
+
+.h-\[calc\(100vh-56px\)\] {
+  height: calc(100vh - 56px);
+}
+
+.h-\[56px\] {
+  height: 56px;
 }
 
 .max-h-8 {
@@ -1472,6 +1512,10 @@ input[type='search']::-webkit-search-decoration,
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .flex-wrap {
@@ -1839,6 +1883,11 @@ input[type='search']::-webkit-search-decoration,
   padding-right: 2.5rem;
 }
 
+.py-\[56px\] {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
 .pb-28 {
   padding-bottom: 7rem;
 }
@@ -2012,6 +2061,11 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-placeholder-light {
+  --tw-text-opacity: 1;
+  color: rgb(120 120 120 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -2097,6 +2151,16 @@ input[type='search']::-webkit-search-decoration,
   font-style: normal;
 
   font-display: block;
+}
+
+.hover\:text-basic:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.dark .hover\:text-basic:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .after\:absolute::after {
@@ -2245,6 +2309,11 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.dark .dark\:text-placeholder-dark {
+  --tw-text-opacity: 1;
+  color: rgb(144 144 144 / var(--tw-text-opacity));
+}
+
 @media not all and (min-width: 768px) {
   .max-md\:hidden {
     display: none;
@@ -2264,6 +2333,11 @@ input[type='search']::-webkit-search-decoration,
   .max-\[480px\]\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
+  }
+
+  .max-\[480px\]\:my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .max-\[480px\]\:mb-0 {

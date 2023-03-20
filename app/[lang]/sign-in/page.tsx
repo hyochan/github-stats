@@ -44,7 +44,7 @@ export default async function Page({
     <div
       className={clsx(
         'bg-modal-background',
-        'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden',
+        'flex-1 bg-paper overflow-hidden',
         'max-md:px-4',
         'flex flex-col justify-center items-center',
       )}

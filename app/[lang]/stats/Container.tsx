@@ -16,14 +16,14 @@ export default function Container({t, children}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden px-6',
+        'flex-1 bg-paper overflow-hidden px-6',
         'max-[480px]:px-0',
-        'flex flex-col relative',
+        'flex flex-col',
       )}
     >
       <SearchTextInput
         t={t}
-        className="flex-1 absolute right-6 top-3"
+        className="flex-1 absolute right-6 top-20"
         initialValue={''}
       />
       <H1
