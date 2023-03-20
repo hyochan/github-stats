@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @font-face {
- font-family: 'doobooui';
- src: url('/fonts/doobooui.ttf?ixpxfq') format('truetype');
- font-weight: normal;
- font-style: normal;
- font-display: block;
+  font-family: 'doobooui';
+  src: url('/fonts/doobooui.ttf?ixpxfq') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
 @layer base {

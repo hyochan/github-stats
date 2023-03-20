@@ -31,8 +31,14 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
       <body>
         <RootProvider initialLocale={lang}>
           <main
-            className={clsx('text-center flex-1 self-stretch', 'flex flex-col')}
+            className={clsx(
+              'text-center flex-1 self-stretch relative',
+              'flex flex-col-reverse',
+            )}
           >
+            <div className={clsx('h-[calc(100vh-56px)]', 'flex')}>
+              {children}
+            </div>
             <Header
               t={nav}
               lang={lang}
@@ -41,9 +47,6 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
                 ko: langs.ko,
               }}
             />
-            <div className={clsx('flex-1 self-stretch', 'flex')}>
-              {children}
-            </div>
           </main>
         </RootProvider>
       </body>

@@ -30,15 +30,11 @@ export default async function Page({
   const userPlugins = plugin ? await getUserPlugins({plugin}) : [];
 
   return (
-    <div
-      className={clsx(
-        'w-screen h-[calc(100vh-64px)] bg-paper overflow-hidden',
-        'flex flex-col',
-      )}
-    >
+    <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
       <H1
         className={clsx(
           'text-[44px] font-bold mt-12 mb-[32px] mx-6',
+          'max-[480px]:text-[28px] max-[480px]:mb-0 max-[480px]:my-4',
           inter.className,
         )}
       >

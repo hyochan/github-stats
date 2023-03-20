@@ -4,7 +4,8 @@
     "stats": "스탯",
     "certifiedUsers": "인증 목록",
     "signIn": "로그인",
-    "signOut": "로그아웃"
+    "signOut": "로그아웃",
+    "github": "깃허브"
   },
   "langs": {
     "en": "영어",
