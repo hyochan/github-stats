@@ -284,7 +284,7 @@ export const renderGithubStatsSvg = ({
   <!-- dooboo.io Text Animation -->
   <animate begin="1.70s" xlink:href="#doobooText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <!-- END of Animation -->
-  </svg>
+</svg>
 `;
 
 export const renderGithubStatsSvgWithLangs = ({
@@ -324,11 +324,10 @@ export const renderGithubStatsSvgWithLangs = ({
     };
   });
 
-  const fistConvertedLangs = convertedLangs.slice(0, 3);
+  const firstConvertedLangs = convertedLangs.slice(0, 3);
   const secondConvertedLangs = convertedLangs.slice(3, 6);
 
-  return `
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 350 208" style="enable-background:new 0 0 350 208;" xml:space="preserve">
+  return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 350 208" style="enable-background:new 0 0 350 208;" xml:space="preserve">
   <style type="text/css">
     <![CDATA[
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=block");
@@ -339,24 +338,31 @@ export const renderGithubStatsSvgWithLangs = ({
     .statsBaseIconStyle{fill:#FFFFFF; opacity:0.2;}
     .currentStatsShapeStyle{opacity:0.8; stroke:#FFFFFF; stroke-width:1;}
     .currentStatsLoadingStyle{opacity:0.8; stroke:#FFFFFF; stroke-width:1;}
-    .textGithubIDStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; fill: #FFFFFF;}
+    .textGithubIDStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; color: #FFFFFF;}
     .textCurrentAverageStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; fill: #FFFFFF;}
     .textCurrentStatsNumberStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 9px; fill: #FFFFFF;}
-    .textSubtitleStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 11px; fill: #FFFFFF; opacity:0.5;}
+    .textSubtitleStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 12px; color: #646569;}
     .textLabelStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; }
     .textLabelSubStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; opacity:0.5;}
     .textInfoStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; fill: #FFFFFF; opacity:0.3;}
-    .textSpacer{fill: #FFFFFF; opacity:0; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 5px; }
     .textLangLabelStyle{fill: #FFFFFF; opacity:0.3; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangStyle{fill: #FFFFFF; opacity:1; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangPercent{fill: #FFFFFF; opacity:0.5; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
-    .textDot{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; }
-    .langType1{fill: #FFFFFF; opacity:1.00;}
-    .langType2{fill: #FFFFFF; opacity:0.40;}
-    .langType3{fill: #FFFFFF; opacity:0.24;}
-    .langType4{fill: #FFFFFF; opacity:0.16;}
-    .langType5{fill: #FFFFFF; opacity:0.12;}
-    .langType6{fill: #FFFFFF; opacity:0.08;}
+    .textLangStyle{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot1{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot2{margin-right: 4px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot3{margin-right: 4px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot4{margin-right: 4px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot5{margin-right: 4px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot6{margin-right: 4px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangPercent{margin-right: 4px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
+    .textDot{font-family: "Inter", Sans-Serif; font-weight: 300;font-size: 10px;}
+    .langType1{fill: #FFFFFF; }
+    .langType2{fill: #6F7073;}
+    .langType3{fill: #4D4E51;}
+    .langType4{fill: #3D3D41;}
+    .langType5{fill: #36363A;}
+    .langType6{fill: #2E2F32;}
+    ul{line-height: 0.5em; list-style: none; margin: 0; padding: 0;}
+    li{display: inline-flex; margin: 0; padding: 0; align-items: left; flex-wrap: nowrap;}
     ]]>
   </style>
   <g id="background">
@@ -513,7 +519,7 @@ export const renderGithubStatsSvgWithLangs = ({
       <text id="currentStatsNumberTextType1" x="279" y="32" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.people.score * 100,
       )}</text>
-      <text id="currentStatsNumberTextType2" x="323" y="57" class="textCurrentStatsNumberStyle">${Math.round(
+      <text id="currentStatsNumberTextType2" x="323" y="57.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.tree.score * 100,
       )}</text>
       <text id="currentStatsNumberTextType3" x="323" y="92.5" class="textCurrentStatsNumberStyle">${Math.round(
@@ -525,25 +531,30 @@ export const renderGithubStatsSvgWithLangs = ({
       <text id="currentStatsNumberTextType5" x="232" y="92.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.gold.score * 100,
       )}</text>
-      <text id="currentStatsNumberTextType6" x="232" y="57" class="textCurrentStatsNumberStyle">${Math.round(
+      <text id="currentStatsNumberTextType6" x="232" y="57.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.water.score * 100,
       )}</text>
   </g>
   <!-- Edit github id (hyochan) @ the text after class="textGithubIDStyle of id="textTitle" -->
   <!-- Edit average points (77) @ the text of id="textAverage" -->
   <!-- Edit tier name (Challenger) @ the text after class="textLabelStyle" of id="textTierLabel" -->
+  <g id="SVGtitle">
+    <foreignObject x="24" y="22" width="324" height="80">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+        <ul style="line-height: 1em">
+          <li >
+          <span id="userNameText" class="textGithubIDStyle" opacity="0">${
+            stats.userName || login
+          }</span>
+          </li>
+          <li>
+          <span id="titleText" class="textSubtitleStyle" opacity="0">GitHub Stats</span>
+          </li>
+        </ul>
+      </div>
+    </foreignObject>
+  </g>
   <g id="text">
-    <text id="textTitle" x="24" y="33" class="textGithubIDStyle">
-      <tspan id="userNameText" opacity="0">${stats.userName || login}</tspan>
-      <tspan class="textSpacer">
-        .
-      </tspan>
-      <tspan id="titleText" opacity="0">
-        <tspan class="textSubtitleStyle">
-         GitHub Stats
-        </tspan>
-      </tspan>
-    </text>
     <g id="averageText" opacity="0">
       <text id="textAverage" x="40" y="76" class="textCurrentAverageStyle" dominant-baseline="middle" text-anchor="middle">${avgScore}</text>
     </g>
@@ -578,43 +589,37 @@ export const renderGithubStatsSvgWithLangs = ({
       </clipPath>
     </defs>
   </g>
-  <!-- Edit class="visible" into class="invisible" if not using-->
-  <g id="mostUsedLanguageText">
-    <text id="textLangLabel" x="24" y="132" opacity="0">
-      <tspan class="textLangLabelStyle">
-        Most Used Language
-      </tspan>
-    </text>
-    <text id="textLangLine1" x="24" y="158" class="textLangStyle">${fistConvertedLangs.map(
-      (lang, index) => {
-        return `${'\n'}<tspan class="visible">
-          <tspan id="mostUsedLanguageText${index + 1}" opacity="0">
-            <tspan class="langType${index + 1} textDot">● </tspan> ${
-          lang.name
-        } <tspan class="textLangPercent"> ${lang.percent}% </tspan>
-        </tspan>
-      </tspan>`;
-      },
-    )}
-    </text>
-    <text id="textLangLine2" x="24" y="172" class="textLangStyle">${secondConvertedLangs.map(
-      (lang, index) => {
-        return `${'\n'}<tspan class="visible">
-          <tspan id="mostUsedLanguageText${index + 4}" opacity="0">
-            <tspan class="langType${index + 4} textDot">● </tspan> ${
-          lang.name
-        } <tspan class="textLangPercent"> ${lang.percent}% </tspan>
-        </tspan>
-      </tspan>`;
-      },
-    )}
-    </text>
+  <text id="textLangLabel" class="textLangLabelStyle" x="24" y="132" style="opacity:0.001;">Most Used Language</text>
+  <g id="mostUsedLanguageTextGroup" opacity="0">
+    <foreignObject x="24" y="150" width="310" height="80">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+        <ul>
+          ${firstConvertedLangs.map((lang, index) => {
+            return `${'\n'}
+            <li id="mostUsedLanguageText${index + 1}">
+              <span class="textLangDot${index + 1}">●</span>
+              <span class="textLangStyle">${lang.name}</span>
+              <span class="textLangPercent">${lang.percent}%</span>
+            </li>`;
+          })}
+          ${secondConvertedLangs.map((lang, index) => {
+            return `${'\n'}
+          <li id="mostUsedLanguageText${index + 1}">
+            <span class="textLangDot${index + 1}">●</span>
+            <span class="textLangStyle">${lang.name}</span>
+            <span class="textLangPercent">${lang.percent}%</span>
+          </li>`;
+          })}
+        </ul>
+      </div>
+    </foreignObject>
   </g>
   <!-- START of Animation -->
   <!-- Hexagon Base Animation -->
   <animate begin="0.00s" xlink:href="#statsBaseLines" attributeName="opacity" attributeType="XML" dur="0.6s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#currentStatsShape" attributeName="opacity" attributeType="XML" dur="0.3s" fill="freeze" from="0" to="1"/>
   <!-- Name Animation -->
+  <animate begin="0.00s" xlink:href="#SVGtitle" attributeName="opacity" attributeType="XML" dur="1s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#userNameText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#titleText" attributeName="opacity" attributeType="XML" dur="0.8s" fill="freeze" from="0" to="1"/>
   <!-- Hexagon Morphing Animation -->
@@ -640,12 +645,7 @@ export const renderGithubStatsSvgWithLangs = ({
   <animate begin="1.60s" xlink:href="#mostUsedLanguageLine5" attributeName="opacity" attributeType="XML" dur="0.30s" fill="freeze" from="0" to="1"/>
   <animate begin="1.60s" xlink:href="#mostUsedLanguageLine6" attributeName="opacity" attributeType="XML" dur="0.30s" fill="freeze" from="0" to="1"/>
   <!-- Language Text Animation -->
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText1" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText2" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText3" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText4" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText5" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <animate begin="1.60s" xlink:href="#mostUsedLanguageText6" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
+  <animate begin="1.60s" xlink:href="#mostUsedLanguageTextGroup" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
   <!-- dooboo.io Text Animation -->
   <animate begin="1.60s" xlink:href="#doobooText" attributeName="opacity" attributeType="XML" dur="0.90s" fill="freeze" from="0" to="1"/>
   <!-- END of Animation -->
