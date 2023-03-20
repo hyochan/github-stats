@@ -4,6 +4,7 @@ import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import {useEffect, useState} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 
+import Github from 'public/assets/github.svg';
 import Button from '../Button';
 import {H1} from '../../../../src/components/Typography';
 import {Inter} from '@next/font/google';
@@ -150,7 +151,11 @@ export default function Header({t, lang}: Props): ReactElement {
             router.push(`/sign-in`);
           }}
         />
-        <div className="w-[8px]" />
+        <div className="ml-[6px] mr-2">
+          <a href="https://github.com/hyochan/dooboo.io">
+            <Github className="h-6 body2" />
+          </a>
+        </div>
         <SwitchToggle
           isDark={isDark}
           onToggle={() => {
