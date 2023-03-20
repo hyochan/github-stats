@@ -2,6 +2,8 @@
 
 import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import {useEffect, useState} from 'react';
+import HamburgerMenu from 'react-hamburger-menu';
+
 import {usePathname, useRouter} from 'next/navigation';
 
 import Github from 'public/assets/github.svg';
@@ -127,12 +129,19 @@ function MobileNavMenus(
 
   return (
     <div className={clsx('md:hidden flex-1', 'flex flex-row-reverse')}>
-      <button
-        onClick={() => setIsNavCollapsed(!isNavCollapsed)}
-        className="self-end px-2 pb-1 text-basic text-h3"
-      >
-        ☰
-      </button>
+      <div className="cursor-pointer">
+        <HamburgerMenu
+          isOpen={!isNavCollapsed}
+          menuClicked={() => setIsNavCollapsed(!isNavCollapsed)}
+          width={18}
+          height={12}
+          strokeWidth={2}
+          rotate={0}
+          borderRadius={0}
+          animationDuration={0.5}
+          color={isDark ? 'white' : 'black'}
+        />
+      </div>
       <nav
         className={clsx(
           'absolute top-14 right-0 w-full bg-basic pb-2',
@@ -154,6 +163,7 @@ function MobileNavMenus(
                 className={clsx(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
+                  'hover:opacity-100',
                   pathname?.includes(link.path) ? 'opacity-100' : 'opacity-30',
                 )}
               >
@@ -181,9 +191,8 @@ function MobileNavMenus(
               <Github className="h-6 body2 mr-2" />
               <span
                 className={clsx(
-                  'text-placeholder-light text-body3 font-bold',
-                  'dark:text-placeholder-dark',
-                  'hover:text-basic',
+                  'body3 font-bold opacity-30',
+                  'hover:opacity-70',
                 )}
               >
                 {t.github}

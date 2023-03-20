@@ -2894,6 +2894,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-hamburger-menu@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@types/react-hamburger-menu@npm:0.0.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: fb1d07dde747d82f7e57a73221a2a88f46082d28ef6e4bec8e9ffe5b3491b1d3d6d2a10153a1116c056748858aeebe9fc680180c1a7efc5c143d4f3e3b30a06d
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:18.0.28":
   version: 18.0.28
   resolution: "@types/react@npm:18.0.28"
@@ -4591,6 +4600,7 @@ __metadata:
     "@types/react": 18.0.28
     "@types/react-copy-to-clipboard": ^5.0.4
     "@types/react-dom": 18.0.11
+    "@types/react-hamburger-menu": ^0.0.4
     "@vitejs/plugin-react": ^3.1.0
     "@vitest/coverage-c8": ^0.29.3
     autoprefixer: ^10.4.14
@@ -4614,6 +4624,7 @@ __metadata:
     react: 18.2.0
     react-copy-to-clipboard: ^5.1.0
     react-dom: 18.2.0
+    react-hamburger-menu: ^1.2.1
     react-hook-form: ^7.43.7
     react-simple-snackbar: ^1.1.11
     react-text-transition: ^3.0.2
@@ -8057,6 +8068,16 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-hamburger-menu@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "react-hamburger-menu@npm:1.2.1"
+  peerDependencies:
+    prop-types: ">=15.5.7"
+    react: ">=15.3.0"
+  checksum: 94495292cfcea588192d835d2e3909b4732ecd0216020cc388e68b102ac97771252aae77479cc9dd680dadaa5b9636e9fc599590069d3e04a101fbfbdfdc5365
   languageName: node
   linkType: hard
 
