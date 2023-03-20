@@ -1052,6 +1052,11 @@ input[type='search']::-webkit-search-decoration,
   margin-bottom: 2.5rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -1473,10 +1478,6 @@ input[type='search']::-webkit-search-decoration,
 
 .gap-\[8px\] {
   gap: 8px;
-}
-
-.self-end {
-  align-self: flex-end;
 }
 
 .self-center {
@@ -1939,11 +1940,6 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(24 33 40 / var(--tw-text-opacity));
 }
 
-.text-placeholder-light {
-  --tw-text-opacity: 1;
-  color: rgb(120 120 120 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1975,10 +1971,6 @@ input[type='search']::-webkit-search-decoration,
 
 .opacity-50 {
   opacity: 0.5;
-}
-
-.opacity-70 {
-  opacity: 0.7;
 }
 
 .shadow-sm {
@@ -2034,16 +2026,6 @@ input[type='search']::-webkit-search-decoration,
   font-style: normal;
 
   font-display: block;
-}
-
-.hover\:text-basic:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.dark .hover\:text-basic:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .after\:absolute::after {
@@ -2110,6 +2092,10 @@ input[type='search']::-webkit-search-decoration,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:opacity-100:hover {
+  opacity: 1;
+}
+
 .hover\:opacity-50:hover {
   opacity: 0.5;
 }
@@ -2120,10 +2106,6 @@ input[type='search']::-webkit-search-decoration,
 
 .hover\:opacity-\[0\.6\]:hover {
   opacity: 0.6;
-}
-
-.hover\:opacity-100:hover {
-  opacity: 1;
 }
 
 .active\:opacity-100:active {
@@ -2189,11 +2171,6 @@ input[type='search']::-webkit-search-decoration,
 .dark .dark\:text-paper-light {
   --tw-text-opacity: 1;
   color: rgb(240 242 245 / var(--tw-text-opacity));
-}
-
-.dark .dark\:text-placeholder-dark {
-  --tw-text-opacity: 1;
-  color: rgb(144 144 144 / var(--tw-text-opacity));
 }
 
 .dark .dark\:text-white {
