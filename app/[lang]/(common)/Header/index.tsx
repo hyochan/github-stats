@@ -1,18 +1,17 @@
 'use client';
 
+import type {Dispatch, ReactElement, SetStateAction} from 'react';
 import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import {useEffect, useState} from 'react';
-import HamburgerMenu from 'react-hamburger-menu';
-
 import {usePathname, useRouter} from 'next/navigation';
 
-import Github from 'public/assets/github.svg';
 import Button from '../Button';
+import Github from 'public/assets/github.svg';
 import {H1} from '../../../../src/components/Typography';
+import HamburgerMenu from 'react-hamburger-menu';
 import {Inter} from '@next/font/google';
 import Link from 'next/link';
 import Logo from 'public/assets/logo.svg';
-import type {ReactElement, Dispatch, SetStateAction} from 'react';
 import SwitchToggle from './SwitchToggle';
 import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
@@ -96,7 +95,7 @@ function DesktopNavMenus(
           }}
         />
         <div className="ml-[6px] mr-2">
-          <a href="https://github.com/hyochan/dooboo.io">
+          <a href="https://github.com/hyochan/github-stats" aria-label='github-stats'>
             <Github className="h-6 body2" />
           </a>
         </div>
@@ -185,7 +184,7 @@ function MobileNavMenus(
         >
           <div className={clsx('ml-[6px] mr-4', 'flex flex-row')}>
             <a
-              href="https://github.com/hyochan/dooboo.io"
+              href="https://github.com/hyochan/stats.hyochan.dev"
               className="flex flex-row items-center"
             >
               <Github className="h-6 body2 mr-2" />
@@ -301,7 +300,7 @@ export default function Header(props: Props): ReactElement {
                 inter.className,
               )}
             >
-              dooboo.io
+              github-stats
             </H1>
           </Link>
         </div>

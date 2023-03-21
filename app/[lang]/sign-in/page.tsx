@@ -56,7 +56,7 @@ export default async function Page({
         )}
       >
         <Logo className="h-20 mb-2 text-brand" />
-        <p className={clsx('text-brand pb-28', inter.className)}>dooboo.io</p>
+        <p className={clsx('text-brand pb-28', inter.className)}>stats.hyochan.dev</p>
         <SocialButtons t={signIn} />
         <p
           className={clsx(

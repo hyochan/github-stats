@@ -1,30 +1,30 @@
-# dooboo.io
+# stats.hyochan.dev
 
 > Project is built mainly with `nextjs`, `react server component` and `supabase`.
 
-[![CI](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml/badge.svg)](https://github.com/hyochan/dooboo.io/actions/workflows/ci.yml)
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=dooboo.io)
+[![CI](https://github.com/hyochan/stats.hyochan.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/hyochan/stats.hyochan.dev/actions/workflows/ci.yml)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=stats.hyochan.dev)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 ## Previews
 
-### [Webpage](https://dooboo.io)
+### [Webpage](https://stats.hyochan.dev)
 
 <img width="415" alt="landing" src="https://user-images.githubusercontent.com/27461460/189487529-f2942a04-63af-4d6d-9600-d84e50cabeb9.png">
 
 ### Readme Stats
 
 #### 📊GitHub Stats :
-<a href="https://dooboo.io"><img src="https://dooboo.io/api/github-stats-advanced?login=hyochan" width="520" /></a>
+<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan" width="520" /></a>
 
 #### 🏆GitHub Trophies
-<a href="https://dooboo.io"><img src="https://dooboo.io/api/github-trophies?login=hyochan" width="520" /></a>
+<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-trophies?login=hyochan" width="520" /></a>
 
 > Every GitHub user can make use of their own 🙌
 
 ## Project Overview
 
-`dooboo.io` is a project aimed at providing a comprehensive and visual representation of a developer's potential based on six key attributes. These attributes are tree, fire, earth, gold, water, and people. Each of these attributes symbolizes a different aspect of a developer's skill set, personality, and overall potential. The six attributes are described as follows:
+`stats.hyochan.dev` is a project aimed at providing a comprehensive and visual representation of a developer's potential based on six key attributes. These attributes are tree, fire, earth, gold, water, and people. Each of these attributes symbolizes a different aspect of a developer's skill set, personality, and overall potential. The six attributes are described as follows:
 
 ### Tree (Curiosity)
 
@@ -57,7 +57,7 @@ This attribute serves as an overall representation of a developer's potential. I
 
 <img width="160" src="https://user-images.githubusercontent.com/27461460/226172175-4b8e9ba3-37f9-4245-a22f-aa2a2046a302.png" />
 
-By assessing and visualizing these six attributes, the `dooboo.io`, the Developer Power Meter project aims to provide a holistic view of a developer's potential. This tool can help both individuals and organizations to understand a developer's strengths and weaknesses, allowing for better collaboration, professional development, and more informed hiring decisions.
+By assessing and visualizing these six attributes, the `stats.hyochan.dev`, the Developer Power Meter project aims to provide a holistic view of a developer's potential. This tool can help both individuals and organizations to understand a developer's strengths and weaknesses, allowing for better collaboration, professional development, and more informed hiring decisions.
 
 For a deeper understanding of this philosophy, you can refer to a [blog post](https://medium.com/dooboolab/a-new-fancy-way-to-visualize-your-github-stats-418b5d59498) that provides further insight and discussion.
 

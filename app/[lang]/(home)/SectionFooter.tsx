@@ -53,7 +53,7 @@ export default function SectionFooter({t}: Props): ReactElement {
               inter.className,
             )}
           >
-            dooboo.io
+            stats.hyochan.dev
           </p>
           <div
             className={clsx(
