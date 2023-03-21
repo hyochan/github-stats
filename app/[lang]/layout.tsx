@@ -24,7 +24,7 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
 
   return (
     <html lang={lang} className="dark">
-      <title>doobooio</title>
+      <title>github-stats</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta name="description" content="All stats for developers" />
       <link rel="icon" href="/favicon.ico" />

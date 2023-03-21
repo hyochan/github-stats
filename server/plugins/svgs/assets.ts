@@ -242,7 +242,7 @@ export const renderGithubStatsSvg = ({
       </tspan>
       <tspan id="titleText" opacity="0">
         <tspan class="textSubtitleStyle">
-        GitHub Stats
+        github-stats
         </tspan>
       </tspan>
     </text>
@@ -258,7 +258,7 @@ export const renderGithubStatsSvg = ({
       <text x="152" y="86" class="textLabelSubStyle">Tier</text>
     </g>
     <g id="doobooText" opacity="0">
-      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by github.com/hyochan</text></a>
+      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by hyochan</text></a>
     </g>
   </g>
   <!-- START of Animation -->
@@ -548,7 +548,7 @@ export const renderGithubStatsSvgWithLangs = ({
           }</span>
           </li>
           <li>
-          <span id="titleText" class="textSubtitleStyle" opacity="0">GitHub Stats</span>
+          <span id="titleText" class="textSubtitleStyle" opacity="0">github-stats</span>
           </li>
         </ul>
       </div>
@@ -567,7 +567,7 @@ export const renderGithubStatsSvgWithLangs = ({
       <text x="152" y="86" class="textLabelSubStyle">Tier</text>
     </g>
     <g id="doobooText" opacity="0">
-      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">github.com/hyochan</text></a>
+      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
     </g>
   </g>
   <!-- Edit value of x and width @ langType# -->
