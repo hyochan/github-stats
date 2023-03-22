@@ -95,7 +95,10 @@ function DesktopNavMenus(
           }}
         />
         <div className="ml-[6px] mr-2">
-          <a href="https://github.com/hyochan/github-stats" aria-label='github-stats'>
+          <a
+            href="https://github.com/hyochan/github-stats"
+            aria-label="github-stats"
+          >
             <Github className="h-6 body2" />
           </a>
         </div>
@@ -184,7 +187,7 @@ function MobileNavMenus(
         >
           <div className={clsx('ml-[6px] mr-4', 'flex flex-row')}>
             <a
-              href="https://github.com/hyochan/stats.hyochan.dev"
+              href="https://github.com/hyochan/github-stats"
               className="flex flex-row items-center"
             >
               <Github className="h-6 body2 mr-2" />
