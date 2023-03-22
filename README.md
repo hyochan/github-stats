@@ -19,6 +19,12 @@
 ![github-stats](https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan)
 ```
 
+<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-stats?login=hyochan" width="520" /></a>
+
+```
+![github-stats](https://stats.hyochan.dev/api/github-stats?login=hyochan)
+```
+
 #### 🏆GitHub Trophies
 <a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-trophies?login=hyochan" width="520" /></a>
 
