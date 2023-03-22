@@ -21,10 +21,10 @@ const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 
 const generateSvgUrlToCopy = (login: string, isBasic?: boolean): string => {
   if (isBasic) {
-    return `![${login} GitHub Stats](${rootUrl}/github-stats?login=${login})`;
+    return `![${login} github-stats](${rootUrl}/github-stats?login=${login})`;
   }
 
-  return `![${login} GitHub Stats](${rootUrl}/github-stats-advanced?login=${login})`;
+  return `![${login} github-stats](${rootUrl}/github-stats-advanced?login=${login})`;
 };
 
 type SvgType = 'basic' | 'advanced' | 'trophies';

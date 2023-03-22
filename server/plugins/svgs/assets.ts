@@ -41,24 +41,31 @@ export const renderGithubStatsSvg = ({
     .statsBaseIconStyle{fill:#FFFFFF; opacity:0.2;}
     .currentStatsShapeStyle{opacity:0.8; stroke:#FFFFFF; stroke-width:1;}
     .currentStatsLoadingStyle{opacity:0.8; stroke:#FFFFFF; stroke-width:1;}
-    .textGithubIDStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; fill: #FFFFFF;}
+    .textGithubIDStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; color: #FFFFFF;}
     .textCurrentAverageStyle{font-family: "Inter", Sans-Serif;font-weight: 700;font-size: 12px; fill: #FFFFFF;}
     .textCurrentStatsNumberStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 9px; fill: #FFFFFF;}
-    .textSubtitleStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 11px; fill: #FFFFFF; opacity:0.5;}
+    .textSubtitleStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 12px; color: #646569;}
     .textLabelStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; }
     .textLabelSubStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; opacity:0.5;}
     .textInfoStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; fill: #FFFFFF; opacity:0.3;}
-    .textSpacer{fill: #FFFFFF; opacity:0; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 5px; }
     .textLangLabelStyle{fill: #FFFFFF; opacity:0.3; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangStyle{fill: #FFFFFF; opacity:1; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangPercent{fill: #FFFFFF; opacity:0.5; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
-    .textDot{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; }
-    .langType1{fill: #FFFFFF; opacity:1.00;}
-    .langType2{fill: #FFFFFF; opacity:0.40;}
-    .langType3{fill: #FFFFFF; opacity:0.24;}
-    .langType4{fill: #FFFFFF; opacity:0.16;}
-    .langType5{fill: #FFFFFF; opacity:0.12;}
-    .langType6{fill: #FFFFFF; opacity:0.08;}
+    .textLangStyle{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot1{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot2{margin-right: 4px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot3{margin-right: 4px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot4{margin-right: 4px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot5{margin-right: 4px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangDot6{margin-right: 4px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
+    .textLangPercent{margin-right: 4px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
+    .textDot{font-family: "Inter", Sans-Serif; font-weight: 300;font-size: 10px;}
+    .langType1{fill: #FFFFFF; }
+    .langType2{fill: #6F7073;}
+    .langType3{fill: #4D4E51;}
+    .langType4{fill: #3D3D41;}
+    .langType5{fill: #36363A;}
+    .langType6{fill: #2E2F32;}
+    ul{line-height: 0.5em; list-style: none; margin: 0; padding: 0;}
+    li{display: inline-flex; margin: 0; padding: 0; align-items: left; flex-wrap: nowrap;}
     ]]>
   </style>
   <g id="background">
@@ -215,7 +222,7 @@ export const renderGithubStatsSvg = ({
       <text id="currentStatsNumberTextType1" x="279" y="32" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.people.score * 100,
       )}</text>
-      <text id="currentStatsNumberTextType2" x="323" y="57" class="textCurrentStatsNumberStyle">${Math.round(
+      <text id="currentStatsNumberTextType2" x="323" y="57.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.tree.score * 100,
       )}</text>
       <text id="currentStatsNumberTextType3" x="323" y="92.5" class="textCurrentStatsNumberStyle">${Math.round(
@@ -227,45 +234,49 @@ export const renderGithubStatsSvg = ({
       <text id="currentStatsNumberTextType5" x="232" y="92.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.gold.score * 100,
       )}</text>
-      <text id="currentStatsNumberTextType6" x="232" y="57" class="textCurrentStatsNumberStyle">${Math.round(
+      <text id="currentStatsNumberTextType6" x="232" y="57.5" class="textCurrentStatsNumberStyle">${Math.round(
         stats.pluginStats.water.score * 100,
       )}</text>
   </g>
   <!-- Edit github id (hyochan) @ the text after class="textGithubIDStyle of id="textTitle" -->
   <!-- Edit average points (77) @ the text of id="textAverage" -->
   <!-- Edit tier name (Challenger) @ the text after class="textLabelStyle" of id="textTierLabel" -->
-  <g id="text">
-    <text id="textTitle" x="24" y="33" class="textGithubIDStyle">
-      <tspan id="userNameText" opacity="0">${stats.userName || login}</tspan>
-      <tspan class="textSpacer">
-        .
-      </tspan>
-      <tspan id="titleText" opacity="0">
-        <tspan class="textSubtitleStyle">
-        github-stats
-        </tspan>
-      </tspan>
-    </text>
-    <g id="averageText" opacity="0">
-      <text id="textAverage" x="40" y="76" class="textCurrentAverageStyle" dominant-baseline="middle" text-anchor="middle">${avgScore}</text>
-    </g>
-    <g id="textAverageLabel" opacity="0">
-      <text x="62" y="72" class="textLabelStyle">Average</text>
-      <text x="62" y="86" class="textLabelSubStyle">Points</text>
-    </g>
-    <g id="textTierLabel" opacity="0">
-      <text x="152" y="72" class="textLabelStyle">${tierName}</text>
-      <text x="152" y="86" class="textLabelSubStyle">Tier</text>
-    </g>
-    <g id="doobooText" opacity="0">
-      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by hyochan</text></a>
-    </g>
+  <g id="SVGtitle">
+    <foreignObject x="24" y="22" width="324" height="80">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+        <ul style="line-height: 1em">
+          <li >
+          <span id="userNameText" class="textGithubIDStyle" opacity="0">${
+            stats.userName || login
+          }</span>
+          </li>
+          <li>
+          <span id="titleText" class="textSubtitleStyle" opacity="0">github-stats</span>
+          </li>
+        </ul>
+      </div>
+    </foreignObject>
+  </g>
+  <g id="averageText" opacity="0">
+    <text id="textAverage" x="40" y="76" class="textCurrentAverageStyle" dominant-baseline="middle" text-anchor="middle">${avgScore}</text>
+  </g>
+  <g id="textAverageLabel" opacity="0">
+    <text x="62" y="72" class="textLabelStyle">Average</text>
+    <text x="62" y="86" class="textLabelSubStyle">Points</text>
+  </g>
+  <g id="textTierLabel" opacity="0">
+    <text x="152" y="72" class="textLabelStyle">${tierName}</text>
+    <text x="152" y="86" class="textLabelSubStyle">Tier</text>
+  </g>
+  <g id="doobooText" opacity="0">
+    <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by hyochan</text></a>
   </g>
   <!-- START of Animation -->
   <!-- Hexagon Base Animation -->
   <animate begin="0.00s" xlink:href="#statsBaseLines" attributeName="opacity" attributeType="XML" dur="0.6s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#currentStatsShape" attributeName="opacity" attributeType="XML" dur="0.3s" fill="freeze" from="0" to="1"/>
   <!-- Name Animation -->
+  <animate begin="0.00s" xlink:href="#SVGtitle" attributeName="opacity" attributeType="XML" dur="1s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#userNameText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <animate begin="0.00s" xlink:href="#titleText" attributeName="opacity" attributeType="XML" dur="0.8s" fill="freeze" from="0" to="1"/>
   <!-- Hexagon Morphing Animation -->

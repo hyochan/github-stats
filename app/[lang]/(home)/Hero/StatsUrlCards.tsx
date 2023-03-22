@@ -36,7 +36,7 @@ export default function StatsUrlCard({
     track('Copy URL to clipboard', {login, type});
   };
 
-  const trophiesURL = `![${login} GitHub Trophies](${rootUrl}/github-trophies?login=${login})`;
+  const trophiesURL = `![${login} github-trophies](${rootUrl}/github-trophies?login=${login})`;
 
   return (
     <div className="mb-[32px] self-stretch relative flex flex-col">

@@ -16,14 +16,14 @@
 <a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan" width="520" /></a>
 
 ```
-![GitHub Stats](https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan)
+![github-stats](https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan)
 ```
 
 #### 🏆GitHub Trophies
 <a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-trophies?login=hyochan" width="520" /></a>
 
 ```
-![GitHub Stats](https://stats.hyochan.dev/api/github-trophies?login=hyochan)
+![github-trophies](https://stats.hyochan.dev/api/github-trophies?login=hyochan)
 ```
 
 > Every GitHub user can make use of their own 🙌
