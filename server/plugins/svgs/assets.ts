@@ -49,22 +49,21 @@ export const renderGithubStatsSvg = ({
     .textLabelSubStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; opacity:0.5;}
     .textInfoStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; fill: #FFFFFF; opacity:0.3;}
     .textLangLabelStyle{fill: #FFFFFF; opacity:0.3; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangStyle{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot1{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot2{margin-right: 4px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot3{margin-right: 4px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot4{margin-right: 4px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot5{margin-right: 4px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot6{margin-right: 4px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangPercent{margin-right: 4px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
-    .textDot{font-family: "Inter", Sans-Serif; font-weight: 300;font-size: 10px;}
+    .textLangStyle{margin-right: 8px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot1{margin-right: 8px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot2{margin-right: 8px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot3{margin-right: 8px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot4{margin-right: 8px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot5{margin-right: 8px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot6{margin-right: 8px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangPercent{margin-right: 8px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px; }
     .langType1{fill: #FFFFFF; }
     .langType2{fill: #6F7073;}
     .langType3{fill: #4D4E51;}
     .langType4{fill: #3D3D41;}
     .langType5{fill: #36363A;}
     .langType6{fill: #2E2F32;}
-    ul{line-height: 0.5em; list-style: none; margin: 0; padding: 0;}
+    ul{line-height: 1.75em; list-style: none; margin: 0; padding: 0;}
     li{display: inline-flex; margin: 0; padding: 0; align-items: left; flex-wrap: nowrap;}
     ]]>
   </style>
@@ -357,22 +356,21 @@ export const renderGithubStatsSvgWithLangs = ({
     .textLabelSubStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 10px; fill: #FFFFFF; opacity:0.5;}
     .textInfoStyle{font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; fill: #FFFFFF; opacity:0.3;}
     .textLangLabelStyle{fill: #FFFFFF; opacity:0.3; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangStyle{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot1{margin-right: 4px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot2{margin-right: 4px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot3{margin-right: 4px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot4{margin-right: 4px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot5{margin-right: 4px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangDot6{margin-right: 4px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px;}
-    .textLangPercent{margin-right: 4px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 7px; }
-    .textDot{font-family: "Inter", Sans-Serif; font-weight: 300;font-size: 10px;}
+    .textLangStyle{margin-right: 8px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot1{margin-right: 8px; color:  #FFFFFF; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot2{margin-right: 8px; color:  #96979B; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot3{margin-right: 8px; color:  #6F7073; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot4{margin-right: 8px; color:  #4D4E51; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot5{margin-right: 8px; color:  #3D3D41; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangDot6{margin-right: 8px; color:  #36363A; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px;}
+    .textLangPercent{margin-right: 8px; color: #646569; font-family: "Inter", Sans-Serif;font-weight: 300;font-size: 14px; }
     .langType1{fill: #FFFFFF; }
     .langType2{fill: #6F7073;}
     .langType3{fill: #4D4E51;}
     .langType4{fill: #3D3D41;}
     .langType5{fill: #36363A;}
     .langType6{fill: #2E2F32;}
-    ul{line-height: 0.5em; list-style: none; margin: 0; padding: 0;}
+    ul{line-height: 1.75em; list-style: none; margin: 0; padding: 0;}
     li{display: inline-flex; margin: 0; padding: 0; align-items: left; flex-wrap: nowrap;}
     ]]>
   </style>
@@ -577,9 +575,6 @@ export const renderGithubStatsSvgWithLangs = ({
       <text x="152" y="72" class="textLabelStyle">${tierName}</text>
       <text x="152" y="86" class="textLabelSubStyle">Tier</text>
     </g>
-    <g id="doobooText" opacity="0">
-      <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
-    </g>
   </g>
   <!-- Edit value of x and width @ langType# -->
   <!-- starting point: 24 -->
@@ -602,7 +597,7 @@ export const renderGithubStatsSvgWithLangs = ({
   </g>
   <text id="textLangLabel" class="textLangLabelStyle" x="24" y="132" style="opacity:0.001;">Most Used Language</text>
   <g id="mostUsedLanguageTextGroup" opacity="0">
-    <foreignObject x="24" y="150" width="310" height="80">
+    <foreignObject x="48" y="300" width="608" height="160" transform="scale(0.5)">
       <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
         <ul>
           ${firstConvertedLangs.map((lang, index) => {
@@ -615,8 +610,8 @@ export const renderGithubStatsSvgWithLangs = ({
           })}
           ${secondConvertedLangs.map((lang, index) => {
             return `${'\n'}
-          <li id="mostUsedLanguageText${index + 1}">
-            <span class="textLangDot${index + 1}">●</span>
+          <li id="mostUsedLanguageText${index + 4}">
+            <span class="textLangDot${index + 4}">●</span>
             <span class="textLangStyle">${lang.name}</span>
             <span class="textLangPercent">${lang.percent}%</span>
           </li>`;
@@ -624,6 +619,9 @@ export const renderGithubStatsSvgWithLangs = ({
         </ul>
       </div>
     </foreignObject>
+  </g>
+  <g id="doobooText" opacity="0">
+    <a href="https://stats.hyochan.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
   </g>
   <!-- START of Animation -->
   <!-- Hexagon Base Animation -->
