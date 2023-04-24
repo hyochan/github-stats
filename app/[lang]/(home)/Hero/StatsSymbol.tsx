@@ -1,18 +1,19 @@
 'use client';
 
 import type {CSSProperties, ReactElement} from 'react';
-import TextTransition, {presets} from 'react-text-transition';
 import {cloneElement, useState} from 'react';
+import TextTransition, {presets} from 'react-text-transition';
+import {track} from '@amplitude/analytics-browser';
+import clsx from 'clsx';
 
 import type {StatsInfo} from '../../../../src/fetches/github';
+
 import SvgEarth from '@/public/assets/stats_earth.svg';
 import SvgFire from '@/public/assets/stats_fire.svg';
 import SvgGold from '@/public/assets/stats_gold.svg';
 import SvgPeople from '@/public/assets/stats_people.svg';
 import SvgTree from '@/public/assets/stats_tree.svg';
 import SvgWater from '@/public/assets/stats_water.svg';
-import clsx from 'clsx';
-import {track} from '@amplitude/analytics-browser';
 
 const statTypes = [
   {

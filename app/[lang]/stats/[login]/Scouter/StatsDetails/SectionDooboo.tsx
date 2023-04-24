@@ -1,14 +1,17 @@
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
-import Image from 'next/image';
-import {Inter} from '@next/font/google';
-import Logo from '@/public/assets/logo.svg';
 import type {ReactElement} from 'react';
-import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';
-import type {TierType} from '.';
-import type {Translates} from '../../../../../../src/localization';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+import Image from 'next/image';
+
+import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';
+import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
+import type {Translates} from '../../../../../../src/localization';
 import {getTierSvg} from '../../../../../../src/utils/functions';
 import {statNames} from '..';
+
+import type {TierType} from '.';
+
+import Logo from '@/public/assets/logo.svg';
 
 const inter = Inter({subsets: ['latin']});
 

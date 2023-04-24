@@ -1,13 +1,16 @@
-import GithubUserList from './GithubUserList';
-import {H1} from '~/components/Typography';
-import {Inter} from '@next/font/google';
-import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
-import type {UserListItem} from '../../../src/fetches/recentList';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+
 import {getSupabaseClient} from '../../../server/supabaseClient';
+import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
+
+import GithubUserList from './GithubUserList';
+
+import {H1} from '~/components/Typography';
+import type {Locale} from '~/i18n';
 
 const inter = Inter({subsets: ['latin']});
 

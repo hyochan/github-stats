@@ -1,4 +1,6 @@
+import {track} from '@amplitude/analytics-node';
 import type {NextApiRequest, NextApiResponse} from 'next';
+
 import {LOWEST_TROPHIES_SCORE} from '../../../server/plugins';
 import {uploadTrophiesSvg} from '../../../server/plugins/svgs/functions';
 import {renderGithubTrophies} from '../../../server/plugins/svgs/githubTrophies';
@@ -6,7 +8,6 @@ import {getDoobooStats} from '../../../server/services/githubService';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
-import {track} from '@amplitude/analytics-node';
 
 export default async function handler(
   req: NextApiRequest,

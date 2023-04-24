@@ -1,9 +1,12 @@
-import type {Locale} from '~/i18n';
 import type {ReactElement} from 'react';
-import Scouter from './Scouter';
+
 import {getDoobooStats} from '../../../../server/services/githubService';
 import {getTranslates} from '../../../../src/localization';
 import Container from '../Container';
+
+import Scouter from './Scouter';
+
+import type {Locale} from '~/i18n';
 
 type Props = {
   params: {lang: Locale; login: string};

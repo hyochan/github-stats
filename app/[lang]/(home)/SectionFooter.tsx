@@ -1,9 +1,11 @@
-import {Inter} from '@next/font/google';
 import type {ReactElement} from 'react';
-import SvgScouter from '@/public/assets/scouter.svg';
-import type {Translates} from '../../../src/localization';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+
+import type {Translates} from '../../../src/localization';
+
 import imgBgSection1 from '@/public/assets/bg_section1.png';
+import SvgScouter from '@/public/assets/scouter.svg';
 
 const inter = Inter({subsets: ['latin']});
 

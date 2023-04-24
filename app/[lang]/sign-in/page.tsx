@@ -1,10 +1,13 @@
-import {Inter} from '@next/font/google';
-import type {Locale} from '~/i18n';
-import Logo from 'public/assets/logo.svg';
 import type {ReactElement} from 'react';
-import SocialButtons from './SocialButtons';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+import Logo from 'public/assets/logo.svg';
+
 import {getTranslates} from '../../../src/localization';
+
+import SocialButtons from './SocialButtons';
+
+import type {Locale} from '~/i18n';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -56,7 +59,9 @@ export default async function Page({
         )}
       >
         <Logo className="h-20 mb-2 text-brand" />
-        <p className={clsx('text-brand pb-28', inter.className)}>github-stats</p>
+        <p className={clsx('text-brand pb-28', inter.className)}>
+          github-stats
+        </p>
         <SocialButtons t={signIn} />
         <p
           className={clsx(

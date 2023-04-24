@@ -1,6 +1,8 @@
+import type {ReactElement} from 'react';
+import clsx from 'clsx';
+
 import type {ScouterProps, StatName} from '..';
 
-import type {ReactElement} from 'react';
 import SectionDooboo from './SectionDooboo';
 import SectionEarth from './SectionEarth';
 import SectionFire from './SectionFire';
@@ -8,7 +10,6 @@ import SectionGold from './SectionGold';
 import SectionPeople from './SectionPeople';
 import SectionTree from './SectionTree';
 import SectionWater from './SectionWater';
-import clsx from 'clsx';
 
 export type TierType = {
   tier: string;

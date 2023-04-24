@@ -1,12 +1,13 @@
 'use client';
 
 import type {ChangeEventHandler, ReactElement} from 'react';
+import clsx from 'clsx';
 import {usePathname, useRouter} from 'next/navigation';
 
-import type {TupleToUnion} from '~/types/types';
-import clsx from 'clsx';
-import type {i18n} from '~/i18n';
 import {useLocaleContext} from '../../../../src/components/LocaleProvider';
+
+import type {i18n} from '~/i18n';
+import type {TupleToUnion} from '~/types/types';
 
 type Props = {
   languages: {en: string; ko: string};

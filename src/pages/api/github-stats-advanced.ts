@@ -1,7 +1,7 @@
 import {track} from '@amplitude/analytics-browser';
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 
+import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 import {getDoobooStats} from '../../../server/services/githubService';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';

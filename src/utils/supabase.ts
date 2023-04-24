@@ -1,6 +1,7 @@
-import type {Database} from '../types/supabase';
-import type {SupabaseClient} from '@supabase/supabase-js';
 import {createBrowserSupabaseClient} from '@supabase/auth-helpers-nextjs';
+import type {SupabaseClient} from '@supabase/supabase-js';
+
+import type {Database} from '../types/supabase';
 
 export const getSupabaseBrowserClient = (): SupabaseClient<
   Database,

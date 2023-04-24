@@ -1,7 +1,6 @@
 import type {CSSProperties, FC, ReactElement} from 'react';
-
-import {Inter} from '@next/font/google';
 import {cloneElement} from 'react';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
 
 const inter = Inter({subsets: ['latin']});

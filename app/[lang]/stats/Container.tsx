@@ -1,9 +1,11 @@
-import clsx from 'clsx';
 import type {ReactElement, ReactNode} from 'react';
-import SearchTextInput from './[login]/SearchTextInput';
-import type {Translates} from '../../../src/localization';
-import {H1} from '../../../src/components/Typography';
 import {Inter} from '@next/font/google';
+import clsx from 'clsx';
+
+import {H1} from '../../../src/components/Typography';
+import type {Translates} from '../../../src/localization';
+
+import SearchTextInput from './[login]/SearchTextInput';
 
 const inter = Inter({subsets: ['latin']});
 

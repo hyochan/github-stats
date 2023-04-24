@@ -1,11 +1,13 @@
+import {match as matchLocale} from '@formatjs/intl-localematcher';
+import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
+
+import {upsertUser} from './services/userService';
+
 // import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
-import {match as matchLocale} from '@formatjs/intl-localematcher';
-import {upsertUser} from './services/userService';
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers

@@ -2,7 +2,6 @@
 
 import type {MouseEventHandler, ReactElement} from 'react';
 import {useRef, useState} from 'react';
-
 import {TriangleDownIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
 import {useOnClickOutside} from 'usehooks-ts';

@@ -1,21 +1,22 @@
 'use client';
 
+import type {ReactElement} from 'react';
+import {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {track} from '@amplitude/analytics-browser';
 import {MarkGithubIcon, SearchIcon} from '@primer/octicons-react';
+import clsx from 'clsx';
 
+import type {StatsInfo} from '../../../../src/fetches/github';
+import {fetchGithubStats} from '../../../../src/fetches/github';
+import type {Translates} from '../../../../src/localization';
 import Button from '../../(common)/Button';
 import ButtonGroup from '../../(common)/ButtonGroup';
 import Dropdown from '../../(common)/Dropdown';
-import type {ReactElement} from 'react';
-import type {StatsInfo} from '../../../../src/fetches/github';
+import TextInput from '../../(common)/TextInput';
+
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
-import TextInput from '../../(common)/TextInput';
-import type {Translates} from '../../../../src/localization';
-import clsx from 'clsx';
-import {fetchGithubStats} from '../../../../src/fetches/github';
-import {track} from '@amplitude/analytics-browser';
-import {useForm} from 'react-hook-form';
-import {useState} from 'react';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 

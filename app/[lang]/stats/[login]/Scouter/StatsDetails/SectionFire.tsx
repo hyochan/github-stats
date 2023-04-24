@@ -1,9 +1,10 @@
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
-import {Inter} from '@next/font/google';
 import type {ReactElement} from 'react';
-import type {StatsDetail} from '../../../../../../server/plugins';
-import type {Translates} from '../../../../../../src/localization';
+import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+
+import type {StatsDetail} from '../../../../../../server/plugins';
+import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
+import type {Translates} from '../../../../../../src/localization';
 
 const inter = Inter({subsets: ['latin']});
 

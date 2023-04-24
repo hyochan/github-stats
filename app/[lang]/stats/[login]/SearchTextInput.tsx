@@ -1,13 +1,14 @@
 'use client';
 
-import Button from '../../(common)/Button';
 import type {ReactElement} from 'react';
-import {SearchIcon} from '@primer/octicons-react';
-import TextInput from '../../(common)/TextInput';
-import type {Translates} from '../../../../src/localization';
-import clsx from 'clsx';
-import {useForm} from 'react-hook-form';
 import {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {SearchIcon} from '@primer/octicons-react';
+import clsx from 'clsx';
+
+import type {Translates} from '../../../../src/localization';
+import Button from '../../(common)/Button';
+import TextInput from '../../(common)/TextInput';
 
 export default function SearchTextInput({
   t,

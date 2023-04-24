@@ -1,15 +1,16 @@
 'use client';
 
-import Button from '../../(common)/Button';
-import {CopyIcon} from '@primer/octicons-react';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import type {PluginType} from '../Home';
 import type {ReactElement} from 'react';
-import type {Translates} from '../../../../src/localization';
-import {track} from '@amplitude/analytics-browser';
-import {useAuthContext} from '../../../../src/components/AuthProvider';
-import {useRouter} from 'next/navigation';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useSnackbar} from 'react-simple-snackbar';
+import {track} from '@amplitude/analytics-browser';
+import {CopyIcon} from '@primer/octicons-react';
+import {useRouter} from 'next/navigation';
+
+import {useAuthContext} from '../../../../src/components/AuthProvider';
+import type {Translates} from '../../../../src/localization';
+import Button from '../../(common)/Button';
+import type {PluginType} from '../Home';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 

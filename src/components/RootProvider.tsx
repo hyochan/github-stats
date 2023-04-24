@@ -1,11 +1,12 @@
 'use client';
 
 import type {ReactElement, ReactNode} from 'react';
+import SnackbarProvider from 'react-simple-snackbar';
 
 import {AuthProvider} from './AuthProvider';
-import type {Locale} from '~/i18n';
+
 import {LocaleProvider} from '~/components/LocaleProvider';
-import SnackbarProvider from 'react-simple-snackbar';
+import type {Locale} from '~/i18n';
 
 export type ThemeType = 'light' | 'dark';
 

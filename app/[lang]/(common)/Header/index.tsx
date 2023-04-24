@@ -1,22 +1,23 @@
 'use client';
 
 import type {Dispatch, ReactElement, SetStateAction} from 'react';
-import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import {useEffect, useState} from 'react';
-import {usePathname, useRouter} from 'next/navigation';
-
-import Button from '../Button';
-import Github from 'public/assets/github.svg';
-import {H1} from '../../../../src/components/Typography';
 import HamburgerMenu from 'react-hamburger-menu';
 import {Inter} from '@next/font/google';
-import Link from 'next/link';
-import Logo from 'public/assets/logo.svg';
-import SwitchToggle from './SwitchToggle';
-import type {Translates} from '../../../../src/localization';
 import clsx from 'clsx';
-import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
+import Link from 'next/link';
+import {usePathname, useRouter} from 'next/navigation';
+import Github from 'public/assets/github.svg';
+import Logo from 'public/assets/logo.svg';
+
 import {useAuthContext} from '../../../../src/components/AuthProvider';
+import {H1} from '../../../../src/components/Typography';
+import type {Translates} from '../../../../src/localization';
+import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
+import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
+import Button from '../Button';
+
+import SwitchToggle from './SwitchToggle';
 
 const inter = Inter({subsets: ['latin']});
 

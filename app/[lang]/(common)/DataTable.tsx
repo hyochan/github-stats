@@ -1,5 +1,4 @@
 import type {ReactElement, Ref} from 'react';
-
 import clsx from 'clsx';
 
 type GetKey<TData> = TData extends object ? keyof TData : never;

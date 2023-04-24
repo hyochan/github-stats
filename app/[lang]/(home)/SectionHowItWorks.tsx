@@ -1,17 +1,19 @@
 'use client';
 
-import {ArrowRightIcon} from '@primer/octicons-react';
-import Button from '../(common)/Button';
-import Image from 'next/image';
 import type {ReactElement} from 'react';
-import TextInput from '../(common)/TextInput';
-import type {Translates} from '../../../src/localization';
-import clsx from 'clsx';
-import imgBgSection2 from '@/public/assets/bg_section2.png';
-import {subscribeNewsletter} from '../../../src/fetches/newsLetter';
-import {useForm} from 'react-hook-form';
 import {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {ArrowRightIcon} from '@primer/octicons-react';
+import clsx from 'clsx';
+import Image from 'next/image';
+
+import {subscribeNewsletter} from '../../../src/fetches/newsLetter';
+import type {Translates} from '../../../src/localization';
 import {validateEmail} from '../../../src/utils/common';
+import Button from '../(common)/Button';
+import TextInput from '../(common)/TextInput';
+
+import imgBgSection2 from '@/public/assets/bg_section2.png';
 
 type Props = {
   t: Translates['home'];

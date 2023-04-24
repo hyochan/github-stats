@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import type {ReactElement} from 'react';
+import Image from 'next/image';
+
 import {getTierSvg} from '../../../src/utils/functions';
 
 export type Tier =

@@ -2,11 +2,12 @@
 
 // import Apple from 'public/assets/apple.svg';
 // import Google from 'public/assets/google.svg';
-import Button from '../(common)/Button';
-import Github from 'public/assets/github.svg';
 import type {ReactElement} from 'react';
+import Github from 'public/assets/github.svg';
+
 import type {Translates} from '../../../src/localization';
 import {getSupabaseBrowserClient} from '../../../src/utils/supabase';
+import Button from '../(common)/Button';
 
 export default function SocialButtons({
   t,

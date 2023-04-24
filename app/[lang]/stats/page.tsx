@@ -1,6 +1,8 @@
 import type {ReactElement} from 'react';
+
 import type {Locale} from '../../../src/i18n';
 import {getTranslates} from '../../../src/localization';
+
 import Container from './Container';
 
 type Props = {
