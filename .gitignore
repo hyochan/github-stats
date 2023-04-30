@@ -44,3 +44,7 @@ next-env.d.ts
 .yarn/*
 !/.yarn/plugins
 !/.yarn/releases
+
+# pwa
+public/sw*
+public/workbox*
