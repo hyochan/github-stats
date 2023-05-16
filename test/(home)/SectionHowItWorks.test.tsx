@@ -5,7 +5,7 @@ import {getTranslates} from '../../src/localization';
 import {render} from '@testing-library/react';
 
 beforeAll(() => {
-  vi.mock('@next/font/google', () => {
+  vi.mock('next/font/google', () => {
     const mock = vi.mocked;
 
     return {Inter: mock};

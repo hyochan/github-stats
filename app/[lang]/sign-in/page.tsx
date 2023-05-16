@@ -1,6 +1,6 @@
 import type {ReactElement} from 'react';
-import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+import {Inter} from 'next/font/google';
 import Logo from 'public/assets/logo.svg';
 
 import {getTranslates} from '../../../src/localization';

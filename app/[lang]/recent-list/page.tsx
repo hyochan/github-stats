@@ -1,5 +1,5 @@
 import type {ReactElement} from 'react';
-import {Inter} from '@next/font/google';
+import {Inter} from 'next/font/google';
 import clsx from 'clsx';
 
 import {getSupabaseClient} from '../../../server/supabaseClient';

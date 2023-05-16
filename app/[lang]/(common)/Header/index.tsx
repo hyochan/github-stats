@@ -3,8 +3,8 @@
 import type {Dispatch, ReactElement, SetStateAction} from 'react';
 import {useEffect, useState} from 'react';
 import HamburgerMenu from 'react-hamburger-menu';
-import {Inter} from '@next/font/google';
 import clsx from 'clsx';
+import {Inter} from 'next/font/google';
 import Link from 'next/link';
 import {usePathname, useRouter} from 'next/navigation';
 import Github from 'public/assets/github.svg';
