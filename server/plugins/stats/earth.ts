@@ -1,7 +1,6 @@
 import type {PluginValue, Score} from '..';
-
-import type {AuthorCommits} from '../types/AuthorCommits';
 import {convertToHundreds} from '../pluginUtils';
+import type {AuthorCommits} from '../types/AuthorCommits';
 
 const EARTH_WEIGHT = 30;
 

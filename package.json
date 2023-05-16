@@ -10,6 +10,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
+    "eslint": "eslint --ext .ts,.tsx,.js,.jsx src server app",
     "seed": "dotenv -e .env.local -- prisma db seed",
     "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "migrate:staging": "dotenv -e .env.local -- prisma migrate deploy",

@@ -1,18 +1,18 @@
-import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
-
-import type {GithubUser} from '../plugins/types';
-import type {Json} from '../../src/types/supabase';
-import type {Locale} from '../../src/i18n';
-import type {Model} from '../../src/types/types';
-import type {PluginTrophy} from '../plugins/trophies';
-import type {TopLanguage} from '../plugins/topLanguages';
 import axios from 'axios';
-import {diffHours} from '../plugins/pluginUtils';
-import {getGithubStatus} from '../plugins';
-import {getSupabaseClient} from '../supabaseClient';
-import {getTopLanguages} from '../plugins/topLanguages';
+
+import type {Locale} from '../../src/i18n';
 import {getTranslates} from '../../src/localization';
+import type {Json} from '../../src/types/supabase';
+import type {Model} from '../../src/types/types';
+import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
+import {getGithubStatus} from '../plugins';
+import {diffHours} from '../plugins/pluginUtils';
+import type {TopLanguage} from '../plugins/topLanguages';
+import {getTopLanguages} from '../plugins/topLanguages';
+import type {PluginTrophy} from '../plugins/trophies';
 import {getTrophies} from '../plugins/trophies';
+import type {GithubUser} from '../plugins/types';
+import {getSupabaseClient} from '../supabaseClient';
 
 const {GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GH_TOKEN} = process.env;
 

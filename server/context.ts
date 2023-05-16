@@ -1,7 +1,7 @@
+import type {SupabaseClient} from '@supabase/supabase-js';
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 import type {Database} from '../src/types/supabase';
-import type {SupabaseClient} from '@supabase/supabase-js';
 
 type CreateContextParams = {
   req: NextApiRequest;

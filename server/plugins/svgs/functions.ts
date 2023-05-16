@@ -1,5 +1,12 @@
 'use server';
 
+import fs from 'fs';
+import path from 'path';
+
+import {isDev} from '../../../src/utils/const';
+import {uploadFileToSupabase} from '../../../src/utils/storage';
+import type {DoobooStatsResponse} from '../../services/githubService';
+
 import {renderGithubStatsSvg, renderGithubStatsSvgWithLangs} from './assets';
 import {
   tierBronzeSvg,
@@ -11,12 +18,6 @@ import {
   tierPlatinumSvg,
   tierSilverSvg,
 } from './githubTiers';
-
-import type {DoobooStatsResponse} from '../../services/githubService';
-import fs from 'fs';
-import {isDev} from '../../../src/utils/const';
-import path from 'path';
-import {uploadFileToSupabase} from '../../../src/utils/storage';
 
 export type ScoreType = {
   tierName:

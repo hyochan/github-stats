@@ -1,7 +1,8 @@
-import type {Database} from '../src/types/supabase';
 import type {SupabaseClient} from '@supabase/supabase-js';
-import {assert} from '../src/utils/assert';
 import {createClient} from '@supabase/supabase-js';
+
+import type {Database} from '../src/types/supabase';
+import {assert} from '../src/utils/assert';
 
 const {NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY} = process.env;
 

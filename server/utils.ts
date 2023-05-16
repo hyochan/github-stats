@@ -1,9 +1,9 @@
-import type {Locale} from '../src/i18n';
-import {i18n} from '../src/i18n';
-
+import {init} from '@amplitude/analytics-node';
 import type {NextApiRequest} from 'next';
 import {acceptLanguage} from 'next/dist/server/accept-header';
-import {init} from '@amplitude/analytics-node';
+
+import type {Locale} from '../src/i18n';
+import {i18n} from '../src/i18n';
 
 const {AMPLITUDE_KEY} = process.env;
 

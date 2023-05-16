@@ -1,5 +1,4 @@
 import type {PluginValue, Score} from '..';
-
 import {convertToHundreds} from '../pluginUtils';
 
 const PEOPLE_WEIGHT = 0.005;

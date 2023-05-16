@@ -1,11 +1,11 @@
-import type {AuthorCommits} from './types/AuthorCommits';
-import type {UserGraph} from './types/UserGraph';
 import {getGithubEarthScore} from './stats/earth';
 import {getGithubFireScore} from './stats/fire';
 import {getGithubGoldScore} from './stats/gold';
 import {getGithubPeopleScore} from './stats/people';
 import {getGithubTreeScore} from './stats/tree';
 import {getGithubWaterScore} from './stats/water';
+import type {AuthorCommits} from './types/AuthorCommits';
+import type {UserGraph} from './types/UserGraph';
 
 export * from './types/AuthorCommits';
 export * from './types/UserGraph';

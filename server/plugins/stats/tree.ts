@@ -1,7 +1,6 @@
 import type {PluginValue, Score} from '..';
-
-import type {UserGraph} from '../types/UserGraph';
 import {convertToHundreds} from '../pluginUtils';
+import type {UserGraph} from '../types/UserGraph';
 
 const TREE_WEIGHT = 1.8;
 
