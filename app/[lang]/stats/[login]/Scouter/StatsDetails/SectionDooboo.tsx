@@ -1,6 +1,6 @@
 import type {ReactElement} from 'react';
-import {Inter} from 'next/font/google';
 import clsx from 'clsx';
+import {Inter} from 'next/font/google';
 import Image from 'next/image';
 
 import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';

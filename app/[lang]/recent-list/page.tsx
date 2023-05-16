@@ -1,6 +1,6 @@
 import type {ReactElement} from 'react';
-import {Inter} from 'next/font/google';
 import clsx from 'clsx';
+import {Inter} from 'next/font/google';
 
 import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {UserListItem} from '../../../src/fetches/recentList';
