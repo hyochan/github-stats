@@ -8,7 +8,7 @@
 
 ## Previews
 
-[Hosted webpage](https://stats.dooboo.io)
+[Hosted webpage: stats.dooboo.io](https://stats.dooboo.io)
 
 ### Readme Stats
 
