@@ -3,33 +3,33 @@
 > Project is built mainly with `nextjs`, `react server component` and `supabase`.
 
 [![CI](https://github.com/hyochan/github-stats/actions/workflows/ci.yml/badge.svg)](https://github.com/hyochan/github-stats/actions/workflows/ci.yml)
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=stats.hyochan.dev)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=stats.dooboo.io)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 ## Previews
 
-[Hosted webpage](https://stats.hyochan.dev)
+[Hosted webpage](https://stats.dooboo.io)
 
 ### Readme Stats
 
 #### 📊GitHub Stats :
-<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan" width="520" /></a>
+<a href="https://stats.dooboo.io"><img src="https://stats.dooboo.io/api/github-stats-advanced?login=hyochan" width="520" /></a>
 
 ```
-![github-stats](https://stats.hyochan.dev/api/github-stats-advanced?login=hyochan)
+![github-stats](https://stats.dooboo.io/api/github-stats-advanced?login=hyochan)
 ```
 
-<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-stats?login=hyochan" width="520" /></a>
+<a href="https://stats.dooboo.io"><img src="https://stats.dooboo.io/api/github-stats?login=hyochan" width="520" /></a>
 
 ```
-![github-stats](https://stats.hyochan.dev/api/github-stats?login=hyochan)
+![github-stats](https://stats.dooboo.io/api/github-stats?login=hyochan)
 ```
 
 #### 🏆GitHub Trophies
-<a href="https://stats.hyochan.dev"><img src="https://stats.hyochan.dev/api/github-trophies?login=hyochan" width="520" /></a>
+<a href="https://stats.dooboo.io"><img src="https://stats.dooboo.io/api/github-trophies?login=hyochan" width="520" /></a>
 
 ```
-![github-trophies](https://stats.hyochan.dev/api/github-trophies?login=hyochan)
+![github-trophies](https://stats.dooboo.io/api/github-trophies?login=hyochan)
 ```
 
 > Every GitHub user can make use of their own 🙌
