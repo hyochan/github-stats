@@ -254,6 +254,10 @@ export default function Header(props: Props): ReactElement {
           name: t.stats,
           path: `/stats/`,
         },
+        {
+          name: t.recentList,
+          path: '/recent-list',
+        },
       ];
 
   useEffect(() => {
