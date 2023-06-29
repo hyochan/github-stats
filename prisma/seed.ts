@@ -3,11 +3,11 @@ import {PrismaClient} from '@prisma/client';
 const prisma = new PrismaClient();
 
 const main = async (): Promise<void> => {
-  await prisma.plugins.upsert({
+  await prisma.plugin.upsert({
     where: {id: 'dooboo-github'},
     update: {},
     create: {
-      api_url: 'https://',
+      apiUrl: 'https://',
       id: 'dooboo-github',
       description: 'Github plugin for dooboo stats',
       json: [
