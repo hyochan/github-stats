@@ -3,10 +3,11 @@
 // import Apple from 'public/assets/apple.svg';
 // import Google from 'public/assets/google.svg';
 import type {ReactElement} from 'react';
+import {useRouter} from 'next/navigation';
 import Github from 'public/assets/github.svg';
 
 import type {Translates} from '../../../src/localization';
-import {getSupabaseBrowserClient} from '../../../src/utils/supabase';
+import {getSupabaseComponentClient} from '../../../src/utils/supabase';
 import Button from '../(common)/Button';
 
 export default function SocialButtons({
@@ -20,7 +21,8 @@ export default function SocialButtons({
     onClick?: () => void;
   };
 
-  const supabase = getSupabaseBrowserClient();
+  const router = useRouter();
+  const supabase = getSupabaseComponentClient();
 
   const socialButtons: SocialButton[] = [
     {
@@ -33,6 +35,8 @@ export default function SocialButtons({
             redirectTo: process.env.NEXT_PUBLIC_ROOT_URL,
           },
         });
+
+        router.refresh();
       },
     },
     // {

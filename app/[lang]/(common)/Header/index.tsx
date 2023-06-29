@@ -13,7 +13,7 @@ import Logo from 'public/assets/logo.svg';
 import {useAuthContext} from '../../../../src/components/AuthProvider';
 import {H1} from '../../../../src/components/Typography';
 import type {Translates} from '../../../../src/localization';
-import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
+import {getSupabaseComponentClient} from '../../../../src/utils/supabase';
 import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import Button from '../Button';
 
@@ -40,10 +40,10 @@ function DesktopNavMenus(
     navLinks: NavLink[];
   },
 ): ReactElement {
-  const {t, lang, login, isDark, setIsDark, navLinks} = props;
+  const {t, login, isDark, setIsDark, navLinks} = props;
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = getSupabaseBrowserClient();
+  const supabase = getSupabaseComponentClient();
 
   return (
     <div
@@ -60,7 +60,7 @@ function DesktopNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate',
                   pathname?.includes(link.path) ? 'opacity-100' : 'opacity-30',
@@ -123,10 +123,10 @@ function MobileNavMenus(
     navLinks: NavLink[];
   },
 ): ReactElement {
-  const {t, lang, login, isDark, setIsDark, navLinks} = props;
+  const {t, login, isDark, setIsDark, navLinks} = props;
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = getSupabaseBrowserClient();
+  const supabase = getSupabaseComponentClient();
 
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
@@ -162,7 +162,7 @@ function MobileNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
@@ -232,8 +232,8 @@ function MobileNavMenus(
 }
 
 export default function Header(props: Props): ReactElement {
-  const {t, lang} = props;
-  const supabase = getSupabaseBrowserClient();
+  const {t} = props;
+  const supabase = getSupabaseComponentClient();
 
   const [isDark, setIsDark] = useState(false);
   const {login, changeLogin} = useAuthContext();
@@ -263,7 +263,15 @@ export default function Header(props: Props): ReactElement {
   useEffect(() => {
     const {
       data: {subscription},
-    } = supabase.auth.onAuthStateChange((evt, session) => {
+    } = supabase.auth.onAuthStateChange(async (evt, session) => {
+      // if (session) {
+      //   await setServerSession(event, session);
+
+      //   const isLoggedIn = !!session && evt === 'SIGNED_IN';
+      //   changeLogin(isLoggedIn && session.user.user_metadata.user_name);
+      // } else {
+      //   await setServerSession(event, session);
+      // }
       const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
       changeLogin(isLoggedIn && session.user.user_metadata.user_name);
     });
@@ -299,7 +307,7 @@ export default function Header(props: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Link href={`${lang}/`} className="flex flex-row items-center">
+          <Link href={`/`} className="flex flex-row items-center">
             <Logo className="h-5 text-brand cursor-pointer" />
             <H1
               className={clsx(

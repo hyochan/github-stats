@@ -1,3 +1,4 @@
+import type {SupabaseClient} from '@supabase/supabase-js';
 import axios from 'axios';
 
 import type {Locale} from '../../src/i18n';
@@ -12,7 +13,7 @@ import {getTopLanguages} from '../plugins/topLanguages';
 import type {PluginTrophy} from '../plugins/trophies';
 import {getTrophies} from '../plugins/trophies';
 import type {GithubUser} from '../plugins/types';
-import {getSupabaseClient} from '../supabaseClient';
+import {} from '../supabaseClient';
 
 const {GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GH_TOKEN} = process.env;
 
@@ -318,14 +319,15 @@ const upsertGithubStats = async ({
   plugin,
   user_plugin,
   lang = 'en',
+  supabase,
 }: {
   login: string;
   plugin: Model['plugins']['Row'];
   user_plugin: Model['user_plugins']['Row'] | null;
   lang?: Locale;
+  supabase: SupabaseClient;
 }): Promise<DoobooStatsResponse | null> => {
   try {
-    const supabase = getSupabaseClient();
     const {plugins} = await getTranslates(lang);
 
     // NOTE: Unknown user or user without commits will gracefully fail here.
@@ -475,13 +477,13 @@ const upsertGithubStats = async ({
 export const getDoobooStats = async ({
   login,
   lang = 'en',
+  supabase,
 }: {
   login: string;
   lang?: Locale;
+  supabase: SupabaseClient;
 }): Promise<DoobooStatsResponse | null> => {
   login = login.toLowerCase();
-
-  const supabase = getSupabaseClient();
 
   const {
     common: tCommon,
@@ -591,6 +593,7 @@ export const getDoobooStats = async ({
 
         if (diffHours(updatedAt, today) < 3) {
           upsertGithubStats({
+            supabase,
             plugin,
             user_plugin: userPlugin,
             login,
@@ -626,6 +629,7 @@ export const getDoobooStats = async ({
     }
 
     return await upsertGithubStats({
+      supabase,
       plugin,
       user_plugin: userPlugin,
       login,

@@ -5,6 +5,7 @@ import {LOWEST_TROPHIES_SCORE} from '../../../server/plugins';
 import {uploadTrophiesSvg} from '../../../server/plugins/svgs/functions';
 import {renderGithubTrophies} from '../../../server/plugins/svgs/githubTrophies';
 import {getDoobooStats} from '../../../server/services/githubService';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
@@ -19,6 +20,7 @@ export default async function handler(
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'GET':
@@ -28,6 +30,7 @@ export default async function handler(
         const stats = await getDoobooStats({
           login: login.toLocaleLowerCase(),
           lang: locale,
+          supabase,
         });
 
         if (!stats) {
@@ -53,7 +56,12 @@ export default async function handler(
         }
 
         const trophySvg = renderGithubTrophies(trophies);
-        uploadTrophiesSvg(login, trophySvg);
+
+        uploadTrophiesSvg({
+          login,
+          supabase,
+          svg: trophySvg,
+        });
 
         res.setHeader('Content-Type', 'image/svg+xml');
         res.send(trophySvg);

@@ -1,4 +1,5 @@
-import {getSupabaseClient} from '../../server/supabaseClient';
+import type {SupabaseClient} from '@supabase/supabase-js';
+
 import type {Model} from '../types/types';
 
 export const isEmptyObject = (param: any): boolean =>
@@ -60,13 +61,13 @@ export const getUserPlugins = async ({
   plugin,
   take = 20,
   dateStr = new Date().toISOString(),
+  supabase,
 }: {
   plugin: Model['plugins']['Row'];
   take?: number;
   dateStr?: string;
+  supabase: SupabaseClient;
 }): Promise<PluginUser[]> => {
-  const supabase = getSupabaseClient();
-
   const {data: userPlugins} = await supabase
     .from('user_plugins')
     .select('*')

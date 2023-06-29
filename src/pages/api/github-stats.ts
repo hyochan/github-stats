@@ -3,6 +3,7 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 
 import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 import {getDoobooStats} from '../../../server/services/githubService';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
@@ -16,6 +17,7 @@ export default async function handler(
   const locale = currentLocale(req);
   const method = <string>req.method;
   const {common} = await getTranslates(locale);
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'GET':
@@ -24,6 +26,7 @@ export default async function handler(
 
       try {
         const stats = await getDoobooStats({
+          supabase,
           login: loginParam.toLocaleLowerCase(),
           lang: locale,
         });
@@ -40,7 +43,12 @@ export default async function handler(
           extra: {login: loginParam, lang: locale},
         });
 
-        const {file} = await generateGithubSVG(loginParam, stats, false);
+        const {file} = await generateGithubSVG({
+          login: loginParam,
+          stats,
+          shouldIncludeLanguage: false,
+          supabase,
+        });
         res.setHeader('Content-Type', 'image/svg+xml');
         res.send(file);
       } catch (err) {
@@ -54,6 +62,7 @@ export default async function handler(
 
       try {
         const stats = await getDoobooStats({
+          supabase,
           login: loginBody.toLocaleLowerCase(),
           lang: locale,
         });

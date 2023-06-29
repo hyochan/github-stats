@@ -1,8 +1,11 @@
+'use client';
+
 import {track} from '@amplitude/analytics-browser';
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
 import {getDoobooStats} from '../../../server/services/githubService';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 import {currentLocale, initNodeAmplitude} from '../../../server/utils';
 import {getTranslates} from '../../localization';
 import {assert} from '../../utils/assert';
@@ -17,6 +20,7 @@ export default async function handler(
   const method = <string>req.method;
   const login = <string>req.query.login;
   const {common} = await getTranslates(locale);
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'GET':
@@ -26,6 +30,7 @@ export default async function handler(
         const stats = await getDoobooStats({
           login: login.toLocaleLowerCase(),
           lang: locale,
+          supabase,
         });
 
         if (!stats) {
@@ -34,7 +39,12 @@ export default async function handler(
           return;
         }
 
-        const {file} = await generateGithubSVG(login, stats, true);
+        const {file} = await generateGithubSVG({
+          login,
+          stats,
+          shouldIncludeLanguage: true,
+          supabase,
+        });
 
         track('github-stats-advanced', undefined, {
           language: locale,

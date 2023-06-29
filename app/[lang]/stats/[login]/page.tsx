@@ -1,6 +1,7 @@
 import type {ReactElement} from 'react';
 
 import {getDoobooStats} from '../../../../server/services/githubService';
+import {getSupabaseServerComponentClient} from '../../../../server/supabaseClient';
 import {getTranslates} from '../../../../src/localization';
 import Container from '../Container';
 
@@ -16,7 +17,10 @@ export default async function Page({
   params: {lang, login},
 }: Props): Promise<ReactElement> {
   const {stats: tStats} = await getTranslates(lang);
+  const supabase = getSupabaseServerComponentClient();
+
   const stats = await getDoobooStats({
+    supabase,
     login,
     lang,
   });

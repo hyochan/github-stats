@@ -1,5 +1,6 @@
 'use server';
 
+import type {SupabaseClient} from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 
@@ -54,11 +55,17 @@ export const getTierName = (
   return 'Iron';
 };
 
-export const generateGithubSVG = async (
-  login: string,
-  stats: DoobooStatsResponse,
-  shouldIncludeLanguage?: boolean,
-): Promise<{
+export const generateGithubSVG = async ({
+  login,
+  stats,
+  shouldIncludeLanguage,
+  supabase,
+}: {
+  login: string;
+  stats: DoobooStatsResponse;
+  shouldIncludeLanguage?: boolean;
+  supabase: SupabaseClient;
+}): Promise<{
   file: string;
   path: string;
 }> => {
@@ -220,6 +227,7 @@ export const generateGithubSVG = async (
           file: filePath,
           bucket: 'public',
           destPath: `dooboo-github/${tmpName}`,
+          supabase,
         });
       } catch (err: any) {
         throw new Error(err);
@@ -240,10 +248,15 @@ export const generateGithubSVG = async (
   }
 };
 
-export const uploadTrophiesSvg = async (
-  login: string,
-  svg: string,
-): Promise<void> => {
+export const uploadTrophiesSvg = async ({
+  login,
+  svg,
+  supabase,
+}: {
+  login: string;
+  svg: string;
+  supabase: SupabaseClient;
+}): Promise<void> => {
   const tmpName = `${login}-trophies.svg`;
   // https://stackoverflow.com/questions/53765403/how-to-access-tmp-folder-in-lambda-with-in-node/53770877#53770877
   const filePath = isDev ? path.resolve('public', tmpName) : `/tmp/${tmpName}`;
@@ -255,6 +268,7 @@ export const uploadTrophiesSvg = async (
       file: filePath,
       bucket: 'public',
       destPath: `dooboo-github/${login}-trophies.svg`,
+      supabase,
     });
   } finally {
     if (fs.existsSync(filePath)) {

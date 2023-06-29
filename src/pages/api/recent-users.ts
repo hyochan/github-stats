@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 import type {PluginUser} from '../../utils/functions';
 import {getUserPlugins} from '../../utils/functions';
 
@@ -11,6 +11,7 @@ export default async function handler(
   res: NextApiResponse<Reply>,
 ): Promise<void> {
   const {method, body} = req;
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'POST':
@@ -23,8 +24,6 @@ export default async function handler(
 
         return;
       }
-
-      const supabase = getSupabaseClient();
 
       const {data: plugin} = await supabase
         .from('plugins')
@@ -42,6 +41,7 @@ export default async function handler(
         plugin,
         take,
         dateStr,
+        supabase,
       });
 
       res.status(200).send({users: userPlugins});

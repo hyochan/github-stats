@@ -2,7 +2,7 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseServerComponentClient} from '../../../server/supabaseClient';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
@@ -22,7 +22,7 @@ export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
   const {recentList} = await getTranslates(lang);
-  const supabase = getSupabaseClient();
+  const supabase = getSupabaseServerComponentClient();
 
   const {data: plugin} = await supabase
     .from('plugins')
@@ -30,7 +30,12 @@ export default async function Page({
     .eq('id', 'dooboo-github')
     .single();
 
-  const userPlugins = plugin ? await getUserPlugins({plugin}) : [];
+  const userPlugins = plugin
+    ? await getUserPlugins({
+        plugin,
+        supabase,
+      })
+    : [];
 
   return (
     <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>

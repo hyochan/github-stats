@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 
 type Tier = {
   tier: string;
@@ -16,6 +16,7 @@ export default async function handler(
   res: NextApiResponse<Reply>,
 ): Promise<void> {
   const {body, method} = req;
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'POST':
@@ -27,7 +28,6 @@ export default async function handler(
         return;
       }
 
-      const supabase = getSupabaseClient();
       await supabase.from('news_letters').upsert({email});
 
       res

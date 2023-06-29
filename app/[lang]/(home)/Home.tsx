@@ -1,7 +1,9 @@
 'use client';
 
 import type {ReactElement} from 'react';
+import {useEffect} from 'react';
 import clsx from 'clsx';
+import {useRouter} from 'next/navigation';
 
 import type {StatsInfo} from '../../../src/fetches/github';
 import type {Translates} from '../../../src/localization';
@@ -22,7 +24,13 @@ export type PluginType = {
 };
 
 function Home({t, statsInfo}: Props): ReactElement {
-  initAmplitude();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router) {
+      initAmplitude();
+    }
+  }, [router]);
 
   return (
     <div className={clsx('flex-1 w-screen bg-paper', 'flex flex-col')}>

@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseRouteHandlerClient} from '../../../server/supabaseClient';
 
 type Tier = {
   tier: string;
@@ -17,10 +17,10 @@ export default async function handler(
 ): Promise<void> {
   const {body, method} = req;
   const id = <string>body.id;
+  const supabase = getSupabaseRouteHandlerClient();
 
   switch (method) {
     case 'POST':
-      const supabase = getSupabaseClient();
       const {data} = await supabase
         .from('plugins')
         .select('*')

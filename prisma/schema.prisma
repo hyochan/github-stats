@@ -19,118 +19,130 @@ enum AuthType {
   apple
 }
 
-model news_letters {
+model NewsLetter {
   email String @id
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-  deleted_at DateTime?
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("news_letters")
 }
 
-model users {
-  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email        String?
-  name         String?
-  description  String?
-  birthday     DateTime?
-  gender       Gender?
-  phone        String?
-  locale       String?
-  certified    Boolean?  @default(false)
-  github_login String?   @unique
-  location     String?
-  company      String?
-  blog         String?
-  twitter      String?
-  github_url   String?
+model User {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email       String?
+  name        String?
+  description String?
+  birthday    DateTime?
+  gender      Gender?
+  phone       String?
+  locale      String?
+  certified   Boolean?  @default(false)
+  githubLogin String?   @unique @map("github_login")
+  location    String?
+  company     String?
+  blog        String?
+  twitter     String?
+  githubUrl   String?   @map("github_url")
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-  deleted_at DateTime?
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
-  image        images?
-  user_plugins user_plugins[]
+  image       Image?
+  userPlugins UserPlugin[]
+
+  @@map("users")
 }
 
-model images {
-  id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  thumb_url      String?
-  thumb_url_high String?
-  image_url      String?
+model Image {
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  thumbUrl      String? @map("thumb_url")
+  thumbUrlHight String? @map("thumb_url_high")
+  imageUrl      String? @map("image_url")
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-  deleted_at DateTime?
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
-  user_id String? @unique @db.Uuid
-  user    users?  @relation(fields: [user_id], references: [id])
+  userId String? @unique @map("user_id") @db.Uuid
+  user   User?   @relation(fields: [userId], references: [id])
+
+  @@map("images")
 }
 
-model user_plugins {
-  login            String    @id
-  github_id        String
-  score            Int       @default(0) @db.SmallInt
-  user_name        String?
-  avatar_url       String?
-  description      String?
-  json             Json?     @db.Json
-  certified_at     DateTime?
-  certification_no Int?
+model UserPlugin {
+  login           String    @id
+  githubId        String?   @map("github_id")
+  score           Int       @default(0) @db.SmallInt
+  userName        String?   @map("user_name")
+  avatarUrl       String?   @map("avatar_url")
+  description     String?
+  json            Json?     @db.Json
+  certifiedAt     DateTime? @map("certified_at")
+  certificationNo Int?      @map("certification_no")
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-  deleted_at DateTime?
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
-  user    users?  @relation(fields: [user_id], references: [id])
-  user_id String? @unique @db.Uuid
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id") @db.Uuid
 
-  plugin    plugins? @relation(fields: [plugin_id], references: [id])
-  plugin_id String?
+  plugin   Plugin? @relation(fields: [pluginId], references: [id])
+  pluginId String?  @map("plugin_id")
 
-  view_count Int? @default(0)
+  viewCount Int? @default(0) @map("view_count")
 
-  stats    stats[]
-  trophies trophies[]
+  stats    Stat[]
+  trophies Trophy[]
 
-  @@unique([login, plugin_id])
+  @@unique([login, pluginId])
+  @@map("user_plugins")
 }
 
-model plugins {
+model Plugin {
   id          String  @id
-  api_url     String
+  apiUrl      String  @map("api_url")
   description String?
   json        Json?   @db.Json
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
-  deleted_at DateTime?
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
-  user_plugins user_plugins[]
+  userPlugins UserPlugin[]
+
+  @@map("plugins")
 }
 
-model trophies {
+model Trophy {
   id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   type   String
   score  Decimal @db.Decimal(7, 2)
   points Int     @default(0)
 
-  user_plugin       user_plugins? @relation(fields: [user_plugin_login], references: [login])
+  user_plugin       UserPlugin? @relation(fields: [user_plugin_login], references: [login])
   user_plugin_login String?
 
   @@unique([type, user_plugin_login])
+
+  @@map("trophies")
 }
 
-model stats {
-  id                String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name              String
-  icon_url          String?
-  icon_url_selected String?
-  score             Decimal @db.Decimal(7, 2)
-  description       String?
-  stat_element      Json?   @db.Json
+model Stat {
+  id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String
+  iconUrl         String? @map("icon_url")
+  iconUrlSelected String? @map("icon_url_selected")
+  score           Decimal @db.Decimal(7, 2)
+  description     String?
+  statElement     Json?   @map("stat_element") @db.Json
 
-  user_plugin       user_plugins? @relation(fields: [user_plugin_login], references: [login])
-  user_plugin_login String?
+  userPlugin      UserPlugin? @relation(fields: [userPluginLogin], references: [login])
+  userPluginLogin String?     @map("user_plugin_login")
 
-  @@index([user_plugin_login])
+  @@index([userPluginLogin])
+  @@map("stats")
 }
