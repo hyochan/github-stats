@@ -90,19 +90,19 @@ model UserPlugin {
   user   User?   @relation(fields: [userId], references: [id])
   userId String? @map("user_id") @db.Uuid
 
-  plugin   plugins? @relation(fields: [pluginId], references: [id])
+  plugin   Plugin? @relation(fields: [pluginId], references: [id])
   pluginId String?  @map("plugin_id")
 
   viewCount Int? @default(0) @map("view_count")
 
-  stats    stats[]
-  trophies trophies[]
+  stats    Stat[]
+  trophies Trophy[]
 
   @@unique([login, pluginId])
   @@map("user_plugins")
 }
 
-model plugins {
+model Plugin {
   id          String  @id
   apiUrl      String  @map("api_url")
   description String?
@@ -113,9 +113,11 @@ model plugins {
   deletedAt DateTime? @map("deleted_at")
 
   userPlugins UserPlugin[]
+
+  @@map("plugins")
 }
 
-model trophies {
+model Trophy {
   id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   type   String
   score  Decimal @db.Decimal(7, 2)
@@ -125,9 +127,11 @@ model trophies {
   user_plugin_login String?
 
   @@unique([type, user_plugin_login])
+
+  @@map("trophies")
 }
 
-model stats {
+model Stat {
   id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String
   iconUrl         String? @map("icon_url")
@@ -140,4 +144,5 @@ model stats {
   userPluginLogin String?     @map("user_plugin_login")
 
   @@index([userPluginLogin])
+  @@map("stats")
 }
