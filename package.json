@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://stats.dooboo.io",
   "scripts": {
-    "dev:next": "NODE_OPTIONS='--inspect' next dev",
+    "dev:next": "next dev",
     "dev": "concurrently \"yarn dev:next\" \"tailwindcss --input ./styles/root.css --output ./styles/output.css --watch\"",
     "build": "tailwindcss ./styles/root.css --output ./styles/output.css && yarn generate:prisma && next build",
     "export": "next export",

@@ -40,7 +40,7 @@ function DesktopNavMenus(
     navLinks: NavLink[];
   },
 ): ReactElement {
-  const {t, lang, login, isDark, setIsDark, navLinks} = props;
+  const {t, login, isDark, setIsDark, navLinks} = props;
   const pathname = usePathname();
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
@@ -60,7 +60,7 @@ function DesktopNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate',
                   pathname?.includes(link.path) ? 'opacity-100' : 'opacity-30',
@@ -123,7 +123,7 @@ function MobileNavMenus(
     navLinks: NavLink[];
   },
 ): ReactElement {
-  const {t, lang, login, isDark, setIsDark, navLinks} = props;
+  const {t, login, isDark, setIsDark, navLinks} = props;
   const pathname = usePathname();
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
@@ -162,7 +162,7 @@ function MobileNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
@@ -232,7 +232,7 @@ function MobileNavMenus(
 }
 
 export default function Header(props: Props): ReactElement {
-  const {t, lang} = props;
+  const {t} = props;
   const supabase = getSupabaseBrowserClient();
 
   const [isDark, setIsDark] = useState(false);
@@ -299,7 +299,7 @@ export default function Header(props: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Link href={`${lang}/`} className="flex flex-row items-center">
+          <Link href={`/`} className="flex flex-row items-center">
             <Logo className="h-5 text-brand cursor-pointer" />
             <H1
               className={clsx(

@@ -1,3 +1,5 @@
+'use client';
+
 import {track} from '@amplitude/analytics-browser';
 import type {NextApiRequest, NextApiResponse} from 'next';
 
