@@ -7,10 +7,11 @@ import {track} from '@amplitude/analytics-browser';
 import {CopyIcon} from '@primer/octicons-react';
 import {useRouter} from 'next/navigation';
 
-import {useAuthContext} from '../../../../src/components/AuthProvider';
-import type {Translates} from '../../../../src/localization';
-import Button from '../../(common)/Button';
 import type {PluginType} from '../Home';
+
+import {useAuthContext} from '~/components/providers/AuthProvider';
+import Button from '~/components/uis/Button';
+import type {Translates} from '~/src/localization';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 

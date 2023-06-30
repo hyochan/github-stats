@@ -10,12 +10,12 @@ import {usePathname, useRouter} from 'next/navigation';
 import Github from 'public/assets/github.svg';
 import Logo from 'public/assets/logo.svg';
 
-import {useAuthContext} from '../../../../src/components/AuthProvider';
-import {H1} from '../../../../src/components/Typography';
-import type {Translates} from '../../../../src/localization';
-import {getSupabaseComponentClient} from '../../../../src/utils/supabase';
-import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
+import type {Translates} from '../../../localization';
+import {getSupabaseComponentClient} from '../../../utils/supabase';
+import {isDarkMode, toggleTheme} from '../../../utils/theme';
+import {useAuthContext} from '../../providers/AuthProvider';
 import Button from '../Button';
+import {H1} from '../Typography';
 
 import SwitchToggle from './SwitchToggle';
 

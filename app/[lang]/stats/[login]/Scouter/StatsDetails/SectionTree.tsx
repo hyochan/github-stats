@@ -2,8 +2,8 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
-import type {Translates} from '../../../../../../src/localization';
+import type {DoobooStatsResponse} from '~/server/services/githubService';
+import type {Translates} from '~/src/localization';
 
 const inter = Inter({subsets: ['latin']});
 

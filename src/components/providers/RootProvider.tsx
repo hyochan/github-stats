@@ -5,7 +5,7 @@ import SnackbarProvider from 'react-simple-snackbar';
 
 import {AuthProvider} from './AuthProvider';
 
-import {LocaleProvider} from '~/components/LocaleProvider';
+import {LocaleProvider} from '~/components/providers/LocaleProvider';
 import type {Locale} from '~/i18n';
 
 export type ThemeType = 'light' | 'dark';

@@ -1,8 +1,8 @@
+import {render} from '@testing-library/react';
 import {beforeAll, expect, test, vi} from 'vitest';
 
-import SectionHowItWorks from '../../app/[lang]/(home)/SectionHowItWorks';
-import {getTranslates} from '../../src/localization';
-import {render} from '@testing-library/react';
+import SectionHowItWorks from '../../../app/[lang]/(home)/SectionHowItWorks';
+import {getTranslates} from '../../../src/localization';
 
 beforeAll(() => {
   vi.mock('next/font/google', () => {

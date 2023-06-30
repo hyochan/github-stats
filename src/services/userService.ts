@@ -1,6 +1,6 @@
 import type {SupabaseClient, User} from '@supabase/supabase-js';
 
-import type {Model} from '../types/types';
+import type {Model} from '~/src/types/types';
 
 type DatabaseUser = Model['users']['Row'];
 

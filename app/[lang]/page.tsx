@@ -1,10 +1,9 @@
 import type {ReactElement} from 'react';
 
-import type {StatsInfo} from '../../src/fetches/github';
-import {getTranslates} from '../../src/localization';
-
-import Home from '@/app/(home)/Home';
+import Home from '~/app/(home)/Home';
 import type {Locale} from '~/i18n';
+import type {StatsInfo} from '~/src/apis/github';
+import {getTranslates} from '~/src/localization';
 
 type Props = {
   params: {lang: Locale};

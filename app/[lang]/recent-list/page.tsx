@@ -2,15 +2,14 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import {getSupabaseServerComponentClient} from '../../../server/supabaseClient';
-import type {UserListItem} from '../../../src/fetches/recentList';
-import {getTranslates} from '../../../src/localization';
-import {getUserPlugins} from '../../../src/utils/functions';
-
 import GithubUserList from './GithubUserList';
 
-import {H1} from '~/components/Typography';
+import {H1} from '~/components/uis/Typography';
 import type {Locale} from '~/i18n';
+import {getSupabaseServerComponentClient} from '~/server/supabaseClient';
+import type {UserListItem} from '~/src/apis/recentList';
+import {getTranslates} from '~/src/localization';
+import {getUserPlugins} from '~/src/utils/functions';
 
 const inter = Inter({subsets: ['latin']});
 

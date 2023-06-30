@@ -5,13 +5,13 @@ import {useEffect} from 'react';
 import clsx from 'clsx';
 import {useRouter} from 'next/navigation';
 
-import type {StatsInfo} from '../../../src/fetches/github';
-import type {Translates} from '../../../src/localization';
-import {initAmplitude} from '../../../src/utils/webUtils';
-
 import Hero from './Hero';
 import SectionFooter from './SectionFooter';
 import SectionHowItWorks from './SectionHowItWorks';
+
+import type {StatsInfo} from '~/src/apis/github';
+import type {Translates} from '~/src/localization';
+import {initAmplitude} from '~/src/utils/webUtils';
 
 type Props = {
   t: Translates['home'];

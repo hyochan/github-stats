@@ -3,15 +3,15 @@ import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 import Image from 'next/image';
 
-import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
-import type {Translates} from '../../../../../../src/localization';
-import {getTierSvg} from '../../../../../../src/utils/functions';
 import {statNames} from '..';
 
 import type {TierType} from '.';
 
 import Logo from '@/public/assets/logo.svg';
+import type {ScoreType} from '~/server/plugins/svgs/functions';
+import type {DoobooStatsResponse} from '~/server/services/githubService';
+import type {Translates} from '~/src/localization';
+import {getTierSvg} from '~/src/utils/functions';
 
 const inter = Inter({subsets: ['latin']});
 

@@ -4,7 +4,7 @@ import type {ReactElement} from 'react';
 import {Lottie} from '@crello/react-lottie';
 import clsx from 'clsx';
 
-import * as animationData from '../../public/lotties/dooboo-loading.json';
+import * as animationData from '~/public/lotties/dooboo-loading.json';
 
 function Loading(): ReactElement {
   return (

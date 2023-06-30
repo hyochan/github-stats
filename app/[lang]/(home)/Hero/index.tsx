@@ -7,16 +7,16 @@ import {track} from '@amplitude/analytics-browser';
 import {MarkGithubIcon, SearchIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
 
-import type {StatsInfo} from '../../../../src/fetches/github';
-import {fetchGithubStats} from '../../../../src/fetches/github';
-import type {Translates} from '../../../../src/localization';
-import Button from '../../(common)/Button';
-import ButtonGroup from '../../(common)/ButtonGroup';
-import Dropdown from '../../(common)/Dropdown';
-import TextInput from '../../(common)/TextInput';
-
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
+
+import Button from '~/components/uis/Button';
+import ButtonGroup from '~/components/uis/ButtonGroup';
+import Dropdown from '~/components/uis/Dropdown';
+import TextInput from '~/components/uis/TextInput';
+import type {StatsInfo} from '~/src/apis/github';
+import {fetchGithubStats} from '~/src/apis/github';
+import type {Translates} from '~/src/localization';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 

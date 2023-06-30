@@ -1,15 +1,13 @@
 import 'server-only';
-import '../../styles/output.css';
+import '~/styles/output.css';
 
 import type {ReactElement, ReactNode} from 'react';
 import clsx from 'clsx';
 
-import RootProvider from '../../src/components/RootProvider';
-import {getTranslates} from '../../src/localization';
-
-import Header from './(common)/Header';
-
+import RootProvider from '~/components/providers/RootProvider';
+import Header from '~/components/uis/Header';
 import type {Locale} from '~/i18n';
+import {getTranslates} from '~/src/localization';
 
 type Props = {
   children: ReactNode;

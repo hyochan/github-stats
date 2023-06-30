@@ -1,5 +1,3 @@
-'use client';
-
 import type {ReactElement} from 'react';
 import {cloneElement} from 'react';
 import clsx from 'clsx';
@@ -11,7 +9,7 @@ import StatPeople from 'public/assets/stats_people.svg';
 import StatTree from 'public/assets/stats_tree.svg';
 import StatWater from 'public/assets/stats_water.svg';
 
-import type {StatsInfo} from '../../../../../src/fetches/github';
+import type {StatsInfo} from '~/src/apis/github';
 
 type StatName = keyof StatsInfo | 'dooboo';
 

@@ -6,9 +6,9 @@ import type {ReactElement} from 'react';
 import {useRouter} from 'next/navigation';
 import Github from 'public/assets/github.svg';
 
-import type {Translates} from '../../../src/localization';
-import {getSupabaseComponentClient} from '../../../src/utils/supabase';
-import Button from '../(common)/Button';
+import Button from '~/components/uis/Button';
+import type {Translates} from '~/src/localization';
+import {getSupabaseComponentClient} from '~/src/utils/supabase';
 
 export default function SocialButtons({
   t,

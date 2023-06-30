@@ -7,13 +7,13 @@ import {ArrowRightIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import {subscribeNewsletter} from '../../../src/fetches/newsLetter';
-import type {Translates} from '../../../src/localization';
+import {subscribeNewsletter} from '../../../src/apis/newsLetter';
+import Button from '../../../src/components/uis/Button';
+import TextInput from '../../../src/components/uis/TextInput';
 import {validateEmail} from '../../../src/utils/common';
-import Button from '../(common)/Button';
-import TextInput from '../(common)/TextInput';
 
-import imgBgSection2 from '@/public/assets/bg_section2.png';
+import imgBgSection2 from '~/public/assets/bg_section2.png';
+import type {Translates} from '~/src/localization';
 
 type Props = {
   t: Translates['home'];

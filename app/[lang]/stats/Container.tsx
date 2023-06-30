@@ -2,7 +2,7 @@ import type {ReactElement, ReactNode} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import {H1} from '../../../src/components/Typography';
+import {H1} from '../../../src/components/uis/Typography';
 import type {Translates} from '../../../src/localization';
 
 import SearchTextInput from './[login]/SearchTextInput';

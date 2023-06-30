@@ -4,7 +4,7 @@ import type {ChangeEventHandler, ReactElement} from 'react';
 import clsx from 'clsx';
 import {usePathname, useRouter} from 'next/navigation';
 
-import {useLocaleContext} from '../../../../src/components/LocaleProvider';
+import {useLocaleContext} from '../../providers/LocaleProvider';
 
 import type {i18n} from '~/i18n';
 import type {TupleToUnion} from '~/types/types';

@@ -3,11 +3,10 @@ import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 import Logo from 'public/assets/logo.svg';
 
-import {getTranslates} from '../../../src/localization';
-
 import SocialButtons from './SocialButtons';
 
 import type {Locale} from '~/i18n';
+import {getTranslates} from '~/src/localization';
 
 const inter = Inter({subsets: ['latin']});
 

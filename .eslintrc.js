@@ -5,4 +5,13 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  rules: {
+    'max-len': ['error', {code: 200}],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+  },
 };

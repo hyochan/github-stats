@@ -6,9 +6,9 @@ import {useForm} from 'react-hook-form';
 import {SearchIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
 
-import type {Translates} from '../../../../src/localization';
-import Button from '../../(common)/Button';
-import TextInput from '../../(common)/TextInput';
+import Button from '~/src/components/uis/Button';
+import TextInput from '~/src/components/uis/TextInput';
+import type {Translates} from '~/src/localization';
 
 export default function SearchTextInput({
   t,
