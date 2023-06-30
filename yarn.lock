@@ -12,29 +12,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-browser@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@amplitude/analytics-browser@npm:2.1.0"
+"@amplitude/analytics-browser@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@amplitude/analytics-browser@npm:2.1.1"
   dependencies:
-    "@amplitude/analytics-client-common": ^2.0.2
-    "@amplitude/analytics-core": ^2.0.2
-    "@amplitude/analytics-types": ^2.1.0
-    "@amplitude/plugin-page-view-tracking-browser": ^2.0.2
-    "@amplitude/plugin-web-attribution-browser": ^2.0.2
+    "@amplitude/analytics-client-common": ^2.0.3
+    "@amplitude/analytics-core": ^2.0.3
+    "@amplitude/analytics-types": ^2.1.1
+    "@amplitude/plugin-page-view-tracking-browser": ^2.0.3
+    "@amplitude/plugin-web-attribution-browser": ^2.0.3
     tslib: ^2.4.1
-  checksum: a0129f2fda347a1ce1b66b5c37f6986a6d5e995d06a7496244a23e7a648594db3b1e37a09c6ab095f42f359ddda9a3eceec38777d629cd3a79c2e6fe94c71ffd
+  checksum: 7e0235f8da49f6a96eb34289c56674daff7041a183a51945a0f0a07242eae7831e6b92168cd36ccd4c4ef35f66f6fb3a9053049f1c03f2d3925a0ecfda1c820b
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-client-common@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@amplitude/analytics-client-common@npm:2.0.2"
+"@amplitude/analytics-client-common@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@amplitude/analytics-client-common@npm:2.0.3"
   dependencies:
     "@amplitude/analytics-connector": ^1.4.8
-    "@amplitude/analytics-core": ^2.0.2
-    "@amplitude/analytics-types": ^2.1.0
+    "@amplitude/analytics-core": ^2.0.3
+    "@amplitude/analytics-types": ^2.1.1
     tslib: ^2.4.1
-  checksum: 40f3cca4b1398e51a30b51eaddd0928e5167ddb20aa619b45a52d0de2106b1142ad4b94ee0c53820fa84ac3a18163dd26d301ef3aa655516179d9f69fdceb84a
+  checksum: 8f5f5fb50b12fc693b736057238add1c965a5d25bf287ca61d8f3aa2b2663913d3e088d225fde59beff6fa0b9da3d9433c0df24ab2e1e72e3b920313f3ffb46b
   languageName: node
   linkType: hard
 
@@ -55,13 +55,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-core@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@amplitude/analytics-core@npm:2.0.2"
+"@amplitude/analytics-core@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@amplitude/analytics-core@npm:2.0.3"
   dependencies:
-    "@amplitude/analytics-types": ^2.1.0
+    "@amplitude/analytics-types": ^2.1.1
     tslib: ^2.4.1
-  checksum: 8e9b30bde2dacdd06df77573b530d45ad6be29fcbe5cc06732914ee53de7281a0da92436b0ba6f0b43a5b47d0b9c5be0977b93bcd3507729fa48a178208e3f73
+  checksum: 5b09277d885940fda24838a87585c8782fb556f09bedd824547eed03fddad102c9670eb8758aae46e4ba60ed19edc6cf857fc5ab08a5305cf3ee467fb3305f63
   languageName: node
   linkType: hard
 
@@ -83,32 +83,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-types@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@amplitude/analytics-types@npm:2.1.0"
-  checksum: 8d26ae49bdc763c4ac45b81584fb8571d77861a7c33aafb039f02407ef5038e68766189eaaeac177e6925b6c5deca4a9a28eb87e5b25f5ca5cb5cb290d709c50
+"@amplitude/analytics-types@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@amplitude/analytics-types@npm:2.1.1"
+  checksum: 491cba429c56f76168c23c7b7db328cab569e79e5a5a8425b8444cca13bdc335878503c522df78c1b2a69254ea16997f4f1692a80bf8a714a2f0ad4a1088053a
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-page-view-tracking-browser@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:2.0.2"
+"@amplitude/plugin-page-view-tracking-browser@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:2.0.3"
   dependencies:
-    "@amplitude/analytics-client-common": ^2.0.2
-    "@amplitude/analytics-types": ^2.1.0
+    "@amplitude/analytics-client-common": ^2.0.3
+    "@amplitude/analytics-types": ^2.1.1
     tslib: ^2.4.1
-  checksum: c828b60a7ce9004119d864a36edc52c8ddc4c8c67960fa315ced9d444741eb38a3bed5694d05ff6d4215d47cde05d3cd54f8db698f9ea490c7bfad458256e566
+  checksum: d0d69265329d6bac9a2753dc8f1c262d9d275697e0c63fd1912d73f54611fedb6bc1ac7ec5b56288c0c7eb3a90e897760a362d5fa3a7ff6289b0b0df69c8d915
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-web-attribution-browser@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@amplitude/plugin-web-attribution-browser@npm:2.0.2"
+"@amplitude/plugin-web-attribution-browser@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@amplitude/plugin-web-attribution-browser@npm:2.0.3"
   dependencies:
-    "@amplitude/analytics-client-common": ^2.0.2
-    "@amplitude/analytics-types": ^2.1.0
+    "@amplitude/analytics-client-common": ^2.0.3
+    "@amplitude/analytics-core": ^2.0.3
+    "@amplitude/analytics-types": ^2.1.1
     tslib: ^2.4.1
-  checksum: 9ed37d91c4410cb304fa609ef12ad1c14539869026388c499204606d027b4188eaf3f20a1bffb7352f16a86c80be9bcc554d790c15db313739ce0e1821e4f8e7
+  checksum: 8688eb79402564299ba26afa08b0b99f663e407a78b0b7377d803384be069e1c3271fadf91297c66726cce0b4f9a06459248d71c7bb75245a9a71ecd74b1ab00
   languageName: node
   linkType: hard
 
@@ -2490,31 +2491,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^4.16.1":
-  version: 4.16.1
-  resolution: "@prisma/client@npm:4.16.1"
+"@prisma/client@npm:^4.16.2":
+  version: 4.16.2
+  resolution: "@prisma/client@npm:4.16.2"
   dependencies:
-    "@prisma/engines-version": 4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c
+    "@prisma/engines-version": 4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: da715b6e930f56493cb7c6232b179250a4e93bbc2b5fe42a84cb9511d127b6fd89e1271f83e1d531bd4fdd7e87f6ac0701b30174cf89212ae7da88097de31026
+  checksum: 38e1356644a764946c69c8691ea4bbed0ba37739d833a435625bd5435912bed4b9bdd7c384125f3a4ab8128faf566027985c0f0840a42741c338d72e40b5d565
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c":
-  version: 4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c
-  resolution: "@prisma/engines-version@npm:4.16.0-66.b20ead4d3ab9e78ac112966e242ded703f4a052c"
-  checksum: 23183cab33f95e0711cd6cee7642f4beeeb77b8b0aa54b419f55097bfb96863a11a28f6509ab27fef0ea794522e188044ce850993a25c341333f8305711a255f
+"@prisma/engines-version@npm:4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81":
+  version: 4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
+  resolution: "@prisma/engines-version@npm:4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
+  checksum: b42c6abe7c1928e546f15449e40ffa455701ef2ab1f62973628ecb4e19ff3652e34609a0d83196d1cbd0864adb44c55e082beec852b11929acf1c15fb57ca45a
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:4.16.1":
-  version: 4.16.1
-  resolution: "@prisma/engines@npm:4.16.1"
-  checksum: 7b8c1a9e20434edaa919fb24585ebff573c4ace787ea5a135dfefde3571ae31d3f0b0347397774c38be6d2e3fc0087d4e21a2720fe9f7a66ffd870e34377040f
+"@prisma/engines@npm:4.16.2":
+  version: 4.16.2
+  resolution: "@prisma/engines@npm:4.16.2"
+  checksum: f423e6092c3e558cd089a68ae87459fba7fd390c433df087342b3269c3b04163965b50845150dfe47d01f811781bfff89d5ae81c95ca603c59359ab69ebd810f
   languageName: node
   linkType: hard
 
@@ -6131,7 +6132,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "github-stats@workspace:."
   dependencies:
-    "@amplitude/analytics-browser": ^2.1.0
+    "@amplitude/analytics-browser": ^2.1.1
     "@amplitude/analytics-node": ^1.3.0
     "@commitlint/cli": ^17.6.6
     "@commitlint/config-conventional": ^17.6.6
@@ -6139,7 +6140,7 @@ __metadata:
     "@dooboo/eslint-config-react": ^1.2.2
     "@formatjs/intl-localematcher": ^0.4.0
     "@primer/octicons-react": ^19.4.0
-    "@prisma/client": ^4.16.1
+    "@prisma/client": ^4.16.2
     "@supabase/auth-helpers-nextjs": ^0.7.2
     "@supabase/auth-helpers-react": ^0.4.0
     "@supabase/auth-ui-react": ^0.4.2
@@ -6173,7 +6174,7 @@ __metadata:
     next-pwa: ^5.6.0
     postcss: ^8.4.24
     prettier: ^2.8.8
-    prisma: ^4.16.1
+    prisma: ^4.16.2
     react: 18.2.0
     react-copy-to-clipboard: ^5.1.0
     react-dom: 18.2.0
@@ -8792,15 +8793,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^4.16.1":
-  version: 4.16.1
-  resolution: "prisma@npm:4.16.1"
+"prisma@npm:^4.16.2":
+  version: 4.16.2
+  resolution: "prisma@npm:4.16.2"
   dependencies:
-    "@prisma/engines": 4.16.1
+    "@prisma/engines": 4.16.2
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: eb0f43970464fbaa6ba190a714f23d00acd39dcc14fd8a7183dffc51a548cc32040cc5360415787578749862af7501a7bedcf9f2a0e64a3f82e3af402e9439d7
+  checksum: 1d0ed616abd7f8de22441e333b976705f1cb05abcb206965df3fc6a7ea03911ef467dd484a4bc51fdc6cff72dd9857b9852be5f232967a444af0a98c49bfdb76
   languageName: node
   linkType: hard
 
