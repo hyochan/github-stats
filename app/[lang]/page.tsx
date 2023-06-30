@@ -1,7 +1,7 @@
 import type {ReactElement} from 'react';
 
 import Home from '~/app/(home)/Home';
-import type {Locale} from '~/i18n';
+import type {Locale} from '~/src/i18n';
 import type {StatsInfo} from '~/src/apis/github';
 import {getTranslates} from '~/src/localization';
 

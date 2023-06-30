@@ -5,7 +5,7 @@ import {Inter} from 'next/font/google';
 import GithubUserList from './GithubUserList';
 
 import {H1} from '~/components/uis/Typography';
-import type {Locale} from '~/i18n';
+import type {Locale} from '~/src/i18n';
 import {getSupabaseServerComponentClient} from '~/server/supabaseClient';
 import type {UserListItem} from '~/src/apis/recentList';
 import {getTranslates} from '~/src/localization';

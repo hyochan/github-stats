@@ -6,8 +6,8 @@ import {usePathname, useRouter} from 'next/navigation';
 
 import {useLocaleContext} from '../../providers/LocaleProvider';
 
-import type {i18n} from '~/i18n';
-import type {TupleToUnion} from '~/types/types';
+import type {i18n} from '~/src/i18n';
+import type {TupleToUnion} from '~/src/types/types';
 
 type Props = {
   languages: {en: string; ko: string};

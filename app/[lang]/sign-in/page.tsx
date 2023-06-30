@@ -5,7 +5,7 @@ import Logo from 'public/assets/logo.svg';
 
 import SocialButtons from './SocialButtons';
 
-import type {Locale} from '~/i18n';
+import type {Locale} from '~/src/i18n';
 import {getTranslates} from '~/src/localization';
 
 const inter = Inter({subsets: ['latin']});

@@ -6,7 +6,7 @@ import {NextResponse} from 'next/server';
 
 import {upsertUser} from './services/userService';
 
-import {i18n} from '~/i18n';
+import {i18n} from '~/src/i18n';
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers

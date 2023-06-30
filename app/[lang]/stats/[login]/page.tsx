@@ -4,7 +4,7 @@ import Container from '../Container';
 
 import Scouter from './Scouter';
 
-import type {Locale} from '~/i18n';
+import type {Locale} from '~/src/i18n';
 import {getDoobooStats} from '~/server/services/githubService';
 import {getSupabaseServerComponentClient} from '~/server/supabaseClient';
 import {getTranslates} from '~/src/localization';

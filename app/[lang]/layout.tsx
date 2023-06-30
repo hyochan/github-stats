@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import RootProvider from '~/components/providers/RootProvider';
 import Header from '~/components/uis/Header';
-import type {Locale} from '~/i18n';
+import type {Locale} from '~/src/i18n';
 import {getTranslates} from '~/src/localization';
 
 type Props = {

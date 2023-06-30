@@ -3,7 +3,7 @@
 import type {ReactNode} from 'react';
 import {useState} from 'react';
 
-import createCtx from '~/utils/createCtx';
+import createCtx from '~/src/utils/createCtx';
 
 interface Context {
   login: string;

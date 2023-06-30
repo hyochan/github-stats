@@ -2,8 +2,8 @@
 
 import {useState} from 'react';
 
-import type {Locale} from '~/i18n';
-import createCtx from '~/utils/createCtx';
+import type {Locale} from '~/src/i18n';
+import createCtx from '~/src/utils/createCtx';
 
 interface Context {
   locale: Locale;
