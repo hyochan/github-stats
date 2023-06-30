@@ -4,13 +4,14 @@ import type {ReactElement} from 'react';
 import {useState} from 'react';
 import clsx from 'clsx';
 
+import styles from '../../../styles.module.css';
+
 import StatsDetails from './StatsDetails';
 import StatsHeader from './StatsHeader';
 
 import type {DoobooStatsResponse} from '~/server/services/githubService';
 import type {StatsInfo} from '~/src/apis/github';
 import type {Translates} from '~/src/localization';
-import styles from '~/styles.module.css';
 
 export const statNames = [
   'tree',

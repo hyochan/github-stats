@@ -5,6 +5,8 @@ import {useMemo, useRef, useState} from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
+import styles from '../styles.module.css';
+
 import type {Tier} from './TierRowItem';
 import TierRowItem from './TierRowItem';
 
@@ -14,7 +16,6 @@ import {H4, H5} from '~/components/uis/Typography';
 import type {UserListItem} from '~/src/apis/recentList';
 import {fetchRecentList} from '~/src/apis/recentList';
 import type {Translates} from '~/src/localization';
-import styles from '~/styles.module.css';
 
 type Props = {
   t: Translates['recentList'];

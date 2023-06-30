@@ -7,7 +7,7 @@ import {statNames} from '..';
 
 import type {TierType} from '.';
 
-import Logo from '@/public/assets/logo.svg';
+import Logo from '~/public/assets/logo.svg';
 import type {ScoreType} from '~/server/plugins/svgs/functions';
 import type {DoobooStatsResponse} from '~/server/services/githubService';
 import type {Translates} from '~/src/localization';

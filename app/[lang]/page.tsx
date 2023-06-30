@@ -1,8 +1,8 @@
 import type {ReactElement} from 'react';
 
 import Home from '~/app/(home)/Home';
-import type {Locale} from '~/src/i18n';
 import type {StatsInfo} from '~/src/apis/github';
+import type {Locale} from '~/src/i18n';
 import {getTranslates} from '~/src/localization';
 
 type Props = {

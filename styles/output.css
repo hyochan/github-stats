@@ -918,6 +918,18 @@ input[type='search']::-webkit-search-decoration,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.h3 {
+  font-size: 18px;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+:is(.dark .h3) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .body1 {
   font-size: 18px;
   --tw-text-opacity: 1;
@@ -980,6 +992,10 @@ input[type='search']::-webkit-search-decoration,
 
 .invisible {
   visibility: hidden;
+}
+
+.static {
+  position: static;
 }
 
 .absolute {
@@ -1414,6 +1430,10 @@ input[type='search']::-webkit-search-decoration,
 
 .translate-y-2 {
   --tw-translate-y: 0.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1893,6 +1913,10 @@ input[type='search']::-webkit-search-decoration,
   font-size: 12px;
 }
 
+.text-h1 {
+  font-size: 26px;
+}
+
 .text-h2 {
   font-size: 22px;
 }
@@ -1901,8 +1925,20 @@ input[type='search']::-webkit-search-decoration,
   font-size: 18px;
 }
 
+.text-h4 {
+  font-size: 16px;
+}
+
 .font-bold {
   font-weight: 700;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
 }
 
 .font-semibold {
@@ -1927,6 +1963,54 @@ input[type='search']::-webkit-search-decoration,
 
 .leading-\[28px\] {
   line-height: 28px;
+}
+
+.leading-h1-1\.2 {
+  line-height: 40px;
+}
+
+.leading-h1-1\.5 {
+  line-height: 48px;
+}
+
+.leading-h2-1\.2 {
+  line-height: 30px;
+}
+
+.leading-h2-1\.5 {
+  line-height: 36px;
+}
+
+.leading-h3-1\.2 {
+  line-height: 25px;
+}
+
+.leading-h3-1\.5 {
+  line-height: 30px;
+}
+
+.leading-h4-1\.2 {
+  line-height: 20px;
+}
+
+.leading-h4-1\.5 {
+  line-height: 24px;
+}
+
+.leading-h5-1\.2 {
+  line-height: 18px;
+}
+
+.leading-h5-1\.5 {
+  line-height: 21px;
+}
+
+.leading-h6-1\.2 {
+  line-height: 15px;
+}
+
+.leading-h6-1\.5 {
+  line-height: 18px;
 }
 
 .text-black {

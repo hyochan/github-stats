@@ -2,7 +2,7 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import SvgEnter from '@/public/assets/enter.svg';
+import SvgEnter from '~/public/assets/enter.svg';
 import type {StatsDetail} from '~/server/plugins';
 import type {DoobooStatsResponse} from '~/server/services/githubService';
 import type {Translates} from '~/src/localization';
