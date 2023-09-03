@@ -121,7 +121,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
         data={data}
         onClickRow={(user) => {
           const login = user.login;
-          window.location.assign('http://github.com/' + login);
+          window.open('http://github.com/' + login);
         }}
         classNames={{
           tHead: 'bg-basic border-b-[0.1px] px-2',
