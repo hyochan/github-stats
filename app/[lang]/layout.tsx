@@ -30,6 +30,13 @@ export default async function RootLayout(props: Props): Promise<ReactElement> {
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta name="description" content="All stats for developers" />
       <link rel="icon" href="/favicon.ico" />
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181493727238996"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body>
         <RootProvider initialLocale={lang}>
           <main
