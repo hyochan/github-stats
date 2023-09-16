@@ -8,6 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
 }
 
+// eslint-disable-next-line react/display-name
 const TextInput = forwardRef<HTMLInputElement, Props>(
   (
     {

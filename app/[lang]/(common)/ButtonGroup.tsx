@@ -1,5 +1,4 @@
-import type {CSSProperties} from 'react';
-import {type ReactElement} from 'react';
+import type {CSSProperties, ReactElement} from 'react';
 
 const StyledButton = ({
   selected,
