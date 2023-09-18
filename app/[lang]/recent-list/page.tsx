@@ -44,6 +44,7 @@ export default async function Page({
         <H1
           className={clsx(
             'text-[44px] font-bold',
+            'max-[480px]:hidden',
             'max-[560px]:text-[28px]',
             inter.className,
           )}

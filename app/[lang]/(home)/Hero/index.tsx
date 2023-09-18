@@ -19,6 +19,7 @@ import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
 import { useMediaQuery } from 'usehooks-ts';
 import AdFit from '../../(common)/AdFit';
+import AdFitResponsive from '../../(common)/AdFitResponsive';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 
@@ -115,34 +116,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
           {t.developerPowerMeterDesc}
         </p>
         {/* Begin: AdFit */}
-        {!isMobile ? (
-          <div>
-            <AdFit
-              unit="DAN-SEcRVdSHkh05H0jO"
-              height={90}
-              width={728}
-              className="adfit-top"
-              style={{
-                flex: 1,
-                marginBottom: 40,
-              }}
-            />
-          </div>
-        ) : null}
-        {isMobile ? (
-          <div>
-            <AdFit
-              unit="DAN-dAqcoLWvKpYEtbtq"
-              height={100}
-              width={320}
-              className="adfit-top-mobile"
-              style={{
-                flex: 1,
-                marginBottom: 40,
-              }}
-            />
-          </div>
-        ) : null}
+        <AdFitResponsive className='mb-6'/>
         {/* End: AdFit */}
         {/* Begin: Search Form */}
         <form

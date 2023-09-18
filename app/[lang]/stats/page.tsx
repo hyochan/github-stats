@@ -17,10 +17,10 @@ export default async function Page({
 
   return (
     <Container t={t}>
-      <div className="max-[480px]:p-6">
+      <div className="max-[480px]:pt-10 max-[480px]:px-6">
         <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
       </div>
-      <AdFitResponsive className='mt-8'/>
+      <AdFitResponsive className="mt-8 max-[480px]:px-6" />
     </Container>
   );
 }
