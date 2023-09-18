@@ -17,6 +17,8 @@ import TextInput from '../../(common)/TextInput';
 
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
+import { useMediaQuery } from 'usehooks-ts';
+import AdFit from '../../(common)/AdFit';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 
@@ -56,6 +58,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
     },
   ];
 
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const [selectedPluginType, setSelectedPluginType] = useState(statTypes[0]);
   const [login, setLogin] = useState('');
   const [searchLogin, setSearchedUID] = useState('');
@@ -111,6 +114,36 @@ function Hero({t, statsInfo}: Props): ReactElement {
         <p className="body1 text-[20px] text-left mb-[36px] opacity-50">
           {t.developerPowerMeterDesc}
         </p>
+        {/* Begin: AdFit */}
+        {!isMobile ? (
+          <div>
+            <AdFit
+              unit="DAN-SEcRVdSHkh05H0jO"
+              height={90}
+              width={728}
+              className="adfit-top"
+              style={{
+                flex: 1,
+                marginBottom: 40,
+              }}
+            />
+          </div>
+        ) : null}
+        {isMobile ? (
+          <div>
+            <AdFit
+              unit="DAN-dAqcoLWvKpYEtbtq"
+              height={100}
+              width={320}
+              className="adfit-top-mobile"
+              style={{
+                flex: 1,
+                marginBottom: 40,
+              }}
+            />
+          </div>
+        ) : null}
+        {/* End: AdFit */}
         {/* Begin: Search Form */}
         <form
           onSubmit={handleSubmit(searchUser)}

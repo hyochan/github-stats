@@ -4,6 +4,7 @@ import type {Locale} from '../../../src/i18n';
 import {getTranslates} from '../../../src/localization';
 
 import Container from './Container';
+import AdFitResponsive from '../(common)/AdFitResponsive';
 
 type Props = {
   params: {lang: Locale};
@@ -19,6 +20,7 @@ export default async function Page({
       <div className="max-[480px]:p-6">
         <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
       </div>
+      <AdFitResponsive className='mt-8'/>
     </Container>
   );
 }

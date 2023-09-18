@@ -11,6 +11,7 @@ import GithubUserList from './GithubUserList';
 
 import {H1} from '~/components/Typography';
 import type {Locale} from '~/i18n';
+import AdFitResponsive from '../(common)/AdFitResponsive';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -34,16 +35,23 @@ export default async function Page({
 
   return (
     <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
-      <H1
-        className={clsx(
-          'text-[44px] font-bold mt-12 mb-[32px] mx-6',
-          'max-[480px]:text-[28px] max-[480px]:mb-0 max-[480px]:my-4',
-          inter.className,
-        )}
+      <div className='
+        mt-4 mb-[32px] mx-6
+        flex-row items-center
+        max-[480px]:mb-0 max-[480px]:my-4
+      '
       >
-        {recentList.title}
-      </H1>
-
+        <H1
+          className={clsx(
+            'text-[44px] font-bold',
+            'max-[560px]:text-[28px]',
+            inter.className,
+          )}
+        >
+          {recentList.title}
+        </H1>
+        <AdFitResponsive className='mx-6 mb-2'/>
+      </div>
       <GithubUserList
         initialData={userPlugins as UserListItem[]}
         t={recentList}

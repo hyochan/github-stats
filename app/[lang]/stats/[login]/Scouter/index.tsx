@@ -11,6 +11,7 @@ import styles from '../../../styles.module.css';
 
 import StatsDetails from './StatsDetails';
 import StatsHeader from './StatsHeader';
+import AdFitResponsive from '../../../(common)/AdFitResponsive';
 
 export const statNames = [
   'tree',
@@ -44,6 +45,7 @@ export default function Scouter(props: ScouterProps): ReactElement {
           setSelectedStat(name);
         }}
       />
+      <AdFitResponsive/>
       <StatsDetails {...props} selectedStat={selectedStat} />
     </div>
   );

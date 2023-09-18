@@ -8,6 +8,7 @@ import {getTranslates} from '../../../src/localization';
 import SocialButtons from './SocialButtons';
 
 import type {Locale} from '~/i18n';
+import AdFitResponsive from '../(common)/AdFitResponsive';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -46,12 +47,13 @@ export default async function Page({
   return (
     <div
       className={clsx(
-        'bg-modal-background',
+        'bg-modal-background pb-20',
         'flex-1 bg-paper overflow-hidden',
         'max-md:px-4',
         'flex flex-col justify-center items-center',
       )}
     >
+      <AdFitResponsive className='mx-6 mb-8'/>
       <div
         className={clsx(
           'bg-modal max-w-[480px] rounded-2xl px-12 py-16',
