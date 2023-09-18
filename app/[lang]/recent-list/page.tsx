@@ -36,8 +36,8 @@ export default async function Page({
   return (
     <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
       <div className='
-        mt-4 mb-[32px] mx-6
-        flex-row items-center
+        mt-4 mb-[32px] ml-6 mr-2
+        flex-row items-center justify-between
         max-[480px]:mb-0 max-[480px]:my-4
       '
       >
