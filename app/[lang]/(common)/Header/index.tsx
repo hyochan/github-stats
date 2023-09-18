@@ -60,7 +60,7 @@ function DesktopNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate',
                   pathname?.includes(link.path) ? 'opacity-100' : 'opacity-30',
@@ -78,7 +78,6 @@ function DesktopNavMenus(
         })}
       </nav>
       <div className={clsx('flex flex-row items-center')}>
-        {/* <LocaleSwitcher languages={langs} /> */}
         <Button
           text={!!login ? t.signOut : t.signIn}
           className="mr-2 py-2 px-3"
@@ -162,7 +161,7 @@ function MobileNavMenus(
               )}
             >
               <Link
-                href={`${lang}/${link.path}`}
+                href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
@@ -299,7 +298,7 @@ export default function Header(props: Props): ReactElement {
             'flex flex-row items-center',
           )}
         >
-          <Link href={`${lang}/`} className="flex flex-row items-center">
+          <Link href={`/`} className="flex flex-row items-center">
             <Logo className="h-5 text-brand cursor-pointer" />
             <H1
               className={clsx(
