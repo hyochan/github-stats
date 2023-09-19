@@ -53,7 +53,14 @@ export default async function Page({
         'flex flex-col justify-center items-center',
       )}
     >
-      <AdFitResponsive className='mx-6 mb-8'/>
+      <AdFitResponsive
+        className="mx-6 mb-8"
+        adfitClassName="adfit-top"
+        units={{
+          mobile: 'DAN-dAqcoLWvKpYEtbtq',
+          pc: 'DAN-SEcRVdSHkh05H0jO',
+        }}
+      />
       <div
         className={clsx(
           'bg-modal max-w-[480px] rounded-2xl px-12 py-16',

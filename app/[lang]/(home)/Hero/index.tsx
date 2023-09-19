@@ -17,7 +17,7 @@ import TextInput from '../../(common)/TextInput';
 
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
-import { useMediaQuery } from 'usehooks-ts';
+import {useMediaQuery} from 'usehooks-ts';
 import AdFit from '../../(common)/AdFit';
 import AdFitResponsive from '../../(common)/AdFitResponsive';
 
@@ -59,7 +59,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
     },
   ];
 
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [selectedPluginType, setSelectedPluginType] = useState(statTypes[0]);
   const [login, setLogin] = useState('');
   const [searchLogin, setSearchedUID] = useState('');
@@ -116,7 +116,14 @@ function Hero({t, statsInfo}: Props): ReactElement {
           {t.developerPowerMeterDesc}
         </p>
         {/* Begin: AdFit */}
-        <AdFitResponsive className='mb-6'/>
+        <AdFitResponsive
+          className="mb-6"
+          adfitClassName="adfit-top"
+          units={{
+            mobile: 'DAN-dAqcoLWvKpYEtbtq',
+            pc: 'DAN-SEcRVdSHkh05H0jO',
+          }}
+        />
         {/* End: AdFit */}
         {/* Begin: Search Form */}
         <form

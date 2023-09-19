@@ -23,20 +23,23 @@ export default function Container({t, children}: Props): ReactElement {
         'flex flex-col',
       )}
     >
-      <SearchTextInput
-        t={t}
-        className="flex-1 absolute right-6 top-20"
-        initialValue={''}
-      />
-      <H1
-        className={clsx(
-          'text-[44px] font-bold mt-12 mb-[32px]',
-          'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-0 max-[480px]:mt-4',
-          inter.className,
-        )}
-      >
-        {t.title}
-      </H1>
+      <div className={clsx('flex flex-row items-center justify-between')}>
+        <H1
+          className={clsx(
+            'text-[44px] font-bold mt-12 mb-[28px]',
+            'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-0 max-[480px]:mt-4',
+            'max-[380px]:hidden',
+            inter.className,
+          )}
+        >
+          {t.title}
+        </H1>
+        <SearchTextInput
+          t={t}
+          className={clsx('mt-4 mx-6 flex-1 max-w-[320px]')}
+          initialValue={''}
+        />
+      </div>
       {children}
     </div>
   );

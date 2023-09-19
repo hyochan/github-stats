@@ -45,7 +45,13 @@ export default function Scouter(props: ScouterProps): ReactElement {
           setSelectedStat(name);
         }}
       />
-      <AdFitResponsive/>
+      <AdFitResponsive
+        adfitClassName="adfit-top"
+        units={{
+          mobile: 'DAN-dAqcoLWvKpYEtbtq',
+          pc: 'DAN-SEcRVdSHkh05H0jO',
+        }}
+      />
       <StatsDetails {...props} selectedStat={selectedStat} />
     </div>
   );

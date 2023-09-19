@@ -35,11 +35,12 @@ export default async function Page({
 
   return (
     <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
-      <div className='
+      <div
+        className="
         mt-4 mb-[32px] ml-6 mr-2
         flex-row items-center justify-between
         max-[480px]:mb-0 max-[480px]:my-4
-      '
+      "
       >
         <H1
           className={clsx(
@@ -51,7 +52,17 @@ export default async function Page({
         >
           {recentList.title}
         </H1>
-        <AdFitResponsive className='mx-6 mb-2'/>
+        <AdFitResponsive
+          className={clsx(
+            "mx-6 mb-2",
+            "mx-0"
+          )}
+          adfitClassName="adfit-top"
+          units={{
+            mobile: 'DAN-dAqcoLWvKpYEtbtq',
+            pc: 'DAN-SEcRVdSHkh05H0jO',
+          }}
+        />
       </div>
       <GithubUserList
         initialData={userPlugins as UserListItem[]}

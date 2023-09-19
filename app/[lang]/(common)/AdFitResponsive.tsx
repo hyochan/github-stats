@@ -5,15 +5,19 @@ import AdFit from './AdFit';
 import {useEffect, useState} from 'react';
 
 export default function AdFitResponsive({
+  units,
   className,
+  adfitClassName,
 }: {
   className?: string;
+  units: {
+    mobile: string;
+    pc: string;
+  };
+  adfitClassName: string;
 }): JSX.Element {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [loaded, setLoaded] = useState(false);
-
-  console.log('isMobile: ', isMobile);
-  console.log('loaded: ', loaded);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -33,26 +37,22 @@ export default function AdFitResponsive({
       {!isMobile ? (
         <div>
           <AdFit
-            unit="DAN-SEcRVdSHkh05H0jO"
+            unit={units.pc}
             height={90}
             width={728}
-            className="adfit-top-mobile"
-            style={{
-              flex: 1,
-            }}
+            className={adfitClassName}
+            style={{flex: 1}}
           />
         </div>
       ) : null}
       {isMobile ? (
         <div>
           <AdFit
-            unit="DAN-dAqcoLWvKpYEtbtq"
+            unit={units.mobile}
             height={100}
             width={320}
-            className="adfit-top-mobile"
-            style={{
-              flex: 1,
-            }}
+            className={adfitClassName}
+            style={{flex: 1}}
           />
         </div>
       ) : null}

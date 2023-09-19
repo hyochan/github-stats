@@ -6,8 +6,9 @@ import type {Translates} from '../../../src/localization';
 
 import imgBgSection1 from '@/public/assets/bg_section1.png';
 import SvgScouter from '@/public/assets/scouter.svg';
-import { useMediaQuery } from 'usehooks-ts';
+import {useMediaQuery} from 'usehooks-ts';
 import AdFit from '../(common)/AdFit';
+import AdFitResponsive from '../(common)/AdFitResponsive';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -16,7 +17,7 @@ type Props = {
 };
 
 export default function SectionFooter({t}: Props): ReactElement {
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div
@@ -74,34 +75,14 @@ export default function SectionFooter({t}: Props): ReactElement {
         </div>
       </div>
       {/* Begin: AdFit */}
-      {!isMobile ? (
-        <div>
-          <AdFit
-            unit="DAN-SEcRVdSHkh05H0jO"
-            height={90}
-            width={728}
-            className="adfit-bottom"
-            style={{
-              flex: 1,
-              marginBottom: 80,
-            }}
-          />
-        </div>
-      ) : null}
-      {isMobile ? (
-        <div>
-          <AdFit
-            unit="DAN-dAqcoLWvKpYEtbtq"
-            height={100}
-            width={320}
-            className="adfit-bottom-mobile"
-            style={{
-              flex: 1,
-              marginBottom: 80,
-            }}
-          />
-        </div>
-      ) : null}
+      <AdFitResponsive
+        adfitClassName="adfit-bottom"
+        className="mb-20"
+        units={{
+          mobile: 'DAN-GfeJUqhlQ5KqCOzw',
+          pc: 'DAN-9eecqcxVgP9XX0bN',
+        }}
+      />
       {/* End: AdFit */}
     </div>
   );

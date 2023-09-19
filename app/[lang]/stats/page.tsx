@@ -20,7 +20,14 @@ export default async function Page({
       <div className="max-[480px]:pt-10 max-[480px]:px-6">
         <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
       </div>
-      <AdFitResponsive className="mt-8 max-[480px]:px-6" />
+      <AdFitResponsive
+        className="mt-8 max-[480px]:px-6"
+        adfitClassName="adfit-top"
+        units={{
+          mobile: 'DAN-dAqcoLWvKpYEtbtq',
+          pc: 'DAN-SEcRVdSHkh05H0jO',
+        }}
+      />
     </Container>
   );
 }
