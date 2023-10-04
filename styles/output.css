@@ -1035,6 +1035,11 @@ input[type='search']::-webkit-search-decoration,
   margin: auto;
 }
 
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .mx-10 {
   margin-left: 2.5rem;
   margin-right: 2.5rem;
@@ -1073,11 +1078,6 @@ input[type='search']::-webkit-search-decoration,
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-.mx-0 {
-  margin-left: 0px;
-  margin-right: 0px;
 }
 
 .mb-10 {
@@ -1236,6 +1236,10 @@ input[type='search']::-webkit-search-decoration,
   margin-top: 80px;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
@@ -1274,6 +1278,10 @@ input[type='search']::-webkit-search-decoration,
 
 .h-4 {
   height: 1rem;
+}
+
+.h-40 {
+  height: 10rem;
 }
 
 .h-5 {
@@ -1519,10 +1527,6 @@ input[type='search']::-webkit-search-decoration,
   align-self: stretch;
 }
 
-.overflow-auto {
-  overflow: auto;
-}
-
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1642,6 +1646,11 @@ input[type='search']::-webkit-search-decoration,
   background-color: rgb(232 232 232 / var(--tw-bg-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-contrast-light {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1689,11 +1698,6 @@ input[type='search']::-webkit-search-decoration,
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
@@ -2289,12 +2293,6 @@ input[type='search']::-webkit-search-decoration,
   }
 }
 
-@media (max-width: 460px) {
-  .max-\[460px\]\:hidden {
-    display: none;
-  }
-}
-
 @media (max-width: 425px) {
   .max-\[425px\]\:invisible {
     visibility: hidden;
@@ -2338,20 +2336,8 @@ input[type='search']::-webkit-search-decoration,
   }
 }
 
-@media (max-width: 400px) {
-  .max-\[400px\]\:hidden {
-    display: none;
-  }
-}
-
 @media (max-width: 380px) {
   .max-\[380px\]\:hidden {
-    display: none;
-  }
-}
-
-@media (max-width: 360px) {
-  .max-\[360px\]\:hidden {
     display: none;
   }
 }

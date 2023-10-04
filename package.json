@@ -5,11 +5,11 @@
   "homepage": "https://stats.dooboo.io",
   "scripts": {
     "dev:next": "NODE_OPTIONS='--inspect' next dev",
-    "dev": "concurrently \"yarn dev:next\" \"tailwindcss --input ./styles/root.css --output ./styles/output.css --watch\"",
-    "build": "tailwindcss ./styles/root.css --output ./styles/output.css && yarn generate:prisma && next build",
+    "dev": "concurrently \"bun dev:next\" \"tailwindcss --input ./styles/root.css --output ./styles/output.css --watch\"",
+    "build": "tailwindcss ./styles/root.css --output ./styles/output.css && bun generate:prisma && next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint && yarn eslint",
+    "lint": "next lint && bun eslint",
     "eslint": "eslint --ext .ts,.tsx,.js,.jsx src server app",
     "seed": "dotenv -e .env.local -- prisma db seed",
     "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
@@ -17,7 +17,7 @@
     "migrate:prod": "dotenv -e .env.prod -- prisma migrate deploy",
     "generate:prisma": "prisma generate",
     "generate:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_DOOBOOIO_STAGING --schema public > src/types/supabase.ts",
-    "generate": "yarn generate:prisma && yarn generate:supabase",
+    "generate": "bun generate:prisma && bun generate:supabase",
     "test": "vitest"
   },
   "dependencies": {
@@ -84,6 +84,5 @@
   },
   "prisma": {
     "seed": "ts-node --transpile-only ./prisma/seed.ts"
-  },
-  "packageManager": "yarn@3.5.1"
+  }
 }

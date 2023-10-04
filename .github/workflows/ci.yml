@@ -38,17 +38,21 @@ jobs:
           # update the Node version to meet your needs
           node-version: 18
 
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Copy env
         run: cp .env.sample .env.local
 
       - name: Install modules
-        run: yarn
+        run: bun
 
       - name: Check lint
-        run: yarn lint
+        run: bun lint
 
       - name: Test
-        run: yarn test --coverage
+        run: bun run test --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
@@ -61,11 +65,11 @@ jobs:
           verbose: true
 
       # - name: Build
-      #   run: yarn build
+      #   run: bun build
       #   env:
       #     DATABASE_URL: postgresql://test:test!@localhost:5432/test
 
       # - name: Export
       #   run: |
-      #     yarn export
+      #     bun export
       #     touch out/.nojekyll
