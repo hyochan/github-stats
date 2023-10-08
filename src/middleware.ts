@@ -46,7 +46,7 @@ export async function middleware(
   });
 
   // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
+  if (!pathname.startsWith('/adfit') && pathnameIsMissingLocale) {
     const locale = getLocale(req);
     const origin = new URL(req.url).origin;
 
