@@ -1,6 +1,5 @@
 'use client';
 
-import type {ReactElement} from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useSnackbar} from 'react-simple-snackbar';
 import {track} from '@amplitude/analytics-browser';
@@ -27,7 +26,7 @@ export default function StatsUrlCard({
   login,
   svgStatsURL,
   svgTrophiesURL,
-}: Props): ReactElement {
+}: Props): JSX.Element {
   const router = useRouter();
   const [openSnackbar] = useSnackbar();
   const {login: authLogin} = useAuthContext();
@@ -43,6 +42,7 @@ export default function StatsUrlCard({
     <div className="mb-[32px] self-stretch relative flex flex-col">
       {/* Stats URL */}
       <CopyToClipboard text={svgStatsURL}>
+        {/* @ts-ignore */}
         <div className="bg-basic relative flex-1 p-4 flex flex-col flex-wrap mt-2 mb-3 rounded-md">
           <div
             className="
@@ -60,6 +60,7 @@ export default function StatsUrlCard({
       {/* Trophies URL */}
       {svgTrophiesURL ? (
         <CopyToClipboard text={trophiesURL}>
+          {/* @ts-ignore */}
           <div className="bg-basic relative flex-1 p-4 flex flex-col flex-wrap rounded-md">
             <div
               className="
