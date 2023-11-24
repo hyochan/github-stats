@@ -7,6 +7,7 @@ export const fetchGithubStats = async (login: string): Promise<string> => {
       Accept: 'application/json',
       'Content-Type': 'image/svg+xml',
     },
+    next: {revalidate: 3600},
   };
 
   try {

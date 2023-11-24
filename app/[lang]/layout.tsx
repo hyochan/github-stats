@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import 'server-only';
 import '../../styles/output.css';
 
