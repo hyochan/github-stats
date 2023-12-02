@@ -1,13 +1,13 @@
 import {match as matchLocale} from '@formatjs/intl-localematcher';
-import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
 
 import {upsertUser} from './services/userService';
 
-// import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
+import {getSupabaseBrowserClient} from './utils/supabaseBrowserClient';
+import {getSupabaseServerClient} from '../server/services/supabaseServerClient';
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -28,16 +28,14 @@ export async function middleware(
   req: NextRequest,
 ): Promise<NextResponse | undefined> {
   let pathname = req.nextUrl.pathname;
-
   const res = NextResponse.next();
+  const supabase = getSupabaseServerClient();
+  const {data, error} = await supabase.auth.getSession();
 
-  const supabase = createMiddlewareSupabaseClient({req, res});
-  const {
-    data: {user},
-  } = await supabase.auth.getUser();
-
-  if (user) {
-    upsertUser({supabase, user});
+  if (!error) {
+    if (data.session?.user) {
+      upsertUser({supabase, user: data.session?.user});
+    }
   }
 
   // Check if there is any supported locale in the pathname
@@ -46,7 +44,10 @@ export async function middleware(
   });
 
   // Redirect if there is no locale
-  if (!pathname.startsWith('/adfit') && pathnameIsMissingLocale) {
+  if (
+    !(pathname.startsWith('/adfit') || pathname.startsWith('/auth')) &&
+    pathnameIsMissingLocale
+  ) {
     const locale = getLocale(req);
     const origin = new URL(req.url).origin;
 

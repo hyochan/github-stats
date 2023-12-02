@@ -1,7 +1,7 @@
 export const revalidate = 3600;
 
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import { getSupabaseServerClient } from '../../../server/services/supabaseServerClient';
 
 type Tier = {
   tier: string;
@@ -21,7 +21,7 @@ export default async function handler(
 
   switch (method) {
     case 'POST':
-      const supabase = getSupabaseClient();
+      const supabase = getSupabaseServerClient();
       const {data} = await supabase
         .from('plugins')
         .select('*')

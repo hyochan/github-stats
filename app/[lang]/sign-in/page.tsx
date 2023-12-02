@@ -2,11 +2,8 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 import Logo from 'public/assets/logo.svg';
-
 import {getTranslates} from '../../../src/localization';
-
 import SocialButtons from './SocialButtons';
-
 import type {Locale} from '~/i18n';
 import AdFitResponsive from '../(common)/AdFitResponsive';
 
@@ -32,8 +29,8 @@ export default async function Page({
             str === 'termsOfService'
               ? 'https://legacy.dooboolab.com/termsofservice'
               : str === 'privacyPolicy'
-              ? 'https://legacy.dooboolab.com/privacyandpolicy'
-              : ''
+                ? 'https://legacy.dooboolab.com/privacyandpolicy'
+                : ''
           }
           key={str}
           className="underline underline-offset-[1px]"

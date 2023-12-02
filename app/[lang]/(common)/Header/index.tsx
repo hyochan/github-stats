@@ -13,7 +13,7 @@ import Logo from 'public/assets/logo.svg';
 import {useAuthContext} from '../../../../src/components/AuthProvider';
 import {H1} from '../../../../src/components/Typography';
 import type {Translates} from '../../../../src/localization';
-import {getSupabaseBrowserClient} from '../../../../src/utils/supabase';
+import {getSupabaseBrowserClient} from '../../../../src/utils/supabaseBrowserClient';
 import {isDarkMode, toggleTheme} from '../../../../src/utils/theme';
 import Button from '../Button';
 

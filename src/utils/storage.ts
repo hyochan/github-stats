@@ -1,4 +1,4 @@
-import {getSupabaseClient} from '../../server/supabaseClient';
+import {getSupabaseBrowserClient} from './supabaseBrowserClient';
 
 export const uploadFileToSupabase = async ({
   file,
@@ -9,7 +9,7 @@ export const uploadFileToSupabase = async ({
   bucket: string;
   destPath: string;
 }): Promise<string> => {
-  const supabase = getSupabaseClient();
+  const supabase = getSupabaseBrowserClient();
   const {data, error} = await supabase.storage
     .from(bucket)
     .upload(destPath, file, {

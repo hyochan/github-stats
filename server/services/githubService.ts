@@ -12,7 +12,7 @@ import {getTopLanguages} from '../plugins/topLanguages';
 import type {PluginTrophy} from '../plugins/trophies';
 import {getTrophies} from '../plugins/trophies';
 import type {GithubUser} from '../plugins/types';
-import {getSupabaseClient} from '../supabaseClient';
+import { getSupabaseServerClient } from './supabaseServerClient';
 
 const {GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GH_TOKEN} = process.env;
 
@@ -325,7 +325,7 @@ const upsertGithubStats = async ({
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
-    const supabase = getSupabaseClient();
+    const supabase = getSupabaseServerClient();
     const {plugins} = await getTranslates(lang);
 
     // NOTE: Unknown user or user without commits will gracefully fail here.
@@ -481,7 +481,7 @@ export const getDoobooStats = async ({
 }): Promise<DoobooStatsResponse | null> => {
   login = login.toLowerCase();
 
-  const supabase = getSupabaseClient();
+  const supabase = getSupabaseServerClient();
 
   const {
     common: tCommon,

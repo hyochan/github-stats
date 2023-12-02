@@ -1,9 +1,9 @@
 export const revalidate = 3600;
 
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {PluginUser} from '../../utils/functions';
 import {getUserPlugins} from '../../utils/functions';
+import { getSupabaseServerClient } from '../../../server/services/supabaseServerClient';
 
 type Reply = {message: string} | {users: PluginUser[]};
 
@@ -25,7 +25,7 @@ export default async function handler(
         return;
       }
 
-      const supabase = getSupabaseClient();
+      const supabase = getSupabaseServerClient();
 
       const {data: plugin} = await supabase
         .from('plugins')

@@ -10,7 +10,6 @@ import {initAmplitude} from '../../../src/utils/webUtils';
 import Hero from './Hero';
 import SectionFooter from './SectionFooter';
 import SectionHowItWorks from './SectionHowItWorks';
-import AdFit from '../(common)/AdFit';
 
 type Props = {
   t: Translates['home'];

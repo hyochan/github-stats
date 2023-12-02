@@ -1,0 +1,4 @@
+{
+  "upgrade": true,
+  "reject": ["@amplitude/analytics-browser", "@amplitude/analytics-node"]
+}

@@ -2,7 +2,6 @@ import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
@@ -12,6 +11,7 @@ import GithubUserList from './GithubUserList';
 import {H1} from '~/components/Typography';
 import type {Locale} from '~/i18n';
 import AdFitResponsive from '../(common)/AdFitResponsive';
+import { getSupabaseServerClient } from '../../../server/services/supabaseServerClient';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -23,7 +23,7 @@ export default async function Page({
   params: {lang},
 }: Props): Promise<ReactElement> {
   const {recentList} = await getTranslates(lang);
-  const supabase = getSupabaseClient();
+  const supabase = getSupabaseServerClient();
 
   const {data: plugin} = await supabase
     .from('plugins')
@@ -53,10 +53,7 @@ export default async function Page({
           {recentList.title}
         </H1>
         <AdFitResponsive
-          className={clsx(
-            "mx-6 mb-2",
-            "mx-0"
-          )}
+          className={clsx('mx-6 mb-2', 'mx-0')}
           adfitClassName="adfit-top"
           units={{
             mobile: 'DAN-dAqcoLWvKpYEtbtq',

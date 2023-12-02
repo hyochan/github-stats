@@ -6,7 +6,7 @@ import type {ReactElement} from 'react';
 import Github from 'public/assets/github.svg';
 
 import type {Translates} from '../../../src/localization';
-import {getSupabaseBrowserClient} from '../../../src/utils/supabase';
+import {getSupabaseBrowserClient} from '../../../src/utils/supabaseBrowserClient';
 import Button from '../(common)/Button';
 
 export default function SocialButtons({
@@ -30,7 +30,7 @@ export default function SocialButtons({
         await supabase.auth.signInWithOAuth({
           provider: 'github',
           options: {
-            redirectTo: process.env.NEXT_PUBLIC_ROOT_URL,
+            redirectTo: `${process.env.NEXT_PUBLIC_ROOT_URL}/auth/callback`,
           },
         });
       },

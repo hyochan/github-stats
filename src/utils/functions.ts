@@ -1,5 +1,6 @@
-import {getSupabaseClient} from '../../server/supabaseClient';
+import { getSupabaseServerClient } from '../../server/services/supabaseServerClient';
 import type {Model} from '../types/types';
+import {cookies} from 'next/headers';
 
 export const isEmptyObject = (param: any): boolean =>
   Object.keys(param).length === 0 && param.constructor === Object;
@@ -65,7 +66,7 @@ export const getUserPlugins = async ({
   take?: number;
   dateStr?: string;
 }): Promise<PluginUser[]> => {
-  const supabase = getSupabaseClient();
+  const supabase = getSupabaseServerClient();
 
   const {data: userPlugins} = await supabase
     .from('user_plugins')
@@ -97,16 +98,16 @@ export const getTierSvg = (tier: ScoreType['tierName']): string => {
   return tier === 'Challenger'
     ? '/assets/tier_challenger.svg'
     : tier === 'Master'
-    ? '/assets/tier_master.svg'
-    : tier === 'Diamond'
-    ? '/assets/tier_diamond.svg'
-    : tier === 'Platinum'
-    ? '/assets/tier_platinum.svg'
-    : tier === 'Gold'
-    ? '/assets/tier_gold.svg'
-    : tier === 'Silver'
-    ? '/assets/tier_silver.svg'
-    : tier === 'Bronze'
-    ? '/assets/tier_bronze.svg'
-    : '/assets/tier_iron.svg';
+      ? '/assets/tier_master.svg'
+      : tier === 'Diamond'
+        ? '/assets/tier_diamond.svg'
+        : tier === 'Platinum'
+          ? '/assets/tier_platinum.svg'
+          : tier === 'Gold'
+            ? '/assets/tier_gold.svg'
+            : tier === 'Silver'
+              ? '/assets/tier_silver.svg'
+              : tier === 'Bronze'
+                ? '/assets/tier_bronze.svg'
+                : '/assets/tier_iron.svg';
 };
