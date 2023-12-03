@@ -575,7 +575,7 @@ export const getDoobooStats = async ({
         },
       };
 
-      const updatedAt = new Date(userPlugin?.updated_at || '');
+      const updatedAt = userPlugin?.updated_at ? new Date(userPlugin?.updated_at) : null;
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
@@ -589,7 +589,7 @@ export const getDoobooStats = async ({
           })
           .match({login: userPlugin.login});
 
-        if (diffHours(updatedAt, today) < 3) {
+        if (!updatedAt || diffHours(updatedAt, today) < 3) {
           upsertGithubStats({
             plugin,
             user_plugin: userPlugin,
