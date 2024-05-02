@@ -96,7 +96,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-cover',
+        'self-stretch bg-paper',
         'flex flex-col justify-center items-center',
         'max-[425px]:p-0',
       )}
