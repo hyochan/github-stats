@@ -7,7 +7,6 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
-  experimental: {appDir: true},
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,
