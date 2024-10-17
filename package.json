@@ -2,7 +2,7 @@
   "name": "github-stats",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://stats.dooboo.io",
+  "homepage": "https://stats.hyo.dev",
   "scripts": {
     "dev:next": "NODE_OPTIONS='--inspect' next dev",
     "dev": "concurrently \"bun dev:next\" \"tailwindcss --input ./styles/root.css --output ./styles/output.css --watch\"",

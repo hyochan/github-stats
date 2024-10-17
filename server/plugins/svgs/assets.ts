@@ -268,7 +268,7 @@ export const renderGithubStatsSvg = ({
     <text x="152" y="86" class="textLabelSubStyle">Tier</text>
   </g>
   <g id="doobooText" opacity="0">
-    <a href="https://stats.dooboo.io" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by hyochan</text></a>
+    <a href="https://stats.hyo.dev" target="_blank"><text id="textInfo" x="24" y="124" class="textInfoStyle">Designed by hyochan</text></a>
   </g>
   <!-- START of Animation -->
   <!-- Hexagon Base Animation -->
@@ -291,7 +291,7 @@ export const renderGithubStatsSvg = ({
   <!-- Tier Animation -->
   <animate begin="1.50s" xlink:href="#currentTierImage" attributeName="opacity" attributeType="XML" dur="0.3s" fill="freeze" from="0" to="1"/>
   <animate begin="1.50s" xlink:href="#textTierLabel" attributeName="opacity" attributeType="XML" dur="0.8s" fill="freeze" from="0" to="1"/>
-  <!-- stats.dooboo.io Text Animation -->
+  <!-- stats.hyo.dev Text Animation -->
   <animate begin="1.70s" xlink:href="#doobooText" attributeName="opacity" attributeType="XML" dur="0.5s" fill="freeze" from="0" to="1"/>
   <!-- END of Animation -->
 </svg>
@@ -621,7 +621,7 @@ export const renderGithubStatsSvgWithLangs = ({
     </foreignObject>
   </g>
   <g id="doobooText" opacity="0">
-    <a href="https://stats.dooboo.io" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
+    <a href="https://stats.hyo.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
   </g>
   <!-- START of Animation -->
   <!-- Hexagon Base Animation -->
@@ -655,7 +655,7 @@ export const renderGithubStatsSvgWithLangs = ({
   <animate begin="1.60s" xlink:href="#mostUsedLanguageLine6" attributeName="opacity" attributeType="XML" dur="0.30s" fill="freeze" from="0" to="1"/>
   <!-- Language Text Animation -->
   <animate begin="1.60s" xlink:href="#mostUsedLanguageTextGroup" attributeName="opacity" attributeType="XML" dur="0.60s" fill="freeze" from="0" to="1"/>
-  <!-- stats.dooboo.io Text Animation -->
+  <!-- stats.hyo.dev Text Animation -->
   <animate begin="1.60s" xlink:href="#doobooText" attributeName="opacity" attributeType="XML" dur="0.90s" fill="freeze" from="0" to="1"/>
   <!-- END of Animation -->
   </svg>
