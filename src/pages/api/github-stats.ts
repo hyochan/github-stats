@@ -1,3 +1,5 @@
+// pages/api/github-stats.ts
+
 export const revalidate = 3600;
 
 import {track} from '@amplitude/analytics-node';
@@ -13,15 +15,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | unknown | {message: string}>,
 ): Promise<void> {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   initNodeAmplitude();
 
   const locale = currentLocale(req);
-  const method = <string>req.method;
+  const method = req.method as string;
   const {common} = await getTranslates(locale);
 
   switch (method) {
-    case 'GET':
-      const loginParam = <string>req.query.login;
+    case 'GET': {
+      const loginParam = req.query.login as string;
       assert(loginParam, common.badRequest);
 
       try {
@@ -32,7 +46,6 @@ export default async function handler(
 
         if (!stats) {
           res.status(404).json({message: common.notFound});
-
           return;
         }
 
@@ -50,8 +63,9 @@ export default async function handler(
       }
 
       break;
-    case 'POST':
-      const loginBody = <string>req.body.login;
+    }
+    case 'POST': {
+      const loginBody = req.body.login as string;
       assert(loginBody, common.badRequest);
 
       try {
@@ -62,7 +76,6 @@ export default async function handler(
 
         if (!stats) {
           res.status(404).json({message: common.notFound});
-
           return;
         }
 
@@ -72,12 +85,13 @@ export default async function handler(
           extra: {login: loginBody, lang: locale},
         });
 
-        res.send({stats});
+        res.json({stats});
       } catch (err) {
         res.status(500).send(err);
       }
 
       break;
+    }
     default:
       res.status(404).json({message: common.notFound});
   }
