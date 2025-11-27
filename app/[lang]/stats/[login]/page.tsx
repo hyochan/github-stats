@@ -1,6 +1,5 @@
 import type {ReactElement} from 'react';
 
-import {revalidatePath} from 'next/cache';
 import {getDoobooStats} from '../../../../server/services/githubService';
 import {getTranslates} from '../../../../src/localization';
 import Container from '../Container';
@@ -25,8 +24,6 @@ export default async function Page(props: Props): Promise<ReactElement> {
     login,
     lang,
   });
-
-  revalidatePath('/stats', 'page');
 
   return (
     <Container

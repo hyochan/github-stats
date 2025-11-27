@@ -31,7 +31,12 @@ export default function SocialButtons({
 
     const normalizedRoot = process.env.NEXT_PUBLIC_ROOT_URL.replace(/\/$/, '');
 
-    return `${normalizedRoot}/auth/callback?next=${encodeURIComponent(pathname || '/')}`;
+    // If we're on the sign-in page, redirect to home after successful login
+    const nextPath = pathname?.includes('/sign-in')
+      ? pathname.replace(/\/sign-in.*$/, '') || '/'
+      : pathname || '/';
+
+    return `${normalizedRoot}/auth/callback?next=${encodeURIComponent(nextPath)}`;
   }, [pathname]);
 
   const socialButtons: SocialButton[] = [

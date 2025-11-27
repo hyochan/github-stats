@@ -608,7 +608,7 @@ export const getDoobooStats = async ({
           })
           .match({login: userPlugin.login});
 
-        if (!updatedAt || diffHours(updatedAt, today) < 3) {
+        if (!updatedAt || diffHours(updatedAt, today) > 3) {
           void upsertGithubStats({
             plugin,
             user_plugin: userPlugin,
@@ -651,6 +651,12 @@ export const getDoobooStats = async ({
       lang,
     });
   } catch (e: any) {
-    throw new Error(e);
+    console.error('Error in getDoobooStats:', {
+      login,
+      error: e.message || e,
+      stack: e.stack,
+    });
+
+    return null;
   }
 };
