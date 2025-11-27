@@ -46,14 +46,9 @@ export default function SectionFooter({t}: Props): ReactElement {
         >
           {t.enjoyStats}
         </p>
-        <a
-          href="https://github.com/hyochan"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer"
-        >
+        <div className="cursor-pointer">
           <SvgScouter className="w-screen px-12 max-w-3xl" />
-        </a>
+        </div>
         <div
           className={clsx(
             'h-[22px] mb-12 mt-12 px-6 py-4',

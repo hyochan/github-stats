@@ -13,12 +13,12 @@ import GreatFrontEnd from '../(common)/GreatFrontEnd';
 const inter = Inter({subsets: ['latin']});
 
 type Props = {
-  params: {lang: Locale};
+  params: Promise<{lang: string}>;
 };
 
-export default async function Page({
-  params: {lang},
-}: Props): Promise<ReactElement> {
+export default async function Page(props: Props): Promise<ReactElement> {
+  const params = await props.params;
+  const lang = params.lang as Locale;
   const {signIn} = await getTranslates(lang);
 
   // Next.js intl interpolation is not currently supported as of 2023-03-12.

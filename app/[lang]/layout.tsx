@@ -15,14 +15,13 @@ import type {Locale} from '~/i18n';
 
 type Props = {
   children: ReactNode;
-  params: {lang: Locale};
+  params: Promise<{lang: string}>;
 };
 
 export default async function RootLayout(props: Props): Promise<ReactElement> {
-  const {
-    params: {lang},
-    children,
-  } = props;
+  const params = await props.params;
+  const lang = params.lang as Locale;
+  const {children} = props;
 
   const {langs, nav} = await getTranslates(lang);
 

@@ -12,12 +12,13 @@ import SearchTextInput from './SearchTextInput';
 import type {Locale} from '~/i18n';
 
 type Props = {
-  params: {lang: Locale; login: string};
+  params: Promise<{lang: string; login: string}>;
 };
 
-export default async function Page({
-  params: {lang, login},
-}: Props): Promise<ReactElement> {
+export default async function Page(props: Props): Promise<ReactElement> {
+  const params = await props.params;
+  const lang = params.lang as Locale;
+  const login = params.login;
   const {stats: tStats} = await getTranslates(lang);
 
   const stats = await getDoobooStats({

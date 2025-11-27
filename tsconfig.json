@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -12,19 +16,40 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"],
-      "@/public/*": ["./public/*"],
-      "@/app/*": ["./app/[lang]/*"],
-      "@/server/*": ["./server/*"],
+      "~/*": [
+        "./src/*"
+      ],
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/app/*": [
+        "./app/[lang]/*"
+      ],
+      "@/server/*": [
+        "./server/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "src/types/supabase.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/types/supabase.ts"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS" // For seed script in ./server/prisma/seed.ts

@@ -1859,11 +1859,6 @@ input[type='search']::-webkit-search-decoration,
   padding-right: 18px;
 }
 
-.px-\[20px\] {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 .px-\[28px\] {
   padding-left: 28px;
   padding-right: 28px;
@@ -2266,6 +2261,10 @@ input[type='search']::-webkit-search-decoration,
   transition-duration: 300ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 @font-face {
   font-family: 'doobooui';
 
@@ -2451,10 +2450,6 @@ input[type='search']::-webkit-search-decoration,
 
 :is(.dark .dark\:border-white\/30) {
   border-color: rgb(255 255 255 / .3);
-}
-
-:is(.dark .dark\:border-white\/5) {
-  border-color: rgb(255 255 255 / 0.05);
 }
 
 :is(.dark .dark\:bg-\[\#232323\]) {

@@ -1,8 +1,7 @@
 'use client';
 
 import type {CSSProperties, ReactElement} from 'react';
-import {cloneElement, useState} from 'react';
-import TextTransition, {presets} from 'react-text-transition';
+import {cloneElement, useState, useEffect} from 'react';
 import {track} from '@amplitude/analytics-browser';
 import clsx from 'clsx';
 
@@ -51,6 +50,38 @@ const PluginStatsInfo = ({
   statsInfo: StatsInfo;
   selectedStatName: StatName;
 }): React.ReactElement => {
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => setIsTransitioning(false), 50);
+    return () => clearTimeout(timer);
+  }, [selectedStatName]);
+
+  const name = selectedStatName === 'fire'
+    ? statsInfo.fire.name
+    : selectedStatName === 'earth'
+    ? statsInfo.earth.name
+    : selectedStatName === 'gold'
+    ? statsInfo.gold.name
+    : selectedStatName === 'water'
+    ? statsInfo.water.name
+    : selectedStatName === 'people'
+    ? statsInfo.people.name
+    : statsInfo.tree.name;
+
+  const description = selectedStatName === 'fire'
+    ? statsInfo.fire.description
+    : selectedStatName === 'earth'
+    ? statsInfo.earth.description
+    : selectedStatName === 'gold'
+    ? statsInfo.gold.description
+    : selectedStatName === 'water'
+    ? statsInfo.water.description
+    : selectedStatName === 'people'
+    ? statsInfo.people.description
+    : statsInfo.tree.description;
+
   return (
     <div
       className={clsx(
@@ -58,40 +89,22 @@ const PluginStatsInfo = ({
         'flex-1 flex flex-col relative',
       )}
     >
-      <TextTransition
-        springConfig={presets.gentle}
-        direction="down"
-        className="body1 font-bold mb-3 text-left"
+      <div
+        className={clsx(
+          'body1 font-bold mb-3 text-left transition-opacity duration-300',
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        )}
       >
-        {selectedStatName === 'fire'
-          ? statsInfo.fire.name
-          : selectedStatName === 'earth'
-          ? statsInfo.earth.name
-          : selectedStatName === 'gold'
-          ? statsInfo.gold.name
-          : selectedStatName === 'water'
-          ? statsInfo.water.name
-          : selectedStatName === 'people'
-          ? statsInfo.people.name
-          : statsInfo.tree.name}
-      </TextTransition>
-      <TextTransition
-        className="body3 leading-[160%] text-left"
-        springConfig={presets.wobbly}
-        direction="down"
+        {name}
+      </div>
+      <div
+        className={clsx(
+          'body3 leading-[160%] text-left transition-opacity duration-500',
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        )}
       >
-        {selectedStatName === 'fire'
-          ? statsInfo.fire.description
-          : selectedStatName === 'earth'
-          ? statsInfo.earth.description
-          : selectedStatName === 'gold'
-          ? statsInfo.gold.description
-          : selectedStatName === 'water'
-          ? statsInfo.water.description
-          : selectedStatName === 'people'
-          ? statsInfo.people.description
-          : statsInfo.tree.description}
-      </TextTransition>
+        {description}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseClient} from '@/server/supabaseClient';
 
 type Tier = {
   tier: string;

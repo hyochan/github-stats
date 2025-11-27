@@ -4,7 +4,7 @@ import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
 
-import {upsertUser} from './services/userService';
+import {upsertUser} from './src/services/userService';
 
 // import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
 import {i18n} from '~/i18n';
@@ -24,7 +24,7 @@ function getLocale(request: NextRequest): string | undefined {
   });
 }
 
-export async function middleware(
+export async function proxy(
   req: NextRequest,
 ): Promise<NextResponse | undefined> {
   let pathname = req.nextUrl.pathname;

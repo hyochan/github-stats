@@ -7,12 +7,12 @@ import Home from '@/app/(home)/Home';
 import type {Locale} from '~/i18n';
 
 type Props = {
-  params: {lang: Locale};
+  params: Promise<{lang: string}>;
 };
 
-export default async function Page({
-  params: {lang},
-}: Props): Promise<ReactElement> {
+export default async function Page(props: Props): Promise<ReactElement> {
+  const params = await props.params;
+  const lang = params.lang as Locale;
   const {home, plugins} = await getTranslates(lang);
 
   const statsInfo: StatsInfo = {

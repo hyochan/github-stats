@@ -5,8 +5,15 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
   reactStrictMode: true,
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,
