@@ -49,7 +49,6 @@
   ],
   "exclude": [
     "node_modules",
-    "src/types/supabase.ts",
     "vitest.config.ts"
   ],
   "ts-node": {

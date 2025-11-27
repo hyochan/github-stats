@@ -11,6 +11,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const {searchParams, origin} = new URL(request.url);
   const code = searchParams.get('code');
   const next = searchParams.get('next');
+  const langParam = searchParams.get('lang');
 
   if (code) {
     const cookieStore = await cookies();
@@ -33,7 +34,9 @@ export async function GET(request: Request): Promise<NextResponse> {
   }
 
   const redirectPath =
-    next && next.startsWith('/') ? next : `/${i18n.defaultLocale}`;
+    next && next.startsWith('/')
+      ? next
+      : `/${langParam || i18n.defaultLocale}`;
 
   return NextResponse.redirect(`${origin}${redirectPath}`);
 }

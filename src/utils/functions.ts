@@ -1,5 +1,6 @@
 import {getSupabaseClient} from '../../server/supabaseClient';
-import type {Model} from '../types/types';
+import type {Model, PluginRow, UserPluginRow} from '../types/types';
+import type {Database} from '../types/supabase';
 
 export const isEmptyObject = (param: any): boolean =>
   Object.keys(param).length === 0 && param.constructor === Object;
@@ -61,13 +62,15 @@ export const getUserPlugins = async ({
   take = 20,
   dateStr = new Date().toISOString(),
 }: {
-  plugin: Model['plugins']['Row'];
+  plugin: PluginRow;
   take?: number;
   dateStr?: string;
 }): Promise<PluginUser[]> => {
   const supabase = getSupabaseClient();
 
-  const {data: userPlugins} = await supabase
+  type UserPluginRow = Database['public']['Tables']['user_plugins']['Row'];
+
+  const {data: userPlugins}: {data: UserPluginRow[] | null} = await supabase
     .from('user_plugins')
     .select('*')
     .match({plugin_id: 'dooboo-github'})
@@ -75,10 +78,12 @@ export const getUserPlugins = async ({
     .lt('created_at', dateStr?.toLocaleString())
     .limit(take || 20);
 
+  const pluginTiers = (plugin.json || []) as {tier: string; score: number}[];
+
   const users = (userPlugins || [])
-    .filter((user: any) => user.github_id !== null)
-    .map((user: any) => {
-      const tierName = getTierName(user.score || 0, (plugin as any).json);
+    .filter((user) => user.github_id !== null)
+    .map((user) => {
+      const tierName = getTierName(user.score || 0, pluginTiers);
 
       return {
         login: user.login,
@@ -86,7 +91,7 @@ export const getUserPlugins = async ({
         score: user.score,
         avatarUrl: user.avatar_url,
         tierName,
-        createdAt: <string>user.created_at,
+        createdAt: user.created_at || '',
       };
     });
 

@@ -52,29 +52,7 @@ const PluginStatsInfo = ({
   selectedStatName: StatName;
   isTransitioning: boolean;
 }): React.ReactElement => {
-  const name = selectedStatName === 'fire'
-    ? statsInfo.fire.name
-    : selectedStatName === 'earth'
-    ? statsInfo.earth.name
-    : selectedStatName === 'gold'
-    ? statsInfo.gold.name
-    : selectedStatName === 'water'
-    ? statsInfo.water.name
-    : selectedStatName === 'people'
-    ? statsInfo.people.name
-    : statsInfo.tree.name;
-
-  const description = selectedStatName === 'fire'
-    ? statsInfo.fire.description
-    : selectedStatName === 'earth'
-    ? statsInfo.earth.description
-    : selectedStatName === 'gold'
-    ? statsInfo.gold.description
-    : selectedStatName === 'water'
-    ? statsInfo.water.description
-    : selectedStatName === 'people'
-    ? statsInfo.people.description
-    : statsInfo.tree.description;
+  const {name, description} = statsInfo[selectedStatName];
 
   return (
     <div

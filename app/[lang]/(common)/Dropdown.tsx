@@ -17,14 +17,14 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
   setSelected,
   data = [],
 }: DropdownProps<T>): ReactElement {
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null!);
   const [isOpened, setIsOpened] = useState(false);
 
   const handleClickOutside = (): void => {
     setIsOpened(false);
   };
 
-  useOnClickOutside(dropdownRef as any, handleClickOutside);
+  useOnClickOutside<HTMLDivElement>(dropdownRef, handleClickOutside);
 
   const onClick: MouseEventHandler<HTMLButtonElement> | undefined = (
     e,

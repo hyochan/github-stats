@@ -2,8 +2,17 @@ import axios from 'axios';
 
 import type {Locale} from '../../src/i18n';
 import {getTranslates} from '../../src/localization';
-import type {Json} from '../../src/types/supabase';
-import type {Model} from '../../src/types/types';
+import type {Database, Json} from '../../src/types/supabase';
+import type {
+  Model,
+  PluginRow,
+  StatsInsert,
+  StatsRow,
+  TrophiesInsert,
+  TrophiesRow,
+  UserPluginInsert,
+  UserPluginRow,
+} from '../../src/types/types';
 import type {AuthorCommits, PluginStats, UserGraph} from '../plugins';
 import {getGithubStatus} from '../plugins';
 import {diffHours} from '../plugins/pluginUtils';
@@ -320,8 +329,8 @@ const upsertGithubStats = async ({
   lang = 'en',
 }: {
   login: string;
-  plugin: Model['plugins']['Row'];
-  user_plugin: Model['user_plugins']['Row'] | null;
+  plugin: PluginRow;
+  user_plugin: UserPluginRow | null;
   lang?: Locale;
 }): Promise<DoobooStatsResponse | null> => {
   try {
@@ -336,11 +345,11 @@ const upsertGithubStats = async ({
       data: {user: githubUser},
     } = results[0];
 
-    const githubStatus = getGithubStatus(githubUser, results[1]);
-    const languages = getTopLanguages(githubUser);
-    const trophies = getTrophies(githubUser);
+  const githubStatus = getGithubStatus(githubUser, results[1]);
+  const languages = getTopLanguages(githubUser);
+  const trophies = getTrophies(githubUser);
 
-    const stats: Model['stats']['Insert'][] = [
+  const stats: StatsInsert[] = [
       {
         name: 'TREE',
         score: githubStatus.tree.score,
@@ -402,7 +411,7 @@ const upsertGithubStats = async ({
 
     const score = Math.round((sum / 6) * 100);
 
-    await supabase.from('user_plugins').upsert({
+    const userPluginPayload: UserPluginInsert = {
       login,
       user_name: githubUser.name,
       avatar_url: githubUser.avatarUrl,
@@ -417,28 +426,34 @@ const upsertGithubStats = async ({
         score,
         languages,
       },
-    } as any);
+    };
+
+    await supabase.from('user_plugins').upsert(userPluginPayload);
 
     trophies.forEach(async (el) => {
       const trophyScore = el.score as number;
 
-      await supabase.from('trophies').upsert({
+      const trophyPayload: TrophiesInsert = {
         ...el,
         score: trophyScore,
         user_plugin_login: login,
-      } as any);
+      };
+
+      await supabase.from('trophies').upsert(trophyPayload);
     });
 
     stats.forEach(async (el) => {
       const statScore = el.score as number;
-      const stat_element = el.stat_element as Json;
+      const statElement = el.stat_element as Json;
 
-      await supabase.from('stats').upsert({
+      const statPayload: StatsInsert = {
         ...el,
         score: statScore,
-        stat_element: stat_element,
+        stat_element: statElement,
         user_plugin_login: login,
-      } as any);
+      };
+
+      await supabase.from('stats').upsert(statPayload);
     });
 
     return {
@@ -491,33 +506,34 @@ export const getDoobooStats = async ({
   try {
     const PLUGIN_ID = 'dooboo-github';
 
-    const {data: plugin} = await supabase
-      .from('plugins')
-      .select()
-      .eq('id', PLUGIN_ID)
-      .single();
+    const {data: plugin}: {
+      data: Model['plugins']['Row'] | null;
+    } = await supabase.from('plugins').select().eq('id', PLUGIN_ID).single();
 
     if (!plugin) {
       throw new Error(tCommon.pluginNotFound);
     }
 
-    const {data: userPlugin} = await supabase
+    const {data: userPlugin}: {data: UserPluginRow | null} = await supabase
       .from('user_plugins')
       .select()
       .match({
-        plugin_id: (plugin as any).id,
+        plugin_id: plugin.id,
         login,
       })
       .single();
 
-    const {data: stats} = await supabase.from('stats').select('*').match({
-      user_plugin_login: login,
-    });
+    const {data: stats}: {data: StatsRow[] | null} = await supabase
+      .from('stats')
+      .select('*')
+      .match({
+        user_plugin_login: login,
+      });
 
     // NOTE: Return the data when user was fetched.
     if (userPlugin && stats?.length === 6) {
       const ghStats: GithubStats[] =
-        stats?.map((el: any) => {
+        stats?.map((el) => {
           return {
             id: el.id,
             description: el.description,
@@ -574,22 +590,22 @@ export const getDoobooStats = async ({
         },
       };
 
-      const updatedAt = (userPlugin as any)?.updated_at ? new Date((userPlugin as any)?.updated_at) : null;
+      const updatedAt = userPlugin?.updated_at ? new Date(userPlugin.updated_at) : null;
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
       let isCachedResult = false;
 
-      if ((userPlugin as any).login) {
-        await (supabase
-          .from('user_plugins') as any)
+      if (userPlugin?.login) {
+        await supabase
+          .from('user_plugins')
           .update({
-            view_count: (userPlugin as any)?.view_count ? (userPlugin as any).view_count + 1 : 1,
+            view_count: userPlugin.view_count ? userPlugin.view_count + 1 : 1,
           })
-          .match({login: (userPlugin as any).login});
+          .match({login: userPlugin.login});
 
         if (!updatedAt || diffHours(updatedAt, today) < 3) {
-          upsertGithubStats({
+          void upsertGithubStats({
             plugin,
             user_plugin: userPlugin,
             login,
@@ -602,13 +618,13 @@ export const getDoobooStats = async ({
       const {data: trophyData} = await supabase
         .from('trophies')
         .select('score, points, type')
-        .eq('user_plugin_login', (userPlugin as any).login);
+        .eq('user_plugin_login', userPlugin.login);
 
       return {
         plugin,
         pluginStats: result,
         pluginTrophies:
-          trophyData?.map((el: any) => {
+          trophyData?.map((el) => {
             const type = el.type as keyof typeof tTrophies;
 
             return {
@@ -616,11 +632,11 @@ export const getDoobooStats = async ({
               type: tTrophies[type],
             };
           }) || [],
-        json: JSON.parse(JSON.stringify((userPlugin as any).json)),
+        json: JSON.parse(JSON.stringify(userPlugin.json)),
         isCachedResult,
-        userName: (userPlugin as any).user_name,
-        githubId: (userPlugin as any).github_id,
-        score: (userPlugin as any).score,
+        userName: userPlugin.user_name,
+        githubId: userPlugin.github_id,
+        score: userPlugin.score,
       };
     }
 

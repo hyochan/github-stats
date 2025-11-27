@@ -2,6 +2,7 @@ export const revalidate = 3600;
 
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {getSupabaseClient} from '@/server/supabaseClient';
+import type {PluginRow} from '~/types/types';
 
 type Tier = {
   tier: string;
@@ -22,11 +23,11 @@ export default async function handler(
   switch (method) {
     case 'POST':
       const supabase = getSupabaseClient();
-      const {data} = await supabase
+      const {data}: {data: PluginRow | null} = await supabase
         .from('plugins')
-        .select('*')
+        .select('id, description, json')
         .eq('id', id)
-        .single();
+        .maybeSingle();
 
       if (!data) {
         res.status(404).json({message: 'No plugins found.'});
@@ -34,11 +35,11 @@ export default async function handler(
         return;
       }
 
-      const tiers = <Tier[]>(data as any).json;
+      const tiers = (data.json || []) as Tier[];
 
       res.status(200).json({
-        id: (data as any).id,
-        description: (data as any).description,
+        id: data.id,
+        description: data.description,
         tiers,
       });
       break;
