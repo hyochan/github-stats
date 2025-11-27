@@ -465,7 +465,6 @@ const upsertGithubStats = async ({
       score,
     };
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.log('Error in upsertGithubStats', err);
 
     return null;

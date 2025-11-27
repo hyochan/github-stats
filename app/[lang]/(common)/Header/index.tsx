@@ -235,7 +235,7 @@ export default function Header(props: Props): ReactElement {
   const {t, lang} = props;
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
 
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => isDarkMode());
   const {login, changeLogin} = useAuthContext();
 
   const navLinks: NavLink[] = !!login
@@ -299,8 +299,6 @@ export default function Header(props: Props): ReactElement {
       subscription.unsubscribe();
     };
   }, [changeLogin, supabase]);
-
-  useEffect(() => setIsDark(isDarkMode()), []);
 
   return (
     <header

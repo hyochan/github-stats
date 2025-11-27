@@ -1,7 +1,7 @@
 'use client';
 
 import type {CSSProperties, ReactElement} from 'react';
-import {cloneElement, useState, useEffect} from 'react';
+import {cloneElement, useEffect, useRef, useState} from 'react';
 import {track} from '@amplitude/analytics-browser';
 import clsx from 'clsx';
 
@@ -46,18 +46,12 @@ type StatName = (typeof statTypes)[number]['name'];
 const PluginStatsInfo = ({
   statsInfo,
   selectedStatName,
+  isTransitioning,
 }: {
   statsInfo: StatsInfo;
   selectedStatName: StatName;
+  isTransitioning: boolean;
 }): React.ReactElement => {
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  useEffect(() => {
-    setIsTransitioning(true);
-    const timer = setTimeout(() => setIsTransitioning(false), 50);
-    return () => clearTimeout(timer);
-  }, [selectedStatName]);
-
   const name = selectedStatName === 'fire'
     ? statsInfo.fire.name
     : selectedStatName === 'earth'
@@ -119,11 +113,27 @@ const StatsSymbols = ({
   statsInfo: StatsInfo;
 }): ReactElement => {
   const [selectedStatName, setSelectedStatName] = useState<StatName>('tree');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const pressStat = (type: StatName): void => {
+    if (transitionTimer.current) {
+      clearTimeout(transitionTimer.current);
+    }
+
+    setIsTransitioning(true);
+    transitionTimer.current = setTimeout(() => setIsTransitioning(false), 50);
     setSelectedStatName(type);
     track('Press Stat Info', {type});
   };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimer.current) {
+        clearTimeout(transitionTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <div className={`flex flex-col  ${className}`} style={style}>
@@ -151,6 +161,7 @@ const StatsSymbols = ({
       <PluginStatsInfo
         selectedStatName={selectedStatName}
         statsInfo={statsInfo}
+        isTransitioning={isTransitioning}
       />
     </div>
   );
