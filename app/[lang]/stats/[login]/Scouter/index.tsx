@@ -35,6 +35,7 @@ export default function Scouter(props: ScouterProps): ReactElement {
     <div
       className={clsx(
         styles.scrollable,
+        'w-full max-w-full',
         'flex flex-col flex-start items-center',
       )}
     >

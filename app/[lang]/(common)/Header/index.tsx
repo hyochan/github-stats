@@ -148,7 +148,9 @@ function MobileNavMenus(
       <nav
         className={clsx(
           'absolute top-14 right-0 w-full bg-basic pb-2',
+          'max-h-[calc(100vh-56px)] overflow-y-auto',
           'flex flex-col',
+          'z-50',
           isNavCollapsed ? 'hidden' : 'flex',
         )}
       >

@@ -110,5 +110,13 @@
   "certifiedUsers": {
     "title": "Certified Users",
     "noCertifiedUsers": "No certified users"
+  },
+  "error": {
+    "notFound": "Page Not Found",
+    "notFoundDesc": "The page you're looking for doesn't exist or has been moved.",
+    "serverError": "Something Went Wrong",
+    "serverErrorDesc": "An unexpected error occurred. Please try again later.",
+    "goHome": "Go Home",
+    "tryAgain": "Try Again"
   }
 }

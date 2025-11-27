@@ -75,7 +75,7 @@ function SectionBody({stats}: SectionProps): ReactElement {
 
         return (
           <div key={el.name} className={clsx('mb-6', 'flex flex-col')}>
-            <p
+            <div
               className={clsx(
                 'text-basic font-bold mb-6',
                 'flex flex-row items-center',
@@ -93,14 +93,13 @@ function SectionBody({stats}: SectionProps): ReactElement {
                   maximumFractionDigits: 0,
                 })}
               </div>
-            </p>
+            </div>
             {details.map((detail: StatsDetail) => {
               switch (detail.type) {
                 case 'repository':
                   return (
-                    <div>
+                    <div key={`${el.name}-${detail.name}`}>
                       <a
-                        key={`${el.name}-${detail.name}`}
                         href={detail.url}
                         className="mb-4"
                       >

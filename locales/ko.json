@@ -119,5 +119,13 @@
   "certifiedUsers": {
     "title": "인증된 사용자",
     "noCertifiedUsers": "인증된 사용자가 없습니다"
+  },
+  "error": {
+    "notFound": "페이지를 찾을 수 없습니다",
+    "notFoundDesc": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+    "serverError": "오류가 발생했습니다",
+    "serverErrorDesc": "예기치 않은 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+    "goHome": "홈으로",
+    "tryAgain": "다시 시도"
   }
 }

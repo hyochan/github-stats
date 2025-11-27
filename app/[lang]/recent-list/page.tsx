@@ -39,7 +39,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
           'flex flex-row items-center justify-between gap-4',
-          'max-[480px]:flex-col max-[480px]:items-start max-[480px]:mb-0 max-[480px]:my-4',
+          'max-[480px]:flex-col max-[480px]:items-start max-[480px]:mb-6 max-[480px]:mt-2',
         )}
       >
         <H1
@@ -52,7 +52,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
           {recentList.title}
         </H1>
         <GreatFrontEnd
-          className="max-w-[400px] shrink-0 max-[480px]:mt-4 max-[480px]:max-w-full"
+          className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full"
           href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
           title="Quiz interview questions"
         />
