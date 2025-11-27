@@ -1,7 +1,7 @@
 'use client';
 
 import type {ReactElement, ReactNode} from 'react';
-import SnackbarProvider from 'react-simple-snackbar';
+import {Toaster} from 'react-hot-toast';
 
 import {AuthProvider} from './AuthProvider';
 
@@ -19,9 +19,32 @@ export default function RootProvider({
 }): ReactElement {
   return (
     <LocaleProvider initialLocale={initialLocale}>
-      <SnackbarProvider>
-        <AuthProvider>{children}</AuthProvider>
-      </SnackbarProvider>
+      <AuthProvider>
+        {children}
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            duration: 2000,
+            success: {
+              style: {
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: '#fff',
+                padding: '12px 20px',
+                borderRadius: '12px',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: '0 10px 25px rgba(102, 126, 234, 0.3)',
+                maxWidth: 'fit-content',
+                minWidth: 'auto',
+              },
+              iconTheme: {
+                primary: '#fff',
+                secondary: '#667eea',
+              },
+            },
+          }}
+        />
+      </AuthProvider>
     </LocaleProvider>
   );
 }

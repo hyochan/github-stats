@@ -21,13 +21,18 @@ import {useMediaQuery} from 'usehooks-ts';
 import GreatFrontEnd from '../../(common)/GreatFrontEnd';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
+const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL;
 
+// For display (markdown format)
+const generateSvgUrlToDisplay = (login: string, isBasic?: boolean): string => {
+  const apiEndpoint = isBasic ? 'github-stats' : 'github-stats-advanced';
+  return `![${login} github-stats](${rootUrl}/${apiEndpoint}?login=${login})`;
+};
+
+// For copying (HTML format)
 const generateSvgUrlToCopy = (login: string, isBasic?: boolean): string => {
-  if (isBasic) {
-    return `![${login} github-stats](${rootUrl}/github-stats?login=${login})`;
-  }
-
-  return `![${login} github-stats](${rootUrl}/github-stats-advanced?login=${login})`;
+  const apiEndpoint = isBasic ? 'github-stats' : 'github-stats-advanced';
+  return `<a href="${baseUrl}/stats/${login}"><img src="${rootUrl}/${apiEndpoint}?login=${login}" width="600" /></a>`;
 };
 
 type SvgType = 'basic' | 'advanced' | 'trophies';
@@ -64,7 +69,8 @@ function Hero({t, statsInfo}: Props): ReactElement {
   const [searchLogin, setSearchedUID] = useState('');
   const [githubSVG, setGithubSVG] = useState<string | null>(null);
   const [noTrophies, setNoTrophies] = useState(false);
-  const [svgStatsURL, setSvgStatsURL] = useState<string>('');
+  const [svgStatsURLDisplay, setSvgStatsURLDisplay] = useState<string>('');
+  const [svgStatsURLCopy, setSvgStatsURLCopy] = useState<string>('');
   const [isBasic, setIsBasic] = useState<boolean | undefined>(undefined);
   const {register, formState, handleSubmit} = useForm();
 
@@ -80,13 +86,15 @@ function Hero({t, statsInfo}: Props): ReactElement {
         const base64dataStats = btoa(unescape(encodeURIComponent(svgStats)));
         setGithubSVG(base64dataStats);
 
-        setSvgStatsURL(generateSvgUrlToCopy(login, false));
+        setSvgStatsURLDisplay(generateSvgUrlToDisplay(login, false));
+        setSvgStatsURLCopy(generateSvgUrlToCopy(login, false));
         setSearchedUID(login);
         setIsBasic(false);
         setNoTrophies(false);
       } catch (err) {
         setGithubSVG(null);
-        setSvgStatsURL('');
+        setSvgStatsURLDisplay('');
+        setSvgStatsURLCopy('');
         setIsBasic(undefined);
       }
     }
@@ -202,7 +210,8 @@ function Hero({t, statsInfo}: Props): ReactElement {
               buttons={[{label: t.basic}, {label: t.advanced}]}
               onClick={(index) => {
                 const shouldBeBasic = index === 0;
-                setSvgStatsURL(generateSvgUrlToCopy(login, shouldBeBasic));
+                setSvgStatsURLDisplay(generateSvgUrlToDisplay(login, shouldBeBasic));
+                setSvgStatsURLCopy(generateSvgUrlToCopy(login, shouldBeBasic));
                 setIsBasic(shouldBeBasic);
 
                 track('Press Stat Tab', {login, basic: shouldBeBasic});
@@ -243,11 +252,12 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 />
               </div>
             ) : null}
-            {svgStatsURL ? (
+            {svgStatsURLDisplay ? (
               <StatsUrlCard
                 t={t}
                 selectedPluginType={selectedPluginType}
-                svgStatsURL={svgStatsURL}
+                svgStatsURLDisplay={svgStatsURLDisplay}
+                svgStatsURLCopy={svgStatsURLCopy}
                 svgTrophiesURL={
                   !noTrophies ? getSVGUrl('trophies', searchLogin) : ''
                 }

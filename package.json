@@ -42,7 +42,7 @@
     "react-dom": "^19.2.0",
     "react-hamburger-menu": "^1.2.1",
     "react-hook-form": "^7.66.1",
-    "react-simple-snackbar": "^1.1.11",
+    "react-hot-toast": "^2.6.0",
     "server-only": "^0.0.1",
     "tiny-invariant": "^1.3.3",
     "typescript": "5.9.3",
