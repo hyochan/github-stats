@@ -27,7 +27,6 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "prettier.configPath": ".prettierrc.js",
   "cSpell.words": [
-    "adfit",
     "clsx",
     "formatjs",
     "hyochan",

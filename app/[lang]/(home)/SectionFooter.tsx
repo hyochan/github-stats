@@ -7,8 +7,7 @@ import type {Translates} from '../../../src/localization';
 import imgBgSection1 from '@/public/assets/bg_section1.png';
 import SvgScouter from '@/public/assets/scouter.svg';
 import {useMediaQuery} from 'usehooks-ts';
-import AdFit from '../(common)/AdFit';
-import AdFitResponsive from '../(common)/AdFitResponsive';
+import GreatFrontEnd from '../(common)/GreatFrontEnd';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -70,20 +69,17 @@ export default function SectionFooter({t}: Props): ReactElement {
           />
           <p className={clsx('text-white text-[12px] align-center opacity-50')}>
             designed by &nbsp;
-            <a href="https://dooboolab.com">dooboolab</a>
+            <a href="https://hyo.dev">hyochan</a>
           </p>
         </div>
       </div>
-      {/* Begin: AdFit */}
-      <AdFitResponsive
-        adfitClassName="adfit-bottom"
+      {/* Begin: GreatFrontEnd Banner */}
+      <GreatFrontEnd
         className="mb-20"
-        units={{
-          mobile: 'DAN-GfeJUqhlQ5KqCOzw',
-          pc: 'DAN-9eecqcxVgP9XX0bN',
-        }}
+        href="https://www.greatfrontend.com/prepare/coding?fpr=hyo73"
+        title="Coding interview questions"
       />
-      {/* End: AdFit */}
+      {/* End: GreatFrontEnd Banner */}
     </div>
   );
 }

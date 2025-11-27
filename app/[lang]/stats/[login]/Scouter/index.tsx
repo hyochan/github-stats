@@ -11,7 +11,7 @@ import styles from '../../../styles.module.css';
 
 import StatsDetails from './StatsDetails';
 import StatsHeader from './StatsHeader';
-import AdFitResponsive from '../../../(common)/AdFitResponsive';
+import GreatFrontEnd from '../../../(common)/GreatFrontEnd';
 
 export const statNames = [
   'tree',
@@ -45,12 +45,9 @@ export default function Scouter(props: ScouterProps): ReactElement {
           setSelectedStat(name);
         }}
       />
-      <AdFitResponsive
-        adfitClassName="adfit-top"
-        units={{
-          mobile: 'DAN-dAqcoLWvKpYEtbtq',
-          pc: 'DAN-SEcRVdSHkh05H0jO',
-        }}
+      <GreatFrontEnd
+        href="https://www.greatfrontend.com/questions/formats/system-design?fpr=hyo73"
+        title="Front End System design questions"
       />
       <StatsDetails {...props} selectedStat={selectedStat} />
     </div>

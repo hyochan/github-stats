@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

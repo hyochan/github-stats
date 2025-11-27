@@ -8,7 +8,7 @@ import {getTranslates} from '../../../src/localization';
 import SocialButtons from './SocialButtons';
 
 import type {Locale} from '~/i18n';
-import AdFitResponsive from '../(common)/AdFitResponsive';
+import GreatFrontEnd from '../(common)/GreatFrontEnd';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -30,9 +30,9 @@ export default async function Page({
         <a
           href={
             str === 'termsOfService'
-              ? 'https://legacy.dooboolab.com/termsofservice'
+              ? 'https://www.hyo.dev/termsofservice.html'
               : str === 'privacyPolicy'
-              ? 'https://legacy.dooboolab.com/privacyandpolicy'
+              ? 'https://www.hyo.dev/privacyandpolicy.html'
               : ''
           }
           key={str}
@@ -53,13 +53,10 @@ export default async function Page({
         'flex flex-col justify-center items-center',
       )}
     >
-      <AdFitResponsive
+      <GreatFrontEnd
         className="mx-6 mb-8"
-        adfitClassName="adfit-top"
-        units={{
-          mobile: 'DAN-dAqcoLWvKpYEtbtq',
-          pc: 'DAN-SEcRVdSHkh05H0jO',
-        }}
+        href="https://www.greatfrontend.com/behavioral-interview-playbook?fpr=hyo73"
+        title="Behavioral interview questions"
       />
       <div
         className={clsx(

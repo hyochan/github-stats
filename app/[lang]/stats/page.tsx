@@ -4,7 +4,7 @@ import type {Locale} from '../../../src/i18n';
 import {getTranslates} from '../../../src/localization';
 
 import Container from './Container';
-import AdFitResponsive from '../(common)/AdFitResponsive';
+import GreatFrontEnd from '../(common)/GreatFrontEnd';
 
 type Props = {
   params: {lang: Locale};
@@ -20,13 +20,10 @@ export default async function Page({
       <div className="max-[480px]:pt-10 max-[480px]:px-6">
         <p className="text-dark dark:text-paper-light">{t.searchUserHint}.</p>
       </div>
-      <AdFitResponsive
+      <GreatFrontEnd
         className="mt-8 max-[480px]:px-6"
-        adfitClassName="adfit-top"
-        units={{
-          mobile: 'DAN-dAqcoLWvKpYEtbtq',
-          pc: 'DAN-SEcRVdSHkh05H0jO',
-        }}
+        href="https://www.greatfrontend.com/front-end-interview-playbook?fpr=hyo73"
+        title="Front End Interview Guidebook"
       />
     </Container>
   );

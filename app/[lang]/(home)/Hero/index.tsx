@@ -18,8 +18,7 @@ import TextInput from '../../(common)/TextInput';
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
 import {useMediaQuery} from 'usehooks-ts';
-import AdFit from '../../(common)/AdFit';
-import AdFitResponsive from '../../(common)/AdFitResponsive';
+import GreatFrontEnd from '../../(common)/GreatFrontEnd';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 
@@ -115,16 +114,12 @@ function Hero({t, statsInfo}: Props): ReactElement {
         <p className="body1 text-[20px] text-left mb-[36px] opacity-50">
           {t.developerPowerMeterDesc}
         </p>
-        {/* Begin: AdFit */}
-        <AdFitResponsive
+        {/* Begin: GreatFrontEnd Banner */}
+        <GreatFrontEnd
           className="mb-6"
-          adfitClassName="adfit-top"
-          units={{
-            mobile: 'DAN-dAqcoLWvKpYEtbtq',
-            pc: 'DAN-SEcRVdSHkh05H0jO',
-          }}
+          href="https://www.greatfrontend.com?fpr=hyo73"
         />
-        {/* End: AdFit */}
+        {/* End: GreatFrontEnd Banner */}
         {/* Begin: Search Form */}
         <form
           onSubmit={handleSubmit(searchUser)}

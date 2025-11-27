@@ -11,7 +11,7 @@ import GithubUserList from './GithubUserList';
 
 import {H1} from '~/components/Typography';
 import type {Locale} from '~/i18n';
-import AdFitResponsive from '../(common)/AdFitResponsive';
+import GreatFrontEnd from '../(common)/GreatFrontEnd';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -36,32 +36,25 @@ export default async function Page({
   return (
     <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
       <div
-        className="
-        mt-4 mb-[32px] ml-6 mr-2
-        flex-row items-center justify-between
-        max-[480px]:mb-0 max-[480px]:my-4
-      "
+        className={clsx(
+          'mt-4 mb-[32px] px-6 w-full',
+          'flex flex-row items-center justify-between gap-4',
+          'max-[480px]:flex-col max-[480px]:items-start max-[480px]:mb-0 max-[480px]:my-4',
+        )}
       >
         <H1
           className={clsx(
-            'text-[44px] font-bold',
-            'max-[480px]:hidden',
-            'max-[560px]:text-[28px]',
+            'text-[44px] font-bold shrink-0 whitespace-nowrap',
+            'max-[480px]:text-[28px]',
             inter.className,
           )}
         >
           {recentList.title}
         </H1>
-        <AdFitResponsive
-          className={clsx(
-            "mx-6 mb-2",
-            "mx-0"
-          )}
-          adfitClassName="adfit-top"
-          units={{
-            mobile: 'DAN-dAqcoLWvKpYEtbtq',
-            pc: 'DAN-SEcRVdSHkh05H0jO',
-          }}
+        <GreatFrontEnd
+          className="max-w-[400px] shrink-0 max-[480px]:mt-4 max-[480px]:max-w-full"
+          href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
+          title="Quiz interview questions"
         />
       </div>
       <GithubUserList
