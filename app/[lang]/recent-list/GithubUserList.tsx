@@ -109,8 +109,13 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'flex-1 bg-paper mb-12 mx-6 overflow-y-scroll',
-        'max-[480px]:mx-0 max-[480px]:mb-0',
+        'flex-1 mb-12 mx-6 overflow-y-scroll',
+        'rounded-[20px]',
+        'bg-black/10 dark:bg-white/5',
+        'backdrop-blur-xl',
+        'border border-black/20 dark:border-white/10',
+        'shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]',
+        'max-[480px]:mx-4 max-[480px]:mb-8 max-[480px]:rounded-[16px]',
         styles.scrollable,
       )}
       onScroll={handleScroll}
@@ -123,9 +128,10 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
           const login = user.login;
           window.open('http://github.com/' + login);
         }}
+        className="p-6 max-[480px]:p-4"
         classNames={{
-          tHead: 'bg-basic border-b-[0.1px] px-2',
-          tBodyRow: 'hover:opacity-[0.6]',
+          tHead: 'bg-paper backdrop-blur-xl border-b border-black/10 dark:border-white/10 px-2 pb-2 -mx-6 -mt-6 px-6 pt-6 rounded-t-[20px] max-[480px]:-mx-4 max-[480px]:-mt-4 max-[480px]:px-4 max-[480px]:pt-4 max-[480px]:rounded-t-[16px]',
+          tBodyRow: 'hover:bg-black/10 dark:hover:bg-white/5 transition-all duration-200 rounded-[8px] my-1',
         }}
       />
     </div>

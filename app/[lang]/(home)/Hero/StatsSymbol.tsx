@@ -54,7 +54,7 @@ const PluginStatsInfo = ({
   return (
     <div
       className={clsx(
-        'ml-[8px] py-[24px] px-[8x] max-w-[600px] w-full',
+        'ml-[8px] py-[24px] max-w-[600px] w-full',
         'flex-1 flex flex-col relative',
       )}
     >

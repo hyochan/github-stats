@@ -47,7 +47,7 @@ const ButtonGroup = ({
   return (
     <div
       style={style}
-      className={`rounded-[4px] h-12 w-full bg-basic flex items-center ${className}`}
+      className={`rounded-[12px] h-12 w-full flex items-center bg-black/10 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/10 ${className}`}
     >
       {buttons.map((button, index) => {
         const selected = index === selectedIndex;

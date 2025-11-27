@@ -95,7 +95,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-paper',
+        'self-stretch bg-paper relative',
         'flex flex-col justify-center items-center',
         'max-[425px]:p-0',
       )}
@@ -108,10 +108,10 @@ function Hero({t, statsInfo}: Props): ReactElement {
           'min-[1200px]:self-center min-[1200px]:w-[1200px]',
         )}
       >
-        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8">
+        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8 text-contrast-light dark:text-contrast-dark">
           {t.developerPowerMeter}
         </p>
-        <p className="body1 text-[20px] text-left mb-[36px] opacity-50">
+        <p className="body1 text-[20px] text-left mb-[36px] text-gray5 dark:text-gray3">
           {t.developerPowerMeterDesc}
         </p>
         {/* Begin: GreatFrontEnd Banner */}
@@ -128,8 +128,14 @@ function Hero({t, statsInfo}: Props): ReactElement {
         >
           <div
             className={clsx(
-              'rounded-[4px] bg-gray7 px-3 h-[64px] relative body2 max-w-[800px]',
+              'rounded-[16px] px-3 h-[64px] relative body2 max-w-[800px]',
               'flex flex-row-reverse items-center',
+              'bg-white/50 dark:bg-black/40',
+              'backdrop-blur-2xl',
+              'border border-black/10 dark:border-white/20',
+              'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)]',
+              'hover:bg-white/60 dark:hover:bg-black/50',
+              'transition-all duration-300',
               'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto max-[425px]:flex-wrap',
               'max-[320px]:py-3 max-[320px]:items-start',
             )}
@@ -141,7 +147,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 'bg-transparent border-0 text-center max-w-[100px] p-2',
                 'absolute',
               )}
-              text={<SearchIcon size={22} fill="#FFF" />}
+              text={<SearchIcon size={22} className="text-gray8 dark:text-white" />}
             />
             <div
               className={clsx(
@@ -158,7 +164,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
               />
               <span
                 className={clsx(
-                  'text-white',
+                  'text-gray5 dark:text-gray3',
                   'mx-3 body3 text-[22px]',
                   'max-[425px]:invisible max-[425px]:hidden',
                 )}
@@ -166,7 +172,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
                 /
               </span>
               <TextInput
-                className="text-white"
+                className="text-gray7 dark:text-white placeholder:text-gray5 dark:placeholder:text-gray4"
                 {...register('githubID')}
                 placeholder={t.githubUsername}
                 onChange={(e) => {
@@ -183,10 +189,15 @@ function Hero({t, statsInfo}: Props): ReactElement {
             className={clsx(
               'max-w-[800px] flex-1 self-stretch',
               'flex flex-col',
+              'rounded-[20px] p-6 mt-6',
+              'bg-white/50 dark:bg-black/40',
+              'backdrop-blur-2xl',
+              'border border-black/10 dark:border-white/20',
+              'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)]',
             )}
           >
             <ButtonGroup
-              className="py-[4px] w-[98%] mt-[18px] mb-[10px]"
+              className="py-[4px] w-full mb-4"
               selectedIndex={isBasic ? 0 : 1}
               buttons={[{label: t.basic}, {label: t.advanced}]}
               onClick={(index) => {

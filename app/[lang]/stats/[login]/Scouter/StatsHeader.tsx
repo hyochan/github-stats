@@ -110,7 +110,11 @@ export default function StatsHeader({
   return (
     <div
       className={clsx(
-        'max-h-8 py-8 self-stretch items-center border-b-[1px] border-b-border-light dark:border-b-border-dark',
+        'max-h-8 py-8 self-stretch items-center mb-6 rounded-[16px] px-4',
+        'bg-black/10 dark:bg-white/5',
+        'backdrop-blur-xl',
+        'border border-black/20 dark:border-white/10',
+        'shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]',
         'flex flex-row justify-between overflow-y-hidden',
       )}
     >

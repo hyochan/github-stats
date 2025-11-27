@@ -32,7 +32,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
 
   return (
     <table className={clsx(['flex-1 self-stretch', props.className])}>
-      <thead className={clsx('', props.classNames?.tHead)}>
+      <thead className={clsx('sticky top-0 z-10', props.classNames?.tHead)}>
         <tr
           className={clsx(
             'flex-1 px-1 flex items-center',

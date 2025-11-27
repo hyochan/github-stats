@@ -1,3 +1,5 @@
+'use client';
+
 import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
@@ -7,7 +9,6 @@ import type {Translates} from '../../../src/localization';
 import imgBgSection1 from '@/public/assets/bg_section1.png';
 import SvgScouter from '@/public/assets/scouter.svg';
 import {useMediaQuery} from 'usehooks-ts';
-import GreatFrontEnd from '../(common)/GreatFrontEnd';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -39,17 +40,28 @@ export default function SectionFooter({t}: Props): ReactElement {
       >
         <p
           className={clsx(
-            'text-white max-w-[800px] leading-8 text-[24px] text-center mt-32 mb-20 mx-10',
+            'text-white leading-8 text-[24px] text-center mt-12 mb-20',
             inter.className,
           )}
         >
           {t.enjoyStats}
         </p>
-        <SvgScouter className="w-screen px-12 max-w-6xl" />
+        <a
+          href="https://github.com/hyochan"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
+          <SvgScouter className="w-screen px-12 max-w-3xl" />
+        </a>
         <div
           className={clsx(
-            'h-[22px] mb-12 mt-12',
+            'h-[22px] mb-12 mt-12 px-6 py-4',
             'flex flex-row items-center',
+            'rounded-[12px]',
+            'bg-white/5 dark:bg-white/5',
+            'backdrop-blur-md',
+            'border border-white/10',
             inter.className,
           )}
         >
@@ -73,13 +85,6 @@ export default function SectionFooter({t}: Props): ReactElement {
           </p>
         </div>
       </div>
-      {/* Begin: GreatFrontEnd Banner */}
-      <GreatFrontEnd
-        className="mb-20"
-        href="https://www.greatfrontend.com/prepare/coding?fpr=hyo73"
-        title="Coding interview questions"
-      />
-      {/* End: GreatFrontEnd Banner */}
     </div>
   );
 }

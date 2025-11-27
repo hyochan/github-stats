@@ -11,7 +11,6 @@ import styles from '../../../styles.module.css';
 
 import StatsDetails from './StatsDetails';
 import StatsHeader from './StatsHeader';
-import GreatFrontEnd from '../../../(common)/GreatFrontEnd';
 
 export const statNames = [
   'tree',
@@ -44,10 +43,6 @@ export default function Scouter(props: ScouterProps): ReactElement {
         onChangeStat={(name) => {
           setSelectedStat(name);
         }}
-      />
-      <GreatFrontEnd
-        href="https://www.greatfrontend.com/questions/formats/system-design?fpr=hyo73"
-        title="Front End System design questions"
       />
       <StatsDetails {...props} selectedStat={selectedStat} />
     </div>

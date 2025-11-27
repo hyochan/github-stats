@@ -1,4 +1,4 @@
-'use-client';
+'use client';
 
 import type {MouseEventHandler, ReactElement} from 'react';
 import {useRef, useState} from 'react';
@@ -37,23 +37,22 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
     <div
       ref={dropdownRef}
       className={clsx(
-        'rounded-[4px] relative font-inter h-10 outline-none',
+        'rounded-[12px] relative font-inter h-10 outline-none',
         'flex justify-center items-center',
+        'bg-white/70 dark:bg-black/70',
+        'backdrop-blur-xl',
+        'border border-black/20 dark:border-white/30',
+        'hover:bg-white/80 dark:hover:bg-black/80',
+        'transition-all duration-300',
       )}
-      style={{
-        backgroundColor: 'rgb(84,84,84)',
-        boxSizing: 'border-box',
-      }}
     >
       <button
         onClick={onClick}
         className={clsx(
-          'rounded-[4px] text-white cursor-pointer p-[8px] ml-auto border-none align-middle transition-shadow',
+          'rounded-[12px] text-gray7 dark:text-white cursor-pointer p-[8px] ml-auto border-none align-middle',
           'flex flex-row items-center justify-center',
+          'transition-all duration-200',
         )}
-        style={{
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
-        }}
       >
         {selected?.icon}
         <span
@@ -71,12 +70,9 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
           isOpened
             ? 'opacity-100 visible translate-y-0'
             : 'opacity-0 invisible translate-y-2'
-        } bg-gray6 absolute top-12 left-0 rounded-md transition-all duration-400`}
-        style={{
-          boxShadow: '0 1px 8px rgba(0, 0, 0, 0.3)',
-        }}
+        } absolute top-12 left-0 rounded-[12px] transition-all duration-400 bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-black/20 dark:border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.3)]`}
       >
-        <ul className="list-none p-0 bg-gray9">
+        <ul className="list-none p-0 rounded-[12px] overflow-hidden">
           {data.map((item) => (
             <li
               key={item.domain}
@@ -85,8 +81,9 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
                 setSelected(item);
               }}
               className={clsx(
-                'py-2 px-4 hover:bg-gray-200 cursor-pointer text-white',
+                'py-2 px-4 hover:bg-black/10 dark:hover:bg-white/10 cursor-pointer text-gray7 dark:text-white',
                 'flex items-center',
+                'transition-all duration-200',
               )}
             >
               {item.icon}

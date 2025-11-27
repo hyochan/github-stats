@@ -31,8 +31,13 @@ export default function SearchTextInput({
     >
       <div
         className={clsx(
-          'rounded-[4px] body4 bg-gray3 dark:bg-gray7 px-3 h-[32px]',
+          'rounded-[16px] body4 px-4 h-[56px]',
+          'bg-black/10 dark:bg-white/5',
+          'backdrop-blur-md',
+          'border border-black/20 dark:border-white/10',
           'flex flex-row-reverse items-center',
+          'hover:bg-black/15 dark:hover:bg-white/8',
+          'transition-all duration-300',
         )}
       >
         <TextInput

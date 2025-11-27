@@ -14,11 +14,11 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
   const pluginStats = stats.pluginStats;
 
   return (
-    <div className={clsx('flex flex-col flex-wrap')}>
+    <div className={clsx('flex flex-col')}>
       <p className={clsx('font-bold text-basic text-h2', inter.className)}>
         {pluginStats.earth.name}
       </p>
-      <p className={clsx('text-body3 text-placeholder')}>
+      <p className={clsx('text-body3 text-placeholder break-words')}>
         {pluginStats.earth.description}
       </p>
       {/* Badges */}

@@ -48,3 +48,5 @@ next-env.d.ts
 # pwa
 public/sw*
 public/workbox*
+
+.claude/settings.local.json
