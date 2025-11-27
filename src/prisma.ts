@@ -53,11 +53,8 @@ const createPrismaClient = (): PrismaClient => {
           }
 
           return (baseClient as any)[model].update({
-            ...(args as any),
-            data: {
-              ...((args as any).data || {}),
-              deleted_at: new Date(),
-            },
+            where: (args as any).where,
+            data: {deleted_at: new Date()},
           });
         },
         deleteMany({model, args}) {
@@ -66,11 +63,8 @@ const createPrismaClient = (): PrismaClient => {
           }
 
           return (baseClient as any)[model].updateMany({
-            ...(args as any),
-            data: {
-              ...((args as any).data || {}),
-              deleted_at: new Date(),
-            },
+            where: (args as any).where,
+            data: {deleted_at: new Date()},
           });
         },
       },

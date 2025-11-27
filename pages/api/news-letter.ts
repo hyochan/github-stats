@@ -18,7 +18,7 @@ export default async function handler(
   const {body, method} = req;
 
   switch (method) {
-    case 'POST':
+    case 'POST': {
       const email = <string>body.email;
 
       if (!email) {
@@ -35,6 +35,7 @@ export default async function handler(
         .status(200)
         .send({message: 'Thank you for subscribing to our newsletter'});
       break;
+    }
     default:
       res.status(404).end();
   }

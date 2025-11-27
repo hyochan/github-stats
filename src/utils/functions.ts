@@ -68,8 +68,6 @@ export const getUserPlugins = async ({
 }): Promise<PluginUser[]> => {
   const supabase = getSupabaseClient();
 
-  type UserPluginRow = Database['public']['Tables']['user_plugins']['Row'];
-
   const {data: userPlugins}: {data: UserPluginRow[] | null} = await supabase
     .from('user_plugins')
     .select('*')

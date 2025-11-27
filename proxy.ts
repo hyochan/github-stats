@@ -1,5 +1,5 @@
 import {match as matchLocale} from '@formatjs/intl-localematcher';
-import {createServerClient} from '@supabase/auth-helpers-nextjs';
+import {createServerClient} from '@supabase/ssr';
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
@@ -29,8 +29,8 @@ function getLocale(request: NextRequest): string | undefined {
 export async function proxy(
   req: NextRequest,
 ): Promise<NextResponse | undefined> {
-  assert(NEXT_PUBLIC_SUPABASE_URL, 'SUPABASE_URL is not defined');
-  assert(NEXT_PUBLIC_SUPABASE_ANON_KEY, 'SUPABASE_API_KEY is not defined');
+  assert(NEXT_PUBLIC_SUPABASE_URL, 'NEXT_PUBLIC_SUPABASE_URL is not defined');
+  assert(NEXT_PUBLIC_SUPABASE_ANON_KEY, 'NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined');
 
   let pathname = req.nextUrl.pathname;
 

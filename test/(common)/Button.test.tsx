@@ -1,8 +1,7 @@
 import 'next/font/google';
 
 import {beforeAll, expect, test, vi} from 'vitest';
-import {render} from '@testing-library/react';
-import {screen, within} from '@testing-library/dom';
+import {render, screen, within} from '@testing-library/react';
 
 import Button from '../../app/[lang]/(common)/Button';
 

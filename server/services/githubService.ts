@@ -430,31 +430,35 @@ const upsertGithubStats = async ({
 
     await supabase.from('user_plugins').upsert(userPluginPayload);
 
-    trophies.forEach(async (el) => {
-      const trophyScore = el.score as number;
+    await Promise.all(
+      trophies.map(async (el) => {
+        const trophyScore = el.score as number;
 
-      const trophyPayload: TrophiesInsert = {
-        ...el,
-        score: trophyScore,
-        user_plugin_login: login,
-      };
+        const trophyPayload: TrophiesInsert = {
+          ...el,
+          score: trophyScore,
+          user_plugin_login: login,
+        };
 
-      await supabase.from('trophies').upsert(trophyPayload);
-    });
+        await supabase.from('trophies').upsert(trophyPayload);
+      })
+    );
 
-    stats.forEach(async (el) => {
-      const statScore = el.score as number;
-      const statElement = el.stat_element as Json;
+    await Promise.all(
+      stats.map(async (el) => {
+        const statScore = el.score as number;
+        const statElement = el.stat_element as Json;
 
-      const statPayload: StatsInsert = {
-        ...el,
-        score: statScore,
-        stat_element: statElement,
-        user_plugin_login: login,
-      };
+        const statPayload: StatsInsert = {
+          ...el,
+          score: statScore,
+          stat_element: statElement,
+          user_plugin_login: login,
+        };
 
-      await supabase.from('stats').upsert(statPayload);
-    });
+        await supabase.from('stats').upsert(statPayload);
+      })
+    );
 
     return {
       plugin,
