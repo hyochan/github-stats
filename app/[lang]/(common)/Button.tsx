@@ -51,7 +51,7 @@ const Button: FC<ButtonProps> = ({
       disabled={loading}
     >
       {loading ? (
-        <div className="self-center border-2 border-white border-t-transparent rounded-full w-5 h-5 animate-spin" />
+        <div className="self-center border-2 border-gray8 dark:border-gray3 border-t-transparent rounded-full w-5 h-5 animate-spin" />
       ) : (
         <div
           className={clsx(

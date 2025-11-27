@@ -1,7 +1,7 @@
 'use client';
 
 import type {ReactElement} from 'react';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {useForm} from 'react-hook-form';
 import {track} from '@amplitude/analytics-browser';
 import {MarkGithubIcon, SearchIcon} from '@primer/octicons-react';
@@ -17,8 +17,10 @@ import TextInput from '../../(common)/TextInput';
 
 import StatsSymbols from './StatsSymbol';
 import StatsUrlCard from './StatsUrlCards';
+import SearchHistoryDropdown from './SearchHistoryDropdown';
 import {useMediaQuery} from 'usehooks-ts';
 import GreatFrontEnd from '../../(common)/GreatFrontEnd';
+import {useSearchHistory} from '../../../../src/hooks/useSearchHistory';
 
 const rootUrl = `${process.env.NEXT_PUBLIC_ROOT_URL}/api`;
 const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL;
@@ -72,12 +74,19 @@ function Hero({t, statsInfo}: Props): ReactElement {
   const [svgStatsURLDisplay, setSvgStatsURLDisplay] = useState<string>('');
   const [svgStatsURLCopy, setSvgStatsURLCopy] = useState<string>('');
   const [isBasic, setIsBasic] = useState<boolean | undefined>(undefined);
+  const [showHistory, setShowHistory] = useState(false);
   const {register, formState, handleSubmit} = useForm();
+  const {history, addToHistory, removeFromHistory} = useSearchHistory();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   const searchUser = async (): Promise<void> => {
     if (selectedPluginType.domain === 'github.com') {
       try {
         const svgStats = await fetchGithubStats(login);
+
+        // Add to search history
+        addToHistory(login);
+        setShowHistory(false);
 
         track('Search User', {login});
 
@@ -98,6 +107,18 @@ function Hero({t, statsInfo}: Props): ReactElement {
         setIsBasic(undefined);
       }
     }
+  };
+
+  const handleHistorySelect = (item: string) => {
+    setLogin(item);
+    setShowHistory(false);
+    // Trigger search
+    setTimeout(() => {
+      const form = searchContainerRef.current?.querySelector('form');
+      if (form) {
+        form.requestSubmit();
+      }
+    }, 100);
   };
 
   return (
@@ -129,67 +150,81 @@ function Hero({t, statsInfo}: Props): ReactElement {
         />
         {/* End: GreatFrontEnd Banner */}
         {/* Begin: Search Form */}
-        <form
-          onSubmit={handleSubmit(searchUser)}
-          className="self-stretch"
-          autoComplete="off"
-        >
-          <div
-            className={clsx(
-              'rounded-[16px] px-3 h-[64px] relative body2 max-w-[800px]',
-              'flex flex-row-reverse items-center',
-              'bg-white/50 dark:bg-black/40',
-              'backdrop-blur-2xl',
-              'border border-black/10 dark:border-white/20',
-              'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)]',
-              'hover:bg-white/60 dark:hover:bg-black/50',
-              'transition-all duration-300',
-              'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto max-[425px]:flex-wrap',
-              'max-[320px]:py-3 max-[320px]:items-start',
-            )}
+        <div ref={searchContainerRef} className="relative self-stretch max-w-[800px] w-full">
+          <form
+            onSubmit={handleSubmit(searchUser)}
+            className="self-stretch w-full"
+            autoComplete="off"
           >
-            <Button
-              loading={formState.isSubmitting}
-              type="submit"
-              className={clsx(
-                'bg-transparent border-0 text-center max-w-[100px] p-2',
-                'absolute',
-              )}
-              text={<SearchIcon size={22} className="text-gray8 dark:text-white" />}
-            />
             <div
               className={clsx(
-                'flex-1',
-                'flex flex-row items-center overflow-x-clip',
+                'rounded-[16px] px-3 h-[64px] relative body2 w-full',
+                'flex flex-row-reverse items-center',
+                'bg-white/50 dark:bg-black/40',
+                'backdrop-blur-2xl',
+                'border border-black/10 dark:border-white/20',
+                'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)]',
+                'hover:bg-white/60 dark:hover:bg-black/50',
+                'transition-all duration-300',
+                'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto max-[425px]:flex-wrap',
+                'max-[320px]:py-3 max-[320px]:items-start',
               )}
             >
-              <Dropdown
-                data={statTypes}
-                selected={selectedPluginType}
-                setSelected={(el) => {
-                  setSelectedPluginType(el);
-                }}
-              />
-              <span
+              <Button
+                loading={formState.isSubmitting}
+                type="submit"
                 className={clsx(
-                  'text-gray5 dark:text-gray3',
-                  'mx-3 body3 text-[22px]',
-                  'max-[425px]:invisible max-[425px]:hidden',
+                  'bg-transparent border-0 text-center max-w-[100px] p-2',
+                  'absolute',
+                )}
+                text={<SearchIcon size={22} className="text-gray8 dark:text-white" />}
+              />
+              <div
+                className={clsx(
+                  'flex-1',
+                  'flex flex-row items-center overflow-x-clip',
                 )}
               >
-                /
-              </span>
-              <TextInput
-                className="text-gray7 dark:text-white placeholder:text-gray5 dark:placeholder:text-gray4"
-                {...register('githubID')}
-                placeholder={t.githubUsername}
-                onChange={(e) => {
-                  setLogin(e.target.value.trim());
-                }}
-              />
+                <Dropdown
+                  data={statTypes}
+                  selected={selectedPluginType}
+                  setSelected={(el) => {
+                    setSelectedPluginType(el);
+                  }}
+                />
+                <span
+                  className={clsx(
+                    'text-gray5 dark:text-gray3',
+                    'mx-3 body3 text-[22px]',
+                    'max-[425px]:invisible max-[425px]:hidden',
+                  )}
+                >
+                  /
+                </span>
+                <TextInput
+                  className="text-gray7 dark:text-white placeholder:text-gray5 dark:placeholder:text-gray4"
+                  placeholder={t.githubUsername}
+                  value={login}
+                  onChange={(e) => {
+                    setLogin(e.target.value.trim());
+                  }}
+                  onFocus={() => setShowHistory(true)}
+                  onBlur={() => {
+                    // Delay to allow click on history items
+                    setTimeout(() => setShowHistory(false), 200);
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+          <SearchHistoryDropdown
+            history={history}
+            query={login}
+            onSelectAction={handleHistorySelect}
+            onRemoveAction={removeFromHistory}
+            show={showHistory}
+          />
+        </div>
         {/* End: Search Form */}
         {/* Begin: Stats */}
         {githubSVG ? (

@@ -21,6 +21,7 @@ export default function SwitchToggle({isDark, onToggle}: Props): ReactElement {
         />
         <div
           onClick={onToggle}
+          suppressHydrationWarning
           className={twMerge(
             clsx(isDark ? 'bg-gray8' : 'bg-gray3'),
             clsx(

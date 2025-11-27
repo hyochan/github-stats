@@ -1,7 +1,7 @@
 'use client';
 
 import type {ReactElement} from 'react';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {useForm} from 'react-hook-form';
 import {SearchIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
@@ -9,6 +9,8 @@ import clsx from 'clsx';
 import type {Translates} from '../../../../src/localization';
 import Button from '../../(common)/Button';
 import TextInput from '../../(common)/TextInput';
+import SearchHistoryDropdown from '../../(home)/Hero/SearchHistoryDropdown';
+import {useSearchHistory} from '../../../../src/hooks/useSearchHistory';
 
 export default function SearchTextInput({
   t,
@@ -20,15 +22,37 @@ export default function SearchTextInput({
   initialValue: string;
 }): ReactElement {
   const [login, setLogin] = useState(initialValue);
+  const [showHistory, setShowHistory] = useState(false);
   const {formState} = useForm();
+  const {history, addToHistory, removeFromHistory} = useSearchHistory();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleHistorySelect = (item: string) => {
+    setLogin(item);
+    setShowHistory(false);
+    addToHistory(item);
+    // Trigger navigation
+    setTimeout(() => {
+      window.location.href = `/stats/${item}`;
+    }, 100);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (login) {
+      addToHistory(login);
+      setShowHistory(false);
+      window.location.href = `/stats/${login}`;
+    }
+  };
 
   return (
-    <form
-      action={`/stats/${login}`}
-      method="get"
-      className={clsx('', className)}
-      autoComplete="off"
-    >
+    <div ref={searchContainerRef} className={clsx('relative', className)}>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full"
+        autoComplete="off"
+      >
       <div
         className={clsx(
           'rounded-[16px] body4 px-4 h-[56px]',
@@ -46,6 +70,11 @@ export default function SearchTextInput({
           onChange={(e) => {
             setLogin(e.target.value.trim());
           }}
+          onFocus={() => setShowHistory(true)}
+          onBlur={() => {
+            // Delay to allow click on history items
+            setTimeout(() => setShowHistory(false), 200);
+          }}
         />
         <Button
           loading={formState.isSubmitting}
@@ -57,6 +86,14 @@ export default function SearchTextInput({
           text={<SearchIcon size={14} className="text-basic" />}
         />
       </div>
-    </form>
+      </form>
+      <SearchHistoryDropdown
+        history={history}
+        query={login}
+        onSelectAction={handleHistorySelect}
+        onRemoveAction={removeFromHistory}
+        show={showHistory}
+      />
+    </div>
   );
 }
