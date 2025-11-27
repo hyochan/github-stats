@@ -4,7 +4,6 @@ import {LOWEST_TROPHIES_SCORE} from '..';
 import type {Grade} from './assets';
 import {renderTrophySvg} from './assets';
 
-/* eslint-disable max-len */
 export const renderGithubTrophies = (
   pluginTrophies: PluginTrophy[],
 ): string => {

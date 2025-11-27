@@ -1,10 +1,10 @@
 'use client';
 
 import type {ReactElement} from 'react';
-import {Lottie} from '@crello/react-lottie';
+import Lottie from 'lottie-react';
 import clsx from 'clsx';
 
-import * as animationData from '../../public/lotties/dooboo-loading.json';
+import animationData from '../../public/lotties/dooboo-loading.json';
 
 function Loading(): ReactElement {
   return (
@@ -15,11 +15,9 @@ function Loading(): ReactElement {
       )}
     >
       <Lottie
-        config={{
-          loop: true,
-          autoplay: true,
-          animationData,
-        }}
+        animationData={animationData}
+        loop={true}
+        autoplay={true}
         style={{width: '234px', height: '234px'}}
       />
     </div>

@@ -47,7 +47,6 @@ export const getGithubEarthScore = (
         key: 'ACTIVE_LATENCY_IN_DAYS',
         name: 'Active latency in days',
         description:
-          // eslint-disable-next-line max-len
           'Total number of days period for all commits. The shorter the duration, the more treaks there are, so the smaller the score, the more points.',
         totalCount: diffDays,
         details: JSON.stringify(

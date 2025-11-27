@@ -1,5 +1,6 @@
 'use client';
 
+import type {ReactElement} from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useSnackbar} from 'react-simple-snackbar';
 import {track} from '@amplitude/analytics-browser';
@@ -26,7 +27,7 @@ export default function StatsUrlCard({
   login,
   svgStatsURL,
   svgTrophiesURL,
-}: Props): JSX.Element {
+}: Props): ReactElement {
   const router = useRouter();
   const [openSnackbar] = useSnackbar();
   const {login: authLogin} = useAuthContext();

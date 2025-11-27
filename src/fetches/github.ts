@@ -27,7 +27,6 @@ export const fetchGithubStats = async (login: string): Promise<string> => {
       }),
     );
   } catch (err: any) {
-    // eslint-disable-next-line no-console
     console.error(err);
     throw new Error(err);
   }

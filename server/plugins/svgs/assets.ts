@@ -1,8 +1,6 @@
 import type {DoobooStatsResponse} from '../../services/githubService';
 import type {TopLanguage} from '../topLanguages';
 
-/* eslint-disable max-len */
-
 type GithubStatsSvgType = {
   stats: DoobooStatsResponse;
   tierSvg: string;

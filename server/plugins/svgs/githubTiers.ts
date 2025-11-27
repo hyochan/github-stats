@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 export const tierIronSvg = `
 <svg x="116" y="58" width="32" height="32" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M23.5 51C23.5 51 11.7625 47.3824 8.42236 42.16C-0.26951 28.5668 -4.27653e-05 4.08 -4.27653e-05 4.08L23.5 0L47 4.08C47 4.08 47.2694 28.5668 38.5776 42.16C35.2374 47.3824 23.5 51 23.5 51Z" fill="url(#paint0_linear_348_680)"/>

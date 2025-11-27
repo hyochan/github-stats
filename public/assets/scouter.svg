@@ -367,7 +367,7 @@
     </foreignObject>
   </g>
   <g id="doobooText" opacity="1">
-    <a href="https://stats.hyo.dev" target="_blank"><text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text></a>
+    <text id="textInfo" x="326" y="188" class="textInfoStyle" text-anchor="end">Designed by hyochan</text>
   </g>
   </svg>
   

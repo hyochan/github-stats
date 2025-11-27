@@ -3,11 +3,11 @@ export const revalidate = 3600;
 import {track} from '@amplitude/analytics-browser';
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-import {generateGithubSVG} from '../../../server/plugins/svgs/functions';
-import {getDoobooStats} from '../../../server/services/githubService';
-import {currentLocale, initNodeAmplitude} from '../../../server/utils';
-import {getTranslates} from '../../localization';
-import {assert} from '../../utils/assert';
+import {generateGithubSVG} from '@/server/plugins/svgs/functions';
+import {getDoobooStats} from '@/server/services/githubService';
+import {currentLocale, initNodeAmplitude} from '@/server/utils';
+import {getTranslates} from '~/localization';
+import {assert} from '~/utils/assert';
 
 export default async function handler(
   req: NextApiRequest,

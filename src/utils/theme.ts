@@ -1,6 +1,10 @@
 'use client';
 
 export const setThemeType = (themeType: 'light' | 'dark'): void => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   if (themeType === 'dark') {
     document.documentElement.classList.remove('light');
     document.documentElement.classList.add('dark');
@@ -17,6 +21,10 @@ export const setThemeType = (themeType: 'light' | 'dark'): void => {
 };
 
 export const isDarkMode = (): boolean => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   const themeType = localStorage.getItem('themeType');
 
   if (

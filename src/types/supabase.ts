@@ -40,6 +40,7 @@ export interface Database {
           rolled_back_at?: string | null
           started_at?: string
         }
+        Relationships: []
       }
       images: {
         Row: {
@@ -72,6 +73,7 @@ export interface Database {
           updated_at?: string | null
           user_id?: string | null
         }
+        Relationships: []
       }
       news_letters: {
         Row: {
@@ -92,6 +94,7 @@ export interface Database {
           email?: string
           updated_at?: string | null
         }
+        Relationships: []
       }
       plugins: {
         Row: {
@@ -121,6 +124,7 @@ export interface Database {
           json?: Json | null
           updated_at?: string | null
         }
+        Relationships: []
       }
       stats: {
         Row: {
@@ -153,6 +157,7 @@ export interface Database {
           stat_element?: Json | null
           user_plugin_login?: string | null
         }
+        Relationships: []
       }
       trophies: {
         Row: {
@@ -176,6 +181,7 @@ export interface Database {
           type?: string
           user_plugin_login?: string | null
         }
+        Relationships: []
       }
       user_plugins: {
         Row: {
@@ -229,6 +235,7 @@ export interface Database {
           user_name?: string | null
           view_count?: number | null
         }
+        Relationships: []
       }
       users: {
         Row: {
@@ -291,6 +298,7 @@ export interface Database {
           twitter?: string | null
           updated_at?: string | null
         }
+        Relationships: []
       }
     }
     Views: {

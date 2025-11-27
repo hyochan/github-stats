@@ -15,17 +15,14 @@ import type {StatsInfo} from '../../../../../src/fetches/github';
 
 type StatName = keyof StatsInfo | 'dooboo';
 
-type StatObj = {
-  name: StatName;
-  svg: ReactElement;
-};
+type StatObj = {name: StatName; svg: ReactElement<{className?: string}>};
 
 export default function StatsHeader({
   selectedStat,
-  onChangeStat,
+  onChangeStatAction,
 }: {
   selectedStat: keyof StatsInfo | 'dooboo';
-  onChangeStat: (stat: StatName) => void;
+  onChangeStatAction: (stat: StatName) => void;
 }): ReactElement {
   const stats: StatObj[] = [
     {
@@ -126,10 +123,10 @@ export default function StatsHeader({
               'flex-1 text-center p-4 cursor-pointer',
               'justify-center items-center',
             )}
-            onClick={() => onChangeStat(stat.name)}
+            onClick={() => onChangeStatAction(stat.name)}
           >
             {cloneElement(stat.svg, {
-              className: `${stat.svg.props.className} ${
+              className: `${stat.svg.props.className ?? ''} ${
                 selectedStat === stat.name ? 'text-basic' : 'text-placeholder'
               }`,
             })}

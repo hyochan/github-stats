@@ -1,56 +1,80 @@
-import {PrismaClient} from '@prisma/client';
+import {Prisma, PrismaClient} from '@prisma/client';
 
 const createPrismaClient = (): PrismaClient => {
-  const prisma = new PrismaClient();
+  const baseClient = new PrismaClient();
 
-  //! Specify soft deletion models here.
-  prisma.$use(async (params, next) => {
-    const softDeletionModels = ['User'];
+  const softDeleteModels = new Set<Prisma.ModelName>([
+    'news_letters',
+    'users',
+    'images',
+    'user_plugins',
+    'plugins',
+  ]);
 
-    if (params.model && softDeletionModels.includes(params.model)) {
-      if (params.action === 'delete') {
-        params.action = 'update';
-        params.args.data = {deletedAt: new Date().toISOString()};
-      }
-
-      if (params.action === 'deleteMany') {
-        params.action = 'updateMany';
-
-        if (params.args.data !== undefined) {
-          params.args.data.deletedAt = new Date().toISOString();
-        } else {
-          params.args.data = {deletedAt: new Date().toISOString()};
-        }
-      }
-
-      if (params.action === 'findUnique') {
-        params.action = 'findFirst';
-        if (!params.args) {
-          params.args = {where: {}};
-        }
-
-        params.args.where.deletedAt = null;
-      }
-
-      if (params.action === 'findMany' || params.action === 'findFirst') {
-        if (!params.args) {
-          params.args = {where: {}};
-        }
-
-        if (params.args.where !== undefined) {
-          if (params.args.where.deletedAt === undefined) {
-            params.args.where.deletedAt = null;
-          }
-        } else {
-          params.args.where = {deletedAt: null};
-        }
-      }
+  const appendNotDeletedFilter = <T extends {where?: unknown}>(
+    model: Prisma.ModelName,
+    args: T,
+  ): T => {
+    if (!softDeleteModels.has(model)) {
+      return args;
     }
 
-    return next(params);
+    const where = (args as any).where || {};
+
+    if (Object.prototype.hasOwnProperty.call(where, 'deleted_at')) {
+      return args;
+    }
+
+    return {
+      ...args,
+      where: {
+        ...where,
+        deleted_at: null,
+      },
+    };
+  };
+
+  const prisma = baseClient.$extends({
+    name: 'soft-delete',
+    query: {
+      $allModels: {
+        findFirst({model, args, query}) {
+          return query(appendNotDeletedFilter(model, args || {}));
+        },
+        findMany({model, args, query}) {
+          return query(appendNotDeletedFilter(model, args || {}));
+        },
+        count({model, args, query}) {
+          return query(appendNotDeletedFilter(model, args || {}));
+        },
+        delete({model, args}) {
+          if (!softDeleteModels.has(model)) {
+            return (baseClient as any)[model].delete(args);
+          }
+
+          return (baseClient as any)[model].update({
+            where: (args as any).where,
+            data: {deleted_at: new Date()},
+          });
+        },
+        deleteMany({model, args}) {
+          if (!softDeleteModels.has(model)) {
+            return (baseClient as any)[model].deleteMany(args);
+          }
+
+          return (baseClient as any)[model].updateMany({
+            where: (args as any).where,
+            data: {deleted_at: new Date()},
+          });
+        },
+      },
+    },
   });
 
-  return prisma;
+  // Cast to the base PrismaClient type so downstream usage continues to expose
+  // the standard client surface ($on, $transaction, etc.) while keeping the
+  // soft-delete behavior applied above.
+  return prisma as unknown as PrismaClient;
 };
 
 let prismaClient: PrismaClient;

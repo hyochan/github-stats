@@ -47,10 +47,11 @@ export default function SectionFooter({t}: Props): ReactElement {
           {t.enjoyStats}
         </p>
         <a
-          href="https://github.com/hyochan"
-          target="_blank"
-          rel="noopener noreferrer"
           className="cursor-pointer"
+          href="https://github.com/hyochan/github-stats"
+          aria-label="github-stats scouter"
+          target="_blank"
+          rel="noreferrer"
         >
           <SvgScouter className="w-screen px-12 max-w-3xl" />
         </a>

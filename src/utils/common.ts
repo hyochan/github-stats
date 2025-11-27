@@ -43,11 +43,8 @@ export const lightOrDark = (color: string): boolean => {
       )
     );
 
-    // eslint-disable-next-line no-bitwise
     r = hexNum >> 16;
-    // eslint-disable-next-line no-bitwise
     g = (hexNum >> 8) & 255;
-    // eslint-disable-next-line no-bitwise
     b = hexNum & 255;
   }
 

@@ -9,13 +9,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '@next': path.resolve(__dirname, './node_modules/@next'),
-      '~': path.resolve(__dirname, './src/*'),
-      '@/public': path.resolve(__dirname, './public/*'),
-      '@/app': path.resolve(__dirname, './app/[lang]/*'),
-      '@/server': path.resolve(__dirname, './server/*'),
+      '~': path.resolve(__dirname, './src'),
+      '@/public': path.resolve(__dirname, './public'),
+      '@/app': path.resolve(__dirname, './app/[lang]'),
+      '@/server': path.resolve(__dirname, './server'),
     },
   },
   test: {
     environment: 'jsdom',
+    setupFiles: ['./test/lru-cache.mock.ts'],
   },
 });

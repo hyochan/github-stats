@@ -1,7 +1,8 @@
 'use client';
 
 import type {Dispatch, ReactElement, SetStateAction} from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
+import type {Session} from '@supabase/supabase-js';
 import HamburgerMenu from 'react-hamburger-menu';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
@@ -232,9 +233,9 @@ function MobileNavMenus(
 
 export default function Header(props: Props): ReactElement {
   const {t, lang} = props;
-  const supabase = getSupabaseBrowserClient();
+  const supabase = useMemo(() => getSupabaseBrowserClient(), []);
 
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => isDarkMode());
   const {login, changeLogin} = useAuthContext();
 
   const navLinks: NavLink[] = !!login
@@ -260,20 +261,44 @@ export default function Header(props: Props): ReactElement {
       ];
 
   useEffect(() => {
+    const applySession = (session: Session | null): void => {
+      const username = session?.user.user_metadata?.user_name || '';
+
+      changeLogin(username);
+    };
+
+    const syncSession = async (): Promise<void> => {
+      const {
+        data: {session},
+      } = await supabase.auth.getSession();
+
+      applySession(session);
+    };
+
+    void syncSession();
+
     const {
       data: {subscription},
     } = supabase.auth.onAuthStateChange((evt, session) => {
-      const isLoggedIn = !!session?.access_token && evt === 'SIGNED_IN';
-      changeLogin(isLoggedIn && session.user.user_metadata.user_name);
+      if (evt === 'SIGNED_OUT') {
+        changeLogin('');
+
+        return;
+      }
+
+      if (
+        evt === 'INITIAL_SESSION' ||
+        evt === 'SIGNED_IN' ||
+        evt === 'TOKEN_REFRESHED'
+      ) {
+        applySession(session);
+      }
     });
 
     return () => {
       subscription.unsubscribe();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => setIsDark(isDarkMode()), []);
+  }, [changeLogin, supabase]);
 
   return (
     <header

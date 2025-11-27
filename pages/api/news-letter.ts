@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-
-import {getSupabaseClient} from '../../../server/supabaseClient';
+import {getSupabaseClient} from '@/server/supabaseClient';
+import type {NewsLetterInsert} from '~/types/types';
 
 type Tier = {
   tier: string;
@@ -18,7 +18,7 @@ export default async function handler(
   const {body, method} = req;
 
   switch (method) {
-    case 'POST':
+    case 'POST': {
       const email = <string>body.email;
 
       if (!email) {
@@ -28,12 +28,14 @@ export default async function handler(
       }
 
       const supabase = getSupabaseClient();
-      await supabase.from('news_letters').upsert({email});
+      const payload: NewsLetterInsert = {email};
+      await supabase.from('news_letters').upsert(payload);
 
       res
         .status(200)
         .send({message: 'Thank you for subscribing to our newsletter'});
       break;
+    }
     default:
       res.status(404).end();
   }

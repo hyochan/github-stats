@@ -1,12 +1,22 @@
-const withPWA = require('next-pwa')({
-  disable: process.env.NODE_ENV !== 'production',
-  dest: 'public',
-});
+const enablePWA = process.env.ENABLE_PWA === 'true';
+const withPWA = enablePWA
+  ? require('next-pwa')({
+      disable: process.env.NODE_ENV !== 'production',
+      dest: 'public',
+    })
+  : (config) => config;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
   reactStrictMode: true,
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,

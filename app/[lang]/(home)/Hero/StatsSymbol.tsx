@@ -1,8 +1,7 @@
 'use client';
 
 import type {CSSProperties, ReactElement} from 'react';
-import {cloneElement, useState} from 'react';
-import TextTransition, {presets} from 'react-text-transition';
+import {cloneElement, useEffect, useRef, useState} from 'react';
 import {track} from '@amplitude/analytics-browser';
 import clsx from 'clsx';
 
@@ -47,10 +46,14 @@ type StatName = (typeof statTypes)[number]['name'];
 const PluginStatsInfo = ({
   statsInfo,
   selectedStatName,
+  isTransitioning,
 }: {
   statsInfo: StatsInfo;
   selectedStatName: StatName;
+  isTransitioning: boolean;
 }): React.ReactElement => {
+  const {name, description} = statsInfo[selectedStatName];
+
   return (
     <div
       className={clsx(
@@ -58,40 +61,22 @@ const PluginStatsInfo = ({
         'flex-1 flex flex-col relative',
       )}
     >
-      <TextTransition
-        springConfig={presets.gentle}
-        direction="down"
-        className="body1 font-bold mb-3 text-left"
+      <div
+        className={clsx(
+          'body1 font-bold mb-3 text-left transition-opacity duration-300',
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        )}
       >
-        {selectedStatName === 'fire'
-          ? statsInfo.fire.name
-          : selectedStatName === 'earth'
-          ? statsInfo.earth.name
-          : selectedStatName === 'gold'
-          ? statsInfo.gold.name
-          : selectedStatName === 'water'
-          ? statsInfo.water.name
-          : selectedStatName === 'people'
-          ? statsInfo.people.name
-          : statsInfo.tree.name}
-      </TextTransition>
-      <TextTransition
-        className="body3 leading-[160%] text-left"
-        springConfig={presets.wobbly}
-        direction="down"
+        {name}
+      </div>
+      <div
+        className={clsx(
+          'body3 leading-[160%] text-left transition-opacity duration-500',
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        )}
       >
-        {selectedStatName === 'fire'
-          ? statsInfo.fire.description
-          : selectedStatName === 'earth'
-          ? statsInfo.earth.description
-          : selectedStatName === 'gold'
-          ? statsInfo.gold.description
-          : selectedStatName === 'water'
-          ? statsInfo.water.description
-          : selectedStatName === 'people'
-          ? statsInfo.people.description
-          : statsInfo.tree.description}
-      </TextTransition>
+        {description}
+      </div>
     </div>
   );
 };
@@ -106,11 +91,27 @@ const StatsSymbols = ({
   statsInfo: StatsInfo;
 }): ReactElement => {
   const [selectedStatName, setSelectedStatName] = useState<StatName>('tree');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const pressStat = (type: StatName): void => {
+    if (transitionTimer.current) {
+      clearTimeout(transitionTimer.current);
+    }
+
+    setIsTransitioning(true);
+    transitionTimer.current = setTimeout(() => setIsTransitioning(false), 50);
     setSelectedStatName(type);
     track('Press Stat Info', {type});
   };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimer.current) {
+        clearTimeout(transitionTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <div className={`flex flex-col  ${className}`} style={style}>
@@ -138,6 +139,7 @@ const StatsSymbols = ({
       <PluginStatsInfo
         selectedStatName={selectedStatName}
         statsInfo={statsInfo}
+        isTransitioning={isTransitioning}
       />
     </div>
   );

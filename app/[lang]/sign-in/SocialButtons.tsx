@@ -3,7 +3,9 @@
 // import Apple from 'public/assets/apple.svg';
 // import Google from 'public/assets/google.svg';
 import type {ReactElement} from 'react';
+import {useMemo} from 'react';
 import Github from 'public/assets/github.svg';
+import {usePathname} from 'next/navigation';
 
 import type {Translates} from '../../../src/localization';
 import {getSupabaseBrowserClient} from '../../../src/utils/supabase';
@@ -21,6 +23,16 @@ export default function SocialButtons({
   };
 
   const supabase = getSupabaseBrowserClient();
+  const pathname = usePathname();
+  const oauthRedirectUrl = useMemo(() => {
+    if (!process.env.NEXT_PUBLIC_ROOT_URL) {
+      return undefined;
+    }
+
+    const normalizedRoot = process.env.NEXT_PUBLIC_ROOT_URL.replace(/\/$/, '');
+
+    return `${normalizedRoot}/auth/callback?next=${encodeURIComponent(pathname || '/')}`;
+  }, [pathname]);
 
   const socialButtons: SocialButton[] = [
     {
@@ -30,7 +42,7 @@ export default function SocialButtons({
         await supabase.auth.signInWithOAuth({
           provider: 'github',
           options: {
-            redirectTo: process.env.NEXT_PUBLIC_ROOT_URL,
+            redirectTo: oauthRedirectUrl,
           },
         });
       },
