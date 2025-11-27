@@ -40,7 +40,7 @@ export default function Scouter(props: ScouterProps): ReactElement {
     >
       <StatsHeader
         selectedStat={selectedStat}
-        onChangeStat={(name) => {
+        onChangeStatAction={(name) => {
           setSelectedStat(name);
         }}
       />
