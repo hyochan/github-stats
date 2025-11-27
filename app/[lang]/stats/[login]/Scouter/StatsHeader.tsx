@@ -128,8 +128,8 @@ export default function StatsHeader({
             )}
             onClick={() => onChangeStat(stat.name)}
           >
-            {cloneElement(stat.svg, {
-              className: `${stat.svg.props.className} ${
+            {cloneElement(stat.svg as any, {
+              className: `${(stat.svg as any).props.className} ${
                 selectedStat === stat.name ? 'text-basic' : 'text-placeholder'
               }`,
             })}

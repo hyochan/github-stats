@@ -6,6 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -48,7 +49,8 @@
   ],
   "exclude": [
     "node_modules",
-    "src/types/supabase.ts"
+    "src/types/supabase.ts",
+    "vitest.config.ts"
   ],
   "ts-node": {
     "compilerOptions": {

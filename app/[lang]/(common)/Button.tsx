@@ -61,7 +61,7 @@ const Button: FC<ButtonProps> = ({
         >
           <>
             {startElement
-              ? cloneElement(startElement, {
+              ? cloneElement(startElement as ReactElement<any>, {
                   style: {
                     position: 'absolute',
                     left: 0,

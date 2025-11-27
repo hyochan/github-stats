@@ -34,11 +34,11 @@ export default async function handler(
         return;
       }
 
-      const tiers = <Tier[]>data.json;
+      const tiers = <Tier[]>(data as any).json;
 
       res.status(200).json({
-        id: data.id,
-        description: data.description,
+        id: (data as any).id,
+        description: (data as any).description,
         tiers,
       });
       break;

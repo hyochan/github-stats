@@ -1,13 +1,15 @@
 import {match as matchLocale} from '@formatjs/intl-localematcher';
-import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
+import {createServerClient} from '@supabase/auth-helpers-nextjs';
 import Negotiator from 'negotiator';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
 
 import {upsertUser} from './src/services/userService';
-
-// import {createMiddlewareSupabaseClient} from '@supabase/auth-helpers-nextjs';
+import type {Database} from './src/types/supabase';
+import {assert} from './src/utils/assert';
 import {i18n} from '~/i18n';
+
+const {NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY} = process.env;
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -27,11 +29,30 @@ function getLocale(request: NextRequest): string | undefined {
 export async function proxy(
   req: NextRequest,
 ): Promise<NextResponse | undefined> {
+  assert(NEXT_PUBLIC_SUPABASE_URL, 'SUPABASE_URL is not defined');
+  assert(NEXT_PUBLIC_SUPABASE_ANON_KEY, 'SUPABASE_API_KEY is not defined');
+
   let pathname = req.nextUrl.pathname;
 
   const res = NextResponse.next();
 
-  const supabase = createMiddlewareSupabaseClient({req, res});
+  const supabase = createServerClient<Database>(
+    NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({name, value, options}) => {
+            req.cookies.set(name, value);
+            res.cookies.set(name, value, options);
+          });
+        },
+      },
+    },
+  );
   const {
     data: {user},
   } = await supabase.auth.getUser();

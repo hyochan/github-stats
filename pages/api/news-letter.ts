@@ -28,7 +28,7 @@ export default async function handler(
       }
 
       const supabase = getSupabaseClient();
-      await supabase.from('news_letters').upsert({email});
+      await supabase.from('news_letters').upsert({email} as any);
 
       res
         .status(200)

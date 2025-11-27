@@ -11,7 +11,7 @@ type CreateContextParams = {
 export interface Context {
   request: CreateContextParams;
   appSecret: string | undefined;
-  supabase: SupabaseClient<Database, 'public', Database['public']>;
+  supabase: SupabaseClient<Database>;
   // getUID: Promise<string | null>;
   // pubsub: PubSub;
 }

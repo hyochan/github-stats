@@ -417,7 +417,7 @@ const upsertGithubStats = async ({
         score,
         languages,
       },
-    });
+    } as any);
 
     trophies.forEach(async (el) => {
       const trophyScore = el.score as number;
@@ -426,7 +426,7 @@ const upsertGithubStats = async ({
         ...el,
         score: trophyScore,
         user_plugin_login: login,
-      });
+      } as any);
     });
 
     stats.forEach(async (el) => {
@@ -438,7 +438,7 @@ const upsertGithubStats = async ({
         score: statScore,
         stat_element: stat_element,
         user_plugin_login: login,
-      });
+      } as any);
     });
 
     return {
@@ -506,7 +506,7 @@ export const getDoobooStats = async ({
       .from('user_plugins')
       .select()
       .match({
-        plugin_id: plugin.id,
+        plugin_id: (plugin as any).id,
         login,
       })
       .single();
@@ -518,7 +518,7 @@ export const getDoobooStats = async ({
     // NOTE: Return the data when user was fetched.
     if (userPlugin && stats?.length === 6) {
       const ghStats: GithubStats[] =
-        stats?.map((el) => {
+        stats?.map((el: any) => {
           return {
             id: el.id,
             description: el.description,
@@ -575,19 +575,19 @@ export const getDoobooStats = async ({
         },
       };
 
-      const updatedAt = userPlugin?.updated_at ? new Date(userPlugin?.updated_at) : null;
+      const updatedAt = (userPlugin as any)?.updated_at ? new Date((userPlugin as any)?.updated_at) : null;
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
       let isCachedResult = false;
 
-      if (userPlugin.login) {
-        await supabase
-          .from('user_plugins')
+      if ((userPlugin as any).login) {
+        await (supabase
+          .from('user_plugins') as any)
           .update({
-            view_count: userPlugin?.view_count ? userPlugin.view_count + 1 : 1,
+            view_count: (userPlugin as any)?.view_count ? (userPlugin as any).view_count + 1 : 1,
           })
-          .match({login: userPlugin.login});
+          .match({login: (userPlugin as any).login});
 
         if (!updatedAt || diffHours(updatedAt, today) < 3) {
           upsertGithubStats({
@@ -603,13 +603,13 @@ export const getDoobooStats = async ({
       const {data: trophyData} = await supabase
         .from('trophies')
         .select('score, points, type')
-        .eq('user_plugin_login', userPlugin.login);
+        .eq('user_plugin_login', (userPlugin as any).login);
 
       return {
         plugin,
         pluginStats: result,
         pluginTrophies:
-          trophyData?.map((el) => {
+          trophyData?.map((el: any) => {
             const type = el.type as keyof typeof tTrophies;
 
             return {
@@ -617,11 +617,11 @@ export const getDoobooStats = async ({
               type: tTrophies[type],
             };
           }) || [],
-        json: JSON.parse(JSON.stringify(userPlugin.json)),
+        json: JSON.parse(JSON.stringify((userPlugin as any).json)),
         isCachedResult,
-        userName: userPlugin.user_name,
-        githubId: userPlugin.github_id,
-        score: userPlugin.score,
+        userName: (userPlugin as any).user_name,
+        githubId: (userPlugin as any).github_id,
+        score: (userPlugin as any).score,
       };
     }
 

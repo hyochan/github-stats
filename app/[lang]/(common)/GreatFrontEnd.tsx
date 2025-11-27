@@ -1,5 +1,6 @@
 'use client';
 
+import type {ReactElement} from 'react';
 import React from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
@@ -16,7 +17,7 @@ export default function GreatFrontEnd({
   className,
   href,
   title,
-}: GreatFrontEndProps): JSX.Element {
+}: GreatFrontEndProps): ReactElement {
   return (
     <a
       href={href}

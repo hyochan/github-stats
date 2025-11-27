@@ -24,7 +24,7 @@ function Dropdown<T extends {domain: string; icon: ReactElement}>({
     setIsOpened(false);
   };
 
-  useOnClickOutside(dropdownRef, handleClickOutside);
+  useOnClickOutside(dropdownRef as any, handleClickOutside);
 
   const onClick: MouseEventHandler<HTMLButtonElement> | undefined = (
     e,

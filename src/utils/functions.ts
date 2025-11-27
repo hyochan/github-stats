@@ -76,9 +76,9 @@ export const getUserPlugins = async ({
     .limit(take || 20);
 
   const users = (userPlugins || [])
-    .filter((user) => user.github_id !== null)
-    .map((user) => {
-      const tierName = getTierName(user.score || 0, plugin.json);
+    .filter((user: any) => user.github_id !== null)
+    .map((user: any) => {
+      const tierName = getTierName(user.score || 0, (plugin as any).json);
 
       return {
         login: user.login,
