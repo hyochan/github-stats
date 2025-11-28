@@ -94,15 +94,18 @@
     "privacyPolicy": "개인 정보 보호 정책"
   },
   "recentList": {
-    "title": "최근 리스트",
+    "title": "리더보드",
     "githubUsername": "깃허브 유저명",
-    "noRecentList": "최근 리스트가 없습니다",
+    "noRecentList": "유저가 없습니다",
     "tier": "티어",
-    "score": "점수"
+    "score": "점수",
+    "all": "전체",
+    "topUsers": "탑 유저",
+    "topRanked": "최고 티어"
   },
   "stats": {
     "title": "스탯",
-    "searchUserHint": "점수 속성을 자세히 보려면 ​​오른쪽 상단 모서리에서 사용자를 검색하십시오",
+    "searchUserHint": "개발자의 전투력을 GitHub username을 검색해서 확인하세요.",
     "githubUsername": "깃허브 유저명",
     "achievement": "성취",
     "achievementDetails": "깃허브 데이터에 따름",
@@ -114,7 +117,11 @@
     "water": "수",
     "people": "인",
     "github": "Github",
-    "score": "점수"
+    "score": "점수",
+    "selectPeriod": "기간 선택",
+    "periodDescription": "선택한 월부터 1년간 스탯",
+    "resetToDefault": "기본값으로 초기화",
+    "search": "검색"
   },
   "certifiedUsers": {
     "title": "인증된 사용자",
