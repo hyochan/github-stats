@@ -1,38 +1,30 @@
 'use client';
 
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 
 const STORAGE_KEY = 'github-stats-search-history';
 const MAX_HISTORY_ITEMS = 10;
 
-const readFromStorage = (): string[] => {
+const getInitialHistory = (): string[] => {
   if (typeof window === 'undefined') return [];
 
-  const stored = localStorage.getItem(STORAGE_KEY);
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
 
-  if (stored) {
-    try {
+    if (stored) {
       const parsed = JSON.parse(stored);
 
       return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
     }
+  } catch {
+    // Ignore parse errors
   }
 
   return [];
 };
 
 export function useSearchHistory() {
-  const [history, setHistory] = useState<string[]>([]);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  useEffect(() => {
-    if (!isInitialized) {
-      setHistory(readFromStorage());
-      setIsInitialized(true);
-    }
-  }, [isInitialized]);
+  const [history, setHistory] = useState<string[]>(getInitialHistory);
 
   const addToHistory = useCallback((item: string) => {
     if (!item.trim()) return;

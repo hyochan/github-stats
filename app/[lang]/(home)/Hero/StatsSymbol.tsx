@@ -1,9 +1,10 @@
 'use client';
 
 import type {CSSProperties, ReactElement} from 'react';
-import {cloneElement, useEffect, useRef, useState} from 'react';
+import {cloneElement, useState} from 'react';
 import {track} from '@amplitude/analytics-browser';
 import clsx from 'clsx';
+import TextTransition, {presets} from 'react-text-transition';
 
 import type {StatsInfo} from '../../../../src/fetches/github';
 
@@ -46,11 +47,9 @@ type StatName = (typeof statTypes)[number]['name'];
 const PluginStatsInfo = ({
   statsInfo,
   selectedStatName,
-  isTransitioning,
 }: {
   statsInfo: StatsInfo;
   selectedStatName: StatName;
-  isTransitioning: boolean;
 }): React.ReactElement => {
   const {name, description} = statsInfo[selectedStatName];
 
@@ -61,22 +60,20 @@ const PluginStatsInfo = ({
         'flex-1 flex flex-col relative',
       )}
     >
-      <div
-        className={clsx(
-          'body1 font-bold mb-3 text-left transition-opacity duration-300',
-          isTransitioning ? 'opacity-0' : 'opacity-100'
-        )}
+      <TextTransition
+        springConfig={presets.gentle}
+        direction="down"
+        className="body1 font-bold mb-3 text-left"
       >
         {name}
-      </div>
-      <div
-        className={clsx(
-          'body3 leading-[160%] text-left transition-opacity duration-500',
-          isTransitioning ? 'opacity-0' : 'opacity-100'
-        )}
+      </TextTransition>
+      <TextTransition
+        springConfig={presets.wobbly}
+        direction="down"
+        className="body3 leading-[160%] text-left"
       >
         {description}
-      </div>
+      </TextTransition>
     </div>
   );
 };
@@ -91,27 +88,11 @@ const StatsSymbols = ({
   statsInfo: StatsInfo;
 }): ReactElement => {
   const [selectedStatName, setSelectedStatName] = useState<StatName>('tree');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const pressStat = (type: StatName): void => {
-    if (transitionTimer.current) {
-      clearTimeout(transitionTimer.current);
-    }
-
-    setIsTransitioning(true);
-    transitionTimer.current = setTimeout(() => setIsTransitioning(false), 50);
     setSelectedStatName(type);
     track('Press Stat Info', {type});
   };
-
-  useEffect(() => {
-    return () => {
-      if (transitionTimer.current) {
-        clearTimeout(transitionTimer.current);
-      }
-    };
-  }, []);
 
   return (
     <div className={`flex flex-col  ${className}`} style={style}>
@@ -139,7 +120,6 @@ const StatsSymbols = ({
       <PluginStatsInfo
         selectedStatName={selectedStatName}
         statsInfo={statsInfo}
-        isTransitioning={isTransitioning}
       />
     </div>
   );
