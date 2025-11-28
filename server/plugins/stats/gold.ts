@@ -15,78 +15,96 @@ export const getGithubGoldScore = (githubUser: UserGraph): PluginValue => {
 
   const sponsorCount = githubUser.sponsors.totalCount;
   const gistCount = githubUser.gists.totalCount;
-  const prRepos = githubUser.pullRequests.edges.map((el) => {
-    if (!el) {
-      return;
-    }
+  const prRepos = githubUser.pullRequests.edges
+    .map((el) => {
+      if (!el) {
+        return null;
+      }
 
-    const node = el.node;
+      const node = el.node;
+      const owner = node.repository.owner?.login;
 
-    return {
-      name: node.title,
-      number: node.number,
-      state: node.state,
-      createdAt: node.createdAt,
-      owner: node.repository.owner.login,
-      repositoryName: node.repository.name,
-      repoStarCount: node.repository.stargazerCount,
-    };
-  });
+      if (!owner) return null;
 
-  const contribRepoPRs = githubUser.contributedRepos.edges.map((el) => {
-    if (!el) {
-      return;
-    }
+      return {
+        name: node.title,
+        number: node.number,
+        state: node.state,
+        createdAt: node.createdAt,
+        owner,
+        repositoryName: node.repository.name,
+        repoStarCount: node.repository.stargazerCount,
+      };
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
 
-    if (
-      prRepos.find(
-        (pr) =>
-          pr?.repositoryName === el.node.name &&
-          pr.owner === el.node.owner.login &&
-          pr.state !== 'MERGED',
-      )
-    ) {
-      // NOTE: Avoid counting contribution on `PR` opened
-      return;
-    }
+  const contribRepoPRs = githubUser.contributedRepos.edges
+    .map((el) => {
+      if (!el) {
+        return null;
+      }
 
-    return {
-      owner: el.node.owner.login,
-      name: el.node.name,
-      starCount: el.node.stargazerCount,
-      languages: el.node.languages.edges.map((ele) => ele.node.name),
-    };
-  });
+      const owner = el.node.owner?.login;
+      if (!owner) return null;
 
-  const collaboratedRepos = githubUser.collaboratedRepos.edges.map((el) => {
-    if (!el) {
-      return null;
-    }
+      if (
+        prRepos.find(
+          (pr) =>
+            pr?.repositoryName === el.node.name &&
+            pr.owner === owner &&
+            pr.state !== 'MERGED',
+        )
+      ) {
+        // NOTE: Avoid counting contribution on `PR` opened
+        return null;
+      }
 
-    const node = el.node;
+      return {
+        owner,
+        name: el.node.name,
+        starCount: el.node.stargazerCount,
+        languages: el.node.languages.edges.map((ele) => ele.node.name),
+      };
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
 
-    return {
-      owner: node.owner.login,
-      name: node.name,
-      starCount: node.stargazerCount,
-      languages: node.languages.edges.map((ele) => ele.node.name),
-    };
-  });
+  const collaboratedRepos = githubUser.collaboratedRepos.edges
+    .map((el) => {
+      if (!el) {
+        return null;
+      }
 
-  const myRepos = githubUser.myRepos.edges.map((el) => {
-    if (!el) {
-      return null;
-    }
+      const node = el.node;
+      const owner = node.owner?.login;
+      if (!owner) return null;
 
-    const node = el.node;
+      return {
+        owner,
+        name: node.name,
+        starCount: node.stargazerCount,
+        languages: node.languages.edges.map((ele) => ele.node.name),
+      };
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
 
-    return {
-      owner: node.owner.login,
-      name: node.name,
-      starCount: node.stargazerCount,
-      languages: node.languages.edges.map((ele) => ele.node.name),
-    };
-  });
+  const myRepos = githubUser.myRepos.edges
+    .map((el) => {
+      if (!el) {
+        return null;
+      }
+
+      const node = el.node;
+      const owner = node.owner?.login;
+      if (!owner) return null;
+
+      return {
+        owner,
+        name: node.name,
+        starCount: node.stargazerCount,
+        languages: node.languages.edges.map((ele) => ele.node.name),
+      };
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
 
   const contribReposStarCount = contribRepoPRs.reduce(
     (prev, current) => prev + (current?.starCount || 0),

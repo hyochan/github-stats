@@ -1,10 +1,14 @@
+'use client';
+
 import type {ReactElement} from 'react';
+import {useCallback, useState, useEffect, useRef} from 'react';
+import {usePathname, useRouter} from 'next/navigation';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 import Image from 'next/image';
 
 import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
+import type {StatsWithMonthly} from '..';
 import type {Translates} from '../../../../../../src/localization';
 import {getTierSvg} from '../../../../../../src/utils/functions';
 import {statNames} from '..';
@@ -12,11 +16,44 @@ import {statNames} from '..';
 import type {TierType} from '.';
 
 import Logo from '@/public/assets/logo.svg';
+import StatsChart from './StatsChart';
+import MonthPicker from '../../MonthPicker';
 
 const inter = Inter({subsets: ['latin']});
 
-function SectionHeader({t, stats}: SectionProps): ReactElement {
+function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
+  const pathname = usePathname();
+  const router = useRouter();
   const pluginStats = stats.pluginStats;
+  const [isLoading, setIsLoading] = useState(false);
+  const pendingEndDateRef = useRef<string | undefined>(endDate);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (
+        pendingEndDateRef.current === endDate ||
+        pendingEndDateRef.current === undefined
+      ) {
+        pendingEndDateRef.current = undefined;
+        setIsLoading(false);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [endDate, stats]);
+
+  const handleEndDateChange = useCallback(
+    (newDate: string | undefined) => {
+      if (!pathname) return;
+      pendingEndDateRef.current = newDate;
+      setIsLoading(true);
+      if (newDate) {
+        router.push(`${pathname}?endDate=${newDate}`);
+      } else {
+        router.push(pathname);
+      }
+    },
+    [pathname, router],
+  );
 
   const sum =
     +pluginStats.earth.score +
@@ -40,7 +77,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
       : (tiers[tiers.length - 1].tier as ScoreType['tierName']);
 
   return (
-    <div className={clsx('flex flex-col flex-wrap')}>
+    <div className={clsx('flex flex-col flex-wrap w-full max-w-full')}>
       <p className={clsx('font-bold text-basic text-h2', inter.className)}>
         {t.achievement}
       </p>
@@ -48,7 +85,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
         {t.achievementDetails}
       </p>
       {/* Badges */}
-      <div className={clsx('mt-6', 'flex flex-row')}>
+      <div className={clsx('mt-6', 'flex flex-row flex-wrap gap-2')}>
         {/* Tier badge */}
         <div
           className={clsx(
@@ -65,12 +102,7 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
           />
         </div>
         {/* AVG score badge */}
-        <div
-          className={clsx(
-            'ml-2 p-2 bg-basic border rounded-md',
-            'flex items-center',
-          )}
-        >
+        <div className={clsx('p-2 bg-basic border rounded-md', 'flex items-center')}>
           <span className="body3 mr-2">{t.avgScore}</span>{' '}
           <div className="body3 p-1 bg-contrast-light dark:bg-contrast-dark rounded-md">
             <p className="text-[12px] text-white dark:text-black">{score}</p>
@@ -78,11 +110,17 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
         </div>
       </div>
       {/* Scores */}
-      <div className={clsx('mt-5', 'flex flex-row items-center flex-wrap')}>
+      <div
+        className={clsx(
+          'mt-5 w-full max-w-full',
+          'flex flex-wrap items-center',
+          'gap-x-4 gap-y-2',
+        )}
+      >
         {statNames.map((name) => {
           return (
-            <div key={name} className={clsx('mr-4 mt-1', 'items-center')}>
-              <span className="mr-2 text-basic font-bold text-[14px]">
+            <div key={name} className={clsx('flex items-center gap-2')}>
+              <span className="text-basic font-bold text-[14px] whitespace-nowrap">
                 {pluginStats[name].name}
               </span>
               <div
@@ -97,6 +135,17 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
           );
         })}
       </div>
+      {/* MonthPicker - positioned between scores and chart */}
+      <div className="mt-4 flex justify-start max-w-full w-full">
+        <MonthPicker
+          t={t}
+          value={endDate}
+          onChangeAction={handleEndDateChange}
+          isLoading={isLoading}
+        />
+      </div>
+      {/* Stats Chart - Monthly contributions */}
+      <StatsChart monthlyContributions={stats.monthlyContributions} isLoading={isLoading} />
     </div>
   );
 }
@@ -143,13 +192,22 @@ function SectionBody({t, stats}: SectionProps): ReactElement {
 
 type SectionProps = {
   t: Translates['stats'];
-  stats: DoobooStatsResponse;
+  stats: StatsWithMonthly;
+  endDate?: string;
 };
 
-export default function SectionDooboo(props: SectionProps): ReactElement {
+export default function SectionDooboo({
+  endDate,
+  ...props
+}: SectionProps): ReactElement {
   return (
-    <div className={clsx('flex-1', 'flex flex-col')}>
-      <SectionHeader {...props} />
+    <div
+      className={clsx(
+        'flex-1 w-full max-w-full min-w-0',
+        'flex flex-col',
+      )}
+    >
+      <SectionHeader {...props} endDate={endDate} />
       <hr className="my-10 h-[1px] flex-1 text-border-light dark:text-border-dark" />
       <SectionBody {...props} />
     </div>

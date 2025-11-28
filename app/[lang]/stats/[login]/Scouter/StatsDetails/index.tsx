@@ -20,9 +20,10 @@ export default function StatsDetails({
   t,
   stats,
   selectedStat,
+  endDate,
 }: ScouterProps & {selectedStat: StatName}): ReactElement {
   const map: Record<StatName, ReactElement> = {
-    dooboo: <SectionDooboo stats={stats} t={t} />,
+    dooboo: <SectionDooboo stats={stats} t={t} endDate={endDate} />,
     tree: <SectionTree stats={stats} t={t} />,
     fire: <SectionFire stats={stats} t={t} />,
     earth: <SectionEarth stats={stats} t={t} />,
@@ -32,7 +33,12 @@ export default function StatsDetails({
   };
 
   return (
-    <div className={clsx('mb-8 self-stretch', 'max-w-full overflow-x-hidden')}>
+    <div
+      className={clsx(
+        'mb-8 self-stretch w-full min-w-0',
+        'max-w-full overflow-x-hidden',
+      )}
+    >
       {map[selectedStat]}
     </div>
   );

@@ -4,7 +4,10 @@ import type {ReactElement} from 'react';
 import {useState} from 'react';
 import clsx from 'clsx';
 
-import type {DoobooStatsResponse} from '../../../../../server/services/githubService';
+import type {
+  DoobooStatsResponse,
+  MonthlyContribution,
+} from '../../../../../server/services/githubService';
 import type {StatsInfo} from '../../../../../src/fetches/github';
 import type {Translates} from '../../../../../src/localization';
 import styles from '../../../styles.module.css';
@@ -21,21 +24,26 @@ export const statNames = [
   'people',
 ] as const;
 
+export type StatsWithMonthly = DoobooStatsResponse & {
+  monthlyContributions?: MonthlyContribution[];
+};
+
 export type ScouterProps = {
   t: Translates['stats'];
-  stats: DoobooStatsResponse;
+  stats: StatsWithMonthly;
+  endDate?: string;
 };
 
 export type StatName = keyof StatsInfo | 'dooboo';
 
-export default function Scouter(props: ScouterProps): ReactElement {
+export default function Scouter({endDate, ...props}: ScouterProps): ReactElement {
   const [selectedStat, setSelectedStat] = useState<StatName>('dooboo');
 
   return (
     <div
       className={clsx(
         styles.scrollable,
-        'w-full max-w-full',
+        'w-full max-w-full min-w-0',
         'flex flex-col flex-start items-center',
       )}
     >
@@ -45,7 +53,7 @@ export default function Scouter(props: ScouterProps): ReactElement {
           setSelectedStat(name);
         }}
       />
-      <StatsDetails {...props} selectedStat={selectedStat} />
+      <StatsDetails {...props} selectedStat={selectedStat} endDate={endDate} />
     </div>
   );
 }

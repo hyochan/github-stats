@@ -48,10 +48,34 @@ export const getAccessToken = async (
 
 export const getGithubUser = async (
   login: string,
+  startDate?: string, // ISO date string (YYYY-MM) for the start of 1-year period
 ): Promise<{data: {user: UserGraph}}> => {
   // Note: Duration to 12 months fails intermittently for some users like `mcollina`. For that, we could try something like 6 months in the future.
-  const date = new Date();
-  date.setMonth(date.getMonth() - 12);
+  // If startDate is provided (YYYY-MM format), use that as the start of 1-year period
+  // Otherwise, default to 12 months ago from today
+  // Always start from the 1st of the month (use UTC noon to avoid timezone issues)
+  let date: Date;
+  if (startDate) {
+    const [year, month] = startDate.split('-').map(Number);
+    if (
+      Number.isFinite(year) &&
+      Number.isFinite(month) &&
+      month >= 1 &&
+      month <= 12
+    ) {
+      date = new Date(Date.UTC(year, month - 1, 1, 12, 0, 0));
+    } else {
+      const now = new Date();
+      date = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 12, 1, 12, 0, 0),
+      );
+    }
+  } else {
+    const now = new Date();
+    date = new Date(
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 12, 1, 12, 0, 0),
+    );
+  }
 
   const {data} = await axios({
     method: 'post',
@@ -152,10 +176,10 @@ export const getGithubUser = async (
               totalCount
               edges {
                 node {
-                  createdAt
                   owner {
                     login
                   }
+                  createdAt
                   watchers {
                     totalCount
                   }
@@ -164,9 +188,6 @@ export const getGithubUser = async (
                   stargazerCount
                   id
                   name
-                  owner {
-                    login
-                  }
                   stargazers {
                     totalCount
                   }
@@ -202,9 +223,6 @@ export const getGithubUser = async (
                   stargazerCount
                   id
                   name
-                  owner {
-                    login
-                  }
                   stargazers {
                     totalCount
                   }
@@ -240,9 +258,6 @@ export const getGithubUser = async (
                   stargazerCount
                   id
                   name
-                  owner {
-                    login
-                  }
                   stargazers {
                     totalCount
                   }
@@ -267,6 +282,60 @@ export const getGithubUser = async (
   });
 
   return data;
+};
+
+// Fetch monthly contribution counts from GitHub API
+const fetchGithubMonthlyContributions = async (
+  login: string,
+  month: string, // YYYY-MM
+): Promise<{commits: number; pullRequests: number; reviews: number}> => {
+  const [year, mon] = month.split('-').map(Number);
+
+  // fromDate: 1st of month at midnight UTC
+  const fromDate = new Date(Date.UTC(year, mon - 1, 1, 0, 0, 0));
+
+  // toDate: last day of month at 23:59:59 UTC
+  const toDate = new Date(Date.UTC(year, mon, 0, 23, 59, 59));
+
+  const {data} = await axios({
+    method: 'post',
+    url: 'https://api.github.com/graphql',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `token ${GH_TOKEN}`,
+    },
+    data: {
+      query: /* GraphQL */ `
+        query monthlyContributions(
+          $username: String!
+          $from: DateTime!
+          $to: DateTime!
+        ) {
+          user(login: $username) {
+            contributionsCollection(from: $from, to: $to) {
+              totalCommitContributions
+              totalPullRequestContributions
+              totalPullRequestReviewContributions
+            }
+          }
+        }
+      `,
+      variables: {
+        username: login,
+        from: fromDate.toISOString(),
+        to: toDate.toISOString(),
+      },
+    },
+  });
+
+  const contributions = data?.data?.user?.contributionsCollection;
+
+  return {
+    commits: contributions?.totalCommitContributions || 0,
+    pullRequests: contributions?.totalPullRequestContributions || 0,
+    reviews: contributions?.totalPullRequestReviewContributions || 0,
+  };
 };
 
 export const getGithubLogin = async (login: string): Promise<GithubUser> => {
@@ -305,6 +374,14 @@ type GithubStats = Omit<
   stat_element: any;
 };
 
+export type MonthlyContribution = {
+  month: string; // YYYY-MM format
+  commits: number;
+  pullRequests: number;
+  reviews: number;
+  total: number;
+};
+
 export type DoobooStatsResponse = {
   plugin: Model['plugins']['Row'];
   pluginStats: PluginStats;
@@ -322,16 +399,82 @@ export type DoobooStatsResponse = {
   score: number;
 };
 
+// Generate array of months from startDate for 12 months (always starting from the 1st)
+// Excludes future months
+const generateMonths = (startDate: string): string[] => {
+  const months: string[] = [];
+  const [year, month] = startDate.split('-').map(Number);
+
+  // Get current year and month in UTC
+  const now = new Date();
+  const currentYear = now.getUTCFullYear();
+  const currentMonth = now.getUTCMonth() + 1; // 1-indexed
+
+  for (let i = 0; i < 12; i++) {
+    // Use UTC to avoid timezone issues
+    const current = new Date(Date.UTC(year, month - 1 + i, 1));
+    const y = current.getUTCFullYear();
+    const m = current.getUTCMonth() + 1; // 1-indexed
+
+    // Skip future months
+    if (y > currentYear || (y === currentYear && m > currentMonth)) {
+      continue;
+    }
+
+    months.push(`${y}-${String(m).padStart(2, '0')}`);
+  }
+
+  return months;
+};
+
+// Fetch monthly contribution data (commits, PRs, reviews)
+const getMonthlyContributions = async (
+  login: string,
+  startDate: string,
+): Promise<MonthlyContribution[]> => {
+  const months = generateMonths(startDate);
+  const monthlyContributions: MonthlyContribution[] = [];
+
+  // Fetch stats for each month in parallel (batch of 3 to avoid rate limiting)
+  const batchSize = 3;
+  for (let i = 0; i < months.length; i += batchSize) {
+    const batch = months.slice(i, i + batchSize);
+    const results = await Promise.all(
+      batch.map(async (month) => {
+        try {
+          const {commits, pullRequests, reviews} =
+            await fetchGithubMonthlyContributions(login, month);
+
+          return {
+            month,
+            commits,
+            pullRequests,
+            reviews,
+            total: commits + pullRequests + reviews,
+          };
+        } catch {
+          return {month, commits: 0, pullRequests: 0, reviews: 0, total: 0};
+        }
+      }),
+    );
+    monthlyContributions.push(...results);
+  }
+
+  return monthlyContributions;
+};
+
 const upsertGithubStats = async ({
   login,
   plugin,
   user_plugin,
   lang = 'en',
+  startDate,
 }: {
   login: string;
   plugin: PluginRow;
   user_plugin: UserPluginRow | null;
   lang?: Locale;
+  startDate?: string;
 }): Promise<DoobooStatsResponse | null> => {
   try {
     const supabase = getSupabaseClient();
@@ -339,17 +482,20 @@ const upsertGithubStats = async ({
 
     // NOTE: Unknown user or user without commits will gracefully fail here.
     const results: [{data: {user: UserGraph}}, AuthorCommits] =
-      await Promise.all([getGithubUser(login), getGithubCommits(login)]);
+      await Promise.all([
+        getGithubUser(login, startDate),
+        getGithubCommits(login),
+      ]);
 
     const {
       data: {user: githubUser},
     } = results[0];
 
-  const githubStatus = getGithubStatus(githubUser, results[1]);
-  const languages = getTopLanguages(githubUser);
-  const trophies = getTrophies(githubUser);
+    const githubStatus = getGithubStatus(githubUser, results[1]);
+    const languages = getTopLanguages(githubUser);
+    const trophies = getTrophies(githubUser);
 
-  const stats: StatsInsert[] = [
+    const stats: StatsInsert[] = [
       {
         name: 'TREE',
         score: githubStatus.tree.score,
@@ -388,19 +534,6 @@ const upsertGithubStats = async ({
       },
     ];
 
-    if (user_plugin) {
-      const deleteStatsPromise = supabase
-        .from('stats')
-        .delete()
-        .match({user_plugin_login: user_plugin.login});
-
-      const deleteTrophiesPromise = supabase.from('trophies').delete().match({
-        user_plugin_login: user_plugin.login,
-      });
-
-      await Promise.all([deleteStatsPromise, deleteTrophiesPromise]);
-    }
-
     const sum =
       (githubStatus.tree?.score || 0) +
       (githubStatus.fire?.score || 0) +
@@ -411,54 +544,71 @@ const upsertGithubStats = async ({
 
     const score = Math.round((sum / 6) * 100);
 
-    const userPluginPayload: UserPluginInsert = {
-      login,
-      user_name: githubUser.name,
-      avatar_url: githubUser.avatarUrl,
-      description: githubUser.bio,
-      plugin_id: plugin.id,
-      score,
-      github_id: githubUser.id,
-      json: {
-        login: githubUser.login,
-        avatarUrl: githubUser.avatarUrl,
-        bio: githubUser.bio,
+    // Only save to database if not using custom startDate
+    // Custom date queries should not overwrite cached default data
+    if (!startDate) {
+      if (user_plugin) {
+        const deleteStatsPromise = supabase
+          .from('stats')
+          .delete()
+          .match({user_plugin_login: user_plugin.login});
+
+        const deleteTrophiesPromise = supabase.from('trophies').delete().match({
+          user_plugin_login: user_plugin.login,
+        });
+
+        await Promise.all([deleteStatsPromise, deleteTrophiesPromise]);
+      }
+
+      const userPluginPayload: UserPluginInsert = {
+        login,
+        user_name: githubUser.name,
+        avatar_url: githubUser.avatarUrl,
+        description: githubUser.bio,
+        plugin_id: plugin.id,
         score,
-        languages,
-      },
-    };
+        github_id: githubUser.id,
+        json: {
+          login: githubUser.login,
+          avatarUrl: githubUser.avatarUrl,
+          bio: githubUser.bio,
+          score,
+          languages,
+        },
+      };
 
-    await supabase.from('user_plugins').upsert(userPluginPayload);
+      await supabase.from('user_plugins').upsert(userPluginPayload);
 
-    await Promise.all(
-      trophies.map(async (el) => {
-        const trophyScore = el.score as number;
+      await Promise.all(
+        trophies.map(async (el) => {
+          const trophyScore = el.score as number;
 
-        const trophyPayload: TrophiesInsert = {
-          ...el,
-          score: trophyScore,
-          user_plugin_login: login,
-        };
+          const trophyPayload: TrophiesInsert = {
+            ...el,
+            score: trophyScore,
+            user_plugin_login: login,
+          };
 
-        await supabase.from('trophies').upsert(trophyPayload);
-      })
-    );
+          await supabase.from('trophies').upsert(trophyPayload);
+        }),
+      );
 
-    await Promise.all(
-      stats.map(async (el) => {
-        const statScore = el.score as number;
-        const statElement = el.stat_element as Json;
+      await Promise.all(
+        stats.map(async (el) => {
+          const statScore = el.score as number;
+          const statElement = el.stat_element as Json;
 
-        const statPayload: StatsInsert = {
-          ...el,
-          score: statScore,
-          stat_element: statElement,
-          user_plugin_login: login,
-        };
+          const statPayload: StatsInsert = {
+            ...el,
+            score: statScore,
+            stat_element: statElement,
+            user_plugin_login: login,
+          };
 
-        await supabase.from('stats').upsert(statPayload);
-      })
-    );
+          await supabase.from('stats').upsert(statPayload);
+        }),
+      );
+    }
 
     return {
       plugin,
@@ -493,9 +643,11 @@ const upsertGithubStats = async ({
 export const getDoobooStats = async ({
   login,
   lang = 'en',
+  startDate,
 }: {
   login: string;
   lang?: Locale;
+  startDate?: string; // YYYY-MM format
 }): Promise<DoobooStatsResponse | null> => {
   login = login.toLowerCase();
 
@@ -510,7 +662,9 @@ export const getDoobooStats = async ({
   try {
     const PLUGIN_ID = 'dooboo-github';
 
-    const {data: plugin}: {
+    const {
+      data: plugin,
+    }: {
       data: Model['plugins']['Row'] | null;
     } = await supabase.from('plugins').select().eq('id', PLUGIN_ID).single();
 
@@ -535,7 +689,8 @@ export const getDoobooStats = async ({
       });
 
     // NOTE: Return the data when user was fetched.
-    if (userPlugin && stats?.length === 6) {
+    // Skip cache if custom startDate is provided
+    if (userPlugin && stats?.length === 6 && !startDate) {
       const ghStats: GithubStats[] =
         stats?.map((el) => {
           return {
@@ -594,7 +749,9 @@ export const getDoobooStats = async ({
         },
       };
 
-      const updatedAt = userPlugin?.updated_at ? new Date(userPlugin.updated_at) : null;
+      const updatedAt = userPlugin?.updated_at
+        ? new Date(userPlugin.updated_at)
+        : null;
       const today = new Date();
 
       // When user was queried after 3 hours, update the data in background.
@@ -614,6 +771,7 @@ export const getDoobooStats = async ({
             user_plugin: userPlugin,
             login,
             lang,
+            startDate,
           });
           isCachedResult = true;
         }
@@ -649,6 +807,7 @@ export const getDoobooStats = async ({
       user_plugin: userPlugin,
       login,
       lang,
+      startDate,
     });
   } catch (e: any) {
     console.error('Error in getDoobooStats:', {
@@ -658,5 +817,28 @@ export const getDoobooStats = async ({
     });
 
     return null;
+  }
+};
+
+// API for fetching monthly contribution data (commits, PRs, reviews)
+export const getMonthlyContribution = async ({
+  login,
+  startDate,
+}: {
+  login: string;
+  startDate: string; // YYYY-MM format (required)
+}): Promise<MonthlyContribution[]> => {
+  login = login.toLowerCase();
+
+  try {
+    return await getMonthlyContributions(login, startDate);
+  } catch (e: any) {
+    console.error('Error in getMonthlyContribution:', {
+      login,
+      startDate,
+      error: e.message || e,
+    });
+
+    return [];
   }
 };

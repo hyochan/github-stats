@@ -6,8 +6,10 @@ import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
+import styles from '../styles.module.css';
 
 import GithubUserList from './GithubUserList';
+import TopTierUsers from './TopTierUsers';
 
 import {H1} from '~/components/Typography';
 import type {Locale} from '~/i18n';
@@ -22,7 +24,7 @@ type Props = {
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;
   const lang = params.lang as Locale;
-  const {recentList} = await getTranslates(lang);
+  const {leaderboards} = await getTranslates(lang);
   const supabase = getSupabaseClient();
 
   const {data: plugin} = await supabase
@@ -38,28 +40,46 @@ export default async function Page(props: Props): Promise<ReactElement> {
       <div
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
-          'flex flex-row items-center justify-between gap-4',
-          'max-[480px]:flex-col max-[480px]:items-start max-[480px]:mb-6 max-[480px]:mt-2',
+          'flex flex-row items-start gap-4',
+          'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-2',
         )}
-      >
-        <H1
+        >
+          <H1
+            className={clsx(
+              'text-[44px] font-bold shrink-0 whitespace-nowrap',
+              'max-[480px]:text-[28px]',
+              inter.className,
+            )}
+          >
+            {leaderboards.title}
+          </H1>
+        <div
           className={clsx(
-            'text-[44px] font-bold shrink-0 whitespace-nowrap',
-            'max-[480px]:text-[28px]',
-            inter.className,
+            styles.horizontalScroll,
+            'flex-1 min-w-0 w-full',
           )}
         >
-          {recentList.title}
-        </H1>
-        <GreatFrontEnd
-          className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full"
-          href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
-          title="Quiz interview questions"
-        />
+          <div
+            className={clsx(
+              'flex flex-row items-start gap-4 flex-nowrap min-w-fit',
+            )}
+          >
+            <div className="shrink-0 min-w-[280px]">
+              <TopTierUsers title={leaderboards.topRanked} />
+            </div>
+            <div className="shrink-0">
+              <GreatFrontEnd
+                className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full max-[768px]:hidden"
+                href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
+                title="Quiz interview questions"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <GithubUserList
         initialData={userPlugins as UserListItem[]}
-        t={recentList}
+        t={leaderboards}
       />
     </div>
   );

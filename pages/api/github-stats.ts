@@ -36,12 +36,14 @@ export default async function handler(
   switch (method) {
     case 'GET': {
       const loginParam = req.query.login as string;
+      const startDate = req.query.startDate as string | undefined;
       assert(loginParam, common.badRequest);
 
       try {
         const stats = await getDoobooStats({
           login: loginParam.toLocaleLowerCase(),
           lang: locale,
+          startDate,
         });
 
         if (!stats) {
@@ -66,12 +68,14 @@ export default async function handler(
     }
     case 'POST': {
       const loginBody = req.body.login as string;
+      const startDateBody = req.body.startDate as string | undefined;
       assert(loginBody, common.badRequest);
 
       try {
         const stats = await getDoobooStats({
           login: loginBody.toLocaleLowerCase(),
           lang: locale,
+          startDate: startDateBody,
         });
 
         if (!stats) {

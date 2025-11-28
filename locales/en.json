@@ -1,6 +1,6 @@
 {
   "nav": {
-    "recentList": "Recent List",
+    "leaderboards": "Leaderboards",
     "stats": "Stats",
     "certifiedUsers": "Certified Users",
     "signIn": "Sign in",
@@ -84,16 +84,19 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy"
   },
-  "recentList": {
-    "title": "Recent List",
+  "leaderboards": {
+    "title": "Leaderboards",
     "githubUsername": "GitHub username",
-    "noRecentList": "No recent list",
+    "noRecentList": "No users found",
     "tier": "Tier",
-    "score": "Score"
+    "score": "Score",
+    "all": "All",
+    "topUsers": "Top Users",
+    "topRanked": "Top Ranked"
   },
   "stats": {
     "title": "Stats",
-    "searchUserHint": "Search for a user in the top right corner to view the score attributes in detail",
+    "searchUserHint": "Check the developer's power level by searching for their GitHub username.",
     "githubUsername": "GitHub username",
     "achievement": "Achievement",
     "achievementDetails": "Based on Github data",
@@ -105,7 +108,11 @@
     "water": "Water",
     "people": "People",
     "github": "Github",
-    "score": "score"
+    "score": "score",
+    "selectPeriod": "Select period",
+    "periodDescription": "Stats for 1 year from selected month",
+    "resetToDefault": "Reset to default",
+    "search": "Search"
   },
   "certifiedUsers": {
     "title": "Certified Users",

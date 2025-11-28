@@ -3,6 +3,26 @@
   overflow-y: auto;
 }
 
+.horizontalScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.horizontalScroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.horizontalScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.horizontalScroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
 .scrollable::-webkit-scrollbar {
   width: 6px;
   height: 12px;
@@ -16,4 +36,14 @@
 .scrollable::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #4d4d4d;
+}
+
+@media (max-width: 768px) {
+  .horizontalScroll {
+    scrollbar-width: none;
+  }
+
+  .horizontalScroll::-webkit-scrollbar {
+    display: none;
+  }
 }

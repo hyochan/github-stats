@@ -19,7 +19,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
   return (
     <Container t={t}>
       <div className="flex flex-col items-center gap-8 max-[480px]:px-6">
-        <p className="text-dark dark:text-paper-light text-center">{t.searchUserHint}.</p>
+        <p className="text-dark dark:text-paper-light text-center">{t.searchUserHint}</p>
         <SearchTextInput
           t={t}
           className="w-full max-w-[600px]"
