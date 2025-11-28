@@ -82,7 +82,7 @@ export default function SectionFooter({t}: Props): ReactElement {
           />
           <p className={clsx('text-white text-[12px] align-center opacity-50')}>
             designed by &nbsp;
-            <a href="https://hyo.dev">hyochan</a>
+            <a href="https://github.com/hyochan">hyochan</a>
           </p>
         </div>
       </div>
