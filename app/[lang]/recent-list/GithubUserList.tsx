@@ -1,13 +1,14 @@
 'use client';
 
 import type {ReactElement, UIEventHandler} from 'react';
-import {useMemo, useRef, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {fetchRecentList} from '../../../src/fetches/recentList';
 import type {Translates} from '../../../src/localization';
+import {getTierSvg} from '../../../src/utils/functions';
 import type {ColumnDef} from '../(common)/DataTable';
 import {DataTable} from '../(common)/DataTable';
 import styles from '../styles.module.css';
@@ -17,6 +18,18 @@ import TierRowItem from './TierRowItem';
 
 import {H4, H5} from '~/components/Typography';
 
+// Tier order from highest to lowest
+const TIER_ORDER: Tier[] = [
+  'Challenger',
+  'Master',
+  'Diamond',
+  'Platinum',
+  'Gold',
+  'Silver',
+  'Bronze',
+  'Iron',
+];
+
 type Props = {
   t: Translates['recentList'];
   initialData: UserListItem[];
@@ -25,11 +38,40 @@ type Props = {
 export default function GithubUserList({t, initialData}: Props): ReactElement {
   const tBodyRef = useRef<HTMLTableSectionElement>(null);
   const [data, setData] = useState(initialData);
+  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
+  const [tierData, setTierData] = useState<UserListItem[]>([]);
+  const [isLoadingTier, setIsLoadingTier] = useState(false);
   const [cursor, setCursor] = useState<Date | null>(
     (initialData?.length || 0) > 0
       ? new Date(initialData?.[initialData?.length - 1]?.createdAt)
       : null,
   );
+
+  const handleTierSelect = useCallback(async (tier: Tier | null) => {
+    setSelectedTier(tier);
+
+    if (!tier) {
+      setTierData([]);
+      return;
+    }
+
+    setIsLoadingTier(true);
+    try {
+      const response = await fetch(`/api/users-by-tier?tier=${tier}`);
+      const result = await response.json();
+      if (result.users) {
+        setTierData(result.users);
+      }
+    } catch (error) {
+      console.error('Failed to fetch tier users:', error);
+      setTierData([]);
+    } finally {
+      setIsLoadingTier(false);
+    }
+  }, []);
+
+  // Use tier data when a tier is selected, otherwise use recent data
+  const displayData = selectedTier ? tierData : data;
 
   const columnsDef: ColumnDef<UserListItem> = useMemo(
     () => [
@@ -107,33 +149,81 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   };
 
   return (
-    <div
-      className={clsx(
-        'flex-1 mb-12 mx-6 overflow-y-scroll',
-        'rounded-[20px]',
-        'bg-black/10 dark:bg-white/5',
-        'backdrop-blur-xl',
-        'border border-black/20 dark:border-white/10',
-        'shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]',
-        'max-[480px]:mx-4 max-[480px]:mb-8 max-[480px]:rounded-[16px]',
-        styles.scrollable,
-      )}
-      onScroll={handleScroll}
-    >
-      <DataTable
-        tBodyRef={tBodyRef}
-        columns={columnsDef}
-        data={data}
-        onClickRow={(user) => {
-          const login = user.login;
-          window.open('http://github.com/' + login);
-        }}
-        className="p-6 max-[480px]:p-4"
-        classNames={{
-          tHead: 'bg-paper backdrop-blur-xl border-b border-black/10 dark:border-white/10 px-2 pb-2 -mx-6 -mt-6 px-6 pt-6 rounded-t-[20px] max-[480px]:-mx-4 max-[480px]:-mt-4 max-[480px]:px-4 max-[480px]:pt-4 max-[480px]:rounded-t-[16px]',
-          tBodyRow: 'hover:bg-black/10 dark:hover:bg-white/5 transition-all duration-200 rounded-[8px] my-1',
-        }}
-      />
+    <div className="flex-1 flex flex-col mx-6 mb-12 max-[480px]:mx-4 max-[480px]:mb-8 overflow-hidden">
+      {/* Tier filter labels */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button
+          onClick={() => handleTierSelect(null)}
+          disabled={isLoadingTier}
+          className={clsx(
+            'px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200',
+            'border',
+            !selectedTier
+              ? 'bg-brand text-white border-brand'
+              : 'bg-black/5 dark:bg-white/5 text-basic border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10',
+            isLoadingTier && 'opacity-50 cursor-not-allowed',
+          )}
+        >
+          {t.all}
+        </button>
+        {TIER_ORDER.map((tier) => (
+          <button
+            key={tier}
+            onClick={() => handleTierSelect(tier)}
+            disabled={isLoadingTier}
+            className={clsx(
+              'px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200',
+              'border flex items-center gap-1.5',
+              selectedTier === tier
+                ? 'bg-brand text-white border-brand'
+                : 'bg-black/5 dark:bg-white/5 text-basic border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10',
+              isLoadingTier && 'opacity-50 cursor-not-allowed',
+            )}
+          >
+            <Image
+              alt={tier}
+              src={getTierSvg(tier)}
+              width={14}
+              height={14}
+            />
+            {tier}
+          </button>
+        ))}
+      </div>
+
+      {/* Data table */}
+      <div
+        className={clsx(
+          'flex-1 overflow-y-scroll',
+          'rounded-[20px]',
+          'bg-black/10 dark:bg-white/5',
+          'backdrop-blur-xl',
+          'border border-black/20 dark:border-white/10',
+          'shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]',
+          'max-[480px]:rounded-[16px]',
+          styles.scrollable,
+          'transition-opacity duration-300',
+          isLoadingTier && 'opacity-50',
+        )}
+        onScroll={!selectedTier ? handleScroll : undefined}
+      >
+        <DataTable
+          tBodyRef={tBodyRef}
+          columns={columnsDef}
+          data={displayData}
+          onClickRow={(user) => {
+            const login = user.login;
+            window.open('http://github.com/' + login);
+          }}
+          className="p-6 max-[480px]:p-4"
+          classNames={{
+            tHead:
+              'bg-paper backdrop-blur-xl border-b border-black/10 dark:border-white/10 px-2 pb-2 -mx-6 -mt-6 px-6 pt-6 rounded-t-[20px] max-[480px]:-mx-4 max-[480px]:-mt-4 max-[480px]:px-4 max-[480px]:pt-4 max-[480px]:rounded-t-[16px]',
+            tBodyRow:
+              'hover:bg-black/10 dark:hover:bg-white/5 transition-all duration-200 rounded-[8px] my-1',
+          }}
+        />
+      </div>
     </div>
   );
 }

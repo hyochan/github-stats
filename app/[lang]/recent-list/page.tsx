@@ -8,6 +8,7 @@ import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
 
 import GithubUserList from './GithubUserList';
+import TopTierUsers from './TopTierUsers';
 
 import {H1} from '~/components/Typography';
 import type {Locale} from '~/i18n';
@@ -51,8 +52,9 @@ export default async function Page(props: Props): Promise<ReactElement> {
         >
           {recentList.title}
         </H1>
+        <TopTierUsers title={recentList.topRanked} />
         <GreatFrontEnd
-          className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full"
+          className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full max-[768px]:hidden"
           href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
           title="Quiz interview questions"
         />
