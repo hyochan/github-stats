@@ -84,8 +84,10 @@ export default function TopTierUsers({title}: Props): ReactElement {
             className={clsx(
               'shrink-0 flex flex-col items-center p-2 rounded-xl w-[80px]',
               'bg-gradient-to-br from-amber-500/10 to-orange-500/10 dark:from-amber-500/20 dark:to-orange-500/20',
-              'border border-amber-500/20 dark:border-amber-500/30',
-              'hover:scale-105 transition-transform duration-200',
+              'border border-border-light dark:border-border-dark',
+              'transition-transform duration-200',
+              'group',
+              'focus:outline-none focus:ring-0 focus-visible:ring-0 focus:ring-transparent',
             )}
           >
             <Image
@@ -93,19 +95,34 @@ export default function TopTierUsers({title}: Props): ReactElement {
               src={user.avatarUrl}
               width={40}
               height={40}
-              className="rounded-full ring-2 ring-amber-500/50"
+              className={clsx(
+                'rounded-full ring-2 ring-amber-500/50',
+                'transition-transform duration-200 group-hover:scale-110',
+              )}
             />
             <Image
               alt={user.tierName}
               src={getTierSvg(user.tierName as Tier)}
               width={14}
               height={14}
-              className="-mt-2 relative z-10"
+              className="-mt-2 relative z-10 transition-transform duration-200 group-hover:scale-110"
             />
-            <span className="mt-1 text-[10px] font-medium text-basic truncate max-w-[70px]">
+            <span
+              className={clsx(
+                'mt-1 text-[10px] font-medium text-basic truncate max-w-[70px]',
+                'transition-transform duration-200 group-hover:scale-105',
+              )}
+            >
               {user.login}
             </span>
-            <span className="text-[9px] text-placeholder">{user.score}</span>
+            <span
+              className={clsx(
+                'text-[9px] text-placeholder',
+                'transition-transform duration-200 group-hover:scale-105',
+              )}
+            >
+              {user.score}
+            </span>
           </a>
         ))}
       </div>

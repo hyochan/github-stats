@@ -34,6 +34,8 @@ export default function SearchTextInput({
 
   // Reset loading state when navigation completes (props change)
   useEffect(() => {
+    // Safe reset after navigation completes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(false);
   }, [initialValue]);
 

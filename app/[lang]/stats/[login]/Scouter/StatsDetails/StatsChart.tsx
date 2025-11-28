@@ -40,7 +40,6 @@ export default function StatsChart({
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleLegendMouseEnter = useCallback((data: any) => {
     if (data?.dataKey) {
       setHoveredLine(String(data.dataKey));
@@ -51,7 +50,6 @@ export default function StatsChart({
     setHoveredLine(null);
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleLegendClick = useCallback((data: any) => {
     if (data?.dataKey) {
       const key = data.dataKey as LineKey;

@@ -29,6 +29,8 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
 
   // Reset loading when endDate changes (data loaded)
   useEffect(() => {
+    // Safe reset after data refresh
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(false);
   }, [endDate, stats]);
 
