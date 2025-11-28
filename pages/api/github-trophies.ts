@@ -24,12 +24,14 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
+      const startDate = <string>req.query.startDate;
       assert(login, common.badRequest);
 
       try {
         const stats = await getDoobooStats({
           login: login.toLocaleLowerCase(),
           lang: locale,
+          startDate,
         });
 
         if (!stats) {

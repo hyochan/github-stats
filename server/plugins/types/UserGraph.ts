@@ -86,6 +86,22 @@ export interface ContributionsCollection {
   totalRepositoryContributions: number;
   totalPullRequestContributions: number;
   totalPullRequestReviewContributions: number;
+  contributionCalendar?: ContributionCalendar;
+}
+
+export interface ContributionCalendar {
+  totalContributions: number;
+  weeks: ContributionWeek[];
+}
+
+export interface ContributionWeek {
+  firstDay: string;
+  contributionDays: ContributionDay[];
+}
+
+export interface ContributionDay {
+  contributionCount: number;
+  date: string;
 }
 
 export interface PullRequests {
