@@ -1,13 +1,13 @@
 'use client';
 
 import type {ReactElement} from 'react';
-import {useState, useRef} from 'react';
-import {useForm} from 'react-hook-form';
+import {useState, useRef, useEffect} from 'react';
 import {SearchIcon} from '@primer/octicons-react';
 import clsx from 'clsx';
 
+import {usePathname, useRouter} from 'next/navigation';
+
 import type {Translates} from '../../../../src/localization';
-import Button from '../../(common)/Button';
 import TextInput from '../../(common)/TextInput';
 import SearchHistoryDropdown from '../../(home)/Hero/SearchHistoryDropdown';
 import {useSearchHistory} from '../../../../src/hooks/useSearchHistory';
@@ -23,18 +23,31 @@ export default function SearchTextInput({
 }): ReactElement {
   const [login, setLogin] = useState(initialValue);
   const [showHistory, setShowHistory] = useState(false);
-  const {formState} = useForm();
+  const [isLoading, setIsLoading] = useState(false);
   const {history, addToHistory, removeFromHistory} = useSearchHistory();
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Extract language from pathname (e.g., /ko/stats/hyochan -> ko)
+  const lang = pathname?.split('/')[1] || 'en';
+
+  // Reset loading state when navigation completes (props change)
+  useEffect(() => {
+    setIsLoading(false);
+  }, [initialValue]);
+
+  const navigateTo = (loginValue: string) => {
+    setIsLoading(true);
+    router.push(`/${lang}/stats/${loginValue}`);
+    router.refresh();
+  };
 
   const handleHistorySelect = (item: string) => {
     setLogin(item);
     setShowHistory(false);
     addToHistory(item);
-    // Trigger navigation
-    setTimeout(() => {
-      window.location.href = `/stats/${item}`;
-    }, 100);
+    navigateTo(item);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -42,7 +55,7 @@ export default function SearchTextInput({
     if (login) {
       addToHistory(login);
       setShowHistory(false);
-      window.location.href = `/stats/${login}`;
+      navigateTo(login);
     }
   };
 
@@ -59,7 +72,7 @@ export default function SearchTextInput({
           'bg-black/10 dark:bg-white/5',
           'backdrop-blur-md',
           'border border-black/20 dark:border-white/10',
-          'flex flex-row-reverse items-center',
+          'flex items-center gap-2',
           'hover:bg-black/15 dark:hover:bg-white/8',
           'transition-all duration-300',
         )}
@@ -76,15 +89,32 @@ export default function SearchTextInput({
             setTimeout(() => setShowHistory(false), 200);
           }}
         />
-        <Button
-          loading={formState.isSubmitting}
+        <button
           type="submit"
+          disabled={isLoading || !login}
           className={clsx(
-            'bg-transparent border-0 text-center px-2 pt-2',
-            'absolute',
+            'p-2 rounded-full',
+            'hover:bg-black/10 dark:hover:bg-white/10',
+            'transition-all duration-200',
+            'disabled:opacity-50 disabled:cursor-not-allowed',
+            'flex items-center justify-center',
           )}
-          text={<SearchIcon size={14} className="text-basic" />}
-        />
+        >
+          {isLoading ? (
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                border: '2px solid #BEBEBE',
+                borderTopColor: '#4190EB',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+              }}
+            />
+          ) : (
+            <SearchIcon size={20} className="text-basic" />
+          )}
+        </button>
       </div>
       </form>
       <SearchHistoryDropdown
