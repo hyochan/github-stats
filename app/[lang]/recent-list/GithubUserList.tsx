@@ -151,13 +151,21 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
   return (
     <div className="flex-1 flex flex-col mx-6 mb-12 max-[480px]:mx-4 max-[480px]:mb-8 overflow-hidden">
       {/* Tier filter labels */}
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div
+        className={clsx(
+          styles.horizontalScroll,
+          'w-full max-w-full min-w-0',
+          'flex flex-nowrap gap-2 mb-4',
+          'pr-2',
+        )}
+      >
         <button
           onClick={() => handleTierSelect(null)}
           disabled={isLoadingTier}
           className={clsx(
             'px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200',
             'border',
+            'shrink-0',
             !selectedTier
               ? 'bg-brand text-white border-brand'
               : 'bg-black/5 dark:bg-white/5 text-basic border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10',
@@ -170,15 +178,20 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
           <button
             key={tier}
             onClick={() => handleTierSelect(tier)}
-            disabled={isLoadingTier}
-            className={clsx(
-              'px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200',
-              'border flex items-center gap-1.5',
-              selectedTier === tier
-                ? 'bg-brand text-white border-brand'
-                : 'bg-black/5 dark:bg-white/5 text-basic border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10',
-              isLoadingTier && 'opacity-50 cursor-not-allowed',
-            )}
+          disabled={isLoadingTier}
+          className={clsx(
+            'px-3 py-1.5 max-[480px]:px-2 max-[480px]:py-1',
+            'rounded-full text-xs font-medium transition-all duration-200',
+            'border flex items-center justify-center gap-1.5 max-[480px]:gap-0',
+            'min-w-[70px] whitespace-nowrap',
+            'max-[480px]:min-w-[44px] max-[480px]:max-w-[60px]',
+            'shrink-0',
+            selectedTier === tier
+              ? 'bg-brand text-white border-brand'
+              : 'bg-black/5 dark:bg-white/5 text-basic border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10',
+            isLoadingTier && 'opacity-50 cursor-not-allowed',
+          )}
+            aria-label={tier}
           >
             <Image
               alt={tier}
@@ -186,7 +199,9 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
               width={14}
               height={14}
             />
-            {tier}
+            <span className="max-[480px]:hidden whitespace-nowrap">
+              {tier}
+            </span>
           </button>
         ))}
       </div>

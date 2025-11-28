@@ -33,7 +33,12 @@ export default function StatsDetails({
   };
 
   return (
-    <div className={clsx('mb-8 self-stretch', 'max-w-full overflow-x-hidden')}>
+    <div
+      className={clsx(
+        'mb-8 self-stretch w-full min-w-0',
+        'max-w-full overflow-x-hidden',
+      )}
+    >
       {map[selectedStat]}
     </div>
   );

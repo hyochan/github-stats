@@ -66,9 +66,15 @@ export default function TopTierUsers({title}: Props): ReactElement {
   }
 
   return (
-    <div className="flex flex-col max-w-[500px]">
+    <div className="flex flex-col w-full max-w-full">
       <span className="text-[10px] text-placeholder mb-1">{title}</span>
-      <div className="flex flex-row gap-2">
+      <div
+        className={clsx(
+          styles.horizontalScroll,
+          'w-full max-w-full min-w-0',
+          'flex flex-nowrap gap-2 pr-2',
+        )}
+      >
         {topTierUsers.map((user) => (
           <a
             key={user.login}

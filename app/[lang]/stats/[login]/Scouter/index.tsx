@@ -43,7 +43,7 @@ export default function Scouter({endDate, ...props}: ScouterProps): ReactElement
     <div
       className={clsx(
         styles.scrollable,
-        'w-full max-w-full',
+        'w-full max-w-full min-w-0',
         'flex flex-col flex-start items-center',
       )}
     >

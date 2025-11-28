@@ -6,6 +6,7 @@ import {getSupabaseClient} from '../../../server/supabaseClient';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTranslates} from '../../../src/localization';
 import {getUserPlugins} from '../../../src/utils/functions';
+import styles from '../styles.module.css';
 
 import GithubUserList from './GithubUserList';
 import TopTierUsers from './TopTierUsers';
@@ -39,8 +40,8 @@ export default async function Page(props: Props): Promise<ReactElement> {
       <div
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
-          'flex flex-row items-center justify-between gap-4',
-          'max-[480px]:flex-col max-[480px]:items-start max-[480px]:mb-6 max-[480px]:mt-2',
+          'flex flex-row items-start gap-4',
+          'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-2',
         )}
       >
         <H1
@@ -52,12 +53,29 @@ export default async function Page(props: Props): Promise<ReactElement> {
         >
           {recentList.title}
         </H1>
-        <TopTierUsers title={recentList.topRanked} />
-        <GreatFrontEnd
-          className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full max-[768px]:hidden"
-          href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
-          title="Quiz interview questions"
-        />
+        <div
+          className={clsx(
+            styles.horizontalScroll,
+            'flex-1 min-w-0 w-full',
+          )}
+        >
+          <div
+            className={clsx(
+              'flex flex-row items-start gap-4 flex-nowrap min-w-fit',
+            )}
+          >
+            <div className="shrink-0 min-w-[280px]">
+              <TopTierUsers title={recentList.topRanked} />
+            </div>
+            <div className="shrink-0">
+              <GreatFrontEnd
+                className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full max-[768px]:hidden"
+                href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"
+                title="Quiz interview questions"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <GithubUserList
         initialData={userPlugins as UserListItem[]}

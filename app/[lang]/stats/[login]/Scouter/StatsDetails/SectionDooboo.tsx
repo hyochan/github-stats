@@ -68,7 +68,7 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
       : (tiers[tiers.length - 1].tier as ScoreType['tierName']);
 
   return (
-    <div className={clsx('flex flex-col flex-wrap')}>
+    <div className={clsx('flex flex-col flex-wrap w-full max-w-full')}>
       <p className={clsx('font-bold text-basic text-h2', inter.className)}>
         {t.achievement}
       </p>
@@ -76,7 +76,7 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
         {t.achievementDetails}
       </p>
       {/* Badges */}
-      <div className={clsx('mt-6', 'flex flex-row')}>
+      <div className={clsx('mt-6', 'flex flex-row flex-wrap gap-2')}>
         {/* Tier badge */}
         <div
           className={clsx(
@@ -93,12 +93,7 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
           />
         </div>
         {/* AVG score badge */}
-        <div
-          className={clsx(
-            'ml-2 p-2 bg-basic border rounded-md',
-            'flex items-center',
-          )}
-        >
+        <div className={clsx('p-2 bg-basic border rounded-md', 'flex items-center')}>
           <span className="body3 mr-2">{t.avgScore}</span>{' '}
           <div className="body3 p-1 bg-contrast-light dark:bg-contrast-dark rounded-md">
             <p className="text-[12px] text-white dark:text-black">{score}</p>
@@ -106,11 +101,17 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
         </div>
       </div>
       {/* Scores */}
-      <div className={clsx('mt-5', 'flex flex-row items-center flex-wrap')}>
+      <div
+        className={clsx(
+          'mt-5 w-full max-w-full',
+          'flex flex-wrap items-center',
+          'gap-x-4 gap-y-2',
+        )}
+      >
         {statNames.map((name) => {
           return (
-            <div key={name} className={clsx('mr-4 mt-1', 'items-center')}>
-              <span className="mr-2 text-basic font-bold text-[14px]">
+            <div key={name} className={clsx('flex items-center gap-2')}>
+              <span className="text-basic font-bold text-[14px] whitespace-nowrap">
                 {pluginStats[name].name}
               </span>
               <div
@@ -126,7 +127,7 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
         })}
       </div>
       {/* MonthPicker - positioned between scores and chart */}
-      <div className="mt-4 flex justify-start">
+      <div className="mt-4 flex justify-start max-w-full w-full">
         <MonthPicker
           t={t}
           value={endDate}
@@ -191,7 +192,12 @@ export default function SectionDooboo({
   ...props
 }: SectionProps): ReactElement {
   return (
-    <div className={clsx('flex-1', 'flex flex-col')}>
+    <div
+      className={clsx(
+        'flex-1 w-full max-w-full min-w-0',
+        'flex flex-col',
+      )}
+    >
       <SectionHeader {...props} endDate={endDate} />
       <hr className="my-10 h-[1px] flex-1 text-border-light dark:text-border-dark" />
       <SectionBody {...props} />

@@ -308,6 +308,7 @@ export default function Header(props: Props): ReactElement {
         'h-[56px] decoration-0 bg-basic sticky',
         'flex flex-row items-center justify-between',
         'px-[28px]',
+        'w-full min-w-0',
       )}
     >
       <div
@@ -315,6 +316,7 @@ export default function Header(props: Props): ReactElement {
           'flex-1 h-14',
           'flex flex-row items-center',
           'justify-between',
+          'min-w-0',
         )}
       >
         <div

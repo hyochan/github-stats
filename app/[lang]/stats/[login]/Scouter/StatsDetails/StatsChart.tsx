@@ -126,86 +126,88 @@ export default function StatsChart({
 
   return (
     <div
-      className="mt-8 w-full transition-opacity duration-300"
+      className="mt-8 w-full max-w-full min-w-0 transition-opacity duration-300"
       style={{
         opacity: isLoading ? 0.4 : 1,
         filter: isLoading ? 'blur(1px)' : 'none',
       }}
     >
-      <div className="overflow-x-auto">
-        <LineChart
-          width={Math.max(720, chartData.length * 60)}
-          height={300}
-          data={chartData}
-          margin={{top: 10, right: 30, left: 10, bottom: 20}}
-        >
-          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-          <XAxis
-            dataKey="month"
-            tick={{fontSize: 11, fill: '#888'}}
-            tickLine={false}
-            axisLine={false}
-            angle={-45}
-            textAnchor="end"
-            height={60}
-          />
-          <YAxis
-            tick={{fontSize: 12, fill: '#888'}}
-            tickLine={false}
-            axisLine={false}
-            domain={[0, yAxisMax]}
-          />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              border: 'none',
-              borderRadius: '8px',
-              color: '#fff',
-            }}
-          />
-          <Legend
-            onMouseEnter={handleLegendMouseEnter}
-            onMouseLeave={handleLegendMouseLeave}
-            onClick={handleLegendClick}
-            wrapperStyle={{cursor: 'pointer'}}
-          />
-          {isLineVisible('commits') && (
-            <Line
-              type="monotone"
-              dataKey="commits"
-              name="Commits"
-              stroke="#22c55e"
-              strokeWidth={2}
-              dot={{fill: '#22c55e', strokeWidth: 2, r: 3}}
-              activeDot={{r: 5, fill: '#22c55e'}}
-              strokeOpacity={getLineOpacity('commits')}
+      <div className="w-full max-w-full overflow-x-auto overflow-y-hidden">
+        <div className="min-w-[640px]">
+          <LineChart
+            width={Math.max(640, chartData.length * 60)}
+            height={300}
+            data={chartData}
+            margin={{top: 10, right: 30, left: 10, bottom: 20}}
+          >
+            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+            <XAxis
+              dataKey="month"
+              tick={{fontSize: 11, fill: '#888'}}
+              tickLine={false}
+              axisLine={false}
+              angle={-45}
+              textAnchor="end"
+              height={60}
             />
-          )}
-          {isLineVisible('pullRequests') && (
-            <Line
-              type="monotone"
-              dataKey="pullRequests"
-              name="Pull Requests"
-              stroke="#3b82f6"
-              strokeWidth={2}
-              dot={{fill: '#3b82f6', strokeWidth: 2, r: 3}}
-              activeDot={{r: 5, fill: '#3b82f6'}}
-              strokeOpacity={getLineOpacity('pullRequests')}
+            <YAxis
+              tick={{fontSize: 12, fill: '#888'}}
+              tickLine={false}
+              axisLine={false}
+              domain={[0, yAxisMax]}
             />
-          )}
-          {isLineVisible('reviews') && (
-            <Line
-              type="monotone"
-              dataKey="reviews"
-              name="Reviews"
-              stroke="#f59e0b"
-              strokeWidth={2}
-              dot={{fill: '#f59e0b', strokeWidth: 2, r: 3}}
-              activeDot={{r: 5, fill: '#f59e0b'}}
-              strokeOpacity={getLineOpacity('reviews')}
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                border: 'none',
+                borderRadius: '8px',
+                color: '#fff',
+              }}
             />
-          )}
-        </LineChart>
+            <Legend
+              onMouseEnter={handleLegendMouseEnter}
+              onMouseLeave={handleLegendMouseLeave}
+              onClick={handleLegendClick}
+              wrapperStyle={{cursor: 'pointer'}}
+            />
+            {isLineVisible('commits') && (
+              <Line
+                type="monotone"
+                dataKey="commits"
+                name="Commits"
+                stroke="#22c55e"
+                strokeWidth={2}
+                dot={{fill: '#22c55e', strokeWidth: 2, r: 3}}
+                activeDot={{r: 5, fill: '#22c55e'}}
+                strokeOpacity={getLineOpacity('commits')}
+              />
+            )}
+            {isLineVisible('pullRequests') && (
+              <Line
+                type="monotone"
+                dataKey="pullRequests"
+                name="Pull Requests"
+                stroke="#3b82f6"
+                strokeWidth={2}
+                dot={{fill: '#3b82f6', strokeWidth: 2, r: 3}}
+                activeDot={{r: 5, fill: '#3b82f6'}}
+                strokeOpacity={getLineOpacity('pullRequests')}
+              />
+            )}
+            {isLineVisible('reviews') && (
+              <Line
+                type="monotone"
+                dataKey="reviews"
+                name="Reviews"
+                stroke="#f59e0b"
+                strokeWidth={2}
+                dot={{fill: '#f59e0b', strokeWidth: 2, r: 3}}
+                activeDot={{r: 5, fill: '#f59e0b'}}
+                strokeOpacity={getLineOpacity('reviews')}
+              />
+            )}
+          </LineChart>
+        </div>
       </div>
     </div>
   );

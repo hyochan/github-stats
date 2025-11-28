@@ -20,7 +20,8 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
   return (
     <div
       className={clsx(
-        'flex-1 bg-paper overflow-y-auto overflow-x-hidden',
+        'flex-1 w-full max-w-full min-w-0',
+        'bg-paper overflow-y-auto overflow-x-hidden',
         'px-6 max-[768px]:px-4 max-[480px]:px-2',
         'flex flex-col',
       )}
