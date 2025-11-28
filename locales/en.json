@@ -1,6 +1,6 @@
 {
   "nav": {
-    "recentList": "Leaderboard",
+    "leaderboards": "Leaderboards",
     "stats": "Stats",
     "certifiedUsers": "Certified Users",
     "signIn": "Sign in",
@@ -84,8 +84,8 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy"
   },
-  "recentList": {
-    "title": "Leaderboard",
+  "leaderboards": {
+    "title": "Leaderboards",
     "githubUsername": "GitHub username",
     "noRecentList": "No users found",
     "tier": "Tier",

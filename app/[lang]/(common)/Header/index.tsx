@@ -262,7 +262,7 @@ export default function Header(props: Props): ReactElement {
         },
         {
           name: t.recentList,
-          path: '/leaderboard',
+          path: '/leaderboards',
         },
       ]
     : [
@@ -272,7 +272,7 @@ export default function Header(props: Props): ReactElement {
         },
         {
           name: t.recentList,
-          path: '/leaderboard',
+          path: '/leaderboards',
         },
       ];
 

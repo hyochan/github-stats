@@ -24,7 +24,7 @@ type Props = {
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;
   const lang = params.lang as Locale;
-  const {recentList} = await getTranslates(lang);
+  const {leaderboards} = await getTranslates(lang);
   const supabase = getSupabaseClient();
 
   const {data: plugin} = await supabase
@@ -43,16 +43,16 @@ export default async function Page(props: Props): Promise<ReactElement> {
           'flex flex-row items-start gap-4',
           'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-2',
         )}
-      >
-        <H1
-          className={clsx(
-            'text-[44px] font-bold shrink-0 whitespace-nowrap',
-            'max-[480px]:text-[28px]',
-            inter.className,
-          )}
         >
-          {recentList.title}
-        </H1>
+          <H1
+            className={clsx(
+              'text-[44px] font-bold shrink-0 whitespace-nowrap',
+              'max-[480px]:text-[28px]',
+              inter.className,
+            )}
+          >
+            {leaderboards.title}
+          </H1>
         <div
           className={clsx(
             styles.horizontalScroll,
@@ -65,7 +65,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
             )}
           >
             <div className="shrink-0 min-w-[280px]">
-              <TopTierUsers title={recentList.topRanked} />
+              <TopTierUsers title={leaderboards.topRanked} />
             </div>
             <div className="shrink-0">
               <GreatFrontEnd
@@ -79,7 +79,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
       </div>
       <GithubUserList
         initialData={userPlugins as UserListItem[]}
-        t={recentList}
+        t={leaderboards}
       />
     </div>
   );

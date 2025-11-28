@@ -1900,13 +1900,13 @@ input[type='search']::-webkit-search-decoration,
   border-color: rgb(255 255 255 / 0.6);
 }
 
-.border-t-transparent {
-  border-top-color: transparent;
-}
-
 .border-t-brand {
   --tw-border-opacity: 1;
   border-top-color: rgb(65 144 235 / var(--tw-border-opacity, 1));
+}
+
+.border-t-transparent {
+  border-top-color: transparent;
 }
 
 .bg-\[\#e8e8e8\] {
@@ -2671,16 +2671,16 @@ input[type='search']::-webkit-search-decoration,
   background-color: rgb(190 190 190 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-transparent:hover {
+  background-color: transparent;
+}
+
 .hover\:bg-white\/60:hover {
   background-color: rgb(255 255 255 / 0.6);
 }
 
 .hover\:bg-white\/80:hover {
   background-color: rgb(255 255 255 / 0.8);
-}
-
-.hover\:bg-transparent:hover {
-  background-color: transparent;
 }
 
 .hover\:text-red1:hover {

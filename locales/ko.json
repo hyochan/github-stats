@@ -1,6 +1,6 @@
 {
   "nav": {
-    "recentList": "리더보드",
+    "leaderboards": "리더보드",
     "stats": "스탯",
     "certifiedUsers": "인증 목록",
     "signIn": "로그인",
@@ -93,7 +93,7 @@
     "termsOfService": "서비스 약관",
     "privacyPolicy": "개인 정보 보호 정책"
   },
-  "recentList": {
+  "leaderboards": {
     "title": "리더보드",
     "githubUsername": "깃허브 유저명",
     "noRecentList": "유저가 없습니다",
