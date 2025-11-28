@@ -111,7 +111,7 @@ export default function SearchTextInput({
           disabled={isLoading || !login}
           aria-label={
             isLoading
-              ? t.search || 'Search'
+              ? `${t.search ?? 'Search'}…`
               : t.search || 'Search'
           }
           className={clsx(

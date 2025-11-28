@@ -104,7 +104,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       {
         id: 'tierName',
         headerClassName: 'w-3/12 py-[12px]',
-        cellClassName: 'h-[37px] text-start w-3/12 h-[50px] py-[8px]',
+        cellClassName: 'text-start w-3/12 h-[50px] py-[8px]',
         header: () => (
           <H5 fontWeight="semibold" className="text-start text-basic">
             {t.tier}
@@ -115,7 +115,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       {
         id: 'score',
         headerClassName: 'w-3/12 py-[12px]',
-        cellClassName: 'h-[37px] text-start w-3/12 h-[50px] py-[8px]',
+        cellClassName: 'text-start w-3/12 h-[50px] py-[8px]',
         header: () => (
           <H5 fontWeight="semibold" className="text-start text-basic">
             {t.score}
