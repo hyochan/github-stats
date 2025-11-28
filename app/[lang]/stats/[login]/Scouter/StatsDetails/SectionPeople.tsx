@@ -4,6 +4,7 @@ import {Inter} from 'next/font/google';
 
 import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
 import type {Translates} from '../../../../../../src/localization';
+import StatsRadar from './StatsRadar';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -58,6 +59,8 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
           );
         })}
       </div>
+      {/* Radar Chart - Pentagon showing 5 stats */}
+      <StatsRadar pluginStats={pluginStats} t={t} />
     </div>
   );
 }

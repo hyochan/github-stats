@@ -1,10 +1,14 @@
+'use client';
+
 import type {ReactElement} from 'react';
+import {useCallback, useState, useEffect} from 'react';
+import {usePathname, useRouter} from 'next/navigation';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
 import Image from 'next/image';
 
 import type {ScoreType} from '../../../../../../server/plugins/svgs/functions';
-import type {DoobooStatsResponse} from '../../../../../../server/services/githubService';
+import type {StatsWithMonthly} from '..';
 import type {Translates} from '../../../../../../src/localization';
 import {getTierSvg} from '../../../../../../src/utils/functions';
 import {statNames} from '..';
@@ -12,11 +16,35 @@ import {statNames} from '..';
 import type {TierType} from '.';
 
 import Logo from '@/public/assets/logo.svg';
+import StatsChart from './StatsChart';
+import MonthPicker from '../../MonthPicker';
 
 const inter = Inter({subsets: ['latin']});
 
-function SectionHeader({t, stats}: SectionProps): ReactElement {
+function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
+  const pathname = usePathname();
+  const router = useRouter();
   const pluginStats = stats.pluginStats;
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Reset loading when endDate changes (data loaded)
+  useEffect(() => {
+    setIsLoading(false);
+  }, [endDate, stats]);
+
+  const handleEndDateChange = useCallback(
+    (newDate: string | undefined) => {
+      if (!pathname) return;
+      setIsLoading(true);
+      if (newDate) {
+        router.push(`${pathname}?endDate=${newDate}`);
+      } else {
+        router.push(pathname);
+      }
+      router.refresh();
+    },
+    [pathname, router],
+  );
 
   const sum =
     +pluginStats.earth.score +
@@ -97,6 +125,17 @@ function SectionHeader({t, stats}: SectionProps): ReactElement {
           );
         })}
       </div>
+      {/* MonthPicker - positioned between scores and chart */}
+      <div className="mt-4 flex justify-start">
+        <MonthPicker
+          t={t}
+          value={endDate}
+          onChangeAction={handleEndDateChange}
+          isLoading={isLoading}
+        />
+      </div>
+      {/* Stats Chart - Monthly contributions */}
+      <StatsChart monthlyContributions={stats.monthlyContributions} isLoading={isLoading} />
     </div>
   );
 }
@@ -143,13 +182,17 @@ function SectionBody({t, stats}: SectionProps): ReactElement {
 
 type SectionProps = {
   t: Translates['stats'];
-  stats: DoobooStatsResponse;
+  stats: StatsWithMonthly;
+  endDate?: string;
 };
 
-export default function SectionDooboo(props: SectionProps): ReactElement {
+export default function SectionDooboo({
+  endDate,
+  ...props
+}: SectionProps): ReactElement {
   return (
     <div className={clsx('flex-1', 'flex flex-col')}>
-      <SectionHeader {...props} />
+      <SectionHeader {...props} endDate={endDate} />
       <hr className="my-10 h-[1px] flex-1 text-border-light dark:text-border-dark" />
       <SectionBody {...props} />
     </div>
