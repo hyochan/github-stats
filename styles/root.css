@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @font-face {
   font-family: 'doobooui';
   src: url('/fonts/doobooui.ttf?ixpxfq') format('truetype');
