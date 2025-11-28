@@ -1499,11 +1499,6 @@ input[type='search']::-webkit-search-decoration,
   min-width: 70px;
 }
 
-.min-w-fit {
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-}
-
 .min-w-full {
   min-width: 100%;
 }
