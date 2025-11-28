@@ -13,27 +13,35 @@ export const getGithubFireScore = (githubUser: UserGraph): PluginValue => {
     };
   }
 
-  const repos = githubUser.myRepos.edges.map((el) => {
-    const node = el.node;
-
-    return {
-      owner: node.owner.login,
-      name: node.name,
-      languages: node.languages.edges.map((ele) => ele.node.name),
-    };
-  });
-
-  const repositoriesContributedTo = githubUser.collaboratedRepos.edges.map(
-    (el) => {
+  const repos = githubUser.myRepos.edges
+    .map((el) => {
       const node = el.node;
+      const owner = node.owner?.login;
+
+      if (!owner) return null;
 
       return {
-        owner: node.owner.login,
+        owner,
         name: node.name,
         languages: node.languages.edges.map((ele) => ele.node.name),
       };
-    },
-  );
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
+
+  const repositoriesContributedTo = githubUser.collaboratedRepos.edges
+    .map((el) => {
+      const node = el.node;
+      const owner = node.owner?.login;
+
+      if (!owner) return null;
+
+      return {
+        owner,
+        name: node.name,
+        languages: node.languages.edges.map((ele) => ele.node.name),
+      };
+    })
+    .filter((el): el is NonNullable<typeof el> => Boolean(el));
 
   const totalCommits =
     githubUser.contributionsCollection.totalCommitContributions;

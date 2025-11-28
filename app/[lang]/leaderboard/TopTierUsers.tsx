@@ -8,6 +8,7 @@ import Image from 'next/image';
 import type {UserListItem} from '../../../src/fetches/recentList';
 import {getTierSvg} from '../../../src/utils/functions';
 import styles from '../styles.module.css';
+import {API_TOP_TIER_USERS} from './apiRoutes';
 
 import type {Tier} from './TierRowItem';
 
@@ -22,7 +23,7 @@ export default function TopTierUsers({title}: Props): ReactElement {
   useEffect(() => {
     const fetchTopUsers = async () => {
       try {
-        const response = await fetch('/api/top-tier-users');
+        const response = await fetch(API_TOP_TIER_USERS);
         const data = await response.json();
         if (data.users) {
           setTopTierUsers(data.users);

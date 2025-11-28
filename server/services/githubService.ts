@@ -164,10 +164,10 @@ export const getGithubUser = async (
               totalCount
               edges {
                 node {
-                  createdAt
                   owner {
                     login
                   }
+                  createdAt
                   watchers {
                     totalCount
                   }

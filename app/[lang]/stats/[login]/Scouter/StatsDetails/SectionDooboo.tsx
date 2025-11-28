@@ -1,7 +1,7 @@
 'use client';
 
 import type {ReactElement} from 'react';
-import {useCallback, useState, useEffect} from 'react';
+import {useCallback, useState, useEffect, useRef} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
@@ -26,17 +26,25 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
   const router = useRouter();
   const pluginStats = stats.pluginStats;
   const [isLoading, setIsLoading] = useState(false);
+  const pendingEndDateRef = useRef<string | undefined>(endDate);
 
-  // Reset loading when endDate changes (data loaded)
   useEffect(() => {
-    // Safe reset after data refresh
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsLoading(false);
+    const frame = requestAnimationFrame(() => {
+      if (
+        pendingEndDateRef.current === endDate ||
+        pendingEndDateRef.current === undefined
+      ) {
+        pendingEndDateRef.current = undefined;
+        setIsLoading(false);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, [endDate, stats]);
 
   const handleEndDateChange = useCallback(
     (newDate: string | undefined) => {
       if (!pathname) return;
+      pendingEndDateRef.current = newDate;
       setIsLoading(true);
       if (newDate) {
         router.push(`${pathname}?endDate=${newDate}`);

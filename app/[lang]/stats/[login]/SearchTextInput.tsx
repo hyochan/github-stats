@@ -24,6 +24,7 @@ export default function SearchTextInput({
   const [login, setLogin] = useState(initialValue);
   const [showHistory, setShowHistory] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const pendingLoginRef = useRef<string | null>(null);
   const {history, addToHistory, removeFromHistory} = useSearchHistory();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -32,17 +33,26 @@ export default function SearchTextInput({
   // Extract language from pathname (e.g., /ko/stats/hyochan -> ko)
   const lang = pathname?.split('/')[1] || 'en';
 
-  // Reset loading state when navigation completes (props change)
+  // Keep local login input in sync with incoming value
   useEffect(() => {
-    // Safe reset after navigation completes
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsLoading(false);
+    setLogin(initialValue);
+  }, [initialValue]);
+
+  // Reset loading state when navigation completes
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (pendingLoginRef.current && initialValue === pendingLoginRef.current) {
+        pendingLoginRef.current = null;
+        setIsLoading(false);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, [initialValue]);
 
   const navigateTo = (loginValue: string) => {
+    pendingLoginRef.current = loginValue;
     setIsLoading(true);
     router.push(`/${lang}/stats/${loginValue}`);
-    router.refresh();
   };
 
   const handleHistorySelect = (item: string) => {
@@ -103,16 +113,7 @@ export default function SearchTextInput({
           )}
         >
           {isLoading ? (
-            <div
-              style={{
-                width: '20px',
-                height: '20px',
-                border: '2px solid #BEBEBE',
-                borderTopColor: '#4190EB',
-                borderRadius: '50%',
-                animation: 'spin 1s linear infinite',
-              }}
-            />
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-brand dark:border-gray-600 dark:border-t-brand" />
           ) : (
             <SearchIcon size={20} className="text-basic" />
           )}

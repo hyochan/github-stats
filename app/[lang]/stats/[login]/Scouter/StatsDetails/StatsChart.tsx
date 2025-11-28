@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+import type {LegendPayload} from 'recharts';
 
 import type {MonthlyContribution} from '../../../../../../server/services/githubService';
 
@@ -40,8 +41,8 @@ export default function StatsChart({
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  const handleLegendMouseEnter = useCallback((data: any) => {
-    if (data?.dataKey) {
+  const handleLegendMouseEnter = useCallback((data: LegendPayload) => {
+    if (data?.dataKey !== undefined && data?.dataKey !== null) {
       setHoveredLine(String(data.dataKey));
     }
   }, []);
@@ -50,9 +51,9 @@ export default function StatsChart({
     setHoveredLine(null);
   }, []);
 
-  const handleLegendClick = useCallback((data: any) => {
+  const handleLegendClick = useCallback((data: LegendPayload) => {
     if (data?.dataKey) {
-      const key = data.dataKey as LineKey;
+      const key = String(data.dataKey) as LineKey;
       setActiveLines((prev) => {
         // If clicking on the only active line, reset to show all
         if (prev.size === 1 && prev.has(key)) {

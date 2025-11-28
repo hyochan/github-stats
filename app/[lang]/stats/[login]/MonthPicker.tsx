@@ -86,21 +86,7 @@ export default function MonthPicker({
       return t.selectPeriod;
     }
     const [year, month] = value.split('-');
-    const monthNames = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    const monthName = monthNames[parseInt(month) - 1];
+    const monthName = MONTHS[parseInt(month, 10) - 1];
     // Show year only if it's not the current year
     if (parseInt(year) === currentYear) {
       return monthName;
@@ -149,16 +135,7 @@ export default function MonthPicker({
         </button>
       )}
       {isLoading && (
-        <div
-          style={{
-            width: '20px',
-            height: '20px',
-            border: '2px solid #BEBEBE',
-            borderTopColor: '#4190EB',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-          }}
-        />
+        <div className="h-5 w-5 rounded-full border-2 border-gray-300 border-t-brand animate-spin" />
       )}
 
       {isOpen && (
@@ -195,14 +172,7 @@ export default function MonthPicker({
           </div>
 
           {/* Month grid - 4 columns x 3 rows */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '8px',
-              width: '100%',
-            }}
-          >
+          <div className="grid grid-cols-4 gap-2 w-full">
             {MONTHS.map((month, monthIndex) => {
               const isSelected =
                 selectedYear === viewYear && selectedMonth === monthIndex;
@@ -214,23 +184,14 @@ export default function MonthPicker({
                   type="button"
                   onClick={() => !isDisabled && handleMonthClick(monthIndex)}
                   disabled={isDisabled}
-                  style={{
-                    display: 'block',
-                    padding: '8px 4px',
-                    borderRadius: '8px',
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    textAlign: 'center',
-                    cursor: isDisabled ? 'not-allowed' : 'pointer',
-                    opacity: isDisabled ? 0.3 : 1,
-                    backgroundColor: isSelected ? '#4190EB' : 'transparent',
-                    color: isSelected ? '#FFFFFF' : 'inherit',
-                  }}
                   className={clsx(
+                    'block rounded-[8px] text-[12px] font-medium text-center py-2 px-1',
                     'text-black dark:text-white',
-                    !isSelected &&
-                      !isDisabled &&
-                      'hover:bg-gray2 dark:hover:bg-gray7',
+                    isSelected
+                      ? 'bg-brand text-white'
+                      : 'hover:bg-gray2 dark:hover:bg-gray7',
+                    isDisabled &&
+                      'opacity-30 cursor-not-allowed hover:bg-transparent',
                   )}
                 >
                   {month}

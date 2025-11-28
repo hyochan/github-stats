@@ -1,5 +1,3 @@
-export const revalidate = 3600;
-
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {getSupabaseClient} from '@/server/supabaseClient';
 import type {PluginUser} from '~/utils/functions';
@@ -58,5 +56,6 @@ export default async function handler(
       };
     });
 
+  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
   res.status(200).send({users});
 }
