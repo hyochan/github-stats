@@ -40,10 +40,10 @@ export default async function Page(props: Props): Promise<ReactElement> {
       <div
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
-          'flex flex-row items-start gap-4',
+          'flex flex-row items-center gap-4',
           'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-2',
         )}
-        >
+      >
           <H1
             className={clsx(
               'text-[44px] font-bold shrink-0 whitespace-nowrap',
@@ -61,13 +61,14 @@ export default async function Page(props: Props): Promise<ReactElement> {
         >
           <div
             className={clsx(
-              'flex flex-row items-start gap-4 flex-nowrap min-w-fit',
+              'flex flex-row items-center gap-4 flex-nowrap justify-between',
+              'min-w-full',
             )}
           >
             <div className="shrink-0 min-w-[280px]">
               <TopTierUsers title={leaderboards.topRanked} />
             </div>
-            <div className="shrink-0">
+            <div className="shrink-0 flex items-center">
               <GreatFrontEnd
                 className="max-w-[400px] shrink-0 max-[480px]:mt-2 max-[480px]:max-w-full max-[768px]:hidden"
                 href="https://www.greatfrontend.com/questions/formats/quiz?fpr=hyo73"

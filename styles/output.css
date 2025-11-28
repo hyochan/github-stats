@@ -1350,10 +1350,6 @@ input[type='search']::-webkit-search-decoration,
   height: 22px;
 }
 
-.h-\[37px\] {
-  height: 37px;
-}
-
 .h-\[40px\] {
   height: 40px;
 }
@@ -1506,6 +1502,10 @@ input[type='search']::-webkit-search-decoration,
 .min-w-fit {
   min-width: -moz-fit-content;
   min-width: fit-content;
+}
+
+.min-w-full {
+  min-width: 100%;
 }
 
 .max-w-3xl {
