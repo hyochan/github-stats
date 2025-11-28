@@ -24,6 +24,9 @@ export default function TopTierUsers({title}: Props): ReactElement {
     const fetchTopUsers = async () => {
       try {
         const response = await fetch(API_TOP_TIER_USERS);
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
         const data = await response.json();
         if (data.users) {
           setTopTierUsers(data.users);
@@ -63,7 +66,7 @@ export default function TopTierUsers({title}: Props): ReactElement {
   }
 
   if (topTierUsers.length === 0) {
-    return <div />;
+    return <></>;
   }
 
   return (

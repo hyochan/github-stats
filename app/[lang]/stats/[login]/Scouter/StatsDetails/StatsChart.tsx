@@ -82,6 +82,10 @@ export default function StatsChart({
   // Format month for display (YYYY-MM -> MMM)
   const formatMonth = (month: string): string => {
     const [, monthNum] = month.split('-');
+    const monthIndex = parseInt(monthNum, 10) - 1;
+    if (Number.isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
+      return month;
+    }
     const months = [
       'Jan',
       'Feb',
@@ -96,7 +100,7 @@ export default function StatsChart({
       'Nov',
       'Dec',
     ];
-    return months[parseInt(monthNum, 10) - 1];
+    return months[monthIndex];
   };
 
   const chartData = monthlyContributions?.map((item) => ({

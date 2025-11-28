@@ -32,7 +32,7 @@ const TIER_ORDER: Tier[] = [
 ];
 
 type Props = {
-  t: Translates['recentList'];
+  t: Translates['leaderboards'];
   initialData: UserListItem[];
 };
 
@@ -142,10 +142,14 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
         cursor,
       });
 
-      const filteredUsers = users.filter((el) => !data.includes(el));
+      const filteredUsers = users.filter(
+        (el) => !data.some((existing) => existing.login === el.login),
+      );
 
-      setData([...data, ...filteredUsers]);
-      setCursor(new Date(filteredUsers?.[filteredUsers.length - 1]?.createdAt));
+      if (filteredUsers.length > 0) {
+        setData([...data, ...filteredUsers]);
+        setCursor(new Date(filteredUsers[filteredUsers.length - 1].createdAt));
+      }
     }
   };
 

@@ -51,7 +51,6 @@ function SectionHeader({t, stats, endDate}: SectionProps): ReactElement {
       } else {
         router.push(pathname);
       }
-      router.refresh();
     },
     [pathname, router],
   );

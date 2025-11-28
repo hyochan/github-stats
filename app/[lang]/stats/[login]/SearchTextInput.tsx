@@ -50,6 +50,11 @@ export default function SearchTextInput({
   }, [initialValue]);
 
   const navigateTo = (loginValue: string) => {
+    // Avoid toggling loading when navigating to the same user
+    if (loginValue === initialValue) {
+      return;
+    }
+
     pendingLoginRef.current = loginValue;
     setIsLoading(true);
     router.push(`/${lang}/stats/${loginValue}`);

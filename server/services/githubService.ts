@@ -57,7 +57,19 @@ export const getGithubUser = async (
   let date: Date;
   if (startDate) {
     const [year, month] = startDate.split('-').map(Number);
-    date = new Date(Date.UTC(year, month - 1, 1, 12, 0, 0));
+    if (
+      Number.isFinite(year) &&
+      Number.isFinite(month) &&
+      month >= 1 &&
+      month <= 12
+    ) {
+      date = new Date(Date.UTC(year, month - 1, 1, 12, 0, 0));
+    } else {
+      const now = new Date();
+      date = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 12, 1, 12, 0, 0),
+      );
+    }
   } else {
     const now = new Date();
     date = new Date(

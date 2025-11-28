@@ -21,6 +21,16 @@ import Button from '../Button';
 import SwitchToggle from './SwitchToggle';
 
 const inter = Inter({subsets: ['latin']});
+const normalizePath = (path: string): string => path.replace(/\/+$/, '');
+const isActivePath = (
+  pathname: string | null,
+  lang: string,
+  path: string,
+): boolean => {
+  const target = normalizePath(`/${lang}${path}`);
+  const current = normalizePath(pathname ?? '');
+  return current === target || current.startsWith(`${target}/`);
+};
 
 export type NavLink = {
   name: string;
@@ -46,13 +56,6 @@ function DesktopNavMenus(
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
 
-  const normalizePath = (path: string): string => path.replace(/\/+$/, '');
-  const isActivePath = (path: string): boolean => {
-    const target = normalizePath(`/${lang}${path}`);
-    const current = normalizePath(pathname ?? '');
-    return current === target || current.startsWith(`${target}/`);
-  };
-
   return (
     <div
       className={clsx('flex-1 justify-between items-center', 'max-md:hidden')}
@@ -71,7 +74,9 @@ function DesktopNavMenus(
                 href={`${link.path}`}
                 className={clsx(
                   'text-body4 truncate',
-                  isActivePath(link.path) ? 'opacity-100' : 'opacity-30',
+                  isActivePath(pathname, lang, link.path)
+                    ? 'opacity-100'
+                    : 'opacity-30',
                 )}
               >
                 <li
@@ -137,13 +142,6 @@ function MobileNavMenus(
 
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
-  const normalizePath = (path: string): string => path.replace(/\/+$/, '');
-  const isActivePath = (path: string): boolean => {
-    const target = normalizePath(`/${lang}${path}`);
-    const current = normalizePath(pathname ?? '');
-    return current === target || current.startsWith(`${target}/`);
-  };
-
   return (
     <div className={clsx('md:hidden flex-1', 'flex flex-row-reverse')}>
       <div className="cursor-pointer">
@@ -183,7 +181,9 @@ function MobileNavMenus(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
                   'hover:opacity-100',
-                  isActivePath(link.path) ? 'opacity-100' : 'opacity-30',
+                  isActivePath(pathname, lang, link.path)
+                    ? 'opacity-100'
+                    : 'opacity-30',
                 )}
               >
                 <li
@@ -261,7 +261,7 @@ export default function Header(props: Props): ReactElement {
           path: `/stats/${login}`,
         },
         {
-          name: t.recentList,
+          name: t.leaderboards,
           path: '/leaderboards',
         },
       ]
@@ -271,7 +271,7 @@ export default function Header(props: Props): ReactElement {
           path: `/stats`,
         },
         {
-          name: t.recentList,
+          name: t.leaderboards,
           path: '/leaderboards',
         },
       ];

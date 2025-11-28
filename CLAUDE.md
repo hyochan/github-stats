@@ -56,7 +56,7 @@ className="border-border-light dark:border-border-dark"
 
 #### Brand/Accent Colors
 ```tsx
-// Primary brand color (blue)
+// Primary brand color (blue) - use for primary actions and highlights
 className="bg-brand"  // #4190EB
 
 // Primary buttons
