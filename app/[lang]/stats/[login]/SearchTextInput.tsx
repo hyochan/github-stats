@@ -109,6 +109,11 @@ export default function SearchTextInput({
         <button
           type="submit"
           disabled={isLoading || !login}
+          aria-label={
+            isLoading
+              ? t.search || 'Search'
+              : t.search || 'Search'
+          }
           className={clsx(
             'p-2 rounded-full',
             'hover:bg-black/10 dark:hover:bg-white/10',

@@ -59,6 +59,9 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
     setIsLoadingTier(true);
     try {
       const response = await fetch(`${API_USERS_BY_TIER}?tier=${tier}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
       const result = await response.json();
       if (result.users) {
         setTierData(result.users);
@@ -136,19 +139,29 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
         return;
       }
 
-      const {users} = await fetchRecentList({
-        pluginId: 'dooboo-github',
-        take: 20,
-        cursor,
-      });
+      try {
+        const {users} = await fetchRecentList({
+          pluginId: 'dooboo-github',
+          take: 20,
+          cursor,
+        });
 
-      const filteredUsers = users.filter(
-        (el) => !data.some((existing) => existing.login === el.login),
-      );
-
-      if (filteredUsers.length > 0) {
-        setData([...data, ...filteredUsers]);
-        setCursor(new Date(filteredUsers[filteredUsers.length - 1].createdAt));
+        let nextCursor: Date | null = null;
+        setData((prevData) => {
+          const filteredUsers = users.filter(
+            (el) => !prevData.some((existing) => existing.login === el.login),
+          );
+          if (filteredUsers.length === 0) return prevData;
+          nextCursor = new Date(
+            filteredUsers[filteredUsers.length - 1].createdAt,
+          );
+          return [...prevData, ...filteredUsers];
+        });
+        if (nextCursor) {
+          setCursor(nextCursor);
+        }
+      } catch (error) {
+        console.error('Failed to fetch more users:', error);
       }
     }
   };
@@ -233,7 +246,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
         data={displayData}
         onClickRow={(user) => {
           const login = user.login;
-          window.open('https://github.com/' + login);
+          window.open(`/stats/${login}`, '_blank', 'noopener');
         }}
         className="p-6 max-[480px]:p-4"
         classNames={{
