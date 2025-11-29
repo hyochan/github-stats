@@ -72,6 +72,8 @@ export default function RootLayout({children}: {children: ReactNode}) {
     <html lang="en" className="dark h-full">
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#4190EB" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181493727238996"

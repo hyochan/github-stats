@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import {usePathname, useRouter} from 'next/navigation';
 
 import type {Translates} from '../../../../src/localization';
-import TextInput from '../../(common)/TextInput';
 import SearchHistoryDropdown from '../../(home)/Hero/SearchHistoryDropdown';
 import {useSearchHistory} from '../../../../src/hooks/useSearchHistory';
 
@@ -85,16 +84,17 @@ export default function SearchTextInput({
       >
       <div
         className={clsx(
-          'rounded-[16px] body4 px-4 h-[56px]',
+          'rounded-[16px] body4 px-3 h-[56px]',
           'bg-black/10 dark:bg-white/5',
           'backdrop-blur-md',
           'border border-black/20 dark:border-white/10',
-          'flex items-center gap-2',
+          'flex items-center',
           'hover:bg-black/15 dark:hover:bg-white/8',
           'transition-all duration-300',
         )}
       >
-        <TextInput
+        <input
+          type="text"
           value={login}
           placeholder={t.githubUsername}
           onChange={(e) => {
@@ -105,6 +105,12 @@ export default function SearchTextInput({
             // Delay to allow click on history items
             setTimeout(() => setShowHistory(false), 200);
           }}
+          className={clsx(
+            'flex-1 min-w-0 h-full',
+            'bg-transparent border-none outline-none',
+            'text-basic placeholder:text-placeholder',
+            'font-inter px-2',
+          )}
         />
         <button
           type="submit"
@@ -115,7 +121,7 @@ export default function SearchTextInput({
               : t.search || 'Search'
           }
           className={clsx(
-            'p-2 rounded-full',
+            'w-10 h-10 flex-shrink-0 rounded-full ml-1',
             'hover:bg-black/10 dark:hover:bg-white/10',
             'transition-all duration-200',
             'disabled:opacity-50 disabled:cursor-not-allowed',

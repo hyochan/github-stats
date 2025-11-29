@@ -10,7 +10,6 @@ import clsx from 'clsx';
 import type {StatsInfo} from '../../../../src/fetches/github';
 import {fetchGithubStats} from '../../../../src/fetches/github';
 import type {Translates} from '../../../../src/localization';
-import Button from '../../(common)/Button';
 import ButtonGroup from '../../(common)/ButtonGroup';
 import Dropdown from '../../(common)/Dropdown';
 import TextInput from '../../(common)/TextInput';
@@ -158,63 +157,61 @@ function Hero({t, statsInfo}: Props): ReactElement {
           >
             <div
               className={clsx(
-                'rounded-[16px] px-3 h-[64px] relative body2 w-full',
-                'flex flex-row-reverse items-center',
+                'rounded-[16px] px-3 h-[64px] body2 w-full',
+                'flex flex-row items-center gap-2',
                 'bg-white/50 dark:bg-black/40',
                 'backdrop-blur-2xl',
                 'border border-black/10 dark:border-white/20',
                 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)]',
                 'hover:bg-white/60 dark:hover:bg-black/50',
                 'transition-all duration-300',
-                'max-[425px]:p-3 max-[425px]:self-stretch max-[425px]:h-auto max-[425px]:flex-wrap',
-                'max-[320px]:py-3 max-[320px]:items-start',
+                'max-[425px]:px-2 max-[425px]:h-[56px]',
               )}
             >
-              <Button
-                loading={formState.isSubmitting}
-                type="submit"
-                className={clsx(
-                  'bg-transparent border-0 text-center max-w-[100px] p-2',
-                  'absolute',
-                )}
-                text={<SearchIcon size={22} className="text-gray8 dark:text-white" />}
+              <Dropdown
+                data={statTypes}
+                selected={selectedPluginType}
+                setSelected={(el) => {
+                  setSelectedPluginType(el);
+                }}
               />
-              <div
+              <span
                 className={clsx(
-                  'flex-1',
-                  'flex flex-row items-center overflow-x-clip',
+                  'text-gray5 dark:text-gray3',
+                  'body3 text-[22px]',
+                  'max-[480px]:hidden',
                 )}
               >
-                <Dropdown
-                  data={statTypes}
-                  selected={selectedPluginType}
-                  setSelected={(el) => {
-                    setSelectedPluginType(el);
-                  }}
-                />
-                <span
-                  className={clsx(
-                    'text-gray5 dark:text-gray3',
-                    'mx-3 body3 text-[22px]',
-                    'max-[425px]:invisible max-[425px]:hidden',
-                  )}
-                >
-                  /
-                </span>
-                <TextInput
-                  className="text-gray7 dark:text-white placeholder:text-gray5 dark:placeholder:text-gray4"
-                  placeholder={t.githubUsername}
-                  value={login}
-                  onChange={(e) => {
-                    setLogin(e.target.value.trim());
-                  }}
-                  onFocus={() => setShowHistory(true)}
-                  onBlur={() => {
-                    // Delay to allow click on history items
-                    setTimeout(() => setShowHistory(false), 200);
-                  }}
-                />
-              </div>
+                /
+              </span>
+              <TextInput
+                className="text-gray7 dark:text-white placeholder:text-gray5 dark:placeholder:text-gray4"
+                placeholder={t.githubUsername}
+                value={login}
+                onChange={(e) => {
+                  setLogin(e.target.value.trim());
+                }}
+                onFocus={() => setShowHistory(true)}
+                onBlur={() => {
+                  // Delay to allow click on history items
+                  setTimeout(() => setShowHistory(false), 200);
+                }}
+              />
+              <button
+                type="submit"
+                disabled={formState.isSubmitting}
+                className={clsx(
+                  'p-2 flex-shrink-0 cursor-pointer',
+                  'bg-transparent border-none outline-none',
+                  formState.isSubmitting && 'opacity-50',
+                )}
+              >
+                {formState.isSubmitting ? (
+                  <div className="border-2 border-gray8 dark:border-gray3 border-t-transparent rounded-full w-5 h-5 animate-spin" />
+                ) : (
+                  <SearchIcon size={22} className="text-gray8 dark:text-white" />
+                )}
+              </button>
             </div>
           </form>
           <SearchHistoryDropdown

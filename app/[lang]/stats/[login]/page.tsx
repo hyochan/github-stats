@@ -95,7 +95,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
       headerSearch={
         <SearchTextInput
           t={tStats}
-          className="mt-4 flex-1 min-w-[400px] max-[768px]:min-w-[300px] max-[480px]:hidden"
+          className="mt-4 flex-1 min-w-[200px] max-[480px]:mt-0 max-[480px]:w-full"
           initialValue={login}
         />
       }

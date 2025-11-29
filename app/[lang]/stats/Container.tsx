@@ -27,13 +27,13 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
       )}
     >
       {hasHeaderContent ? (
-        <div className="flex flex-row items-center justify-between gap-4">
-          <div className="flex flex-row items-center gap-8">
+        <div className="flex flex-row items-center justify-between gap-4 max-[480px]:flex-col max-[480px]:items-start">
+          <div className="flex flex-row items-center gap-4 max-[480px]:flex-col max-[480px]:items-start max-[480px]:w-full">
             <H1
               className={clsx(
                 'text-[44px] font-bold mt-12 mb-[28px]',
-                'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
-                'max-[380px]:hidden',
+                'max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
+                'flex-shrink-0',
                 inter.className,
               )}
             >
@@ -47,8 +47,7 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
         <H1
           className={clsx(
             'text-[44px] font-bold mt-12 mb-[28px] text-center',
-            'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
-            'max-[380px]:hidden',
+            'max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
             inter.className,
           )}
         >

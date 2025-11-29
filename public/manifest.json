@@ -1,0 +1,24 @@
+{
+  "name": "GitHub Stats - Developer Power Meter",
+  "short_name": "GitHub Stats",
+  "description": "Analyze your GitHub contributions and showcase your developer stats",
+  "start_url": "/en",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#4190EB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

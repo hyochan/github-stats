@@ -78,8 +78,8 @@ export async function proxy(
 }
 
 export const config = {
-  // Matcher ignoring `/_next/`, `/api/`, `/auth/`, `/assets/`, sitemap.xml, robots.txt
+  // Matcher ignoring `/_next/`, `/api/`, `/auth/`, `/assets/`, static files
   matcher: [
-    '/((?!api|auth|assets|_next/static|_next/image|favicon.ico|public|sitemap.xml|robots.txt).*)',
+    '/((?!api|auth|assets|_next/static|_next/image|favicon.ico|public|sitemap\\.xml|robots\\.txt|manifest\\.json|.*\\.png$|.*\\.ico$|.*\\.svg$|.*\\.jpg$|.*\\.jpeg$|.*\\.webp$).*)',
   ],
 };
