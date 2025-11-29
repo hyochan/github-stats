@@ -1,6 +1,12 @@
 .scrollable {
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: visible;
+}
+
+@media (min-width: 769px) {
+  .scrollable {
+    overflow-y: auto;
+  }
 }
 
 .horizontalScroll {

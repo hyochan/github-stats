@@ -26,22 +26,12 @@ export default async function LangLayout(props: Props): Promise<ReactElement> {
 
   return (
     <RootProvider initialLocale={lang}>
-      <main
+      <div
         className={clsx(
-          'text-center flex-1 self-stretch relative',
-          'flex flex-col-reverse',
-          'min-w-0 overflow-x-hidden',
+          'h-screen max-[768px]:min-h-screen max-[768px]:h-auto w-full',
+          'flex flex-col',
         )}
       >
-        <div
-          className={clsx(
-            'h-[calc(100vh-56px)]',
-            'flex w-full min-w-0',
-            'overflow-y-auto overflow-x-hidden',
-          )}
-        >
-          {children}
-        </div>
         <Header
           t={nav}
           lang={lang}
@@ -50,7 +40,16 @@ export default async function LangLayout(props: Props): Promise<ReactElement> {
             ko: langs.ko,
           }}
         />
-      </main>
+        <main
+          className={clsx(
+            'flex-1 w-full min-w-0',
+            'flex flex-col',
+            'overflow-hidden max-[768px]:overflow-visible',
+          )}
+        >
+          {children}
+        </main>
+      </div>
     </RootProvider>
   );
 }

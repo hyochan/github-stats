@@ -21,9 +21,10 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
     <div
       className={clsx(
         'flex-1 w-full max-w-full min-w-0',
-        'bg-paper-light dark:bg-paper-dark overflow-y-auto overflow-x-hidden',
+        'bg-paper-light dark:bg-paper-dark overflow-x-hidden',
         'px-6 max-[768px]:px-4 max-[480px]:px-4 max-[480px]:pt-6',
         'flex flex-col',
+        'max-[768px]:overflow-visible',
       )}
     >
       {hasHeaderContent ? (

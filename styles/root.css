@@ -25,15 +25,28 @@
     font-size: 16px;
     line-height: 1.4;
 
-    /*
-     * for Internet Explorer, Edge
-       https://css-tricks.com/snippets/css/hide-scrollbar-in-edge-ie-1011/
-    */
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    scrollbar-width: none; /* for Firefox */
+    /* Firefox scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.4) transparent;
 
     display: flex;
+  }
+
+  html::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 9999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(128, 128, 128, 0.6);
   }
 
   body {
@@ -41,11 +54,28 @@
     width: 100vw;
     height: 100vh;
 
+    /* Firefox scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.4) transparent;
+
     display: flex;
   }
 
   body::-webkit-scrollbar {
-    width: 0px;
+    width: 6px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, 0.4);
+    border-radius: 9999px;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(128, 128, 128, 0.6);
   }
 
   div {

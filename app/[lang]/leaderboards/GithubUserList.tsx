@@ -1,7 +1,7 @@
 'use client';
 
 import type {ReactElement, UIEventHandler} from 'react';
-import {useCallback, useMemo, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -38,6 +38,7 @@ type Props = {
 
 export default function GithubUserList({t, initialData}: Props): ReactElement {
   const tBodyRef = useRef<HTMLTableSectionElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState(initialData);
   const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
   const [tierData, setTierData] = useState<UserListItem[]>([]);
@@ -47,6 +48,9 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       ? new Date(initialData?.[initialData?.length - 1]?.createdAt)
       : null,
   );
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const loadMoreRef = useRef<(() => Promise<void>) | null>(null);
 
   const handleTierSelect = useCallback(async (tier: Tier | null) => {
     setSelectedTier(tier);
@@ -81,32 +85,32 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
     () => [
       {
         id: 'login',
-        headerClassName: 'w-6/12 py-[12px]',
-        cellClassName: 'w-6/12 h-[50px] py-[8px] text-default',
+        headerClassName: 'flex-1 py-[12px] min-w-[150px]',
+        cellClassName: 'flex-1 h-[50px] py-[8px] text-default min-w-[150px]',
         header: () => (
           <H5 fontWeight="semibold" className="text-start">
             {t.githubUsername}
           </H5>
         ),
         cell: ({login, avatarUrl}) => (
-          <div className="text-start flex gap-[8px] items-center">
+          <div className="text-start flex gap-[8px] items-center min-w-0">
             <Image
               alt="avatar"
               src={avatarUrl}
               width={20}
               height={20}
-              className="rounded-full"
+              className="rounded-full shrink-0"
             />
-            <H4>{login}</H4>
+            <H4 className="truncate">{login}</H4>
           </div>
         ),
       },
       {
         id: 'tierName',
-        headerClassName: 'w-3/12 py-[12px]',
-        cellClassName: 'text-start w-3/12 h-[50px] py-[8px]',
+        headerClassName: 'w-[120px] max-[480px]:w-[40px] py-[12px] shrink-0',
+        cellClassName: 'w-[120px] max-[480px]:w-[40px] h-[50px] py-[8px] shrink-0',
         header: () => (
-          <H5 fontWeight="semibold" className="text-start text-basic">
+          <H5 fontWeight="semibold" className="text-start text-basic max-[480px]:hidden">
             {t.tier}
           </H5>
         ),
@@ -114,60 +118,101 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       },
       {
         id: 'score',
-        headerClassName: 'w-3/12 py-[12px]',
-        cellClassName: 'text-start w-3/12 h-[50px] py-[8px]',
+        headerClassName: 'w-[80px] max-[480px]:w-[50px] py-[12px] shrink-0 justify-center',
+        cellClassName: 'w-[80px] max-[480px]:w-[50px] h-[50px] py-[8px] shrink-0 justify-center',
         header: () => (
-          <H5 fontWeight="semibold" className="text-start text-basic">
+          <H5 fontWeight="semibold" className="text-center text-basic">
             {t.score}
           </H5>
         ),
-        cell: ({score}) => <div className="text-start text-basic">{score}</div>,
+        cell: ({score}) => <div className="text-center text-basic">{score}</div>,
       },
     ],
     [t.githubUsername, t.score, t.tier],
   );
 
-  const handleScroll: UIEventHandler<HTMLTableSectionElement> = async (
-    e,
-  ): Promise<void> => {
+  const loadMore = useCallback(async () => {
+    if (!cursor || isLoadingMore || selectedTier || !hasMore) return;
+
+    setIsLoadingMore(true);
+    try {
+      const {users} = await fetchRecentList({
+        pluginId: 'dooboo-github',
+        take: 20,
+        cursor,
+      });
+
+      // No more data from API
+      if (!users || users.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      // Less than requested means end of data
+      if (users.length < 20) {
+        setHasMore(false);
+      }
+
+      setData((prevData) => {
+        const existingLogins = new Set(prevData.map((u) => u.login));
+        const filteredUsers = users.filter((el) => !existingLogins.has(el.login));
+
+        if (filteredUsers.length === 0) {
+          return prevData;
+        }
+
+        return [...prevData, ...filteredUsers];
+      });
+
+      // Update cursor based on the last user from API response
+      const lastUser = users[users.length - 1];
+      if (lastUser) {
+        setCursor(new Date(lastUser.createdAt));
+      }
+    } catch (error) {
+      console.error('Failed to fetch more users:', error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [cursor, isLoadingMore, selectedTier, hasMore]);
+
+  // Keep loadMore ref updated
+  loadMoreRef.current = loadMore;
+
+  // Intersection Observer for infinite scroll (works on both mobile and desktop)
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreRef.current?.();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '100px',
+        threshold: 0,
+      },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleScroll: UIEventHandler<HTMLDivElement> = (e) => {
     const hasEndReached =
       Math.ceil(e.currentTarget.scrollTop + e.currentTarget.clientHeight) >=
       e.currentTarget.scrollHeight;
 
     if (hasEndReached) {
-      if (!cursor) {
-        return;
-      }
-
-      try {
-        const {users} = await fetchRecentList({
-          pluginId: 'dooboo-github',
-          take: 20,
-          cursor,
-        });
-
-        let nextCursor: Date | null = null;
-        setData((prevData) => {
-          const filteredUsers = users.filter(
-            (el) => !prevData.some((existing) => existing.login === el.login),
-          );
-          if (filteredUsers.length === 0) return prevData;
-          nextCursor = new Date(
-            filteredUsers[filteredUsers.length - 1].createdAt,
-          );
-          return [...prevData, ...filteredUsers];
-        });
-        if (nextCursor) {
-          setCursor(nextCursor);
-        }
-      } catch (error) {
-        console.error('Failed to fetch more users:', error);
-      }
+      loadMore();
     }
   };
 
   return (
-    <div className="flex-1 flex flex-col mx-6 mb-12 max-[480px]:mx-4 max-[480px]:mb-8 overflow-hidden">
+    <div className="flex-1 flex flex-col mx-6 mb-12 max-[480px]:mx-4 max-[480px]:mb-8 overflow-hidden max-[768px]:overflow-visible">
       {/* Tier filter labels */}
       <div
         className={clsx(
@@ -227,14 +272,16 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
       {/* Data table */}
       <div
         className={clsx(
-          'flex-1 overflow-y-scroll',
+          'flex-1 max-[768px]:flex-none',
+          'block w-full',
+          'overflow-x-auto',
+          'overflow-y-auto max-[768px]:overflow-y-visible',
           'rounded-[20px]',
           'bg-black/10 dark:bg-white/5',
           'backdrop-blur-xl',
           'border border-black/20 dark:border-white/10',
           'shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]',
           'max-[480px]:rounded-[16px]',
-          styles.scrollable,
           'transition-opacity duration-300',
           isLoadingTier && 'opacity-50',
         )}
@@ -248,7 +295,7 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
           const login = user.login;
           window.open(`/stats/${login}`, '_blank', 'noopener');
         }}
-        className="p-6 max-[480px]:p-4"
+        className="p-6 max-[480px]:p-4 w-full min-w-[500px]"
         classNames={{
           tHead:
             'bg-paper-light dark:bg-paper-dark backdrop-blur-xl border-b border-black/10 dark:border-white/10 px-2 pb-2 -mx-6 -mt-6 px-6 pt-6 rounded-t-[20px] max-[480px]:-mx-4 max-[480px]:-mt-4 max-[480px]:px-4 max-[480px]:pt-4 max-[480px]:rounded-t-[16px]',
@@ -256,6 +303,14 @@ export default function GithubUserList({t, initialData}: Props): ReactElement {
               'hover:bg-black/10 dark:hover:bg-white/5 transition-all duration-200 rounded-[8px] my-1',
           }}
         />
+        {/* Sentinel for infinite scroll */}
+        {!selectedTier && (
+          <div
+            ref={sentinelRef}
+            className="h-[1px] w-full"
+            aria-hidden="true"
+          />
+        )}
       </div>
     </div>
   );

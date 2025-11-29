@@ -31,11 +31,11 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
   const {data, columns, onClickRow, tBodyRef} = props;
 
   return (
-    <table className={clsx(['flex-1 self-stretch', props.className])}>
+    <table className={clsx(['flex-1 self-stretch shrink-0', props.className])}>
       <thead className={clsx('sticky top-0 z-10', props.classNames?.tHead)}>
         <tr
           className={clsx(
-            'flex-1 px-1 flex items-center',
+            'flex-1 px-1 flex items-center min-w-max',
             props.classNames?.tHeadRow,
           )}
         >
@@ -44,11 +44,8 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
               <th
                 key={`${column}-${i}`}
                 className={clsx(
-                  (i + 1) % 3 === 0
-                    ? 'w-14 max-md:w-12'
-                    : `flex-1 ${i === 0 && 'pl-3'}`,
-                  'items-center flex',
-                  'truncate',
+                  'items-center flex min-w-0',
+                  i === 0 && 'pl-3',
                   column.headerClassName,
                 )}
               >
@@ -60,7 +57,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
       </thead>
       <tbody
         className={clsx(
-          'pl-2 py-1 flex-1',
+          'py-1 flex-1',
           'flex flex-col justify-center',
           props.classNames?.tBody,
         )}
@@ -71,7 +68,7 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
             <tr
               key={`${elm}-${i}`}
               className={clsx(
-                'px-1 cursor-pointer flex-1 flex',
+                'px-1 cursor-pointer flex-1 flex min-w-max',
                 props.classNames?.tBodyRow,
               )}
               onClick={() => onClickRow?.(elm, i)}
@@ -80,8 +77,8 @@ export function DataTable<T>(props: DataTableProps<T>): ReactElement {
                 <td
                   key={column.id.toString()}
                   className={clsx(
-                    (idx + 1) % 3 === 0 ? 'w-14 max-md:w-12 pl-2' : 'flex-1',
-                    'flex flex-row items-center',
+                    'flex flex-row items-center min-w-0',
+                    idx === 0 && 'pl-3',
                     column.cellClassName,
                   )}
                 >

@@ -177,6 +177,7 @@ function MobileNavMenus(
             >
               <Link
                 href={`${link.path}`}
+                onClick={() => setIsNavCollapsed(true)}
                 className={clsx(
                   'text-body4 truncate flex-1 h-10 px-8',
                   'flex items-center',
@@ -205,6 +206,7 @@ function MobileNavMenus(
           <div className={clsx('ml-[6px] mr-4', 'flex flex-row')}>
             <a
               href="https://github.com/hyochan/github-stats"
+              onClick={() => setIsNavCollapsed(true)}
               className="flex flex-row items-center"
             >
               <Github className="h-6 body2 mr-2" />
@@ -233,6 +235,7 @@ function MobileNavMenus(
             text: 'body3 truncate',
           }}
           onClick={() => {
+            setIsNavCollapsed(true);
             if (!!login) {
               supabase.auth.signOut();
 
@@ -329,7 +332,8 @@ export default function Header(props: Props): ReactElement {
   return (
     <header
       className={clsx(
-        'h-[56px] decoration-0 bg-basic sticky',
+        'h-[56px] decoration-0 bg-basic',
+        'sticky top-0 z-50',
         'flex flex-row items-center justify-between',
         'px-[28px]',
         'w-full min-w-0',

@@ -46,6 +46,7 @@ export default function Scouter({endDate, ...props}: ScouterProps): ReactElement
         'w-full max-w-full min-w-0',
         'flex flex-col flex-start items-center',
         'max-[480px]:pt-6',
+        'max-[768px]:!overflow-y-visible',
       )}
     >
       <StatsHeader

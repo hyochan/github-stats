@@ -55,7 +55,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
   const userPlugins = plugin ? await getUserPlugins({plugin}) : [];
 
   return (
-    <div className={clsx('flex-1 bg-paper-light dark:bg-paper-dark overflow-hidden', 'flex flex-col')}>
+    <div className={clsx('flex-1 bg-paper-light dark:bg-paper-dark', 'flex flex-col', 'overflow-hidden max-[768px]:overflow-visible')}>
       <div
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
