@@ -25,7 +25,7 @@ function Home({t, statsInfo}: Props): ReactElement {
   initAmplitude();
 
   return (
-    <div className={clsx('flex-1 w-full', 'flex flex-col')}>
+    <div className={clsx('flex-1 w-full max-w-full', 'flex flex-col', 'overflow-x-hidden')}>
       <Hero t={t} statsInfo={statsInfo} />
       <SectionHowItWorks t={t} />
       <SectionFooter t={t} />

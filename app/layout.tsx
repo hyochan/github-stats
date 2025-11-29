@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
-    <html lang="en" className="dark h-full">
+    <html lang="en" className="dark h-full overflow-x-hidden">
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link rel="manifest" href="/manifest.json" />
@@ -80,7 +80,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body className="h-full">{children}</body>
+      <body className="h-full overflow-x-hidden">{children}</body>
     </html>
   );
 }
