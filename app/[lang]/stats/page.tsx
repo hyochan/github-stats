@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
 
 import type {Locale} from '../../../src/i18n';
@@ -10,6 +11,23 @@ import SearchTextInput from './[login]/SearchTextInput';
 type Props = {
   params: Promise<{lang: string}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {lang} = await params;
+  const {stats} = await getTranslates(lang as Locale);
+
+  return {
+    title: stats.title,
+    description: stats.searchUserHint,
+    alternates: {
+      canonical: `/${lang}/stats`,
+      languages: {
+        en: '/en/stats',
+        ko: '/ko/stats',
+      },
+    },
+  };
+}
 
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;

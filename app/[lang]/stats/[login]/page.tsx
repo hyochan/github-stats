@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
 
 import {
@@ -5,6 +6,7 @@ import {
   getMonthlyContribution,
 } from '../../../../server/services/githubService';
 import {getTranslates} from '../../../../src/localization';
+import {siteUrl} from '../../../../src/utils/const';
 import Container from '../Container';
 
 import Scouter from './Scouter';
@@ -18,8 +20,42 @@ export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{lang: string; login: string}>;
-  searchParams: Promise<{endDate?: string}>;
+  searchParams: Promise<{endDate?: string}>
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {lang, login} = await params;
+
+  const title = `${login}'s GitHub Stats`;
+  const description = `Check ${login}'s GitHub contribution stats, achievements, and developer power level.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${lang}/stats/${login}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/${lang}/stats/${login}`,
+      images: [
+        {
+          url: `${siteUrl}/api/github-stats-advanced?login=${login}`,
+          width: 800,
+          height: 400,
+          alt: `${login}'s GitHub Stats`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${siteUrl}/api/github-stats-advanced?login=${login}`],
+    },
+  };
+}
 
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;

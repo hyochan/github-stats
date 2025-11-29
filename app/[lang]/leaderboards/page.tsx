@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
 import clsx from 'clsx';
 import {Inter} from 'next/font/google';
@@ -20,6 +21,24 @@ const inter = Inter({subsets: ['latin']});
 type Props = {
   params: Promise<{lang: string}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {lang} = await params;
+  const {leaderboards} = await getTranslates(lang as Locale);
+
+  return {
+    title: leaderboards.title,
+    description:
+      'Discover top GitHub developers ranked by their contributions, achievements, and coding activity.',
+    alternates: {
+      canonical: `/${lang}/leaderboards`,
+      languages: {
+        en: '/en/leaderboards',
+        ko: '/ko/leaderboards',
+      },
+    },
+  };
+}
 
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;

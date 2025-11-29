@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
 
 import type {StatsInfo} from '../../src/fetches/github';
@@ -9,6 +10,23 @@ import type {Locale} from '~/i18n';
 type Props = {
   params: Promise<{lang: string}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {lang} = await params;
+  const {home} = await getTranslates(lang as Locale);
+
+  return {
+    title: home.developerPowerMeter,
+    description: home.developerPowerMeterDesc,
+    alternates: {
+      canonical: `/${lang}`,
+      languages: {
+        en: '/en',
+        ko: '/ko',
+      },
+    },
+  };
+}
 
 export default async function Page(props: Props): Promise<ReactElement> {
   const params = await props.params;
