@@ -251,8 +251,18 @@ export default function Header(props: Props): ReactElement {
   const {t, lang} = props;
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
 
-  const [isDark, setIsDark] = useState(() => isDarkMode());
+  const [isDark, setIsDark] = useState(true);
   const {login, changeLogin} = useAuthContext();
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const dark = isDarkMode();
+      if (!dark) {
+        setIsDark(false);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const navLinks: NavLink[] = !!login
     ? [

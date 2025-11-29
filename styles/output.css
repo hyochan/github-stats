@@ -3041,6 +3041,11 @@ input[type='search']::-webkit-search-decoration,
     padding-right: 1rem;
   }
 
+  .max-\[768px\]\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .max-\[768px\]\:text-\[32px\] {
     font-size: 32px;
   }
@@ -3099,8 +3104,8 @@ input[type='search']::-webkit-search-decoration,
     margin-top: 0.5rem;
   }
 
-  .max-\[480px\]\:mt-4 {
-    margin-top: 1rem;
+  .max-\[480px\]\:mt-8 {
+    margin-top: 2rem;
   }
 
   .max-\[480px\]\:hidden {
@@ -3181,12 +3186,37 @@ input[type='search']::-webkit-search-decoration,
     padding-bottom: 0.25rem;
   }
 
+  .max-\[480px\]\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .max-\[480px\]\:pt-4 {
     padding-top: 1rem;
   }
 
+  .max-\[480px\]\:pt-6 {
+    padding-top: 1.5rem;
+  }
+
+  .max-\[480px\]\:pt-8 {
+    padding-top: 2rem;
+  }
+
   .max-\[480px\]\:text-\[28px\] {
     font-size: 28px;
+  }
+
+  .max-\[480px\]\:text-\[32px\] {
+    font-size: 32px;
+  }
+
+  .max-\[480px\]\:text-\[18px\] {
+    font-size: 18px;
+  }
+
+  .max-\[480px\]\:leading-7 {
+    line-height: 1.75rem;
   }
 }
 

@@ -124,7 +124,7 @@ function Hero({t, statsInfo}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-paper relative',
+        'self-stretch bg-paper-light dark:bg-paper-dark relative',
         'flex flex-col justify-center items-center',
         'max-[425px]:p-0',
       )}
@@ -133,11 +133,11 @@ function Hero({t, statsInfo}: Props): ReactElement {
         className={clsx(
           'self-stretch px-14',
           'flex flex-col align-start justify-start',
-          'max-[425px]:px-8',
+          'max-[768px]:px-6 max-[480px]:px-4',
           'min-[1200px]:self-center min-[1200px]:w-[1200px]',
         )}
       >
-        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8 text-contrast-light dark:text-contrast-dark">
+        <p className="h1 text-[44px] text-left font-bold mt-[80px] mb-8 max-[480px]:mt-8 max-[480px]:text-[32px] text-contrast-light dark:text-contrast-dark">
           {t.developerPowerMeter}
         </p>
         <p className="body1 text-[20px] text-left mb-[36px] text-gray5 dark:text-gray3">

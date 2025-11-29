@@ -22,7 +22,7 @@ export default function SectionFooter({t}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-paper bg-cover',
+        'self-stretch bg-paper-light dark:bg-paper-dark bg-cover',
         'flex flex-col justify-center items-center',
         'md:p-0',
       )}
@@ -40,7 +40,8 @@ export default function SectionFooter({t}: Props): ReactElement {
       >
         <p
           className={clsx(
-            'text-white leading-8 text-[24px] text-center mt-12 mb-20',
+            'text-white leading-8 text-[24px] text-center mt-12 mb-20 px-6',
+            'max-[480px]:text-[18px] max-[480px]:leading-7 max-[480px]:px-8',
             inter.className,
           )}
         >

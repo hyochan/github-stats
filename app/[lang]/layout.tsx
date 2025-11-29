@@ -33,7 +33,13 @@ export default async function LangLayout(props: Props): Promise<ReactElement> {
           'min-w-0 overflow-x-hidden',
         )}
       >
-        <div className={clsx('h-[calc(100vh-56px)]', 'flex w-full min-w-0')}>
+        <div
+          className={clsx(
+            'h-[calc(100vh-56px)]',
+            'flex w-full min-w-0',
+            'overflow-y-auto',
+          )}
+        >
           {children}
         </div>
         <Header

@@ -36,12 +36,12 @@ export default async function Page(props: Props): Promise<ReactElement> {
   const userPlugins = plugin ? await getUserPlugins({plugin}) : [];
 
   return (
-    <div className={clsx('flex-1 bg-paper overflow-hidden', 'flex flex-col')}>
+    <div className={clsx('flex-1 bg-paper-light dark:bg-paper-dark overflow-hidden', 'flex flex-col')}>
       <div
         className={clsx(
           'mt-4 mb-[32px] px-6 w-full',
           'flex flex-row items-center gap-4',
-          'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-2',
+          'max-[768px]:flex-col max-[480px]:mb-6 max-[480px]:mt-8 max-[480px]:px-4',
         )}
       >
           <H1

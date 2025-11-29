@@ -21,8 +21,8 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
     <div
       className={clsx(
         'flex-1 w-full max-w-full min-w-0',
-        'bg-paper overflow-y-auto overflow-x-hidden',
-        'px-6 max-[768px]:px-4 max-[480px]:px-2',
+        'bg-paper-light dark:bg-paper-dark overflow-y-auto overflow-x-hidden',
+        'px-6 max-[768px]:px-4 max-[480px]:px-4 max-[480px]:pt-6',
         'flex flex-col',
       )}
     >
@@ -32,7 +32,7 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
             <H1
               className={clsx(
                 'text-[44px] font-bold mt-12 mb-[28px]',
-                'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-4',
+                'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
                 'max-[380px]:hidden',
                 inter.className,
               )}
@@ -47,7 +47,7 @@ export default function Container({t, children, headerSearch, headerRight}: Prop
         <H1
           className={clsx(
             'text-[44px] font-bold mt-12 mb-[28px] text-center',
-            'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-4',
+            'max-[480px]:px-6 max-[480px]:text-[28px] max-[480px]:mb-4 max-[480px]:mt-8',
             'max-[380px]:hidden',
             inter.className,
           )}

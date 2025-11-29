@@ -10,7 +10,7 @@ function Loading(): ReactElement {
   return (
     <div
       className={clsx(
-        'flex-1 self-stretch p-4 bg-paper',
+        'flex-1 self-stretch p-4 bg-paper-light dark:bg-paper-dark',
         'flex flex-row justify-center items-center',
       )}
     >

@@ -44,7 +44,7 @@ export default function SectionHowItWorks({t}: Props): ReactElement {
   return (
     <div
       className={clsx(
-        'self-stretch bg-paper bg-cover',
+        'self-stretch bg-paper-light dark:bg-paper-dark bg-cover',
         'flex flex-col justify-center items-center',
         'py-20 px-6',
       )}

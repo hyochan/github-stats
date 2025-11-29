@@ -48,7 +48,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
     <div
       className={clsx(
         'bg-modal-background pb-20',
-        'flex-1 bg-paper overflow-hidden',
+        'flex-1 bg-paper-light dark:bg-paper-dark overflow-hidden',
         'max-md:px-4',
         'flex flex-col justify-center items-center',
       )}
